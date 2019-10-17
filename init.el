@@ -19,6 +19,7 @@
  '(org-agenda-skip-timestamp-if-deadline-is-shown nil)
  '(org-babel-load-languages (quote ((js . t) (java . t) (python . t) (emacs-lisp . t))))
  '(org-directory "c:/Users/thoma/Dev/orgs/")
+ '(org-export-use-babel nil)
  '(org-html-htmlize-output-type (quote css))
  '(org-refile-targets
    (quote
