@@ -11,6 +11,7 @@
  '(elfeed-feeds (quote ("https://nyaa.si/?page=rss")))
  '(global-display-line-numbers-mode t)
  '(initial-buffer-choice "C:\\Users\\thoma\\Dev")
+ '(load-prefer-newer t)
  '(org-agenda-files
    (quote
     ("~/Dev/orgs/Personal.org" "~/Dev/orgs/learnning.org" "c:/Users/thoma/Dev/orgs/QUT.org" "c:/Users/thoma/Dev/orgs/COF.org")))
@@ -129,3 +130,8 @@
 
 ; js2 minor mode
 (add-hook 'js-mode-hook 'js2-minor-mode)
+
+; ein
+(require 'ein)
+(require 'ein-notebook)
+(require 'ein-subpackages)
