@@ -33,7 +33,7 @@
      ("melpa" . "https://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
+    (cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -135,3 +135,17 @@
 (require 'ein)
 (require 'ein-notebook)
 (require 'ein-subpackages)
+
+;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
+;; This solves the problem that affects Emacs' speed while displaying Chinese characters
+(when (eq system-type 'windows-nt) (setq gc-cons-threshold (* 512 1024 1024))
+      (setq gc-cons-percentage 0.5) (run-with-idle-timer 5 t #'garbage-collect)
+      ;; 显示垃圾回收信息，这个可以作为调试用
+      ;; (setq garbage-collection-messages t)
+      )
+
+(require 'cnfonts)
+;; 让 cnfonts 随着 Emacs 自动生效。
+(cnfonts-enable)
+;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+;; (cnfonts-set-spacemacs-fallback-fonts)
