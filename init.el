@@ -7,6 +7,8 @@
  '(custom-safe-themes
    (quote
     ("b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default)))
+ '(ein:completion-backend (quote ein:use-none-backend))
+ '(ein:polymode t)
  '(electric-pair-mode t)
  '(elfeed-feeds (quote ("https://nyaa.si/?page=rss")))
  '(global-display-line-numbers-mode t)
@@ -18,7 +20,12 @@
  '(org-agenda-search-headline-for-time nil)
  '(org-agenda-skip-additional-timestamps-same-entry t)
  '(org-agenda-skip-timestamp-if-deadline-is-shown nil)
- '(org-babel-load-languages (quote ((js . t) (java . t) (python . t) (emacs-lisp . t))))
+ '(org-babel-load-languages
+   (quote
+    ((js . t)
+     (java . t)
+     (python . t)
+     (emacs-lisp . t))))
  '(org-directory "c:/Users/thoma/Dev/orgs/")
  '(org-export-use-babel nil)
  '(org-html-htmlize-output-type (quote css))
@@ -31,9 +38,10 @@
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://stable.melpa.org/packages/"))))
+ '(package-check-signature t)
  '(package-selected-packages
    (quote
-    (cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
+    (gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
