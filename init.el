@@ -169,8 +169,8 @@
 (message "Highlight-tail loaded - now your Emacs will be even more sexy!")
 ;
 ; [ here some setq of variables - see CONFIGURATION section below ]
-(setq highlight-tail-colors '(("black" . 0)
-                              ("#bc2525" . 25)
-                              ("black" . 66)))
+(setq highlight-tail-colors '(;("black" . 0)
+                              ("#c75e18" . 0)
+                              ("#267bbd" . 66)))
 
 (highlight-tail-mode)
