@@ -25,6 +25,9 @@
  '(org-directory "c:/Users/thoma/Dev/orgs/")
  '(org-export-use-babel nil)
  '(org-html-htmlize-output-type (quote css))
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-eww org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
  '(org-refile-targets
    (quote
     ((org-agenda-files :regexp . "*")
@@ -33,11 +36,12 @@
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa" . "https://stable.melpa.org/packages/"))))
- '(package-check-signature t)
+     ("melpa" . "https://stable.melpa.org/packages/")
+     ("org" . "https://orgmode.org/elpa/"))))
+ '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
+    (org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -47,8 +51,12 @@
 
 (require 'package)
 
+;; If we use the package-archive variable, we don't need the following add-to-list
+;; they will cause issues and the org elpa was never fetched successfully when this directive was used
+;; Add org emacs lisp package archive
+;;(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 ;; Add melpa package source when using package list
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 ;; disable sound
 (setq visible-bell 1)
@@ -58,6 +66,7 @@
 ;; Don't delete this line.
 (package-initialize)
 
+(add-to-list 'load-path "~/.emacs.d/plugins/highlight-tail")
 (add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
 (add-to-list 'load-path "~/.emacs.d/plugins/evil-surround")
 (add-to-list 'load-path "~/.emacs.d/plugins/yaml-mode")
@@ -153,3 +162,15 @@
 (cnfonts-enable)
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
 ;; (cnfonts-set-spacemacs-fallback-fonts)
+
+;; highlight-tail
+
+(require 'highlight-tail)
+(message "Highlight-tail loaded - now your Emacs will be even more sexy!")
+;
+; [ here some setq of variables - see CONFIGURATION section below ]
+(setq highlight-tail-colors '(("black" . 0)
+                              ("#bc2525" . 25)
+                              ("black" . 66)))
+
+(highlight-tail-mode)
