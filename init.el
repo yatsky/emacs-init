@@ -23,6 +23,7 @@
  '(org-agenda-skip-timestamp-if-deadline-is-shown nil)
  '(org-babel-load-languages (quote ((js . t) (java . t) (python . t) (emacs-lisp . t))))
  '(org-directory "c:/Users/thoma/Dev/orgs/")
+ '(org-drill-maximum-items-per-session 80)
  '(org-export-use-babel nil)
  '(org-html-htmlize-output-type (quote css))
  '(org-modules
@@ -36,7 +37,7 @@
  '(package-archives
    (quote
     (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa" . "https://stable.melpa.org/packages/")
+     ("melpa" . "https://melpa.org/packages/")
      ("org" . "https://orgmode.org/elpa/"))))
  '(package-check-signature nil)
  '(package-selected-packages
@@ -173,4 +174,5 @@
                               ("#c75e18" . 0)
                               ("#267bbd" . 66)))
 
-(highlight-tail-mode)
+; Highlight mode always on
+(highlight-tail-mode 1)
