@@ -21,7 +21,13 @@
  '(org-agenda-search-headline-for-time nil)
  '(org-agenda-skip-additional-timestamps-same-entry t)
  '(org-agenda-skip-timestamp-if-deadline-is-shown nil)
- '(org-babel-load-languages (quote ((js . t) (java . t) (python . t) (emacs-lisp . t))))
+ '(org-babel-load-languages
+   (quote
+    ((js . t)
+     (java . t)
+     (python . t)
+     (emacs-lisp . t)
+     (ein . t))))
  '(org-directory "c:/Users/thoma/Dev/orgs/")
  '(org-drill-maximum-items-per-session 80)
  '(org-export-use-babel nil)
@@ -42,7 +48,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
+    (org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -115,6 +121,9 @@
 ;; turn on indent mode in Org
 (add-hook 'org-mode-hook 'org-indent-mode)
 ;; (add-hook 'org-mode-hook 'linum-relative-mode)
+;; org-drill shortcut for resume
+(eval-after-load "org-mode"
+    '(define-key org-mode-map (kbd "M-r") 'org-drill-resume))
 
 ;; yaml support
 (require 'yaml-mode)
@@ -176,3 +185,7 @@
 
 ; Highlight mode always on
 (highlight-tail-mode 1)
+
+; org-brain config
+;; org-brain using evil
+(evil-set-initial-state 'org-brain-visualize-mode 'emacs)
