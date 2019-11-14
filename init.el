@@ -182,6 +182,8 @@
 (setq highlight-tail-colors '(;("black" . 0)
                               ("#c75e18" . 0)
                               ("#267bbd" . 66)))
+(setq highlight-tail-steps 10)
+(setq highlight-tail-timer 0.1)
 
 ; Highlight mode always on
 (highlight-tail-mode 1)
