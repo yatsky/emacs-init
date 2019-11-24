@@ -48,7 +48,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
+    (org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -278,3 +278,9 @@
 ;; Enable the new eshell prompt
 (setq eshell-prompt-function 'esh-prompt-func)
 
+;; set magit global keybinding
+(global-set-key (kbd "C-x g") 'magit-status)
+
+;; org-bullets
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
