@@ -29,6 +29,7 @@
      (emacs-lisp . t)
      (ein . t))))
  '(org-directory "c:/Users/thoma/Dev/orgs/")
+ '(org-drill-learn-fraction 0.45)
  '(org-drill-maximum-items-per-session 80)
  '(org-export-use-babel nil)
  '(org-html-htmlize-output-type (quote css))
@@ -122,8 +123,9 @@
 (add-hook 'org-mode-hook 'org-indent-mode)
 ;; (add-hook 'org-mode-hook 'linum-relative-mode)
 ;; org-drill shortcut for resume
-(eval-after-load "org-mode"
-    '(define-key org-mode-map (kbd "M-r") 'org-drill-resume))
+;; "org" because C-h f org-mode RET says that org-mode is defined in org.el
+(eval-after-load "org"
+    '(define-key org-mode-map (kbd "C-c r") 'org-drill-resume))
 
 ;; yaml support
 (require 'yaml-mode)
