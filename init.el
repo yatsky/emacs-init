@@ -49,7 +49,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
+    (flycheck tide web-mode rjsx-mode org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -286,3 +286,32 @@
 ;; org-bullets
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; tide for TypeScript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+(flycheck-add-mode 'typescript-tslint 'web-mode)
