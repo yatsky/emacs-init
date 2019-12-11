@@ -317,3 +317,9 @@
               (setup-tide-mode))))
 ;; enable typescript-tslint checker
 (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+;; do not use any tabs
+;; this is added to prevent picture mode from inserting tabs
+;; while we are drawing ascii images
+;; we do not use tabs anyway so leave it globally on
+(setq-default indent-tabs-mode nil)
