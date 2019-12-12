@@ -338,4 +338,18 @@
 ;; Ditaa settings
 ; disable Artist mode in org-src-mode when editing ditaa code
 ; this is because Artist mode seems to prevent me from typing arrows (< and >)
+(defun setup-ditaa ()
+    "Setting up the ditaa env for org-src-mode"
+    (message "In ditaa mode %s"(buffer-name))
+    (artist-mode-off)
+    (picture-mode)
+  )
 
+(add-hook 'org-src-mode-hook
+          (lambda ()
+            (if (string-match-p (regexp-quote "ditaa") (buffer-name))
+                ;; fixme: need to fix this
+                ;; seems to be not calling this function
+                (setup-ditaa)
+                (message "Not in ditaa mode %s"(buffer-name))
+                )))
