@@ -325,3 +325,8 @@
 ;; while we are drawing ascii images
 ;; we do not use tabs anyway so leave it globally on
 (setq-default indent-tabs-mode nil)
+
+;; Ditaa settings
+; disable Artist mode in org-src-mode when editing ditaa code
+; this is because Artist mode seems to prevent me from typing arrows (< and >)
+
