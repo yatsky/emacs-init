@@ -190,7 +190,7 @@
 (setq highlight-tail-timer 0.1)
 
 ; Highlight mode always on
-(highlight-tail-mode 1)
+; (highlight-tail-mode 1)
 
 ; org-brain config
 ;; org-brain using evil
