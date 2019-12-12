@@ -13,7 +13,16 @@
  '(electric-pair-mode t)
  '(elfeed-feeds (quote ("https://nyaa.si/?page=rss")))
  '(global-display-line-numbers-mode t)
- '(initial-buffer-choice "C:\\Users\\thoma\\Dev")
+ '(initial-buffer-choice
+   ;; We have to use find-file to open the buffer
+   ;; because initial-buffer-choice selects the buffer the function returns.
+   ;; instead of visiting/finding the file/directory when given a string.
+   (lambda() (find-file 
+              (if (string-equal system-type "gnu/linux")
+                  "*scratch*"
+                "C:\\Users\\thoma\\Dev"
+                )
+              )))
  '(load-prefer-newer t)
  '(org-agenda-files
    (quote
