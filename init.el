@@ -133,7 +133,10 @@
 (define-key evil-motion-state-map " " nil)
 (evil-define-key 'motion 'global
   (kbd "SPC e") 'evil-end-of-line
-  (kbd "SPC l") 'load-file
+  ;; global-set-key expects an interactive command
+  (kbd "SPC l i") (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
+  (kbd "SPC k") 'describe-key
+  (kbd "SPC f") 'describe-function
   )
 
 ;; evil surround
