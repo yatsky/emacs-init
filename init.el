@@ -124,6 +124,18 @@
 (evil-org-agenda-set-keys)
 (evil-mode 1)
 
+;; Remap SPC in evil mode to a leader key
+
+;; Remove SPC from motion state means remove it from all states
+;; unless specified otherwise.
+;; see: https://github.com/noctuid/evil-guide#global-keybindings-and-evil-states
+;; Remember that binding a key in motion state is like binding a key in the normal, visual, and operator states all at once (unless that key is already bound in one of those states).
+(define-key evil-motion-state-map " " nil)
+(evil-define-key 'motion 'global
+  (kbd "SPC e") 'evil-end-of-line
+  (kbd "SPC l") 'load-file
+  )
+
 ;; evil surround
 (require 'evil-surround)
 (add-hook 'org-mode-hook 'turn-on-evil-surround-mode)
