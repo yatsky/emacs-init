@@ -343,6 +343,7 @@
     (message "In ditaa mode %s"(buffer-name))
     (artist-mode-off)
     (picture-mode)
+    (display-line-numbers-mode)
   )
 
 (add-hook 'org-src-mode-hook
