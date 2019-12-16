@@ -134,7 +134,8 @@
 (evil-define-key 'motion 'global
   (kbd "SPC e") 'evil-end-of-line
   ;; global-set-key expects an interactive command
-  (kbd "SPC l i") (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
+  (kbd "SPC i e") (lambda() (interactive) (find-file "~/.emacs.d/init.el"))
+  (kbd "SPC i l") (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
   (kbd "SPC k") 'describe-key
   (kbd "SPC f") 'describe-function
   )
