@@ -19,7 +19,7 @@
    ;; instead of visiting/finding the file/directory when given a string.
    (lambda() (find-file 
               (if (string-equal system-type "gnu/linux")
-                  "*scratch*"
+                  "/mnt/c/Users/thoma/Dev"
                 "C:\\Users\\thoma\\Dev"
                 )
               )))
