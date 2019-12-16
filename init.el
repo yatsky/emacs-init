@@ -95,6 +95,9 @@
 (global-display-line-numbers-mode t)
 (electric-pair-mode t)
 
+(require 'undo-tree)
+(global-undo-tree-mode)
+
 (require 'dracula-theme)
 (load-theme 'dracula t)
 (require 'powerline)
