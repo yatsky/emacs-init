@@ -456,6 +456,7 @@
 
 
 ;; Use MS Edge to open the link in mu4e view
+;; https://www.emacswiki.org/emacs/BrowseUrl
 (defun browse-url-ms-edge (url &optional new-window)
   (shell-command
    (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" " url))
