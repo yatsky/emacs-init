@@ -146,6 +146,7 @@
   (kbd "SPC i l") (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
   (kbd "SPC k") 'describe-key
   (kbd "SPC f") 'describe-function
+  (kbd "SPC m u") 'mu4e
   )
 
 ;; evil surround
