@@ -17,12 +17,11 @@
    ;; We have to use find-file to open the buffer
    ;; because initial-buffer-choice selects the buffer the function returns.
    ;; instead of visiting/finding the file/directory when given a string.
-   (lambda() (find-file 
-              (if (string-equal system-type "gnu/linux")
-                  "/mnt/c/Users/thoma/Dev"
-                "C:\\Users\\thoma\\Dev"
-                )
-              )))
+   (lambda nil
+     (find-file
+      (if
+          (string-equal system-type "gnu/linux")
+          "/mnt/c/Users/thoma/Dev" "C:\\Users\\thoma\\Dev"))))
  '(load-prefer-newer t)
  '(org-agenda-files
    (quote
