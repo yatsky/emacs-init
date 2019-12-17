@@ -12,6 +12,7 @@
  '(ein:polymode t)
  '(electric-pair-mode t)
  '(elfeed-feeds (quote ("https://nyaa.si/?page=rss")))
+ '(evil-want-keybinding nil)
  '(global-display-line-numbers-mode t)
  '(initial-buffer-choice
    ;; We have to use find-file to open the buffer
@@ -62,7 +63,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (flycheck tide web-mode rjsx-mode org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
+    (evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi neotree powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
