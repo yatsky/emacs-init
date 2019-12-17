@@ -23,6 +23,9 @@
           (string-equal system-type "gnu/linux")
           "/mnt/c/Users/thoma/Dev" "C:\\Users\\thoma\\Dev"))))
  '(load-prefer-newer t)
+ '(mu4e-headers-date-format "%d/%m/%Y")
+ '(mu4e-headers-include-related t)
+ '(mu4e-headers-skip-duplicates t)
  '(org-agenda-files
    (quote
     ("~/Dev/orgs/Personal.org" "~/Dev/orgs/learnning.org" "c:/Users/thoma/Dev/orgs/QUT.org" "c:/Users/thoma/Dev/orgs/COF.org")))
