@@ -280,7 +280,8 @@
 (setq eshell-prompt-string " ")   ; or "└─> "
 
 (esh-section esh-dir
-             "\xf07c"  ;  (faicon folder)
+             ;"\xf07c"  ;  (faicon folder)
+             "fake-dir"
              (abbreviate-file-name (eshell/pwd))
              '(:foreground "gold" :bold ultra-bold :underline t))
 
@@ -295,7 +296,8 @@
 ;             pyvenv-virtual-env-name)
 
 (esh-section esh-clock
-             "\xf017"  ;  (clock icon)
+             ;"\xf017"  ;  (clock icon)
+             "fake-clock"
              (format-time-string "%H:%M" (current-time))
              '(:foreground "forest green"))
 
@@ -306,7 +308,8 @@
             (lambda (&rest args) (setq esh-prompt-num (incf esh-prompt-num))))
 
 (esh-section esh-num
-             "\xf0c9"  ;  (list icon)
+             ;"\xf0c9"  ;  (list icon)
+             "fake-num"
              (number-to-string esh-prompt-num)
              '(:foreground "brown"))
 
