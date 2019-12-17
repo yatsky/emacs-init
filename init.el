@@ -123,6 +123,8 @@
 
 ;; evil org
 (require 'evil)
+(when (require 'evil-collection nil t)
+  (evil-collection-init))
 (require 'evil-org)
 (add-hook 'org-mode-hook 'evil-org-mode)
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
