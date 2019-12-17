@@ -453,3 +453,11 @@
 
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)
+
+
+;; Use MS Edge to open the link in mu4e view
+(defun browse-url-ms-edge (url &optional new-window)
+  (shell-command
+   (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" " url))
+  )
+(setq browse-url-browser-function 'browse-url-ms-edge)
