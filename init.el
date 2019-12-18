@@ -421,7 +421,63 @@
        ("/[Gmail].All Mail"    . ?a)))
 
 ;; allow for updating mail using 'U' in the main view:
-(setq mu4e-get-mail-command "offlineimap")
+;; (setq mu4e-get-mail-command "offlineimap")
+(setq mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a"
+  ;; mu4e-html2text-command "w3m -T text/html" ;;using the default mu4e-shr2text
+  mu4e-view-prefer-html t
+  mu4e-update-interval 180
+  mu4e-headers-auto-update t
+  mu4e-compose-signature-auto-include nil
+  mu4e-compose-format-flowed t)
+
+;; enable inline images
+(setq mu4e-view-show-images t)
+;; use imagemagick, if available
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
+
+;; every new email composition gets its own frame!
+;; this conflicts with undo-tree
+; (setq mu4e-compose-in-new-frame t)
+
+;; don't save message to Sent Messages, IMAP takes care of this
+(setq mu4e-sent-messages-behavior 'delete)
+
+(add-hook 'mu4e-view-mode-hook #'visual-line-mode)
+
+;; <tab> to navigate to links, <RET> to open them in browser
+(add-hook 'mu4e-view-mode-hook
+  (lambda()
+;; try to emulate some of the eww key-bindings
+(local-set-key (kbd "<RET>") 'mu4e~view-browse-url-from-binding)
+(local-set-key (kbd "<tab>") 'shr-next-link)
+(local-set-key (kbd "<backtab>") 'shr-previous-link)))
+;; spell check
+(add-hook 'mu4e-compose-mode-hook
+    (defun my-do-compose-stuff ()
+       "My settings for message composition."
+       (visual-line-mode)
+       (org-mu4e-compose-org-mode)
+       (use-hard-newlines -1)
+       (flyspell-mode)))
+;;set up queue for offline email
+;;use mu mkdir  ~/Maildir/acc/queue to set up first
+(setq smtpmail-queue-mail nil)  ;; start in normal mode
+
+;;from the info manual
+(setq mu4e-attachment-dir  "~/Downloads")
+(setq mu4e-compose-dont-reply-to-self t)
+
+;; convert org mode to HTML automatically
+(setq org-mu4e-convert-to-html t)
+
+;;from vxlabs config
+;; show full addresses in view message (instead of just names)
+;; toggle per name with M-RET
+(setq mu4e-view-show-addresses 't)
+
+;; don't ask when quitting
+(setq mu4e-confirm-quit nil)
 
 ;; something about ourselves
 (setq
@@ -464,3 +520,14 @@
    (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" " url))
   )
 (setq browse-url-browser-function 'browse-url-ms-edge)
+
+(setf (alist-get 'trash mu4e-marks)
+      (list :char '("d" . "▼")
+            :prompt "dtrash"
+            :dyn-target (lambda (target msg)
+                          (mu4e-get-trash-folder msg))
+            :action (lambda (docid msg target)
+                      ;; Here's the main difference to the regular trash mark,
+                      ;; no +T before -N so the message is not marked as
+                      ;; IMAP-deleted:
+                      (mu4e~proc-move docid (mu4e~mark-check-target target) "-N"))))
