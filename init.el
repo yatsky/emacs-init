@@ -404,6 +404,7 @@
 ; (setq mu4e-trash-folder  "/[Gmail].Trash")
 
 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+;; Testing shows that office 365 also works with this setting.
 (setq mu4e-sent-messages-behavior 'delete)
 
 ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
