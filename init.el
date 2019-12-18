@@ -597,3 +597,11 @@
 	    (smtpmail-debug-verbose . t)
 	    (mu4e-maildir-shortcuts . ( ("/QUT/INBOX"            . ?i)
 					))))))
+;; bookmarks
+
+(add-to-list 'mu4e-bookmarks
+  (make-mu4e-bookmark
+    :name  "No Trash Unread"
+    :query "date:today..now AND NOT Maildir:/QUT/[QUT].Trash AND NOT Maildir:/my-gmail/[Gmail].Bin"
+    :key ?U))
+ 
