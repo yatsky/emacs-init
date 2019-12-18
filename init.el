@@ -439,10 +439,8 @@
 
 ;; every new email composition gets its own frame!
 ;; this conflicts with undo-tree
-; (setq mu4e-compose-in-new-frame t)
+;; (setq mu4e-compose-in-new-frame t)
 
-;; don't save message to Sent Messages, IMAP takes care of this
-(setq mu4e-sent-messages-behavior 'delete)
 
 (add-hook 'mu4e-view-mode-hook #'visual-line-mode)
 
