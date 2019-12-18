@@ -396,7 +396,7 @@
 ;; use mu4e for e-mail in emacs
 (setq mail-user-agent 'mu4e-user-agent)
 ;; default
-;; (setq mu4e-maildir "~/Maildir")
+(setq mu4e-maildir "~/.mail/my-gmail")
 
 (setq mu4e-drafts-folder "/[Gmail].Drafts")
 (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
