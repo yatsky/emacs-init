@@ -388,8 +388,10 @@
 
 ;; minimum configuration for mu4e
 
+(require 'org-mime)
 ;; make sure mu4e is in your load-path
 (require 'mu4e)
+(require 'org-mu4e)
 
 ;; use mu4e for e-mail in emacs
 (setq mail-user-agent 'mu4e-user-agent)
