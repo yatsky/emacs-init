@@ -462,7 +462,9 @@
 ;;set up queue for offline email
 ;;use mu mkdir  ~/Maildir/acc/queue to set up first
 (setq smtpmail-queue-mail nil)  ;; start in normal mode
-
+;;rename files when moving
+;;NEEDED FOR MBSYNC
+(setq mu4e-change-filenames-when-moving t)
 ;;from the info manual
 (setq mu4e-attachment-dir  "~/Downloads")
 (setq mu4e-compose-dont-reply-to-self t)
