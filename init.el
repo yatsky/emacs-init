@@ -82,6 +82,7 @@
 
 ;; disable sound
 (setq visible-bell 1)
+(tool-bar-mode -1)
 
 ;; Load emacs packages and activate them
 ;; This must come before configurations of installed packages.
