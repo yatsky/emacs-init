@@ -567,3 +567,6 @@
     :query "date:today..now AND NOT Maildir:/QUT/[QUT].Trash AND NOT Maildir:/my-gmail/[Gmail].Bin"
     :key ?U))
  
+
+;; Set initial frame size
+(set-frame-size (selected-frame) 1600 1300 t)
