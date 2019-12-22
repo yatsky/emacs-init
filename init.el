@@ -565,6 +565,34 @@
 	    (smtpmail-debug-info . t)
 	    (smtpmail-debug-verbose . t)
 	    (mu4e-maildir-shortcuts . ( ("/QUT/INBOX"            . ?i)
+					))))
+
+   (make-mu4e-context
+    :name "uq" ;;for acc2-gmail
+    :enter-func (lambda () (mu4e-message "Entering context work"))
+    :leave-func (lambda () (mu4e-message "Leaving context work"))
+    :match-func (lambda (msg)
+		  (when msg
+		(mu4e-message-contact-field-matches
+		 msg '(:from :to :cc :bcc) "y.wang7@uqconnect.edu.au")))
+    :vars '((user-mail-address . "y.wang7@uqconnect.edu.au")
+	    (user-full-name . "Yi Wang")
+	    (mu4e-sent-folder . "/uq/[uq].Sent Mail")
+	    (mu4e-drafts-folder . "/uq/[uq].drafts")
+	    (mu4e-trash-folder . "/uq/[uq].Trash")
+	    (mu4e-compose-signature . (concat "Cheers\n" "Emacs is awesome!\n"))
+	    (mu4e-compose-format-flowed . t)
+	    (smtpmail-queue-dir . "~/.mail/uq/queue/cur")
+	    (message-send-mail-function . smtpmail-send-it)
+	    (smtpmail-smtp-user . "y.wang7@uqconnect.edu.au")
+	    (smtpmail-starttls-credentials . (("smtp.office365.com" 587 nil nil)))
+	    (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+	    (smtpmail-default-smtp-server . "smtp.office365.com")
+	    (smtpmail-smtp-server . "smtp.office365.com")
+	    (smtpmail-smtp-service . 587)
+	    (smtpmail-debug-info . t)
+	    (smtpmail-debug-verbose . t)
+	    (mu4e-maildir-shortcuts . ( ("/uq/INBOX"            . ?i)
 					))))))
 ;; bookmarks
 
