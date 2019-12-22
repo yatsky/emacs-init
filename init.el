@@ -161,8 +161,15 @@
 ;; (add-hook 'org-mode-hook 'linum-relative-mode)
 ;; org-drill shortcut for resume
 ;; "org" because C-h f org-mode RET says that org-mode is defined in org.el
+
+(defun my-org-setup ()
+  "Set up my org settings."
+  '(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
+  '(require 'ox-md nil t)
+  )
 (eval-after-load "org"
-    '(define-key org-mode-map (kbd "C-c r") 'org-drill-resume))
+  (my-org-setup)
+  )
 
 ;; yaml support
 (require 'yaml-mode)
