@@ -162,11 +162,24 @@
 ;; org-drill shortcut for resume
 ;; "org" because C-h f org-mode RET says that org-mode is defined in org.el
 
+
 (defun my-org-setup ()
   "Set up my org settings."
   '(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
   '(require 'ox-md nil t)
-  )
+  '(define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
+
+  (defun search-word ()
+    (interactive)
+    (let ((cur-word (thing-at-point 'word)))
+
+                                        ;(message "The word is %s" cur-word)
+      (shell-command (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" https://duckduckgo.com/?q=" cur-word))
+      )
+    )
+  '(define-key org-mode-map (kbd "C-c g") 'search-word)
+)
+
 (eval-after-load "org"
   (my-org-setup)
   )
