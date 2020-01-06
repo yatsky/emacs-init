@@ -37,16 +37,14 @@
    ;; instead of visiting/finding the file/directory when given a string.
    (lambda nil
      (find-file
-      (if
-          (string-equal system-type "gnu/linux")
-          "/mnt/c/Users/thoma/Dev" "C:\\Users\\thoma\\Dev"))))
+      (get-wd (is-gnu-linux)))))
  '(load-prefer-newer t)
  '(mu4e-headers-date-format "%d/%m/%Y")
  '(mu4e-headers-include-related t)
  '(mu4e-headers-skip-duplicates t)
  '(org-agenda-files
-   (quote
-    ("~/Dev/orgs/Personal.org" "~/Dev/orgs/learnning.org" "c:/Users/thoma/Dev/orgs/QUT.org" "c:/Users/thoma/Dev/orgs/COF.org")))
+   (org-agenda-files-paths (get-wd) '("/orgs/Personal.org" "/orgs/learnning.org" "/orgs/QUT.org" "/orgs/COF.org" "/orgs/capture/quick_notes.org"))
+   )
  '(org-agenda-search-headline-for-time nil)
  '(org-agenda-skip-additional-timestamps-same-entry t)
  '(org-agenda-skip-timestamp-if-deadline-is-shown nil)
