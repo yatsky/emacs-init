@@ -209,7 +209,7 @@
                                     ("STYLE_ALL" . "habit"))))
 
 ;; capture
-(setq org-default-notes-file (concat org-directory "/quick_notes.org"))
+(setq org-default-notes-file (concat (get-wd) "/orgs" "/capture/quick_notes.org"))
 
 ;; wrap lines
 (global-visual-line-mode 1)
