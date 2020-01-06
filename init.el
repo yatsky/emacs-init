@@ -1,4 +1,21 @@
+(defun org-agenda-files-paths (cur-wd list)
+  "Generate a list of file paths based on `get-wd' for variable `org-agenda-files'"
+  (let (new-list)
+    (dolist (element list new-list)
+      (setq new-list (cons (concat cur-wd element) new-list)))))
 
+(defun is-gnu-linux ()
+  "Return true is the current os is gnu/linux"
+  (string-equal system-type "gnu/linux")
+  )
+
+(defun get-wd ()
+  "get my working directory"
+  (if
+      (is-gnu-linux)
+      "/mnt/c/Users/thoma/Dev"
+    "C:\\Users\\thoma\\Dev")
+  )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
