@@ -37,7 +37,7 @@
    ;; instead of visiting/finding the file/directory when given a string.
    (lambda nil
      (find-file
-      (get-wd (is-gnu-linux)))))
+      (get-wd))))
  '(load-prefer-newer t)
  '(mu4e-headers-date-format "%d/%m/%Y")
  '(mu4e-headers-include-related t)
