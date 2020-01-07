@@ -51,21 +51,6 @@
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
 ;; (cnfonts-set-spacemacs-fallback-fonts)
 
-;; highlight-tail
-
-;(require 'highlight-tail)
-(message "Highlight-tail loaded - now your Emacs will be even more sexy!")
-;
-; [ here some setq of variables - see CONFIGURATION section below ]
-(setq highlight-tail-colors '(;("black" . 0)
-                              ("#c75e18" . 0)
-                              ("#267bbd" . 66)))
-(setq highlight-tail-steps 10)
-(setq highlight-tail-timer 0.1)
-
-; Highlight mode always on
-; (highlight-tail-mode 1)
-
 ;; set magit global keybinding
 (global-set-key (kbd "C-x g") 'magit-status)
 
