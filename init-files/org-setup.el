@@ -2,9 +2,28 @@
                     ;              Org-global             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq org-directory (concat (get-wd) "/orgs/"))
+;; include entries from the Emacs diary into Org mode's agenda
+(setq org-agenda-include-diary t)
+;; turn on indent mode in Org
+(add-hook 'org-mode-hook 'org-indent-mode)
+
+;; capture
+(setq org-default-notes-file (concat org-directory "capture/quick_notes.org"))
+
+;; cater for whitespace sensetive languages
+(setq org-edit-src-content-indentation 4)
+(setq org-src-fontify-natively t)
+(setq org-src-preserve-indentation t)
+
+; Set default column view headings: Task Effort Clock_Summary
+(setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+;; set effort estimates
+(setq org-global-properties (quote (("Effort_ALL" . "0:05 0:10 0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
+                                    ("STYLE_ALL" . "habit"))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;                Agenda               ;
+                    ;                Agenda               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Agenda
 (defun org-agenda-files-paths (cur-wd list)
@@ -14,10 +33,13 @@
       (setq new-list (cons (concat cur-wd element) new-list)))))
 
 (setq org-agenda-files
-  (org-agenda-files-paths org-directory '("Personal.org" "learnning.org" "QUT.org" "COF.org" "capture/quick_notes.org"))
-   )
+      (cons org-default-notes-file (org-agenda-files-paths org-directory '("Personal.org" "learnning.org" "QUT.org" "COF.org")))
+      )
 
-;; OB-lang
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;           ob-lang settings          ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; enable python source code eval
 (require 'ob-python)
 ;; enable javascript source code eval
@@ -27,15 +49,9 @@
 (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
 
 
-;; include entries from the Emacs diary into Org mode's agenda
-(setq org-agenda-include-diary t)
-;; turn on indent mode in Org
-(add-hook 'org-mode-hook 'org-indent-mode)
-;; (add-hook 'org-mode-hook 'linum-relative-mode)
-;; org-drill shortcut for resume
-;; "org" because C-h f org-mode RET says that org-mode is defined in org.el
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;             My org seup             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-org-setup ()
   "Set up my org settings."
   (define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
@@ -56,23 +72,11 @@
    (my-org-setup)
   )
 
-;; capture
-(setq org-default-notes-file (concat (get-wd) "/orgs" "/capture/quick_notes.org"))
-
-;; cater for whitespace sensetive languages
-(setq org-edit-src-content-indentation 4)
-(setq org-src-fontify-natively t)
-;;(setq org-src-tab-acts-natively t)
-(setq org-src-preserve-indentation t)
-
-; Set default column view headings: Task Effort Clock_Summary
-(setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
-;; set effort estimates
-(setq org-global-properties (quote (("Effort_ALL" . "0:05 0:10 0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
-                                    ("STYLE_ALL" . "habit"))))
 
 
-;; Modules
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;             org-modules             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-bullets
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
