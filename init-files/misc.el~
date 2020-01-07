@@ -1,0 +1,108 @@
+;; disable sound
+(setq visible-bell 1)
+(tool-bar-mode -1)
+(global-display-line-numbers-mode t)
+(electric-pair-mode t)
+
+(require 'undo-tree)
+(global-undo-tree-mode)
+
+(require 'dracula-theme)
+(load-theme 'dracula t)
+(require 'powerline)
+(powerline-center-evil-theme)
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+
+;; yaml support
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+
+
+;; wrap lines
+(global-visual-line-mode 1)
+
+;; jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)    ;optional
+
+;; yasnippet
+(add-to-list 'load-path
+              "~/.emacs.d/plugins/yasnippet")
+(require 'yasnippet)
+(yas-global-mode 1)
+
+; js2 minor mode
+(add-hook 'js-mode-hook 'js2-minor-mode)
+
+;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
+;; This solves the problem that affects Emacs' speed while displaying Chinese characters
+(when (eq system-type 'windows-nt) (setq gc-cons-threshold (* 512 1024 1024))
+      (setq gc-cons-percentage 0.5) (run-with-idle-timer 5 t #'garbage-collect)
+      ;; 显示垃圾回收信息，这个可以作为调试用
+      ;; (setq garbage-collection-messages t)
+      )
+
+(require 'cnfonts)
+;; 让 cnfonts 随着 Emacs 自动生效。
+(cnfonts-enable)
+;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+;; (cnfonts-set-spacemacs-fallback-fonts)
+
+;; highlight-tail
+
+(require 'highlight-tail)
+(message "Highlight-tail loaded - now your Emacs will be even more sexy!")
+;
+; [ here some setq of variables - see CONFIGURATION section below ]
+(setq highlight-tail-colors '(;("black" . 0)
+                              ("#c75e18" . 0)
+                              ("#267bbd" . 66)))
+(setq highlight-tail-steps 10)
+(setq highlight-tail-timer 0.1)
+
+; Highlight mode always on
+; (highlight-tail-mode 1)
+
+;; set magit global keybinding
+(global-set-key (kbd "C-x g") 'magit-status)
+
+
+;; tide for TypeScript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1)
+
+  ;; enable typescript-tslint checker
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  )
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+
+
+;; Set initial frame size
+(set-frame-size (selected-frame) 1850 950 t)
+
+(which-key-mode)
