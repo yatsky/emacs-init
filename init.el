@@ -33,7 +33,6 @@
      (ein . t)
      (ditaa . t))))
  '(org-confirm-babel-evaluate nil)
- '(org-directory "c:/Users/thoma/Dev/orgs/")
  '(org-drill-learn-fraction 0.45)
  '(org-drill-maximum-items-per-session 80)
  '(org-export-use-babel nil)

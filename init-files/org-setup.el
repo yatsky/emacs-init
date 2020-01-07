@@ -1,4 +1,7 @@
-;;(add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;              Org-global             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq org-directory (concat (get-wd) "/orgs/"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                         ;                Agenda               ;
@@ -11,7 +14,7 @@
       (setq new-list (cons (concat cur-wd element) new-list)))))
 
 (setq org-agenda-files
-  (org-agenda-files-paths (get-wd) '("/orgs/Personal.org" "/orgs/learnning.org" "/orgs/QUT.org" "/orgs/COF.org" "/orgs/capture/quick_notes.org"))
+  (org-agenda-files-paths org-directory '("Personal.org" "learnning.org" "QUT.org" "COF.org" "capture/quick_notes.org"))
    )
 
 ;; OB-lang
