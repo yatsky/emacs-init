@@ -4,19 +4,15 @@
 (global-display-line-numbers-mode t)
 (electric-pair-mode t)
 
-(require 'undo-tree)
 (global-undo-tree-mode)
 
-(require 'dracula-theme)
 (load-theme 'dracula t)
 (require 'powerline)
 (powerline-center-evil-theme)
-(require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
 
 ;; yaml support
-(require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 
@@ -31,7 +27,6 @@
 ;; yasnippet
 (add-to-list 'load-path
               "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
 (yas-global-mode 1)
 
 ; js2 minor mode
@@ -45,7 +40,6 @@
       ;; (setq garbage-collection-messages t)
       )
 
-(require 'cnfonts)
 ;; 让 cnfonts 随着 Emacs 自动生效。
 (cnfonts-enable)
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
