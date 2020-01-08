@@ -9,7 +9,6 @@
 (load-theme 'dracula t)
 (require 'powerline)
 (powerline-center-evil-theme)
-(global-set-key [f8] 'neotree-toggle)
 
 
 ;; yaml support
