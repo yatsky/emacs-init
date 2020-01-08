@@ -84,3 +84,4 @@
 (set-frame-size (selected-frame) 1850 950 t)
 
 (which-key-mode)
+(setq gif-screencast-output-directory (cons org-directory "screencasts"))
