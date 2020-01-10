@@ -56,6 +56,8 @@
   "Set up my org settings."
   (define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
   (define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
+  (define-key org-mode-map (kbd "C-c l") 'org-shiftright)
+  (define-key org-mode-map (kbd "C-c g") 'org-shiftleft)
   (require 'ox-md nil t)
 
   (defun search-word ()
