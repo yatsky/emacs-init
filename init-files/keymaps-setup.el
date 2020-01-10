@@ -19,6 +19,7 @@
   (kbd "SPC k") 'describe-key
   (kbd "SPC f") 'describe-function
   (kbd "SPC m u") 'mu4e
+  (kbd "SPC o a") 'org-agenda
   )
 
 ;(evil-define-key '(motion normal)  'global; this does not work in dired but works in *scratch* and when editing files
