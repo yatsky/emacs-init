@@ -22,6 +22,7 @@
   "f" 'describe-function
   "m u" 'mu4e
   "o a" 'org-agenda
+  "." 'evil-repeat
   ; Frame size
   ; inc frame width
   "i f w" 'inc-frame-width
