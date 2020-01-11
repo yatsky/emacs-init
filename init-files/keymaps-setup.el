@@ -12,7 +12,7 @@
   :prefix "SPC o")
 
 (my-global-leader-def
-  :states 'motion
+  :states '(motion normal)
   :keymaps 'override
   "e" 'evil-end-of-line
   ;"set-key expects an interactive command
