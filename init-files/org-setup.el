@@ -58,6 +58,10 @@
   ;(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
   ;(define-key org-mode-map (kbd "C-c l") 'org-shiftright)
   ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
+  (defun org-open-org-directory ()
+    (interactive)
+    (find-file org-directory)
+    )
   (yaoni-org-leader-def
    :states 'normal
    :keymaps 'override
@@ -65,6 +69,7 @@
    "r" 'org-drill-resume
    "l" 'org-shiftright
    "h" 'org-shiftleft
+   "o" 'org-open-org-directory
    )
   (require 'ox-md nil t)
 
