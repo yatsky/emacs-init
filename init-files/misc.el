@@ -80,8 +80,39 @@
               (setup-tide-mode))))
 
 
-;; Set initial frame size
-(set-frame-size (selected-frame) 1850 950 t)
 
 (which-key-mode)
 (setq gif-screencast-output-directory (cons org-directory "screencasts"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;           Frame and Window           ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(set-frame-size (selected-frame) 1350 950 t)
+(defmacro gen-frame-size-func (w-or-h inc)
+  "inc/dec-frame-width/height"
+;(set-frame-height (selected-frame) (+ (frame-native-height (selected-frame)) 20) nil t)
+  ; use let* so that we can refer to the `inc-or-dec' right away in `let'.
+  (let* ((set-func (intern (concat "set-frame-" w-or-h)))
+        (get-func (intern (concat "frame-native-" w-or-h)))
+;; not sure why but it seems 20 is the minimum offset required for the change to take effect
+        (value (if (string-equal w-or-h "width") 40 40))
+        (inc-or-dec (if inc "inc" "dec"))
+        (doc (format "%s the current frame %s." inc-or-dec w-or-h))
+        (positive (if inc 1 -1)))
+
+    ; The comma `,' causes Emacs to evaluate everything in the list it precedes
+    ; so there is no need to place a comma before the variables in the list
+    ; if you want it to be evaluated.
+    ;FIXME: Need to figure out what @ does.
+    `(defun ,(intern (concat inc-or-dec "-frame-" w-or-h)) ()
+       ,doc
+       (interactive)
+        (message ,(number-to-string (* positive value)))
+         (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t)
+         )
+    )
+  )
+(gen-frame-size-func "width" t)
+(gen-frame-size-func "width" nil)
+(gen-frame-size-func "height" nil)
+(gen-frame-size-func "height" t)

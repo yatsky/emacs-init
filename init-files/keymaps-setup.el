@@ -21,7 +21,13 @@
   "f" 'describe-function
   "m u" 'mu4e
   "o a" 'org-agenda
- )
+  ; Frame size
+  ; inc frame width
+  "i f w" 'inc-frame-width
+  "d f w" 'dec-frame-width
+  "i f h" 'inc-frame-height
+  "d f h" 'dec-frame-height
+  )
 
 
 
