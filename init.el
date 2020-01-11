@@ -67,10 +67,10 @@
 ;; Don't delete this line.
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/elpa/")
+(load "~/.emacs.d/init-files/keymaps-setup.el")
 (load "~/.emacs.d/init-files/mu4e-setup.el")
 (load "~/.emacs.d/init-files/org-setup.el")
 (load "~/.emacs.d/init-files/eshell-setup.el")
 (load "~/.emacs.d/init-files/ein-setup.el")
 (load "~/.emacs.d/init-files/evil-setup.el")
-(load "~/.emacs.d/init-files/keymaps-setup.el")
 (load "~/.emacs.d/init-files/misc.el")
