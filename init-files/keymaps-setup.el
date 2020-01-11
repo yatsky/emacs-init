@@ -15,7 +15,7 @@
  :keymaps 'normal
   "e" 'evil-end-of-line
   ;"set-key expects an interactive command
-  "i e" (lambda() (interactive) (find-file "~/.emacs.d/init.el"))
+  "i e" (lambda() (interactive) (find-file "~/.emacs.d"))
   "i l" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
   "k" 'describe-key
   "f" 'describe-function
