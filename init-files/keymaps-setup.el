@@ -12,7 +12,8 @@
   :prefix "SPC o")
 
 (my-global-leader-def
- :keymaps 'normal
+  :states 'motion
+  :keymaps 'override
   "e" 'evil-end-of-line
   ;"set-key expects an interactive command
   "i e" (lambda() (interactive) (find-file "~/.emacs.d"))
