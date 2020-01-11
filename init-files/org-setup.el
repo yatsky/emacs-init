@@ -54,10 +54,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-org-setup ()
   "Set up my org settings."
-  (define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
-  (define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
-  (define-key org-mode-map (kbd "C-c l") 'org-shiftright)
-  (define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
+  ;(define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
+  ;(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
+  ;(define-key org-mode-map (kbd "C-c l") 'org-shiftright)
+  ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
+  (yaoni-org-leader-def
+   :states 'normal
+   :keymaps 'override
+   "t" (kbd "C-u M-x org-time-stamp")
+   "r" 'org-drill-resume
+   "l" 'org-shiftright
+   "h" 'org-shiftleft
+   )
   (require 'ox-md nil t)
 
   (defun search-word ()
