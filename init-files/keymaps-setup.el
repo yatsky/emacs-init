@@ -3,32 +3,66 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Remap SPC in evil mode to a leader key
-(general-create-definer my-global-leader-def
+(general-create-definer my-global-leader
   ;; :prefix my-leader
   :prefix "SPC")
+
+(general-create-definer my-global-text-leader
+  ;; for faster text operations
+  :prefix ",")
 
 ;; Remap SPC o to org mode leader key
 (general-create-definer yaoni-org-leader-def
   :prefix "SPC o")
 
-(my-global-leader-def
+(my-global-text-leader
   :states '(motion normal)
   :keymaps 'override
+
   "e" 'evil-end-of-line
+  "a" 'evil-append-line
+  )
+
+(my-global-leader
+  :states '(motion normal)
+  :keymaps 'override
+
   ;"set-key expects an interactive command
   "i e" (lambda() (interactive) (find-file "~/.emacs.d"))
-  "i l" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
-  "k" 'describe-key
-  "f" 'describe-function
+
+  ; l -> load
+  "l i" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
   "m u" 'mu4e
   "o a" 'org-agenda
   "." 'evil-repeat
+
+  ;d -> delete
+  "d o w" 'delete-other-windows
+  ; r -> run
+  "r" 'execute-extended-command
+
+  ; s -> switch
+  ; switch to buffer
+  "s t b" 'switch-to-buffer
+  "s t f" 'other-frame
+
+  ; s -> search
+  "s i" 'isearch-forward
+
+  ; s -> save
+  "s b" 'save-buffer
+
+  ; o -> open
+  "o f" 'find-file
   ; Frame size
   ; inc frame width
   "i f w" 'inc-frame-width
   "d f w" 'dec-frame-width
   "i f h" 'inc-frame-height
   "d f h" 'dec-frame-height
+
+  ; magit-status
+  "m s" 'magit-status
   )
 
 
