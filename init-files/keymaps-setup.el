@@ -41,22 +41,29 @@
   ; r -> run
 
   ;; helm-M-x is helmized execute-extended-command
-  ;"r" 'execute-extended-command
-  "r" 'helm-M-x
+  ;"e" 'execute-extended-command
+  ; e -> execute
+  "e" 'helm-M-x
 
   ; s -> switch
   ; switch to buffer
-  "s t b" 'switch-to-buffer
-  "s t f" 'other-frame
+  "s b" 'switch-to-buffer
+  "s f" 'other-frame
+  "s w l" 'evil-window-right
+  "s w h" 'evil-window-left
+  "s w k" 'evil-window-up
+  "s w j" 'evil-window-down
 
   ; s -> search
   "s i" 'isearch-forward
 
-  ; s -> save
-  "s b" 'save-buffer
+  ; w -> write
+  "w b" 'save-buffer
 
   ; o -> open
   "o f" 'helm-find-files
+  ;"set-key expects an interactive command
+  "o i" (lambda() (interactive) (find-file "~/.emacs.d"))
   ; Frame size
   ; inc frame width
   "i f w" 'inc-frame-width
