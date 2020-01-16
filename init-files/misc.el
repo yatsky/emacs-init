@@ -139,3 +139,7 @@
 (gen-frame-size-func "width" nil)
 (gen-frame-size-func "height" nil)
 (gen-frame-size-func "height" t)
+
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
