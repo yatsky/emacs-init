@@ -1,7 +1,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;      Functions for key bindings     ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;          Global keybindings         ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(general-define-key
+ :states '(motion normal)
+ :keymaps 'override
+  ; r -> redo
+  "r" 'undo-tree-redo
+  "3" 'split-window-right
+  "4" 'delete-other-windows
+
+ )
 ;; Remap SPC in evil mode to a leader key
 (general-create-definer my-global-leader
   ;; :prefix my-leader
@@ -10,6 +24,10 @@
 (general-create-definer my-global-text-leader
   ;; for faster text operations
   :prefix ",")
+
+(general-create-definer my-global-misc-leader
+  ;; for future operations
+  :prefix "m")
 
 ;; Remap SPC o to org mode leader key
 (general-create-definer yaoni-org-leader-def
@@ -27,8 +45,6 @@
   :states '(motion normal)
   :keymaps 'override
 
-  ;"set-key expects an interactive command
-  "i e" (lambda() (interactive) (find-file "~/.emacs.d"))
 
   ; l -> load
   "l i" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
@@ -73,6 +89,10 @@
 
   ; magit-status
   "m s" 'magit-status
+
+
+  ; eX command
+  "x" 'evil-ex
   )
 
 
