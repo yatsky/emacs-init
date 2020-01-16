@@ -39,7 +39,10 @@
   ;d -> delete
   "d o w" 'delete-other-windows
   ; r -> run
-  "r" 'execute-extended-command
+
+  ;; helm-M-x is helmized execute-extended-command
+  ;"r" 'execute-extended-command
+  "r" 'helm-M-x
 
   ; s -> switch
   ; switch to buffer
@@ -53,7 +56,7 @@
   "s b" 'save-buffer
 
   ; o -> open
-  "o f" 'find-file
+  "o f" 'helm-find-files
   ; Frame size
   ; inc frame width
   "i f w" 'inc-frame-width
