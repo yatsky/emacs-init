@@ -143,3 +143,6 @@
 (require 'keyfreq)
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
+
+(require 'helm-config)
+(helm-mode 1)
