@@ -29,7 +29,7 @@
 (yas-global-mode 1)
 
 ; js2 minor mode
-(add-hook 'js-mode-hook 'js2-minor-mode)
+;(add-hook 'js-mode-hook 'js2-minor-mode)
 
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
 ;; This solves the problem that affects Emacs' speed while displaying Chinese characters
