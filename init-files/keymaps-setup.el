@@ -12,6 +12,7 @@
  :keymaps 'override
   ; r -> redo
   "r" 'undo-tree-redo
+  "2" 'other-window
   "3" 'split-window-right
   "4" 'delete-other-windows
 
