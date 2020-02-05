@@ -151,3 +151,5 @@
 (require 'helm-config)
 (helm-mode 1)
 (pdf-tools-install)
+;; save/restore opened files and windows config
+(desktop-save-mode 1)
