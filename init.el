@@ -17,6 +17,7 @@
  '(elfeed-feeds (quote ("https://nyaa.si/?page=rss")))
  '(evil-want-keybinding nil)
  '(global-display-line-numbers-mode t)
+ '(helm-completion-style (quote emacs))
  '(load-prefer-newer t)
  '(mu4e-headers-date-format "%d/%m/%Y")
  '(mu4e-headers-include-related t)
