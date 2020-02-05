@@ -101,3 +101,7 @@
 (with-eval-after-load 'gif-screencast
   (define-key gif-screencast-mode-map (kbd "<f8>") 'gif-screencast-toggle-pause)
   (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
+
+;; auto-complete
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
