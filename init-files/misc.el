@@ -66,6 +66,9 @@
                 pyim-probe-isearch-mode
                 pyim-probe-program-mode
                 pyim-probe-org-structure-template))
+(setq pyim-punctuation-translate-p '(auto yes no))   ;中文使用全角标点，英文使用半角标点。
+(setq-default pyim-punctuation-half-width-functions
+              '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
 (global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 ;; set magit global keybinding
