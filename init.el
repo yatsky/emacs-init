@@ -69,6 +69,7 @@
 ;; Don't delete this line.
 (package-initialize)
 (add-to-list 'load-path "~/.emacs.d/elpa/")
+(add-to-list 'load-path "~/.emacs.d/plugins/mu4e")
 (load "~/.emacs.d/init-files/keymaps-setup.el")
 (load "~/.emacs.d/init-files/mu4e-setup.el")
 (load "~/.emacs.d/init-files/org-setup.el")
