@@ -153,3 +153,7 @@
 (pdf-tools-install)
 ;; save/restore opened files and windows config
 (desktop-save-mode 1)
+
+;; Projectile
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
