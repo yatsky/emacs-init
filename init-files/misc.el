@@ -22,6 +22,7 @@
 ;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)    ;optional
+(setq ac-max-width 0.1)
 
 ;; yasnippet
 (add-to-list 'load-path
