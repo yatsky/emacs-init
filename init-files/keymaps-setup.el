@@ -103,5 +103,6 @@
   (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
 
 ;; auto-complete
-(define-key ac-complete-mode-map "\C-n" 'ac-next)
-(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(with-eval-after-load 'auto-complete
+  (define-key ac-complete-mode-map "\C-n" 'ac-next)
+  (define-key ac-complete-mode-map "\C-p" 'ac-previous))
