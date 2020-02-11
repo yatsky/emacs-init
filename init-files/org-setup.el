@@ -65,7 +65,7 @@
   (yaoni-org-leader-def
    :states 'normal
    :keymaps 'override
-   "t" (kbd "C-u M-x org-time-stamp")
+   "t" (kbd "C-u M-x org-time-stamp-inactive")
    "r" 'org-drill-resume
    "l" 'org-shiftright
    "h" 'org-shiftleft
