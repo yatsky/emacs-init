@@ -74,12 +74,16 @@
   (require 'ox-md nil t)
 
   (defun search-word ()
+    "Search the word marked or at point."
     (interactive)
-    (let ((cur-word (thing-at-point 'word)))
-     ;(message "The word is %s" cur-word)
-      (shell-command (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" https://duckduckgo.com/?q=" cur-word))
-      )
-    )
+    (let (pos1 pos2 bds)
+      (if (use-region-p)
+          (setq pos1 (region-beginning) pos2 (region-end))
+        (progn
+          (setq bds (bounds-of-thing-at-point 'symbol))
+          (setq pos1 (car bds) pos2 (cdr bds))))
+      (shell-command (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" https://duckduckgo.com/?q=" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))
+      ))
   (define-key org-mode-map (kbd "C-c g") 'search-word)
 )
 
