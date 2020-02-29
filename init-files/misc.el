@@ -164,3 +164,8 @@
 ;; Projectile
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+;; Dired
+(require 'dired-x)
+(setq-default dired-omit-files-p t) ; Buffer-local variable
+(setq dired-omit-files (concat dired-omit-files ".+~$"))
