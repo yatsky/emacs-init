@@ -7,14 +7,20 @@
                     ;          Global keybindings         ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun my-previous-window()
+  "Go to the previous window"
+  (interactive)
+  (other-window -1))
 (general-define-key
  :states '(motion normal)
  :keymaps 'override
   ; r -> redo
   "r" 'undo-tree-redo
+  "1" 'my-previous-window
   "2" 'other-window
   "3" 'split-window-right
-  "4" 'delete-other-windows
+  "4" 'split-window-below
+  "5" 'delete-other-windows
 
  )
 ;; Remap SPC in evil mode to a leader key
