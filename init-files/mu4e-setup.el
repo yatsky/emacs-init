@@ -6,7 +6,7 @@
   (require 'org-mime)
   ;; make sure mu4e is in your load-path
   (require 'mu4e)
-  (require 'org-mu4e)
+  ;;(require 'org-mu4e)
 
   ;; use mu4e for e-mail in emacs
   (setq mail-user-agent 'mu4e-user-agent)
@@ -61,7 +61,7 @@
             (defun my-do-compose-stuff ()
               "My settings for message composition."
               (visual-line-mode)
-              (org-mu4e-compose-org-mode)
+              ;(org-mu4e-compose-org-mode)
               (use-hard-newlines -1)
               (flyspell-mode)))
   ;;set up queue for offline email
@@ -75,7 +75,7 @@
   (setq mu4e-compose-dont-reply-to-self t)
 
   ;; convert org mode to HTML automatically
-  (setq org-mu4e-convert-to-html t)
+  ;(setq org-mu4e-convert-to-html t)
 
   ;;from vxlabs config
   ;; show full addresses in view message (instead of just names)
@@ -216,3 +216,22 @@
   (if (is-gnu-linux)
       (load-mu4e)))
 (load-mu4e-on-gnu-linux)
+
+
+
+(require 'gnus-dired)
+;; make the `gnus-dired-mail-buffers' function also work on
+;; message-mode derived modes, such as mu4e-compose-mode
+(defun gnus-dired-mail-buffers ()
+"Return a list of active message buffers."
+(let (buffers)
+    (save-current-buffer
+    (dolist (buffer (buffer-list t))
+(set-buffer buffer)
+(when (and (derived-mode-p 'message-mode)
+        (null message-sent-message-via))
+    (push (buffer-name buffer) buffers))))
+    (nreverse buffers)))
+
+(setq gnus-dired-mail-mode 'mu4e-user-agent)
+(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
