@@ -177,3 +177,14 @@
 ;; note that setting `venv-location` is not necessary if you
 ;; use the default location (`~/.virtualenvs`), or if the
 ;; the environment variable `WORKON_HOME` points to the right place
+
+(defun open-working-directory ()
+    (interactive)
+    (find-file (get-wd))
+)
+
+(yaoni-org-leader-def
+  :states '(motion normal)
+  :keymaps 'override
+
+  "d" 'open-working-directory)
