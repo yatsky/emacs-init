@@ -3,15 +3,21 @@
 ;; Load emacs packages and activate them
 ;; This must come before configurations of installed packages.
 ;; Don't delete this line.
-
 (setq package-enable-at-startup nil)
+
+(setq package-archives
+      (quote
+       (("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")
+        ("org" . "https://orgmode.org/elpa/"))))
+
+(package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
 
-(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -59,11 +65,6 @@
      (org-agenda-files :maxlevel . 5))))
  '(org-screenshot-image-directory "/tmp/images/")
  '(org-src-tab-acts-natively t)
- '(package-archives
-   (quote
-    (("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa" . "https://melpa.org/packages/")
-     ("org" . "https://orgmode.org/elpa/"))))
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
