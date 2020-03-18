@@ -1,8 +1,6 @@
 
 (require 'package)
-;; Load emacs packages and activate them
-;; This must come before configurations of installed packages.
-;; Don't delete this line.
+
 (setq package-enable-at-startup nil)
 
 (setq package-archives
