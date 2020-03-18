@@ -391,6 +391,16 @@ My org mode setup.
                 (message "Not in ditaa mode %s"(buffer-name))
                 )))
 #+end_src
+* Magit
+Magit settings.
+#+begin_src emacs-lisp :tangle yes
+(use-package magit
+  :ensure t
+  :init
+  ;; call this function so that eshell can use magit-get-current-branch.
+  (magit-version)
+  )
+#+end_src
 * Miscellaneous setup
 Stuff that I haven't decided where to put (or never will!).
 Mostly consists of system settings.
@@ -468,8 +478,6 @@ Mostly consists of system settings.
               '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
 (global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
-;; set magit global keybinding
-(global-set-key (kbd "C-x g") 'magit-status)
 
 
 ;; tide for TypeScript
