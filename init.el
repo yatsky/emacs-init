@@ -1,5 +1,13 @@
-(load "~/.emacs.d/init-files/utils.el")
-(load "~/.emacs.d/init-files/yaoni-set-variables.el")
+
+(require 'package)
+;; Load emacs packages and activate them
+;; This must come before configurations of installed packages.
+;; Don't delete this line.
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 
 (custom-set-variables
@@ -38,6 +46,7 @@
  '(org-drill-maximum-items-per-session 80)
  '(org-export-use-babel nil)
  '(org-html-htmlize-output-type (quote css))
+ '(org-html-preamble-format (quote (("en" "<p>%t</p></p>%d</p>"))))
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-eww org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
@@ -45,6 +54,7 @@
    (quote
     ((org-agenda-files :regexp . "*")
      (org-agenda-files :maxlevel . 5))))
+ '(org-screenshot-image-directory "/tmp/images/")
  '(org-src-tab-acts-natively t)
  '(package-archives
    (quote
@@ -54,7 +64,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree)))
+    (use-package helm-core virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree)))
  '(pdf-view-midnight-colors (quote ("white smoke" . "black"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -63,17 +73,5 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "SauceCodePro Nerd Font" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))
 
-(require 'package)
-;; Load emacs packages and activate them
-;; This must come before configurations of installed packages.
-;; Don't delete this line.
-(package-initialize)
-(add-to-list 'load-path "~/.emacs.d/elpa/")
-(add-to-list 'load-path "~/.emacs.d/plugins/mu4e")
-(load "~/.emacs.d/init-files/keymaps-setup.el")
-(load "~/.emacs.d/init-files/mu4e-setup.el")
-(load "~/.emacs.d/init-files/org-setup.el")
-(load "~/.emacs.d/init-files/eshell-setup.el")
-(load "~/.emacs.d/init-files/ein-setup.el")
-(load "~/.emacs.d/init-files/evil-setup.el")
-(load "~/.emacs.d/init-files/misc.el")
+
+(org-babel-load-file (expand-file-name "~/.emacs.d/yaoni.org"))

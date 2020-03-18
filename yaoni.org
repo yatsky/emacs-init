@@ -1,0 +1,834 @@
+* Introduction
+This is my personal Emacs init file in org.
+* Basic config
+Some very basic config of my own.
+This was called "utils" before being compiled into this file.
+It is renamed to "Basic config" so that it appears on top of the file and gets compiled early.
+#+begin_src emacs-lisp :tangle yes
+(defun is-gnu-linux ()
+  "Return true is the current os is gnu/linux"
+  (string-equal system-type "gnu/linux")
+  )
+
+(defun get-wd ()
+  "Get my working directory"
+  (if
+      (is-gnu-linux)
+      "/mnt/c/Users/thoma/Dev"
+    "C:\\Users\\thoma\\Dev")
+  )
+ (setq initial-buffer-choice
+   ;; We have to use find-file to open the buffer
+   ;; because initial-buffer-choice selects the buffer the function returns.
+   ;; instead of visiting/finding the file/directory when given a string.
+       (lambda nil
+     (find-file
+      (get-wd))))
+(add-to-list 'load-path "~/.emacs.d/elpa/")
+#+end_src
+* EIN
+#+begin_src emacs-lisp :tangle yes
+; ein
+(require 'ein)
+(require 'ein-notebook)
+(require 'ein-subpackages)
+#+end_src
+* eshell
+Extracted from here: http://www.modernemacs.com/post/custom-eshell/
+
+Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
+#+begin_src emacs-lisp :tangle yes
+
+(require 'dash)
+(require 's)
+
+(defmacro with-face (STR &rest PROPS)
+  "Return STR propertized with PROPS."
+  `(propertize ,STR 'face (list ,@PROPS)))
+
+(defmacro esh-section (NAME ICON FORM &rest PROPS)
+  "Build eshell section NAME with ICON prepended to evaled FORM with PROPS."
+  `(setq ,NAME
+         (lambda () (when ,FORM
+                      (-> ,ICON
+                          (concat esh-section-delim ,FORM)
+                          (with-face ,@PROPS))))))
+
+(defun esh-acc (acc x)
+  "Accumulator for evaluating and concatenating esh-sections."
+  (--if-let (funcall x)
+      (if (s-blank? acc)
+          it
+        (concat acc esh-sep it))
+    acc))
+
+(defun esh-prompt-func ()
+  "Build `eshell-prompt-function'"
+  (concat esh-header
+          (-reduce-from 'esh-acc "" eshell-funcs)
+          "\n"
+          eshell-prompt-string))
+
+;; Separator between esh-sections
+(setq esh-sep "  ")  ; or " | "
+
+;; Separator between an esh-section icon and form
+(setq esh-section-delim " ")
+
+;; Eshell prompt header
+(setq esh-header "\n ")  ; or "\n┌─"
+
+;; Eshell prompt regexp and string. Unless you are varying the prompt by eg.
+;; your login, these can be the same.
+(setq eshell-prompt-regexp " ")   ; or "└─> "
+(setq eshell-prompt-string " ")   ; or "└─> "
+
+(esh-section esh-dir
+             ;"\xf07c"  ;  (faicon folder)
+             "fake-dir"
+             (abbreviate-file-name (eshell/pwd))
+             '(:foreground "gold" :bold ultra-bold :underline t))
+
+(esh-section esh-git
+             ;"\xe907"  ;  (git icon)
+	     "fake-git-icon"
+             (magit-get-current-branch)
+             '(:foreground "pink"))
+
+;(esh-section esh-python
+;             "\xe928"  ;  (python icon)
+;             pyvenv-virtual-env-name)
+
+(esh-section esh-clock
+             ;"\xf017"  ;  (clock icon)
+             "fake-clock"
+             (format-time-string "%H:%M" (current-time))
+             '(:foreground "forest green"))
+
+;; Below I implement a "prompt number" section
+(setq esh-prompt-num 0)
+(add-hook 'eshell-exit-hook (lambda () (setq esh-prompt-num 0)))
+(advice-add 'eshell-send-input :before
+            (lambda (&rest args) (setq esh-prompt-num (incf esh-prompt-num))))
+
+(esh-section esh-num
+             ;"\xf0c9"  ;  (list icon)
+             "fake-num"
+             (number-to-string esh-prompt-num)
+             '(:foreground "brown"))
+
+;; Choose which eshell-funcs to enable
+(setq eshell-funcs (list esh-dir esh-git esh-clock esh-num))
+
+;; Enable the new eshell prompt
+(setq eshell-prompt-function 'esh-prompt-func)
+#+end_src
+* Evil
+#+begin_src emacs-lisp :tangle yes
+;; evil org
+(require 'evil)
+(when (require 'evil-collection nil t)
+  (evil-collection-init))
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
+(evil-mode 1)
+
+;; evil surround
+(require 'evil-surround)
+(add-hook 'org-mode-hook 'turn-on-evil-surround-mode)
+; org-brain config
+;; org-brain using evil
+(evil-set-initial-state 'org-brain-visualize-mode 'emacs)
+#+end_src
+* Keymaps
+#+begin_src emacs-lisp :tangle yes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;      Functions for key bindings     ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;          Global keybindings         ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun my-previous-window()
+  "Go to the previous window"
+  (interactive)
+  (other-window -1))
+(general-define-key
+ :states '(motion normal)
+ :keymaps 'override
+  ; r -> redo
+  "r" 'undo-tree-redo
+  "1" 'my-previous-window
+  "2" 'other-window
+  "3" 'split-window-right
+  "4" 'split-window-below
+  "5" 'delete-other-windows
+
+ )
+;; Remap SPC in evil mode to a leader key
+(general-create-definer my-global-leader
+  ;; :prefix my-leader
+  :prefix "SPC")
+
+(general-create-definer my-global-text-leader
+  ;; for faster text operations
+  :prefix ",")
+
+(general-create-definer my-global-misc-leader
+  ;; for future operations
+  :prefix "m")
+
+;; Remap SPC o to org mode leader key
+(general-create-definer yaoni-org-leader-def
+  :prefix "SPC o")
+
+(my-global-text-leader
+  :states '(motion normal)
+  :keymaps 'override
+
+  "e" 'evil-end-of-line
+  "a" 'evil-append-line
+  )
+
+(my-global-leader
+  :states '(motion normal)
+  :keymaps 'override
+
+
+  ; l -> load
+  "l i" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
+  "m u" 'mu4e
+  "o a" 'org-agenda
+  "." 'evil-repeat
+
+  ;d -> delete
+  "d o w" 'delete-other-windows
+  ; r -> run
+
+  ;; helm-M-x is helmized execute-extended-command
+  ;"e" 'execute-extended-command
+  ; e -> execute
+  "e" 'helm-M-x
+
+  ; s -> switch
+  ; switch to buffer
+  "s b" 'switch-to-buffer
+  "s f" 'other-frame
+  "s w l" 'evil-window-right
+  "s w h" 'evil-window-left
+  "s w k" 'evil-window-up
+  "s w j" 'evil-window-down
+
+  ; s -> search
+  "s i" 'isearch-forward
+
+  ; w -> write
+  "w b" 'save-buffer
+
+  ; o -> open
+  "o f" 'helm-find-files
+  ;"set-key expects an interactive command
+  "o i" (lambda() (interactive) (find-file "~/.emacs.d"))
+  ; Frame size
+  ; inc frame width
+  "i f w" 'inc-frame-width
+  "d f w" 'dec-frame-width
+  "i f h" 'inc-frame-height
+  "d f h" 'dec-frame-height
+
+  ; magit-status
+  "m s" 'magit-status
+
+
+  ; eX command
+  "x" 'evil-ex
+  )
+
+
+
+(with-eval-after-load 'gif-screencast
+  (define-key gif-screencast-mode-map (kbd "<f8>") 'gif-screencast-toggle-pause)
+  (define-key gif-screencast-mode-map (kbd "<f9>") 'gif-screencast-stop))
+
+;; auto-complete
+(with-eval-after-load 'auto-complete
+  (define-key ac-complete-mode-map "\C-n" 'ac-next)
+  (define-key ac-complete-mode-map "\C-p" 'ac-previous))
+#+end_src
+* org
+My org mode setup.
+#+begin_src emacs-lisp :tangle yes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;              Org-global             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq org-directory (concat (get-wd) "/orgs/"))
+;; include entries from the Emacs diary into Org mode's agenda
+(setq org-agenda-include-diary t)
+;; turn on indent mode in Org
+(add-hook 'org-mode-hook 'org-indent-mode)
+
+;; capture
+(setq org-default-notes-file (concat org-directory "capture/quick_notes.org"))
+
+;; cater for whitespace sensetive languages
+(setq org-edit-src-content-indentation 4)
+(setq org-src-fontify-natively t)
+(setq org-src-preserve-indentation t)
+
+; Set default column view headings: Task Effort Clock_Summary
+(setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+;; set effort estimates
+(setq org-global-properties (quote (("Effort_ALL" . "0:05 0:10 0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
+                                    ("STYLE_ALL" . "habit"))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;                Agenda               ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Agenda
+(defun org-agenda-files-paths (cur-wd list)
+  "Generate a list of file paths based on `get-wd' for variable `org-agenda-files'"
+  (let (new-list)
+    (dolist (element list new-list)
+      (setq new-list (cons (concat cur-wd element) new-list)))))
+
+(setq org-agenda-files
+      (cons org-default-notes-file (org-agenda-files-paths org-directory '("Personal.org" "learnning.org" "QUT.org" "COF.org")))
+      )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;           ob-lang settings          ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; enable python source code eval
+(require 'ob-python)
+;; enable javascript source code eval
+(require 'ob-js)
+;;(add-to-list 'org-babel-load-languages '(js . t))
+(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+(add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;             My org seup             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my-org-setup ()
+  "Set up my org settings."
+  ;(define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
+  ;(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
+  ;(define-key org-mode-map (kbd "C-c l") 'org-shiftright)
+  ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
+  (defun org-open-org-directory ()
+    (interactive)
+    (find-file org-directory)
+    )
+  (yaoni-org-leader-def
+   :states 'normal
+   :keymaps 'override
+   "t" (kbd "C-u M-x org-time-stamp-inactive")
+   "r" 'org-drill-resume
+   "l" 'org-shiftright
+   "h" 'org-shiftleft
+   "o" 'org-open-org-directory
+   )
+  (require 'ox-md nil t)
+
+  (defun search-word ()
+    "Search the word marked or at point."
+    (interactive)
+    (let (pos1 pos2 bds)
+      (if (use-region-p)
+          (setq pos1 (region-beginning) pos2 (region-end))
+        (progn
+          (setq bds (bounds-of-thing-at-point 'symbol))
+          (setq pos1 (car bds) pos2 (cdr bds))))
+      (shell-command (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" https://duckduckgo.com/?q=" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))
+      ))
+  (define-key org-mode-map (kbd "C-c g") 'search-word)
+)
+
+(with-eval-after-load "org"
+   (my-org-setup)
+  )
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;             org-modules             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-bullets
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; do not use any tabs
+;; this is added to prevent picture mode from inserting tabs
+;; while we are drawing ascii images
+;; we do not use tabs anyway so leave it globally on
+(setq-default indent-tabs-mode nil)
+
+;; Ditaa settings
+; disable Artist mode in org-src-mode when editing ditaa code
+; this is because Artist mode seems to prevent me from typing arrows (< and >)
+(defun setup-ditaa ()
+    "Setting up the ditaa env for org-src-mode"
+    (message "In ditaa mode %s"(buffer-name))
+    (artist-mode-off)
+    (picture-mode)
+    (display-line-numbers-mode)
+  )
+
+(add-hook 'org-src-mode-hook
+          (lambda ()
+            (if (string-match-p (regexp-quote "ditaa") (buffer-name))
+                ;; fixme: need to fix this
+                ;; seems to be not calling this function
+                (setup-ditaa)
+                (message "Not in ditaa mode %s"(buffer-name))
+                )))
+#+end_src
+* Miscellaneous setup
+Stuff that I haven't decided where to put (or never will!).
+Mostly consists of system settings.
+#+begin_src emacs-lisp :tangle yes
+;; disable sound
+(setq visible-bell 1)
+(tool-bar-mode -1)
+(global-display-line-numbers-mode t)
+(electric-pair-mode t)
+
+(global-undo-tree-mode)
+
+(load-theme 'dracula t)
+(require 'powerline)
+(powerline-center-evil-theme)
+
+
+;; yaml support
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+
+
+;; wrap lines
+(global-visual-line-mode 1)
+
+;; jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)    ;optional
+(setq ac-max-width 0.4)
+
+;; yasnippet
+(add-to-list 'load-path
+              "~/.emacs.d/plugins/yasnippet")
+(yas-global-mode 1)
+
+; js2 minor mode
+;(add-hook 'js-mode-hook 'js2-minor-mode)
+
+;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
+;; This solves the problem that affects Emacs' speed while displaying Chinese characters
+(when (eq system-type 'windows-nt) (setq gc-cons-threshold (* 512 1024 1024))
+      (setq gc-cons-percentage 0.5) (run-with-idle-timer 5 t #'garbage-collect)
+      ;; 显示垃圾回收信息，这个可以作为调试用
+      ;; (setq garbage-collection-messages t)
+      )
+
+;; 让 cnfonts 随着 Emacs 自动生效。
+(cnfonts-enable)
+;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+;; (cnfonts-set-spacemacs-fallback-fonts)
+
+;; pyim
+(require 'posframe)
+(require 'pyim)
+(require 'pyim-basedict)
+(pyim-basedict-enable)
+(setq default-input-method "pyim")
+(global-set-key (kbd "C-\\") 'toggle-input-method)
+;; 使用 popup-el 来绘制选词框, 如果用 emacs26, 建议设置
+;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
+;; 手动安装 posframe 包。
+(setq pyim-page-tooltip 'posframe)
+;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
+;; 我自己使用的中英文动态切换规则是：
+;; 1. 光标只有在注释里面时，才可以输入中文。
+;; 2. 光标前是汉字字符时，才能输入中文。
+;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
+(setq-default pyim-english-input-switch-functions
+            '(pyim-probe-dynamic-english
+                pyim-probe-isearch-mode
+                pyim-probe-program-mode
+                pyim-probe-org-structure-template))
+(setq pyim-punctuation-translate-p '(auto yes no))   ;中文使用全角标点，英文使用半角标点。
+(setq-default pyim-punctuation-half-width-functions
+              '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
+(global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
+(global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
+;; set magit global keybinding
+(global-set-key (kbd "C-x g") 'magit-status)
+
+
+;; tide for TypeScript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1)
+
+  ;; enable typescript-tslint checker
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  )
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(require 'web-mode)
+(setq web-mode-engines-alist
+      '(("django"  . "\\.html\\'"))
+)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+
+(defun my-web-mode-hook ()
+  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+    (setup-tide-mode))
+  (message "Web-mode on")
+  (electric-pair-local-mode -1)
+  )
+(add-hook 'web-mode-hook 'my-web-mode-hook)
+
+
+(which-key-mode)
+(setq gif-screencast-output-directory (cons org-directory "screencasts"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;           Frame and Window           ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(set-frame-size (selected-frame) 1350 950 t)
+(defmacro gen-frame-size-func (w-or-h inc)
+  "inc/dec-frame-width/height"
+;(set-frame-height (selected-frame) (+ (frame-native-height (selected-frame)) 20) nil t)
+  ; use let* so that we can refer to the `inc-or-dec' right away in `let'.
+  (let* ((set-func (intern (concat "set-frame-" w-or-h)))
+        (get-func (intern (concat "frame-native-" w-or-h)))
+;; not sure why but it seems 20 is the minimum offset required for the change to take effect
+        (value (if (string-equal w-or-h "width") 40 40))
+        (inc-or-dec (if inc "inc" "dec"))
+        (doc (format "%s the current frame %s." inc-or-dec w-or-h))
+        (positive (if inc 1 -1)))
+
+    ; The comma `,' causes Emacs to evaluate everything in the list it precedes
+    ; so there is no need to place a comma before the variables in the list
+    ; if you want it to be evaluated.
+    ;FIXME: Need to figure out what @ does.
+    `(defun ,(intern (concat inc-or-dec "-frame-" w-or-h)) ()
+       ,doc
+       (interactive)
+        (message ,(number-to-string (* positive value)))
+         (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t)
+         )
+    )
+  )
+(gen-frame-size-func "width" t)
+(gen-frame-size-func "width" nil)
+(gen-frame-size-func "height" nil)
+(gen-frame-size-func "height" t)
+
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+
+(require 'helm-config)
+(helm-mode 1)
+(pdf-tools-install)
+;; save/restore opened files and windows config
+(desktop-save-mode 1)
+
+;; Projectile
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+;; Dired
+(require 'dired-x)
+(setq-default dired-omit-files-p t) ; Buffer-local variable
+(setq dired-omit-files (concat dired-omit-files ".+~$"))
+
+;; virtualenvwrapper
+(require 'virtualenvwrapper)
+(venv-initialize-interactive-shells) ;; if you want interactive shell support
+(venv-initialize-eshell) ;; if you want eshell support
+;; note that setting `venv-location` is not necessary if you
+;; use the default location (`~/.virtualenvs`), or if the
+;; the environment variable `WORKON_HOME` points to the right place
+
+(defun open-working-directory ()
+    (interactive)
+    (find-file (get-wd))
+)
+
+(yaoni-org-leader-def
+  :states '(motion normal)
+  :keymaps 'override
+
+  "d" 'open-working-directory)
+
+;; show-paren-mode
+(show-paren-mode 1)
+(setq show-paren-style 'mixed)
+#+end_src
+* mu4e
+Here's the configs for my mu4e stuff. I compiled it from multiple sources which I will try to recollect.
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "~/.emacs.d/plugins/mu4e")
+(defun load-mu4e ()
+  "Load mu4e"
+
+  ;; minimum configuration for mu4e
+
+  (require 'org-mime)
+  ;; make sure mu4e is in your load-path
+  (require 'mu4e)
+  ;;(require 'org-mu4e)
+
+  ;; use mu4e for e-mail in emacs
+  (setq mail-user-agent 'mu4e-user-agent)
+  ;; default
+  (setq mu4e-maildir (expand-file-name "~/.mail"))
+
+                                        ; (setq mu4e-drafts-folder "/[Gmail].Drafts")
+                                        ; (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+                                        ; (setq mu4e-trash-folder  "/[Gmail].Trash")
+
+  ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+  ;; Testing shows that office 365 also works with this setting.
+  (setq mu4e-sent-messages-behavior 'delete)
+
+  ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
+  ;; additional non-Gmail addresses and want assign them different
+  ;; behavior.)
+
+
+  ;; allow for updating mail using 'U' in the main view:
+  ;; (setq mu4e-get-mail-command "offlineimap")
+  (setq mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a"
+        ;; mu4e-html2text-command "w3m -T text/html" ;;using the default mu4e-shr2text
+        mu4e-view-prefer-html t
+        mu4e-update-interval 180
+        mu4e-headers-auto-update t
+        mu4e-compose-signature-auto-include nil
+        mu4e-compose-format-flowed t)
+
+  ;; enable inline images
+  (setq mu4e-view-show-images t)
+  ;; use imagemagick, if available
+  (when (fboundp 'imagemagick-register-types)
+    (imagemagick-register-types))
+
+  ;; every new email composition gets its own frame!
+  ;; this conflicts with undo-tree
+  ;; (setq mu4e-compose-in-new-frame t)
+
+
+  (add-hook 'mu4e-view-mode-hook #'visual-line-mode)
+
+  ;; <tab> to navigate to links, <RET> to open them in browser
+  (add-hook 'mu4e-view-mode-hook
+            (lambda()
+              ;; try to emulate some of the eww key-bindings
+              (local-set-key (kbd "<RET>") 'mu4e~view-browse-url-from-binding)
+              (local-set-key (kbd "<tab>") 'shr-next-link)
+              (local-set-key (kbd "<backtab>") 'shr-previous-link)))
+  ;; spell check
+  (add-hook 'mu4e-compose-mode-hook
+            (defun my-do-compose-stuff ()
+              "My settings for message composition."
+              (visual-line-mode)
+              ;(org-mu4e-compose-org-mode)
+              (use-hard-newlines -1)
+              (flyspell-mode)))
+  ;;set up queue for offline email
+  ;;use mu mkdir  ~/Maildir/acc/queue to set up first
+  (setq smtpmail-queue-mail nil)  ;; start in normal mode
+  ;;rename files when moving
+  ;;NEEDED FOR MBSYNC
+  (setq mu4e-change-filenames-when-moving t)
+  ;;from the info manual
+  (setq mu4e-attachment-dir  "~/Downloads")
+  (setq mu4e-compose-dont-reply-to-self t)
+
+  ;; convert org mode to HTML automatically
+  ;(setq org-mu4e-convert-to-html t)
+
+  ;;from vxlabs config
+  ;; show full addresses in view message (instead of just names)
+  ;; toggle per name with M-RET
+  (setq mu4e-view-show-addresses 't)
+
+  ;; don't ask when quitting
+  (setq mu4e-confirm-quit nil)
+  (require 'smtpmail)
+
+  ;; don't keep message buffers around
+  (setq message-kill-buffer-on-exit t)
+
+
+  ;; Use MS Edge to open the link in mu4e view
+  ;; https://www.emacswiki.org/emacs/BrowseUrl
+  (defun browse-url-ms-edge (url &optional new-window)
+    (shell-command
+     (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" " url))
+    )
+  (setq browse-url-browser-function 'browse-url-ms-edge)
+
+  (setf (alist-get 'trash mu4e-marks)
+        (list :char '("d" . "▼")
+              :prompt "dtrash"
+              :dyn-target (lambda (target msg)
+                            (mu4e-get-trash-folder msg))
+              :action (lambda (docid msg target)
+                        ;; Here's the main difference to the regular trash mark,
+                        ;; no +T before -N so the message is not marked as
+                        ;; IMAP-deleted:
+                        (mu4e~proc-move docid (mu4e~mark-check-target target) "-N"))))
+  ;; mu4e-context
+  (require 'mu4e-context)
+  (setq mu4e-context-policy 'pick-first)
+  (setq mu4e-compose-context-policy 'always-ask)
+  (setq mu4e-contexts
+        (list
+         (make-mu4e-context
+          :name "personal" ;;for my-gmail
+          :enter-func (lambda () (mu4e-message "Entering context personal"))
+          :leave-func (lambda () (mu4e-message "Leaving context personal"))
+          :match-func (lambda (msg)
+                        (when msg
+                          (mu4e-message-contact-field-matches
+                           msg '(:from :to :cc :bcc) "wyatsky@gmail.com")))
+          :vars '((user-mail-address . "wyatsky@gmail.com")
+                  (user-full-name . "Thomas")
+                  (mu4e-sent-folder . "/my-gmail/[Gmail].Sent Mail")
+                  (mu4e-drafts-folder . "/my-gmail/[Gmail].drafts")
+                  (mu4e-trash-folder . "/my-gmail/[Gmail].Bin")
+                  (mu4e-compose-signature . (concat "Thomas Wang\n" "Emacs 25, org-mode 9, mu4e 1.0\n"))
+                  (mu4e-compose-format-flowed . t)
+                  (smtpmail-queue-dir . "~/.mail/my-gmail/queue/cur")
+                  (message-send-mail-function . smtpmail-send-it)
+                  (smtpmail-smtp-user . "wyatsky")
+                  (smtpmail-starttls-credentials . (("smtp.gmail.com" 587 nil nil)))
+                  (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+                  (smtpmail-default-smtp-server . "smtp.gmail.com")
+                  (smtpmail-smtp-server . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 587)
+                  (smtpmail-debug-info . t)
+                  (smtpmail-debug-verbose . t)
+                  (mu4e-maildir-shortcuts . ( ("/my-gmail/INBOX"            . ?i)
+                                              ("/my-gmail/[my].Sent Mail" . ?s)
+                                              ("/my-gmail/[my].Bin"       . ?t)
+                                              ("/my-gmail/[my].All Mail"  . ?a)
+                                              ("/my-gmail/[my].Starred"   . ?r)
+                                              ("/my-gmail/[my].drafts"    . ?d)
+                                              ))))
+         (make-mu4e-context
+          :name "qut" ;;for acc2-gmail
+          :enter-func (lambda () (mu4e-message "Entering context work"))
+          :leave-func (lambda () (mu4e-message "Leaving context work"))
+          :match-func (lambda (msg)
+                        (when msg
+                          (mu4e-message-contact-field-matches
+                           msg '(:from :to :cc :bcc) "wangy95@qut.edu.au")))
+          :vars '((user-mail-address . "wangy95@qut.edu.au")
+                  (user-full-name . "Yi Wang")
+                  (mu4e-sent-folder . "/QUT/[QUT].Sent Mail")
+                  (mu4e-drafts-folder . "/QUT/[QUT].drafts")
+                  (mu4e-trash-folder . "/QUT/[QUT].Trash")
+                  (mu4e-compose-signature . (concat "Cheers\n" "Emacs is awesome!\n"))
+                  (mu4e-compose-format-flowed . t)
+                  (smtpmail-queue-dir . "~/.mail/QUT/queue/cur")
+                  (message-send-mail-function . smtpmail-send-it)
+                  (smtpmail-smtp-user . "wangy95@qut.edu.au")
+                  (smtpmail-starttls-credentials . (("smtp.office365.com" 587 nil nil)))
+                  (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+                  (smtpmail-default-smtp-server . "smtp.office365.com")
+                  (smtpmail-smtp-server . "smtp.office365.com")
+                  (smtpmail-smtp-service . 587)
+                  (smtpmail-debug-info . t)
+                  (smtpmail-debug-verbose . t)
+                  (mu4e-maildir-shortcuts . ( ("/QUT/INBOX"            . ?i)
+                                              ))))
+
+         (make-mu4e-context
+          :name "uq" ;;for acc2-gmail
+          :enter-func (lambda () (mu4e-message "Entering context work"))
+          :leave-func (lambda () (mu4e-message "Leaving context work"))
+          :match-func (lambda (msg)
+                        (when msg
+                          (mu4e-message-contact-field-matches
+                           msg '(:from :to :cc :bcc) "y.wang7@uqconnect.edu.au")))
+          :vars '((user-mail-address . "y.wang7@uqconnect.edu.au")
+                  (user-full-name . "Yi Wang")
+                  (mu4e-sent-folder . "/uq/[uq].Sent Mail")
+                  (mu4e-drafts-folder . "/uq/[uq].drafts")
+                  (mu4e-trash-folder . "/uq/[uq].Trash")
+                  (mu4e-compose-signature . (concat "Cheers\n" "Emacs is awesome!\n"))
+                  (mu4e-compose-format-flowed . t)
+                  (smtpmail-queue-dir . "~/.mail/uq/queue/cur")
+                  (message-send-mail-function . smtpmail-send-it)
+                  (smtpmail-smtp-user . "y.wang7@uqconnect.edu.au")
+                  (smtpmail-starttls-credentials . (("smtp.office365.com" 587 nil nil)))
+                  (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+                  (smtpmail-default-smtp-server . "smtp.office365.com")
+                  (smtpmail-smtp-server . "smtp.office365.com")
+                  (smtpmail-smtp-service . 587)
+                  (smtpmail-debug-info . t)
+                  (smtpmail-debug-verbose . t)
+                  (mu4e-maildir-shortcuts . ( ("/uq/INBOX"            . ?i)
+                                              ))))))
+  ;; bookmarks
+
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name  "No Trash Unread"
+                :query "date:today..now AND NOT Maildir:/QUT/[QUT].Trash AND NOT Maildir:/my-gmail/[Gmail].Bin"
+                :key ?U))
+  
+  )
+
+(defun load-mu4e-on-gnu-linux ()
+  "Load mu4e if the os is gnu/linux"
+  (if (is-gnu-linux)
+      (load-mu4e)))
+(load-mu4e-on-gnu-linux)
+
+
+
+(require 'gnus-dired)
+;; make the `gnus-dired-mail-buffers' function also work on
+;; message-mode derived modes, such as mu4e-compose-mode
+(defun gnus-dired-mail-buffers ()
+"Return a list of active message buffers."
+(let (buffers)
+    (save-current-buffer
+    (dolist (buffer (buffer-list t))
+(set-buffer buffer)
+(when (and (derived-mode-p 'message-mode)
+        (null message-sent-message-via))
+    (push (buffer-name buffer) buffers))))
+    (nreverse buffers)))
+
+(setq gnus-dired-mail-mode 'mu4e-user-agent)
+(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
+#+end_src
