@@ -3,12 +3,15 @@
 ;; Load emacs packages and activate them
 ;; This must come before configurations of installed packages.
 ;; Don't delete this line.
-(package-initialize)
+
+(setq package-enable-at-startup nil)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
+
+(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
