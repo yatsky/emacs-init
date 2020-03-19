@@ -1,5 +1,7 @@
 * Introduction
 This is my personal Emacs init file in org.
+
+Entries here are alphabetically ordrered except for this *Introduction*
 * Basic config
 Some very basic config of my own.
 This was called "utils" before being compiled into this file.
