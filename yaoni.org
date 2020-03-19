@@ -777,7 +777,9 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
                   (smtpmail-smtp-service . 587)
                   (smtpmail-debug-info . t)
                   (smtpmail-debug-verbose . t)
-                  (mu4e-maildir-shortcuts . ( ("/QUT/INBOX"            . ?i)
+                  (mu4e-maildir-shortcuts . (
+ ("/QUT/INBOX"            . ?i)
+ ("/QUTSent Items"            . ?s)
                                               ))))
 
          (make-mu4e-context
