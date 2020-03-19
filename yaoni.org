@@ -454,32 +454,6 @@ Mostly consists of system settings.
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
 ;; (cnfonts-set-spacemacs-fallback-fonts)
 
-;; pyim
-(require 'posframe)
-(require 'pyim)
-(require 'pyim-basedict)
-(pyim-basedict-enable)
-(setq default-input-method "pyim")
-(global-set-key (kbd "C-\\") 'toggle-input-method)
-;; 使用 popup-el 来绘制选词框, 如果用 emacs26, 建议设置
-;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
-;; 手动安装 posframe 包。
-(setq pyim-page-tooltip 'posframe)
-;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
-;; 我自己使用的中英文动态切换规则是：
-;; 1. 光标只有在注释里面时，才可以输入中文。
-;; 2. 光标前是汉字字符时，才能输入中文。
-;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
-(setq-default pyim-english-input-switch-functions
-            '(pyim-probe-dynamic-english
-                pyim-probe-isearch-mode
-                pyim-probe-program-mode
-                pyim-probe-org-structure-template))
-(setq pyim-punctuation-translate-p '(auto yes no))   ;中文使用全角标点，英文使用半角标点。
-(setq-default pyim-punctuation-half-width-functions
-              '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
-(global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
-(global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 
 
 ;; tide for TypeScript
@@ -855,4 +829,165 @@ The following code [[https://www.djcbsoftware.nl/code/mu/mu4e/Retrieval-and-inde
 Do not show indexing progress in the minibuffer.
 #+begin_src emacs-lisp :tangle yes
 (setq mu4e-hide-index-messages t)
+#+end_src
+* org
+My org mode setup.
+#+begin_src emacs-lisp :tangle yes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;              Org-global             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq org-directory (concat (get-wd) "/orgs/"))
+;; include entries from the Emacs diary into Org mode's agenda
+(setq org-agenda-include-diary t)
+;; turn on indent mode in Org
+(add-hook 'org-mode-hook 'org-indent-mode)
+
+;; capture
+(setq org-default-notes-file (concat org-directory "capture/quick_notes.org"))
+
+;; cater for whitespace sensetive languages
+(setq org-edit-src-content-indentation 4)
+(setq org-src-fontify-natively t)
+(setq org-src-preserve-indentation t)
+
+; Set default column view headings: Task Effort Clock_Summary
+(setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+;; set effort estimates
+(setq org-global-properties (quote (("Effort_ALL" . "0:05 0:10 0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
+                                    ("STYLE_ALL" . "habit"))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;                Agenda               ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Agenda
+(defun org-agenda-files-paths (cur-wd list)
+  "Generate a list of file paths based on `get-wd' for variable `org-agenda-files'"
+  (let (new-list)
+    (dolist (element list new-list)
+      (setq new-list (cons (concat cur-wd element) new-list)))))
+
+(setq org-agenda-files
+      (cons org-default-notes-file (org-agenda-files-paths org-directory '("Personal.org" "learnning.org" "QUT.org" "COF.org")))
+      )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;           ob-lang settings          ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; enable python source code eval
+(require 'ob-python)
+;; enable javascript source code eval
+(require 'ob-js)
+;;(add-to-list 'org-babel-load-languages '(js . t))
+(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+(add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;             My org seup             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my-org-setup ()
+  "Set up my org settings."
+  ;(define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
+  ;(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
+  ;(define-key org-mode-map (kbd "C-c l") 'org-shiftright)
+  ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
+  (defun org-open-org-directory ()
+    (interactive)
+    (find-file org-directory)
+    )
+  (yaoni-org-leader-def
+   :states 'normal
+   :keymaps 'override
+   "t" (kbd "C-u M-x org-time-stamp-inactive")
+   "r" 'org-drill-resume
+   "l" 'org-shiftright
+   "h" 'org-shiftleft
+   "o" 'org-open-org-directory
+   )
+  (require 'ox-md nil t)
+
+  (defun search-word ()
+    "Search the word marked or at point."
+    (interactive)
+    (let (pos1 pos2 bds)
+      (if (use-region-p)
+          (setq pos1 (region-beginning) pos2 (region-end))
+        (progn
+          (setq bds (bounds-of-thing-at-point 'symbol))
+          (setq pos1 (car bds) pos2 (cdr bds))))
+      (shell-command (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" https://duckduckgo.com/?q=" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))
+      ))
+  (define-key org-mode-map (kbd "C-c g") 'search-word)
+)
+
+(with-eval-after-load "org"
+   (my-org-setup)
+  )
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;             org-modules             ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-bullets
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+;; do not use any tabs
+;; this is added to prevent picture mode from inserting tabs
+;; while we are drawing ascii images
+;; we do not use tabs anyway so leave it globally on
+(setq-default indent-tabs-mode nil)
+
+;; Ditaa settings
+; disable Artist mode in org-src-mode when editing ditaa code
+; this is because Artist mode seems to prevent me from typing arrows (< and >)
+(defun setup-ditaa ()
+    "Setting up the ditaa env for org-src-mode"
+    (message "In ditaa mode %s"(buffer-name))
+    (artist-mode-off)
+    (picture-mode)
+    (display-line-numbers-mode)
+  )
+
+(add-hook 'org-src-mode-hook
+          (lambda ()
+            (if (string-match-p (regexp-quote "ditaa") (buffer-name))
+                ;; fixme: need to fix this
+                ;; seems to be not calling this function
+                (setup-ditaa)
+                (message "Not in ditaa mode %s"(buffer-name))
+                )))
+#+end_src
+* pyim
+
+#+begin_src emacs-lisp :tangle yes
+;; pyim
+(require 'posframe)
+(require 'pyim)
+(require 'pyim-basedict)
+(pyim-basedict-enable)
+(setq default-input-method "pyim")
+(global-set-key (kbd "C-\\") 'toggle-input-method)
+;; 使用 popup-el 来绘制选词框, 如果用 emacs26, 建议设置
+;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
+;; 手动安装 posframe 包。
+(setq pyim-page-tooltip 'posframe)
+;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
+;; 我自己使用的中英文动态切换规则是：
+;; 1. 光标只有在注释里面时，才可以输入中文。
+;; 2. 光标前是汉字字符时，才能输入中文。
+;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
+(setq-default pyim-english-input-switch-functions
+            '(pyim-probe-dynamic-english
+                pyim-probe-isearch-mode
+                pyim-probe-program-mode
+                pyim-probe-org-structure-template))
+(setq pyim-punctuation-translate-p '(auto yes no))   ;中文使用全角标点，英文使用半角标点。
+(setq-default pyim-punctuation-half-width-functions
+              '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
+(global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
+(global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
