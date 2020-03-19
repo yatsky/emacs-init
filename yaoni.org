@@ -844,3 +844,15 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
 (setq gnus-dired-mail-mode 'mu4e-user-agent)
 (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 #+end_src
+
+The following code [[https://www.djcbsoftware.nl/code/mu/mu4e/Retrieval-and-indexing.html#Speeding-up-indexing][speeds up the indexing process]].
+#+begin_src emacs-lisp :tangle yes
+(setq
+  mu4e-index-cleanup nil      ;; don't do a full cleanup check
+  mu4e-index-lazy-check t)    ;; don't consider up-to-date dirs
+#+end_src
+
+Do not show indexing progress in the minibuffer.
+#+begin_src emacs-lisp :tangle yes
+(setq mu4e-hide-index-messages t)
+#+end_src
