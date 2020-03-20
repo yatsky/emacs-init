@@ -455,13 +455,11 @@ All the icons to display and show icons.
 #+end_src
 * mu4e
 Here's the configs for my mu4e stuff. I compiled it from multiple sources which I will try to recollect.
+** Basic settings
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'load-path "~/.emacs.d/plugins/mu4e")
 (defun load-mu4e ()
   "Load mu4e"
-
-  ;; minimum configuration for mu4e
-
   (require 'org-mime)
   ;; make sure mu4e is in your load-path
   (require 'mu4e)
@@ -471,10 +469,6 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
   (setq mail-user-agent 'mu4e-user-agent)
   ;; default
   (setq mu4e-maildir (expand-file-name "~/.mail"))
-
-                                        ; (setq mu4e-drafts-folder "/[Gmail].Drafts")
-                                        ; (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
-                                        ; (setq mu4e-trash-folder  "/[Gmail].Trash")
 
   ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
   ;; Testing shows that office 365 also works with this setting.
@@ -486,7 +480,6 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
 
 
   ;; allow for updating mail using 'U' in the main view:
-  ;; (setq mu4e-get-mail-command "offlineimap")
   (setq mu4e-get-mail-command "mbsync -c ~/.emacs.d/mu4e/.mbsyncrc -a"
         ;; mu4e-html2text-command "w3m -T text/html" ;;using the default mu4e-shr2text
         mu4e-view-prefer-html t
@@ -520,7 +513,7 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
             (defun my-do-compose-stuff ()
               "My settings for message composition."
               (visual-line-mode)
-              ;(org-mu4e-compose-org-mode)
+                                        ;(org-mu4e-compose-org-mode)
               (use-hard-newlines -1)
               (flyspell-mode)))
   ;;set up queue for offline email
@@ -567,110 +560,114 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
                         ;; no +T before -N so the message is not marked as
                         ;; IMAP-deleted:
                         (mu4e~proc-move docid (mu4e~mark-check-target target) "-N"))))
-  ;; mu4e-context
-  (require 'mu4e-context)
-  (setq mu4e-context-policy 'pick-first)
-  (setq mu4e-compose-context-policy 'always-ask)
-  (setq mu4e-contexts
-        (list
-         (make-mu4e-context
-          :name "personal" ;;for my-gmail
-          :enter-func (lambda () (mu4e-message "Entering context personal"))
-          :leave-func (lambda () (mu4e-message "Leaving context personal"))
-          :match-func (lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) "wyatsky@gmail.com")))
-          :vars '((user-mail-address . "wyatsky@gmail.com")
-                  (user-full-name . "Thomas")
-                  (mu4e-sent-folder . "/my-gmail/[Gmail].Sent Mail")
-                  (mu4e-drafts-folder . "/my-gmail/[Gmail].drafts")
-                  (mu4e-trash-folder . "/my-gmail/[Gmail].Bin")
-                  (mu4e-compose-signature . (concat "Thomas Wang\n" "Emacs 25, org-mode 9, mu4e 1.0\n"))
-                  (mu4e-compose-format-flowed . t)
-                  (smtpmail-queue-dir . "~/.mail/my-gmail/queue/cur")
-                  (message-send-mail-function . smtpmail-send-it)
-                  (smtpmail-smtp-user . "wyatsky")
-                  (smtpmail-starttls-credentials . (("smtp.gmail.com" 587 nil nil)))
-                  (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
-                  (smtpmail-default-smtp-server . "smtp.gmail.com")
-                  (smtpmail-smtp-server . "smtp.gmail.com")
-                  (smtpmail-smtp-service . 587)
-                  (smtpmail-debug-info . t)
-                  (smtpmail-debug-verbose . t)
-                  (mu4e-maildir-shortcuts . ( ("/my-gmail/INBOX"            . ?i)
-                                              ("/my-gmail/[my].Sent Mail" . ?s)
-                                              ("/my-gmail/[my].Bin"       . ?t)
-                                              ("/my-gmail/[my].All Mail"  . ?a)
-                                              ("/my-gmail/[my].Starred"   . ?r)
-                                              ("/my-gmail/[my].drafts"    . ?d)
-                                              ))))
-         (make-mu4e-context
-          :name "qut" ;;for acc2-gmail
-          :enter-func (lambda () (mu4e-message "Entering context work"))
-          :leave-func (lambda () (mu4e-message "Leaving context work"))
-          :match-func (lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) "wangy95@qut.edu.au")))
-          :vars '((user-mail-address . "wangy95@qut.edu.au")
-                  (user-full-name . "Yi Wang")
-                  (mu4e-sent-folder . "/QUT/Sent Items")
-                  (mu4e-drafts-folder . "/QUT/Drafts")
-                  (mu4e-trash-folder . "/QUT/Deleted Items")
-                  (mu4e-compose-signature . (concat "Cheers\n" "Emacs is awesome!\n"))
-                  (mu4e-compose-format-flowed . t)
-                  (smtpmail-queue-dir . "~/.mail/QUT/queue/cur")
-                  (message-send-mail-function . smtpmail-send-it)
-                  (smtpmail-smtp-user . "wangy95@qut.edu.au")
-                  (smtpmail-starttls-credentials . (("smtp.office365.com" 587 nil nil)))
-                  (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
-                  (smtpmail-default-smtp-server . "smtp.office365.com")
-                  (smtpmail-smtp-server . "smtp.office365.com")
-                  (smtpmail-smtp-service . 587)
-                  (smtpmail-debug-info . t)
-                  (smtpmail-debug-verbose . t)
-                  (mu4e-maildir-shortcuts . (
- ("/QUT/INBOX"            . ?i)
- ("/QUTSent Items"            . ?s)
-                                              ))))
+#+end_src
 
-         (make-mu4e-context
-          :name "uq" ;;for acc2-gmail
-          :enter-func (lambda () (mu4e-message "Entering context work"))
-          :leave-func (lambda () (mu4e-message "Leaving context work"))
-          :match-func (lambda (msg)
-                        (when msg
-                          (mu4e-message-contact-field-matches
-                           msg '(:from :to :cc :bcc) "y.wang7@uqconnect.edu.au")))
-          :vars '((user-mail-address . "y.wang7@uqconnect.edu.au")
-                  (user-full-name . "Yi Wang")
-                  (mu4e-sent-folder . "/uq/Sent Mail")
-                  (mu4e-drafts-folder . "/uq/Drafts")
-                  (mu4e-trash-folder . "/uq/Trash")
-                  (mu4e-compose-signature . (concat "Cheers\n" "Emacs is awesome!\n"))
-                  (mu4e-compose-format-flowed . t)
-                  (smtpmail-queue-dir . "~/.mail/uq/queue/cur")
-                  (message-send-mail-function . smtpmail-send-it)
-                  (smtpmail-smtp-user . "y.wang7@uqconnect.edu.au")
-                  (smtpmail-starttls-credentials . (("smtp.office365.com" 587 nil nil)))
-                  (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
-                  (smtpmail-default-smtp-server . "smtp.office365.com")
-                  (smtpmail-smtp-server . "smtp.office365.com")
-                  (smtpmail-smtp-service . 587)
-                  (smtpmail-debug-info . t)
-                  (smtpmail-debug-verbose . t)
-                  (mu4e-maildir-shortcuts . ( ("/uq/INBOX"            . ?i)
-                                              ))))))
-  ;; bookmarks
+** Context settings.
+#+begin_src emacs-lisp :tangle yes
+;; mu4e-context
+(require 'mu4e-context)
+(setq mu4e-context-policy 'pick-first)
+(setq mu4e-compose-context-policy 'always-ask)
+(setq mu4e-contexts
+      (list
+       (make-mu4e-context
+        :name "personal" ;;for my-gmail
+        :enter-func (lambda () (mu4e-message "Entering context personal"))
+        :leave-func (lambda () (mu4e-message "Leaving context personal"))
+        :match-func (lambda (msg)
+                      (when msg
+                        (mu4e-message-contact-field-matches
+                         msg '(:from :to :cc :bcc) "wyatsky@gmail.com")))
+        :vars '((user-mail-address . "wyatsky@gmail.com")
+                (user-full-name . "Thomas")
+                (mu4e-sent-folder . "/my-gmail/[Gmail].Sent Mail")
+                (mu4e-drafts-folder . "/my-gmail/[Gmail].drafts")
+                (mu4e-trash-folder . "/my-gmail/[Gmail].Bin")
+                (mu4e-compose-signature . (concat "Thomas Wang\n" "Emacs 25, org-mode 9, mu4e 1.0\n"))
+                (mu4e-compose-format-flowed . t)
+                (smtpmail-queue-dir . "~/.mail/my-gmail/queue/cur")
+                (message-send-mail-function . smtpmail-send-it)
+                (smtpmail-smtp-user . "wyatsky")
+                (smtpmail-starttls-credentials . (("smtp.gmail.com" 587 nil nil)))
+                (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+                (smtpmail-default-smtp-server . "smtp.gmail.com")
+                (smtpmail-smtp-server . "smtp.gmail.com")
+                (smtpmail-smtp-service . 587)
+                (smtpmail-debug-info . t)
+                (smtpmail-debug-verbose . t)
+                (mu4e-maildir-shortcuts . ( ("/my-gmail/INBOX"            . ?i)
+                                            ("/my-gmail/[my].Sent Mail" . ?s)
+                                            ("/my-gmail/[my].Bin"       . ?t)
+                                            ("/my-gmail/[my].All Mail"  . ?a)
+                                            ("/my-gmail/[my].Starred"   . ?r)
+                                            ("/my-gmail/[my].drafts"    . ?d)
+                                            ))))
+       (make-mu4e-context
+        :name "qut" 
+        :enter-func (lambda () (mu4e-message "Entering context work"))
+        :leave-func (lambda () (mu4e-message "Leaving context work"))
+        :match-func (lambda (msg)
+                      (when msg
+                        (mu4e-message-contact-field-matches
+                         msg '(:from :to :cc :bcc) "wangy95@qut.edu.au")))
+        :vars '((user-mail-address . "wangy95@qut.edu.au")
+                (user-full-name . "Yi Wang")
+                (mu4e-sent-folder . "/QUT/Sent Items")
+                (mu4e-drafts-folder . "/QUT/Drafts")
+                (mu4e-trash-folder . "/QUT/Deleted Items")
+                (mu4e-compose-signature . (concat "Kind regards,\n" "Yi Wang\n"))
+                (mu4e-compose-format-flowed . t)
+                (smtpmail-queue-dir . "~/.mail/QUT/queue/cur")
+                (message-send-mail-function . smtpmail-send-it)
+                (smtpmail-smtp-user . "wangy95@qut.edu.au")
+                (smtpmail-starttls-credentials . (("smtp.office365.com" 587 nil nil)))
+                (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+                (smtpmail-default-smtp-server . "smtp.office365.com")
+                (smtpmail-smtp-server . "smtp.office365.com")
+                (smtpmail-smtp-service . 587)
+                (smtpmail-debug-info . t)
+                (smtpmail-debug-verbose . t)
+                (mu4e-maildir-shortcuts . (
+                                           ("/QUT/INBOX"            . ?i)
+                                           ("/QUTSent Items"            . ?s)
+                                           ))))
 
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name  "No Trash Unread"
-                :query "date:today..now AND NOT Maildir:/QUT/[QUT].Trash AND NOT Maildir:/my-gmail/[Gmail].Bin"
-                :key ?U))
-  
-  )
+       (make-mu4e-context
+        :name "uq" ;;for acc2-gmail
+        :enter-func (lambda () (mu4e-message "Entering context work"))
+        :leave-func (lambda () (mu4e-message "Leaving context work"))
+        :match-func (lambda (msg)
+                      (when msg
+                        (mu4e-message-contact-field-matches
+                         msg '(:from :to :cc :bcc) "y.wang7@uqconnect.edu.au")))
+        :vars '((user-mail-address . "y.wang7@uqconnect.edu.au")
+                (user-full-name . "Yi Wang")
+                (mu4e-sent-folder . "/uq/Sent Mail")
+                (mu4e-drafts-folder . "/uq/Drafts")
+                (mu4e-trash-folder . "/uq/Trash")
+                (mu4e-compose-signature . (concat "Cheers\n" "Emacs is awesome!\n"))
+                (mu4e-compose-format-flowed . t)
+                (smtpmail-queue-dir . "~/.mail/uq/queue/cur")
+                (message-send-mail-function . smtpmail-send-it)
+                (smtpmail-smtp-user . "y.wang7@uqconnect.edu.au")
+                (smtpmail-starttls-credentials . (("smtp.office365.com" 587 nil nil)))
+                (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
+                (smtpmail-default-smtp-server . "smtp.office365.com")
+                (smtpmail-smtp-server . "smtp.office365.com")
+                (smtpmail-smtp-service . 587)
+                (smtpmail-debug-info . t)
+                (smtpmail-debug-verbose . t)
+                (mu4e-maildir-shortcuts . ( ("/uq/INBOX"            . ?i)
+                                            ))))))
+;; bookmarks
+
+(add-to-list 'mu4e-bookmarks
+             (make-mu4e-bookmark
+              :name  "No Trash Unread"
+              :query "date:today..now AND NOT Maildir:/QUT/[QUT].Trash AND NOT Maildir:/my-gmail/[Gmail].Bin"
+              :key ?U))
+
+)
 
 (defun load-mu4e-on-gnu-linux ()
   "Load mu4e if the os is gnu/linux"
@@ -684,14 +681,14 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
 ;; make the `gnus-dired-mail-buffers' function also work on
 ;; message-mode derived modes, such as mu4e-compose-mode
 (defun gnus-dired-mail-buffers ()
-"Return a list of active message buffers."
-(let (buffers)
+  "Return a list of active message buffers."
+  (let (buffers)
     (save-current-buffer
-    (dolist (buffer (buffer-list t))
-(set-buffer buffer)
-(when (and (derived-mode-p 'message-mode)
-        (null message-sent-message-via))
-    (push (buffer-name buffer) buffers))))
+      (dolist (buffer (buffer-list t))
+        (set-buffer buffer)
+        (when (and (derived-mode-p 'message-mode)
+                   (null message-sent-message-via))
+          (push (buffer-name buffer) buffers))))
     (nreverse buffers)))
 
 (setq gnus-dired-mail-mode 'mu4e-user-agent)
@@ -701,8 +698,8 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
 The following code [[https://www.djcbsoftware.nl/code/mu/mu4e/Retrieval-and-indexing.html#Speeding-up-indexing][speeds up the indexing process]].
 #+begin_src emacs-lisp :tangle yes
 (setq
-  mu4e-index-cleanup nil      ;; don't do a full cleanup check
-  mu4e-index-lazy-check t)    ;; don't consider up-to-date dirs
+ mu4e-index-cleanup nil      ;; don't do a full cleanup check
+ mu4e-index-lazy-check t)    ;; don't consider up-to-date dirs
 #+end_src
 
 Do not show indexing progress in the minibuffer.
