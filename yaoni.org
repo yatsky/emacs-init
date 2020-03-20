@@ -876,3 +876,4 @@ My org mode setup.
 (global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
+* Testing
