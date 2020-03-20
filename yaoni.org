@@ -527,7 +527,7 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
   (setq mu4e-compose-dont-reply-to-self t)
 
   ;; convert org mode to HTML automatically
-  ;(setq org-mu4e-convert-to-html t)
+                                        ;(setq org-mu4e-convert-to-html t)
 
   ;;from vxlabs config
   ;; show full addresses in view message (instead of just names)
