@@ -243,7 +243,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
   ; o -> open
   "o f" 'helm-find-files
-  ;"set-key expects an interactive command
+  ; set-key expects an interactive command
   "o i" (lambda() (interactive) (find-file "~/.emacs.d"))
   ; Frame size
   ; inc frame width
