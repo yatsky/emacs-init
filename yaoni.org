@@ -712,6 +712,29 @@ Some other settings.
 (setq mu4e-headers-include-related t)
 (setq mu4e-headers-skip-duplicates t)
 #+end_src
+** Signature
+My own signature function as the ~mu4e-insert-signature~ always inserts the signature to the end of the whole conversation.
+
+[[http://ergoemacs.org/emacs/elisp_defvar_problem.html][This article]] explains why set ~defvar~ to ~nil~.
+Basically, ~defvar~ cannot override a symbol's value if it's defined already.
+#+begin_src emacs-lisp :tangle yes
+(defvar my-message-signatures nil
+  "Association list providing signatures for different occasions.
+This is set to nil because once it is set by `defvar', it cannot be changed.")
+(setq my-message-signatures '((?1 "Formal" (lambda () "" (insert-file-contents message-signature-file)))
+            (?2 "Informal" (lambda () (insert-file-contents (concat message-signature-file "-informal")))))
+  )
+(defun my-mu4e-insert-signature ()
+"Insert my custom signature from "
+  (interactive)
+  (let ((choice (read-char-choice (mapconcat (lambda (item) (format "%c: %s" (car item) (cadr item))) my-message-signatures "; ")
+                                  (mapcar #'car my-message-signatures))))
+    (funcall (nth 2 (assoc choice my-message-signatures))))
+  )
+(add-hook 'mu4e-compose-mode-hook
+          (lambda () (local-set-key (kbd "C-c C-w") #'my-mu4e-insert-signature)))
+
+#+end_src
 * org
 My org mode setup.
 #+begin_src emacs-lisp :tangle yes
