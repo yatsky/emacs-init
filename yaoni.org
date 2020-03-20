@@ -448,6 +448,11 @@ Mostly consists of system settings.
 (show-paren-mode 1)
 (setq show-paren-style 'mixed)
 #+end_src
+
+All the icons to display and show icons.
+#+begin_src emacs-lisp :tangle yes
+(use-package all-the-icons)
+#+end_src
 * mu4e
 Here's the configs for my mu4e stuff. I compiled it from multiple sources which I will try to recollect.
 #+begin_src emacs-lisp :tangle yes
