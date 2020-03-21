@@ -29,7 +29,7 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
 (add-to-list 'load-path "~/.emacs.d/elpa/")
 #+end_src
 * cnfonts
-~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~.
+~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[my issue][https://github.com/tumashu/cnfonts/issues/113]].
 #+begin_src emacs-lisp :tangle yes
 (require 'cnfonts)
 ;; 让 cnfonts 随着 Emacs 自动生效。
