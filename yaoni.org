@@ -174,7 +174,8 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   :states '(normal insert)
   :keymaps 'override
   ;; :prefix my-leader
-  :prefix "SPC")
+  :prefix "SPC"
+  :non-normal-prefix "C-SPC")
 
 (general-create-definer my-global-text-leader
   ;; for faster text operations
