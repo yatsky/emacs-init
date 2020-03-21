@@ -60,6 +60,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   "Build eshell section NAME with ICON prepended to evaled FORM with PROPS."
   `(setq ,NAME
          (lambda () (when ,FORM
+;< this left angle bracket was added so that org mode matches it with the following one
                       (-> ,ICON
                           (concat esh-section-delim ,FORM)
                           (with-face ,@PROPS))))))
