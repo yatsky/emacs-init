@@ -134,27 +134,6 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 ;; Enable the new eshell prompt
 (setq eshell-prompt-function 'esh-prompt-func)
 #+end_src
-* Evil
-#+begin_src emacs-lisp :tangle yes
-;; evil org
-(setq evil-want-keybinding nil)
-(require 'evil)
-(when (require 'evil-collection nil t)
-  (evil-collection-init))
-(require 'evil-org)
-(add-hook 'org-mode-hook 'evil-org-mode)
-(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
-(require 'evil-org-agenda)
-(evil-org-agenda-set-keys)
-(evil-mode 1)
-
-;; evil surround
-(require 'evil-surround)
-(add-hook 'org-mode-hook 'turn-on-evil-surround-mode)
-; org-brain config
-;; org-brain using evil
-(evil-set-initial-state 'org-brain-visualize-mode 'emacs)
-#+end_src
 * Keymaps
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -271,6 +250,27 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 (with-eval-after-load 'auto-complete
   (define-key ac-complete-mode-map "\C-n" 'ac-next)
   (define-key ac-complete-mode-map "\C-p" 'ac-previous))
+#+end_src
+* Evil
+#+begin_src emacs-lisp :tangle yes
+;; evil org
+(setq evil-want-keybinding nil)
+(require 'evil)
+(when (require 'evil-collection nil t)
+  (evil-collection-init))
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
+(evil-mode 1)
+
+;; evil surround
+(require 'evil-surround)
+(add-hook 'org-mode-hook 'turn-on-evil-surround-mode)
+; org-brain config
+;; org-brain using evil
+(evil-set-initial-state 'org-brain-visualize-mode 'emacs)
 #+end_src
 * Magit
 Magit settings.
