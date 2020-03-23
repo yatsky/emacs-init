@@ -110,7 +110,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
 (esh-section esh-git
              ;"\xe907"  ;  (git icon)
-	     "fake-git-icon"
+	       ""
              (magit-get-current-branch)
              '(:foreground "pink"))
 
