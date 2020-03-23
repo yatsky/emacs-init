@@ -885,6 +885,9 @@ My org mode setup.
 (require 'pyim-basedict)
 (pyim-basedict-enable)
 (setq default-input-method "pyim")
+(setq pyim-default-scheme 'wubi)
+(require 'pyim-wbdict)
+(pyim-wbdict-v98-enable)
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 ;; 使用 popup-el 来绘制选词框, 如果用 emacs26, 建议设置
 ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
