@@ -381,7 +381,7 @@ Mostly consists of system settings.
 
 
 (which-key-mode)
-(setq gif-screencast-output-directory (cons org-directory "screencasts"))
+(setq gif-screencast-output-directory (concat org-directory "screencasts"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;           Frame and Window           ;
