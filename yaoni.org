@@ -877,6 +877,11 @@ My org mode setup.
                 (message "Not in ditaa mode %s"(buffer-name))
                 )))
 #+end_src
+
+Org-tree-slide for presentation.
+#+begin_src emacs-lisp :tangle yes
+(require 'org-tree-slide)
+#+end_src
 * pyim
 
 #+begin_src emacs-lisp :tangle yes
