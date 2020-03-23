@@ -114,9 +114,10 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
              (magit-get-current-branch)
              '(:foreground "pink"))
 
-;(esh-section esh-python
-;             "\xe928"  ;  (python icon)
-;             pyvenv-virtual-env-name)
+(esh-section esh-python
+             "\xe928"  ;  (python icon)
+             venv-current-name
+            '(:foreground "pink"))
 
 (esh-section esh-clock
              "\xf017"  ;  (clock icon)
@@ -137,7 +138,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
              '(:foreground "brown"))
 
 ;; Choose which eshell-funcs to enable
-(setq eshell-funcs (list esh-dir esh-git esh-clock esh-num))
+(setq eshell-funcs (list esh-dir esh-git esh-clock esh-python esh-num))
 
 ;; Enable the new eshell prompt
 (setq eshell-prompt-function 'esh-prompt-func)
