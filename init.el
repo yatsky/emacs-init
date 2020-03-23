@@ -63,12 +63,6 @@
    (quote
     (org-tree-slide emojify pyim-wbdict all-the-icons use-package helm-core virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil linum-relative org undo-tree)))
  '(pdf-view-midnight-colors (quote ("white smoke" . "black"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "SauceCodePro Nerd Font" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))
 
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/yaoni.org"))
