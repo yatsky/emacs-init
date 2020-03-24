@@ -750,6 +750,7 @@ This is set to nil because once it is set by `defvar', it cannot be changed.")
 #+end_src
 * org
 My org mode setup.
+** global
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;              Org-global             ;
@@ -775,6 +776,9 @@ My org mode setup.
                                     ("STYLE_ALL" . "habit"))))
 
 
+#+end_src
+** agenda
+#+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;                Agenda               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -788,8 +792,9 @@ My org mode setup.
 (setq org-agenda-files
       (cons org-default-notes-file (org-agenda-files-paths org-directory '("Personal.org" "learnning.org" "QUT.org" "COF.org")))
       )
-
-
+#+end_src
+** ob-lang
+#+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;           ob-lang settings          ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -800,8 +805,9 @@ My org mode setup.
 ;;(add-to-list 'org-babel-load-languages '(js . t))
 (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
 (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
-
-
+#+end_src
+** my org setup
+#+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;             My org seup             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -844,8 +850,9 @@ My org mode setup.
    (my-org-setup)
   )
 
-
-
+#+end_src
+** modules
+#+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     ;             org-modules             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -878,7 +885,7 @@ My org mode setup.
                 (setup-ditaa)
                 )))
 #+end_src
-
+** org-tree-slide
 Org-tree-slide for presentation.
 #+begin_src emacs-lisp :tangle yes
 (require 'org-tree-slide)
