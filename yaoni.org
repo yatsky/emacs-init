@@ -436,7 +436,7 @@ Mostly consists of system settings.
 ;; Dired
 (require 'dired-x)
 (setq-default dired-omit-files-p t) ; Buffer-local variable
-(setq dired-omit-files (concat dired-omit-files ".+~$"))
+(setq dired-omit-files (concat dired-omit-files "|.+~$"))
 
 ;; virtualenvwrapper
 (require 'virtualenvwrapper)
