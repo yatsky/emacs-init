@@ -163,6 +163,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
  :keymaps 'override
   ; r -> redo
   "r" 'undo-tree-redo
+  "0" 'delete-window
   "1" 'my-previous-window
   "2" 'other-window
   "3" 'split-window-right
@@ -195,6 +196,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   :keymaps 'override
 
   "e" 'evil-end-of-line
+  "b" 'evil-beginning-of-line
   "a" 'evil-append-line
   )
 
