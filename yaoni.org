@@ -876,7 +876,6 @@ My org mode setup.
                 ;; fixme: need to fix this
                 ;; seems to be not calling this function
                 (setup-ditaa)
-                (message "Not in ditaa mode %s"(buffer-name))
                 )))
 #+end_src
 
