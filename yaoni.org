@@ -159,7 +159,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   (interactive)
   (other-window -1))
 (general-define-key
- :states '(motion normal)
+ :states '(motion visual normal)
  :keymaps 'override
   ; r -> redo
   "r" 'undo-tree-redo
