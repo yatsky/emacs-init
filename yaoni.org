@@ -19,13 +19,13 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
       "/mnt/c/Users/thoma/Dev"
     "C:\\Users\\thoma\\Dev")
   )
-(setq initial-buffer-choice
-      ;; We have to use find-file to open the buffer
-      ;; because initial-buffer-choice selects the buffer the function returns.
-      ;; instead of visiting/finding the file/directory when given a string.
-      (lambda nil
-        (find-file
-         (get-wd))))
+ (setq initial-buffer-choice
+   ;; We have to use find-file to open the buffer
+   ;; because initial-buffer-choice selects the buffer the function returns.
+   ;; instead of visiting/finding the file/directory when given a string.
+       (lambda nil
+     (find-file
+      (get-wd))))
 (add-to-list 'load-path "~/.emacs.d/elpa/")
 #+end_src
 * cnfonts
@@ -35,7 +35,7 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
 ;; 让 cnfonts 随着 Emacs 自动生效。
 (cnfonts-enable)
 (setq cnfonts-profiles
-      '("program" "org-mode" "read-book"))
+    '("program" "org-mode" "read-book"))
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
 ;; (cnfonts-set-spacemacs-fallback-fonts)
 #+end_src
@@ -46,7 +46,7 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
 | 中文 | 中文 |
 * EIN
 #+begin_src emacs-lisp :tangle yes
-                                        ; ein
+; ein
 (require 'ein)
 (require 'ein-notebook)
 (require 'ein-subpackages)
@@ -68,7 +68,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   "Build eshell section NAME with ICON prepended to evaled FORM with PROPS."
   `(setq ,NAME
          (lambda () (when ,FORM
-                                        ;< this left angle bracket was added so that org mode matches it with the following one
+;< this left angle bracket was added so that org mode matches it with the following one
                       (-> ,ICON
                           (concat esh-section-delim ,FORM)
                           (with-face ,@PROPS))))))
@@ -104,24 +104,24 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
 (esh-section esh-dir
              "\xf07c"  ;  (faicon folder)
-                                        ;"fake-dir"
+             ;"fake-dir"
              (abbreviate-file-name (eshell/pwd))
              '(:foreground "gold" :bold ultra-bold :underline t))
 
 (esh-section esh-git
-                                        ;"\xe907"  ;  (git icon)
-             ""
+             ;"\xe907"  ;  (git icon)
+	       ""
              (magit-get-current-branch)
              '(:foreground "pink"))
 
 (esh-section esh-python
              "\xe928"  ;  (python icon)
              venv-current-name
-             '(:foreground "pink"))
+            '(:foreground "pink"))
 
 (esh-section esh-clock
              "\xf017"  ;  (clock icon)
-                                        ;"fake-clock"
+             ;"fake-clock"
              (format-time-string "%H:%M" (current-time))
              '(:foreground "forest green"))
 
@@ -133,7 +133,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
 (esh-section esh-num
              "\xf0c9"  ;  (list icon)
-                                        ;"fake-num"
+             ;"fake-num"
              (number-to-string esh-prompt-num)
              '(:foreground "brown"))
 
@@ -146,12 +146,12 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 * Keymaps
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;      Functions for key bindings     ;
+                    ;      Functions for key bindings     ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;          Global keybindings         ;
+                    ;          Global keybindings         ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun my-previous-window()
@@ -161,19 +161,19 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 (general-define-key
  :states '(motion normal)
  :keymaps 'override
-                                        ; r -> redo
- "r" 'undo-tree-redo
- "0" 'delete-window
- "1" 'my-previous-window
- "2" 'other-window
- "3" 'split-window-right
- "4" 'split-window-below
- "5" 'delete-other-windows
+  ; r -> redo
+  "r" 'undo-tree-redo
+  "0" 'delete-window
+  "1" 'my-previous-window
+  "2" 'other-window
+  "3" 'split-window-right
+  "4" 'split-window-below
+  "5" 'delete-other-windows
 
  )
 ;; Remap SPC in evil mode to a leader key
 (general-create-definer my-global-leader
-  :states '(normal visual insert)
+  :states '(normal insert)
   :keymaps 'override
   ;; :prefix my-leader
   :prefix "SPC"
@@ -203,23 +203,23 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 (my-global-leader
 
 
-                                        ; l -> load
+  ; l -> load
   "l i" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
   "m u" 'mu4e
   "o a" 'org-agenda
   "." 'evil-repeat
 
-                                        ;d -> delete
+  ;d -> delete
   "d o w" 'delete-other-windows
-                                        ; r -> run
+  ; r -> run
 
   ;; helm-M-x is helmized execute-extended-command
-                                        ;"e" 'execute-extended-command
-                                        ; e -> execute
+  ;"e" 'execute-extended-command
+  ; e -> execute
   "e" 'helm-M-x
 
-                                        ; s -> switch
-                                        ; switch to buffer
+  ; s -> switch
+  ; switch to buffer
   "s b" 'switch-to-buffer
   "s f" 'other-frame
   "s w l" 'evil-window-right
@@ -227,28 +227,28 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   "s w k" 'evil-window-up
   "s w j" 'evil-window-down
 
-                                        ; s -> search
+  ; s -> search
   "s i" 'isearch-forward
 
-                                        ; w -> write
+  ; w -> write
   "w b" 'save-buffer
 
-                                        ; o -> open
+  ; o -> open
   "o f" 'helm-find-files
-                                        ; set-key expects an interactive command
+  ; set-key expects an interactive command
   "o i" (lambda() (interactive) (find-file "~/.emacs.d"))
-                                        ; Frame size
-                                        ; inc frame width
+  ; Frame size
+  ; inc frame width
   "i f w" 'inc-frame-width
   "d f w" 'dec-frame-width
   "i f h" 'inc-frame-height
   "d f h" 'dec-frame-height
 
-                                        ; magit-status
+  ; magit-status
   "m s" 'magit-status
 
 
-                                        ; eX command
+  ; eX command
   "x" 'evil-ex
   )
 
@@ -280,7 +280,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 ;; evil surround
 (require 'evil-surround)
 (add-hook 'org-mode-hook 'turn-on-evil-surround-mode)
-                                        ; org-brain config
+; org-brain config
 ;; org-brain using evil
 (evil-set-initial-state 'org-brain-visualize-mode 'emacs)
 #+end_src
@@ -326,11 +326,11 @@ Mostly consists of system settings.
 
 ;; yasnippet
 (add-to-list 'load-path
-             "~/.emacs.d/plugins/yasnippet")
+              "~/.emacs.d/plugins/yasnippet")
 (yas-global-mode 1)
 
-                                        ; js2 minor mode
-                                        ;(add-hook 'js-mode-hook 'js2-minor-mode)
+; js2 minor mode
+;(add-hook 'js-mode-hook 'js2-minor-mode)
 
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
 ;; This solves the problem that affects Emacs' speed while displaying Chinese characters
@@ -370,7 +370,7 @@ Mostly consists of system settings.
 (require 'web-mode)
 (setq web-mode-engines-alist
       '(("django"  . "\\.html\\'"))
-      )
+)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
@@ -387,31 +387,31 @@ Mostly consists of system settings.
 (setq gif-screencast-output-directory (concat org-directory "screencasts"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;           Frame and Window           ;
+                    ;           Frame and Window           ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (set-frame-size (selected-frame) 1350 950 t)
 (defmacro gen-frame-size-func (w-or-h inc)
   "inc/dec-frame-width/height"
-                                        ;(set-frame-height (selected-frame) (+ (frame-native-height (selected-frame)) 20) nil t)
-                                        ; use let* so that we can refer to the `inc-or-dec' right away in `let'.
+;(set-frame-height (selected-frame) (+ (frame-native-height (selected-frame)) 20) nil t)
+  ; use let* so that we can refer to the `inc-or-dec' right away in `let'.
   (let* ((set-func (intern (concat "set-frame-" w-or-h)))
-         (get-func (intern (concat "frame-native-" w-or-h)))
-         ;; not sure why but it seems 20 is the minimum offset required for the change to take effect
-         (value (if (string-equal w-or-h "width") 40 40))
-         (inc-or-dec (if inc "inc" "dec"))
-         (doc (format "%s the current frame %s." inc-or-dec w-or-h))
-         (positive (if inc 1 -1)))
+        (get-func (intern (concat "frame-native-" w-or-h)))
+;; not sure why but it seems 20 is the minimum offset required for the change to take effect
+        (value (if (string-equal w-or-h "width") 40 40))
+        (inc-or-dec (if inc "inc" "dec"))
+        (doc (format "%s the current frame %s." inc-or-dec w-or-h))
+        (positive (if inc 1 -1)))
 
-                                        ; The comma `,' causes Emacs to evaluate everything in the list it precedes
-                                        ; so there is no need to place a comma before the variables in the list
-                                        ; if you want it to be evaluated.
-                                        ;FIXME: Need to figure out what @ does.
+    ; The comma `,' causes Emacs to evaluate everything in the list it precedes
+    ; so there is no need to place a comma before the variables in the list
+    ; if you want it to be evaluated.
+    ;FIXME: Need to figure out what @ does.
     `(defun ,(intern (concat inc-or-dec "-frame-" w-or-h)) ()
        ,doc
        (interactive)
-       (message ,(number-to-string (* positive value)))
-       (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t)
-       )
+        (message ,(number-to-string (* positive value)))
+         (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t)
+         )
     )
   )
 (gen-frame-size-func "width" t)
@@ -447,9 +447,9 @@ Mostly consists of system settings.
 ;; the environment variable `WORKON_HOME` points to the right place
 
 (defun open-working-directory ()
-  (interactive)
-  (find-file (get-wd))
-  )
+    (interactive)
+    (find-file (get-wd))
+)
 
 (yaoni-org-leader-def
   :states '(motion normal)
@@ -735,10 +735,10 @@ Basically, ~defvar~ cannot override a symbol's value if it's defined already.
   "Association list providing signatures for different occasions.
 This is set to nil because once it is set by `defvar', it cannot be changed.")
 (setq my-message-signatures '((?1 "Formal" (lambda () "" (insert-file-contents message-signature-file)))
-                              (?2 "Informal" (lambda () (insert-file-contents (concat message-signature-file "-informal")))))
-      )
+            (?2 "Informal" (lambda () (insert-file-contents (concat message-signature-file "-informal")))))
+  )
 (defun my-mu4e-insert-signature ()
-  "Insert my custom signature from "
+"Insert my custom signature from "
   (interactive)
   (let ((choice (read-char-choice (mapconcat (lambda (item) (format "%c: %s" (car item) (cadr item))) my-message-signatures "; ")
                                   (mapcar #'car my-message-signatures))))
@@ -752,7 +752,7 @@ This is set to nil because once it is set by `defvar', it cannot be changed.")
 My org mode setup.
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;              Org-global             ;
+                    ;              Org-global             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq org-directory (concat (get-wd) "/orgs/"))
 ;; include entries from the Emacs diary into Org mode's agenda
@@ -768,7 +768,7 @@ My org mode setup.
 (setq org-src-fontify-natively t)
 (setq org-src-preserve-indentation t)
 
-                                        ; Set default column view headings: Task Effort Clock_Summary
+; Set default column view headings: Task Effort Clock_Summary
 (setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
 ;; set effort estimates
 (setq org-global-properties (quote (("Effort_ALL" . "0:05 0:10 0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
@@ -776,7 +776,7 @@ My org mode setup.
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;                Agenda               ;
+                    ;                Agenda               ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Agenda
 (defun org-agenda-files-paths (cur-wd list)
@@ -791,7 +791,7 @@ My org mode setup.
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;           ob-lang settings          ;
+                    ;           ob-lang settings          ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; enable python source code eval
 (require 'ob-python)
@@ -803,27 +803,27 @@ My org mode setup.
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;             My org seup             ;
+                    ;             My org seup             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-org-setup ()
   "Set up my org settings."
-                                        ;(define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
-                                        ;(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
-                                        ;(define-key org-mode-map (kbd "C-c l") 'org-shiftright)
-                                        ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
+  ;(define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
+  ;(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
+  ;(define-key org-mode-map (kbd "C-c l") 'org-shiftright)
+  ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
   (defun org-open-org-directory ()
     (interactive)
     (find-file org-directory)
     )
   (yaoni-org-leader-def
-    :states 'normal
-    :keymaps 'override
-    "t" (kbd "C-u M-x org-time-stamp-inactive")
-    "r" 'org-drill-resume
-    "l" 'org-shiftright
-    "h" 'org-shiftleft
-    "o" 'org-open-org-directory
-    )
+   :states 'normal
+   :keymaps 'override
+   "t" (kbd "C-u M-x org-time-stamp-inactive")
+   "r" 'org-drill-resume
+   "l" 'org-shiftright
+   "h" 'org-shiftleft
+   "o" 'org-open-org-directory
+   )
   (require 'ox-md nil t)
 
   (defun search-word ()
@@ -838,16 +838,16 @@ My org mode setup.
       (shell-command (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" https://www.startpage.com/do/dsearch?query=" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))
       ))
   (define-key org-mode-map (kbd "C-c g") 'search-word)
-  )
+)
 
 (with-eval-after-load "org"
-  (my-org-setup)
+   (my-org-setup)
   )
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;             org-modules             ;
+                    ;             org-modules             ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-bullets
 (require 'org-bullets)
@@ -860,14 +860,14 @@ My org mode setup.
 (setq-default indent-tabs-mode nil)
 
 ;; Ditaa settings
-                                        ; disable Artist mode in org-src-mode when editing ditaa code
-                                        ; this is because Artist mode seems to prevent me from typing arrows (< and >)
+; disable Artist mode in org-src-mode when editing ditaa code
+; this is because Artist mode seems to prevent me from typing arrows (< and >)
 (defun setup-ditaa ()
-  "Setting up the ditaa env for org-src-mode"
-  (message "In ditaa mode %s"(buffer-name))
-  (artist-mode-off)
-  (picture-mode)
-  (display-line-numbers-mode)
+    "Setting up the ditaa env for org-src-mode"
+    (message "In ditaa mode %s"(buffer-name))
+    (artist-mode-off)
+    (picture-mode)
+    (display-line-numbers-mode)
   )
 
 (add-hook 'org-src-mode-hook
@@ -876,8 +876,8 @@ My org mode setup.
                 ;; fixme: need to fix this
                 ;; seems to be not calling this function
                 (setup-ditaa)
-              (message "Not in ditaa mode %s"(buffer-name))
-              )))
+                (message "Not in ditaa mode %s"(buffer-name))
+                )))
 #+end_src
 
 Org-tree-slide for presentation.
@@ -907,7 +907,7 @@ Org-tree-slide for presentation.
 ;; 2. 光标前是汉字字符时，才能输入中文。
 ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
 (setq-default pyim-english-input-switch-functions
-              '(pyim-probe-dynamic-english
+            '(pyim-probe-dynamic-english
                 pyim-probe-isearch-mode
                 pyim-probe-program-mode
                 pyim-probe-org-structure-template))
