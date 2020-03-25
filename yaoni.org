@@ -967,7 +967,7 @@ Before saving buffer, we want to format any code in it if an appropriate formatt
   "Open project, at LOCATION property in org, in Dired."
   (interactive)
   ;; let is a special form that does not need the single quote
-  (let ((file-location (org-entry-get (point) "LOCATION")))
+  (let ((file-location (org-entry-get (point) "LOCATION" t)))
     (if file-location
         (find-file file-location)
       ;; else
