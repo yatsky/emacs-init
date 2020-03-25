@@ -961,3 +961,23 @@ Before saving buffer, we want to format any code in it if an appropriate formatt
 
 (add-hook 'before-save-hook #'format-code-before-save-buffer)
 #+end_src
+** Open project from entry location
+#+begin_src emacs-lisp :tangle yes
+(defun open-project-from-entry-location ()
+  "Open project, at LOCATION property in org, in Dired."
+  (interactive)
+  ;; let is a special form that does not need the single quote
+  (let ((file-location (org-entry-get (point) "LOCATION")))
+    (if file-location
+        (find-file file-location)
+      ;; else
+      (message "File location is not present.")
+      )
+    )
+  )
+(yaoni-org-leader-def
+  :states 'normal
+  :keymaps 'override
+  "p" 'open-project-from-entry-location
+  )
+#+end_src
