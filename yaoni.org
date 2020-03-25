@@ -943,3 +943,17 @@ Org-tree-slide for presentation.
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 #+end_src
+** Format code and save-buffer
+:LOGBOOK:
+CLOCK: [2020-03-25 Wed 17:46]--[2020-03-25 Wed 18:11] =>  0:25
+:END:
+Before saving buffer, we want to format any code in it if an appropriate formatter is installed.
+#+begin_src emacs-lisp :tangle yes
+(defun format-code-before-save-buffer ()
+  "Format code and then save buffer."
+  (interactive)
+  (cond ((eq major-mode 'org-mode) (indent-region (point-min) (point-max)))
+        ((eq major-mode 'python-mode) (blacken-buffer))))
+
+(add-hook 'before-save-hook #'format-code-before-save-buffer)
+#+end_src
