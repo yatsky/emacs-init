@@ -961,7 +961,11 @@ Before saving buffer, we want to format any code in it if an appropriate formatt
 
 (add-hook 'before-save-hook #'format-code-before-save-buffer)
 #+end_src
-** Open project from entry location
+** Project-Org entry jump
+:LOGBOOK:
+CLOCK: [2020-03-25 Wed 20:39]
+:END:
+*** Open project from entry location
 #+begin_src emacs-lisp :tangle yes
 (defun open-project-from-entry-location ()
   "Open project, at LOCATION property in org, in Dired."
@@ -975,9 +979,40 @@ Before saving buffer, we want to format any code in it if an appropriate formatt
       )
     )
   )
+#+end_src
+*** Open project org file from project
+#+begin_src emacs-lisp :tangle yes
+(defun open-org-file-from-project ()
+  "Open project-related org file from project."
+  (interactive)
+  (let ((file-location (concat org-directory "/" 
+                               (with-temp-buffer
+                                 (insert-file-contents (concat (projectile-project-root) "/org-entry"))
+                                 (buffer-string))
+                               )))
+    (if (file-exists-p file-location)
+        (find-file file-location)
+      ;; else
+      (message "org-entry is not present.")
+      )
+    )
+  )
+#+end_src
+*** Keymap
+#+begin_src emacs-lisp :tangle yes
+(defun org-project-jump ()
+  "A wrapper function to jump between a project and its org file.
+`open-project-from-entry-location' and `open-org-file-from-project'.
+"
+  (interactive)
+  (if (eq major-mode 'org-mode)
+      (open-project-from-entry-location)
+    (open-org-file-from-project)
+    )
+  )
 (yaoni-org-leader-def
   :states 'normal
   :keymaps 'override
-  "p" 'open-project-from-entry-location
+  "p" 'org-project-jump
   )
 #+end_src
