@@ -173,7 +173,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
  )
 ;; Remap SPC in evil mode to a leader key
 (general-create-definer my-global-leader
-  :states '(normal insert)
+  :states '(normal visual insert)
   :keymaps 'override
   ;; :prefix my-leader
   :prefix "SPC"
