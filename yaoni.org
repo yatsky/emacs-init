@@ -963,7 +963,7 @@ Before saving buffer, we want to format any code in it if an appropriate formatt
 #+end_src
 ** Project-Org entry jump
 :LOGBOOK:
-CLOCK: [2020-03-25 Wed 20:39]
+CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 :END:
 *** Open project from entry location
 #+begin_src emacs-lisp :tangle yes
