@@ -897,6 +897,10 @@ Org-tree-slide for presentation.
 (setq jedi:complete-on-dot t)    ;optional
 (setq ac-max-width 0.4)
 #+end_src
+** Blacken
+#+begin_src emacs-lisp :tangle yes
+(use-package blacken)
+#+end_src
 ** Typescript
 #+begin_src emacs-lisp :tangle yes
 ;; tide for TypeScript
