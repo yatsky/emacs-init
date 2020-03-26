@@ -957,7 +957,7 @@ Before saving buffer, we want to format any code in it if an appropriate formatt
 This is the original idea.
 **** [2020-03-26 Thu 09:24] To save some time, only scan and format edited sections
 *Edited section* refers to a heading whose direct children have been modified.
-When in org mode, we save the modified headings in a +temporary buffer+ variable, then before saving the buffer, we use this information to let the ~format-code-before-save-buffer~ function now where to format.
+When in org mode, we save the modified headings in a +temporary buffer+ variable, then before saving the buffer, we use this information to let the ~format-code-before-save-buffer~ function know where to format.
 *** Code
 :LOGBOOK:
 CLOCK: [2020-03-26 Thu 15:16]--[2020-03-26 Thu 15:16] =>  0:00
