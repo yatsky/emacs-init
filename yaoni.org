@@ -952,13 +952,62 @@ Org-tree-slide for presentation.
 CLOCK: [2020-03-25 Wed 17:46]--[2020-03-25 Wed 18:11] =>  0:25
 :END:
 Before saving buffer, we want to format any code in it if an appropriate formatter is installed.
+*** Features
+**** Format code before saving buffer
+This is the original idea.
+**** [2020-03-26 Thu 09:24] To save some time, only scan and format edited sections
+*Edited section* refers to a heading whose direct children have been modified.
+When in org mode, we save the modified headings in a +temporary buffer+ variable, then before saving the buffer, we use this information to let the ~format-code-before-save-buffer~ function now where to format.
+*** Code
+:LOGBOOK:
+CLOCK: [2020-03-26 Thu 15:16]--[2020-03-26 Thu 15:16] =>  0:00
+CLOCK: [2020-03-26 Thu 14:22]--[2020-03-26 Thu 14:26] =>  0:04
+CLOCK: [2020-03-26 Thu 14:06]--[2020-03-26 Thu 14:22] =>  0:16
+CLOCK: [2020-03-26 Thu 14:01]--[2020-03-26 Thu 14:01] =>  0:00
+CLOCK: [2020-03-26 Thu 13:55]--[2020-03-26 Thu 14:01] =>  0:06
+CLOCK: [2020-03-26 Thu 10:53]--[2020-03-26 Thu 12:10] =>  1:17
+CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
+:END:
+#+begin_src emacs-lisp :tangle yes
+(defun store-org-edited-headings ()
+  "Store edited org headings in current buffer."
+  (if (eq major-mode 'org-mode)
+      (let ((heading (nth 4 (org-heading-components))))
+        (if (member heading yaoni-org-edited-headings)
+            (message "Already in edited headings")
+          (setq-local yaoni-org-edited-headings 
+                      (push heading yaoni-org-edited-headings))
+          ))))
+(defun yaoni-format-code-org-setup ()
+  "Setup to be run in org-mode-hook."
+  (setq-local yaoni-org-edited-headings ())
+  ;; store the heading everytime there's a change
+  (add-hook 'evil-insert-state-exit-hook 'store-org-edited-headings)
+  )
+
+(add-hook 'org-mode-hook 'yaoni-format-code-org-setup)
+
+;; Format code here
+(defun yaoni-org-format-code-under-heading (heading)
+  "Format code under HEADING in org buffer."
+  (save-excursion 
+    (search-backward heading)
+    (org-mark-subtree)
+    (indent-region (region-beginning) (region-end))
+    )
+  )
+#+end_src
+
 #+begin_src emacs-lisp :tangle yes
 (defun format-code-before-save-buffer ()
   "Format code and then save buffer."
   (interactive)
-  (cond ((eq major-mode 'org-mode) (indent-region (point-min) (point-max)))
-        ((eq major-mode 'python-mode) (blacken-buffer))))
-
+  (save-excursion
+    (cond ((eq major-mode 'org-mode)
+           (mapc 'yaoni-org-format-code-under-heading yaoni-org-edited-headings)
+           (setq-local yaoni-org-edited-headings (list)))
+          ((eq major-mode 'python-mode) (blacken-buffer)))
+    ))
 (add-hook 'before-save-hook #'format-code-before-save-buffer)
 #+end_src
 ** Project-Org entry jump
