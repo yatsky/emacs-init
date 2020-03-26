@@ -1,3 +1,5 @@
+#+SETUPFILE: /mnt/c/Users/thoma/Dev/orgs/theme-readtheorg.setup
+#+EXPORT_FILE_NAME: /mnt/c/Users/thoma/Dev/yaoni.html
 * Introduction
 This is my personal Emacs init file in org.
 
