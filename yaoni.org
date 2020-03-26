@@ -973,13 +973,17 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
 #+begin_src emacs-lisp :tangle yes
 (defun store-org-edited-headings ()
   "Store edited org headings in current buffer."
-  (if (eq major-mode 'org-mode)
+  ;; Add (org-get-heading) in case we modify text before all headings
+  ;; which will make (org-heading-components) throw an exception.
+  (if (and (eq major-mode 'org-mode) (org-get-heading))
       (let ((heading (nth 4 (org-heading-components))))
         (if (member heading yaoni-org-edited-headings)
             (message "Already in edited headings")
           (setq-local yaoni-org-edited-headings 
                       (push heading yaoni-org-edited-headings))
           ))))
+
+
 (defun yaoni-format-code-org-setup ()
   "Setup to be run in org-mode-hook."
   (setq-local yaoni-org-edited-headings ())
