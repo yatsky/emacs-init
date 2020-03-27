@@ -1000,10 +1000,10 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
 (defun yaoni-org-format-code-under-heading (heading)
   "Format code under HEADING in org buffer."
   (save-excursion 
-    (forward-line)
     ;; Quick error handling
     (condition-case nil
         (progn
+          (forward-line)
           (search-backward heading)
           (org-mark-subtree)
           (indent-region (region-beginning) (region-end)))
