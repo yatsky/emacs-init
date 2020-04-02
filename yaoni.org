@@ -1051,9 +1051,7 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
   (interactive)
   (let ((file-location (concat org-directory "/" 
                                (with-temp-buffer
-                                 ;; We may want to refactor `projectile-project-root' to a custom function
-                                 ;; so that this function can live without installing projectile
-                                 (insert-file-contents (concat (projectile-project-root) "/org-entry"))
+                                 (insert-file-contents (concat (locate-dominating-file default-directory "org-entry") "/org-entry"))
                                  (buffer-string))
                                )))
     (if (file-exists-p file-location)
