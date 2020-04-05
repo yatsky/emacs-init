@@ -1029,6 +1029,26 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
 :LOGBOOK:
 CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 :END:
+用 Emacs 写代码的时候总是会经常需要在工程文件夹和对应的 org 文件之间来回切换​。之前一直用的都是最古老的 `switch-buffer` 命令，每次都需要手动在一个列表里面找到需要跳转的 buffer，于是想到把这步省去，能够快速的跳转到当前 buffer 对应的工程或是 org​ buffer。
+
+#+BEGIN_SRC ditaa :file project-org-jump.png :cmdline -r -s 2
++-----------------+           +-----------------+
+|                 |           |                 |
+|                 |  jump to  |                 |
+|  org buffer     |---------->|  project        |
+|                 |  jump back|  directory      |
+|                 |<----------|                 |
+|                 |           |                 |
+|                 |           |                 |
++-----------------+           +-----------------+
+#+END_SRC
+
+#+RESULTS:
+[[file:project-org-jump.png]]
+
+最基本的想法就是，在工程目录下放一个 org-entry，里面记录对应的 org 文件的名称（我的 org 文件都在同一目录下，所以只需要名称即可）。
+在 org 文件中对应的 entry 下面加上一个 LOCATION 属性，用来记录对应的工程路径。
+这样设置好后，可以用下面的代码实现快速跳转。
 *** Open project from entry location
 #+begin_src emacs-lisp :tangle yes
 (defun open-project-from-entry-location ()
@@ -1049,9 +1069,12 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 (defun open-org-file-from-project ()
   "Open project-related org file from project."
   (interactive)
-  (let ((file-location (concat org-directory "/" 
+  (let ((file-location (concat org-directory "/"
                                (with-temp-buffer
-                                 (insert-file-contents (concat (locate-dominating-file default-directory "org-entry") "/org-entry"))
+                                 (insert-file-contents
+                                  (concat
+                                   (locate-dominating-file default-directory "org-entry")
+                                   "/org-entry"))
                                  (buffer-string))
                                )))
     (if (file-exists-p file-location)
@@ -1074,9 +1097,12 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
     (open-org-file-from-project)
     )
   )
+;; 快捷键设置，我用的是 general.el
 (yaoni-org-leader-def
   :states 'normal
   :keymaps 'override
   "p" 'org-project-jump
   )
 #+end_src
+*** Demo
+[[file:./project-org-jump-demo.gif]]
