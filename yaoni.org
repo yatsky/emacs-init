@@ -887,6 +887,9 @@ Org-tree-slide for presentation.
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
 * Testing
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+#+end_src
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
