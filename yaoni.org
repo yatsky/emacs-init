@@ -49,9 +49,6 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
 * EIN
 #+begin_src emacs-lisp :tangle yes
 ;; in
-(require 'ein)
-(require 'ein-notebook)
-(require 'ein-subpackages)
 #+end_src
 * eshell
 Extracted from here: http://www.modernemacs.com/post/custom-eshell/
