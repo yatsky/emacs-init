@@ -32,6 +32,12 @@
  '(global-display-line-numbers-mode t)
  '(helm-completion-style (quote emacs))
  '(load-prefer-newer t)
+ '(ob-ein-languages
+   (quote
+    (("ein-python" . python)
+     ("ein-R" . R)
+     ("ein-r" . R)
+     ("ein-julia" . julia))))
  '(org-agenda-search-headline-for-time nil)
  '(org-agenda-skip-additional-timestamps-same-entry t)
  '(org-agenda-skip-timestamp-if-deadline-is-shown nil)
