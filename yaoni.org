@@ -891,6 +891,12 @@ Org-tree-slide for presentation.
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 #+end_src
+
+Keyfreq exclude some commands
+#+begin_src emacs-lisp :tangle yes
+(setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command 
+                                                      evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char))
+#+end_src
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
