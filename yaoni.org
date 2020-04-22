@@ -188,7 +188,9 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
 ;; Remap SPC o to org mode leader key
 (general-create-definer yaoni-org-leader-def
-  :prefix "SPC o")
+  :states '(normal visual insert)
+  :prefix "SPC o"
+  :non-normal-prefix "C-c")
 
 (my-global-text-leader
   :states '(motion normal)
