@@ -752,8 +752,9 @@ My org mode setup.
       (setq new-list (cons (concat cur-wd element) new-list)))))
 
 (setq org-agenda-files
-      (cons org-default-notes-file (org-agenda-files-paths org-directory '("Personal.org" "learnning.org" "QUT.org" "COF.org")))
+      (cons org-default-notes-file (org-agenda-files-paths org-directory '("Personal/Personal.org" "Personal/learnning.org" "Work/QUT.org" "Work/COF.org")))
       )
+(setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (get-wd) "/Study/Leetcode/*.org"))))
 #+end_src
 ** ob-lang
 #+begin_src emacs-lisp :tangle yes
