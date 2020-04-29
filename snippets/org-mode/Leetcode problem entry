@@ -23,7 +23,7 @@ Constraints:
 **** Code
 #+name: $1 $2 my solution
 #+caption: $1 $2 my solution
-#+begin_src ein-python :session localhost :results output code :noweb yes
+#+begin_src python :results output code :noweb yes
 <<imports for typing>>
 
 #+end_src
@@ -43,7 +43,7 @@ Constraints:
 
 #+name: $1 $2 leetcode solution
 #+caption: $1 $2 leetcode solution
-#+begin_src ein-python :session localhost :results output code :noweb yes
+#+begin_src python :results output code :noweb yes
 <<imports for typing>>
 
 #+end_src
