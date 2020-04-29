@@ -1,0 +1,64 @@
+# key: lcpentry
+# name: Leetcode problem entry
+# --
+** ${1:Problem number} ${2:Problem name}
+*** Description
+$0
+
+Constraints:
+
+**** Examples:
+#+name: $1 $2 example
+#+caption: $1 $2 example
+#+begin_example
+
+#+end_example
+
+*** Solution
+
+**** Problem category
+
+**** Algorithm
+
+**** Code
+#+name: $1 $2 my solution
+#+caption: $1 $2 my solution
+#+begin_src ein-python :session localhost :results output code :noweb yes
+<<imports for typing>>
+
+#+end_src
+
+#+name: $1 $2 my solution-results
+#+caption: $1 $2 my solution-results
+#+RESULTS: $1 $2 my solution
+#+begin_src none
+
+#+end_src
+***** Complexity
+****** Time complexity:
+
+****** Space complexity: 
+
+**** Leetcode solution
+
+#+name: $1 $2 leetcode solution
+#+caption: $1 $2 leetcode solution
+#+begin_src ein-python :session localhost :results output code :noweb yes
+<<imports for typing>>
+
+#+end_src
+
+#+name: $1 $2 leetcode solution-results
+#+caption: $1 $2 leetcode solution-results
+#+RESULTS: $1 $2 leetcode solution
+#+begin_src none
+
+#+end_src
+***** Time complexity:
+
+***** Space complexity: 
+
+*** More analysis
+**** General thoughts
+**** Related problems
+

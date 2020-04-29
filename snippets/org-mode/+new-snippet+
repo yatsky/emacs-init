@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Tilde
+# key: ct
+# --
+~$1~$0

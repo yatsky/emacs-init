@@ -1,0 +1,8 @@
+# key: js
+# name: Javascript essentials code
+# --
+#+name: ${1: name}
+#+caption: $1
+#+begin_src js
+$0
+#+end_src

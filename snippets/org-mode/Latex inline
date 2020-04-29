@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Latex
+# key: lt
+# --
+$$1$$0
