@@ -432,6 +432,7 @@ All the icons to display and show icons.
 Here's the configs for my mu4e stuff. I compiled it from multiple sources which I will try to recollect.
 ** Basic settings
 :LOGBOOK:
+CLOCK: [2020-05-01 Fri 10:32]--[2020-05-01 Fri 10:35] =>  0:03
 CLOCK: [2020-05-01 Fri 09:59]--[2020-05-01 Fri 10:14] =>  0:15
 :END:
 #+begin_src emacs-lisp :tangle yes
@@ -541,6 +542,9 @@ CLOCK: [2020-05-01 Fri 09:59]--[2020-05-01 Fri 10:14] =>  0:15
 #+end_src
 
 ** Context settings.
+:LOGBOOK:
+CLOCK: [2020-05-01 Fri 10:48]
+:END:
 #+begin_src emacs-lisp :tangle yes
 ;; mu4e-context
 (require 'mu4e-context)
@@ -575,7 +579,7 @@ CLOCK: [2020-05-01 Fri 09:59]--[2020-05-01 Fri 10:14] =>  0:15
                 (smtpmail-debug-verbose . t)
                 (mu4e-maildir-shortcuts . (
                                            ("/QUT/INBOX"            . ?i)
-                                           ("/QUTSent Items"            . ?s)
+                                           ("/QUT/Sent Items"            . ?s)
                                            ))))
 
        (make-mu4e-context
@@ -606,11 +610,10 @@ CLOCK: [2020-05-01 Fri 09:59]--[2020-05-01 Fri 10:14] =>  0:15
                 (mu4e-maildir-shortcuts . ( ("/uq/INBOX"            . ?i)
                                             ))))))
 ;; bookmarks
-
 (add-to-list 'mu4e-bookmarks
              (make-mu4e-bookmark
               :name  "No Trash Unread"
-              :query "date:7d..now AND flag:unread AND NOT Maildir:/uq/Trash AND NOT Maildir:/QUT/Deleted\ Items"
+              :query "date:7d..now AND flag:unread AND maildir:/uq/INBOX OR maildir:/QUT/INBOX"
               :key ?U))
 
 )
