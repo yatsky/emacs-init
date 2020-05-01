@@ -543,7 +543,7 @@ CLOCK: [2020-05-01 Fri 09:59]--[2020-05-01 Fri 10:14] =>  0:15
 
 ** Context settings.
 :LOGBOOK:
-CLOCK: [2020-05-01 Fri 10:48]
+CLOCK: [2020-05-01 Fri 10:48]--[2020-05-01 Fri 10:54] =>  0:06
 :END:
 #+begin_src emacs-lisp :tangle yes
 ;; mu4e-context
