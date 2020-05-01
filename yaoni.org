@@ -765,9 +765,9 @@ My org mode setup.
 (require 'ob-python)
 ;; enable javascript source code eval
 (require 'ob-js)
+(require 'ob-shell)
 ;;(add-to-list 'org-babel-load-languages '(js . t))
 (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-(add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
 #+end_src
 ** my org setup
 #+begin_src emacs-lisp :tangle yes
