@@ -639,7 +639,7 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
 (add-to-list 'mu4e-bookmarks
              (make-mu4e-bookmark
               :name  "No Trash Unread"
-              :query "date:7d..now AND flag:unred AND NOT Maildir:/uq/Trash AND NOT Maildir:/QUT/Deleted\ Items"
+              :query "date:7d..now AND flag:unread AND NOT Maildir:/uq/Trash AND NOT Maildir:/QUT/Deleted\ Items"
               :key ?U))
 
 )
