@@ -431,6 +431,9 @@ All the icons to display and show icons.
 * mu4e
 Here's the configs for my mu4e stuff. I compiled it from multiple sources which I will try to recollect.
 ** Basic settings
+:LOGBOOK:
+CLOCK: [2020-05-01 Fri 09:59]--[2020-05-01 Fri 10:14] =>  0:15
+:END:
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'load-path "~/.emacs.d/plugins/mu4e")
 (defun load-mu4e ()
@@ -545,38 +548,6 @@ Here's the configs for my mu4e stuff. I compiled it from multiple sources which 
 (setq mu4e-compose-context-policy 'always-ask)
 (setq mu4e-contexts
       (list
-       (make-mu4e-context
-        :name "personal" ;; or my-gmail
-        :enter-func (lambda () (mu4e-message "Entering context personal"))
-        :leave-func (lambda () (mu4e-message "Leaving context personal"))
-        :match-func (lambda (msg)
-                      (when msg
-                        (mu4e-message-contact-field-matches
-                         msg '(:from :to :cc :bcc) "wyatsky@gmail.com")))
-        :vars '((user-mail-address . "wyatsky@gmail.com")
-                (user-full-name . "Thomas")
-                (mu4e-sent-folder . "/my-gmail/[Gmail].Sent Mail")
-                (mu4e-drafts-folder . "/my-gmail/[Gmail].drafts")
-                (mu4e-trash-folder . "/my-gmail/[Gmail].Bin")
-                (mu4e-compose-signature . (concat "Thomas Wang\n" "Emacs 25, org-mode 9, mu4e 1.0\n"))
-                (mu4e-compose-format-flowed . t)
-                (smtpmail-queue-dir . "~/.mail/my-gmail/queue/cur")
-                (message-send-mail-function . smtpmail-send-it)
-                (smtpmail-smtp-user . "wyatsky")
-                (smtpmail-starttls-credentials . (("smtp.gmail.com" 587 nil nil)))
-                (smtpmail-auth-credentials . (expand-file-name "~/.authinfo.gpg"))
-                (smtpmail-default-smtp-server . "smtp.gmail.com")
-                (smtpmail-smtp-server . "smtp.gmail.com")
-                (smtpmail-smtp-service . 587)
-                (smtpmail-debug-info . t)
-                (smtpmail-debug-verbose . t)
-                (mu4e-maildir-shortcuts . ( ("/my-gmail/INBOX"            . ?i)
-                                            ("/my-gmail/[my].Sent Mail" . ?s)
-                                            ("/my-gmail/[my].Bin"       . ?t)
-                                            ("/my-gmail/[my].All Mail"  . ?a)
-                                            ("/my-gmail/[my].Starred"   . ?r)
-                                            ("/my-gmail/[my].drafts"    . ?d)
-                                            ))))
        (make-mu4e-context
         :name "qut" 
         :enter-func (lambda () (mu4e-message "Entering context work"))
