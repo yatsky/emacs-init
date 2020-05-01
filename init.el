@@ -48,6 +48,7 @@
      (python . t)
      (emacs-lisp . t)
      (ein . t)
+     (shell . t)
      (ditaa . t))))
  '(org-confirm-babel-evaluate nil)
  '(org-drill-learn-fraction 0.45)
