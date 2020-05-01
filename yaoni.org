@@ -361,6 +361,10 @@ Mostly consists of system settings.
 (gen-frame-size-func "height" nil)
 (gen-frame-size-func "height" t)
 #+end_src
+** Mode line
+#+begin_src emacs-lisp :tangle yes
+(setq projectile-mode-line-prefix " Prj")
+#+end_src
 * Aesthetics
 #+begin_src emacs-lisp :tangle yes
 (load-theme 'dracula t)
