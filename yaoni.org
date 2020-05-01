@@ -897,6 +897,36 @@ Keyfreq exclude some commands
 (setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command 
                                                       evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char))
 #+end_src
+
+Mode-line customization.
+#+begin_src emacs-lisp :tangle yes
+;; see: https://emacs.stackexchange.com/questions/3925/hide-list-of-minor-modes-in-mode-line
+(defvar hidden-minor-modes ; example, write your own list of hidden
+  '(abbrev-mode            ; minor modes
+    org-indent-mode
+    yas-minor-mode
+    evil-org-mode
+    eldoc-mode
+    undo-tree-mode
+    which-key-mode
+    helm-mode
+    visual-line-mode
+    auto-revert-mode))
+
+(defun purge-minor-modes ()
+  (interactive)
+  (dolist (x hidden-minor-modes nil)
+    (let ((trg (cdr (assoc x minor-mode-alist))))
+      (when trg
+        (setcar trg "")))))
+
+(add-hook 'after-change-major-mode-hook 'purge-minor-modes)
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(setq display-time-format "%a %d/%m")
+(setq display-time-default-load-average nil)
+#+end_src
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
