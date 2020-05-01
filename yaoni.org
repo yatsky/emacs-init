@@ -684,6 +684,13 @@ This is set to nil because once it is set by `defvar', it cannot be changed.")
           (lambda () (local-set-key (kbd "C-c C-w") #'my-mu4e-insert-signature)))
 
 #+end_src
+** My emails
+#+begin_src emacs-lisp :tangle yes
+(setq mu4e-user-mail-address-list
+      (with-temp-buffer
+        (insert-file-contents "~/.emacs.d/mu4e/.my-emails")
+        (split-string (buffer-string) "\n" t)))
+#+end_src
 * org
 My org mode setup.
 ** global
