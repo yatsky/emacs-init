@@ -30,6 +30,8 @@
  '(ein:polymode t)
  '(elfeed-feeds (quote ("https://nyaa.si/?page=rss")))
  '(global-display-line-numbers-mode t)
+ '(global-emojify-mode t)
+ '(global-emojify-mode-line-mode t)
  '(helm-completion-style (quote emacs))
  '(load-prefer-newer t)
  '(ob-ein-languages
