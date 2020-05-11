@@ -725,6 +725,10 @@ My org mode setup.
 
 #+end_src
 ** agenda
+:LOGBOOK:
+CLOCK: [2020-05-11 Mon 19:29]--[2020-05-11 Mon 19:31] =>  0:02
+CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
+:END:
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               Agenda              ;;
