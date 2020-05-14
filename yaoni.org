@@ -995,7 +995,9 @@ Mode-line customization.
 #+end_src
 ** Blacken
 #+begin_src emacs-lisp :tangle yes
-(use-package blacken)
+(use-package blacken
+  :config
+  (setq blacken-skip-string-normalization t))
 #+end_src
 ** Typescript
 #+begin_src emacs-lisp :tangle yes
