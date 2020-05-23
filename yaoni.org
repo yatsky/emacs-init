@@ -300,28 +300,30 @@ Stuff that I haven't decided where to put (or never will!).
 Mostly consists of system settings.
 ** vanilla Emacs
 #+begin_src emacs-lisp :tangle yes
-;; disable sound
-(setq visible-bell 1)
-(tool-bar-mode -1)
-(global-display-line-numbers-mode t)
-(electric-pair-mode t)
+(if (display-graphic-p)
+    (progn
 
-;; wrap lines
-(global-visual-line-mode 1)
+      ;; disable sound
+      (setq visible-bell 1)
+      (tool-bar-mode -1)
+      (global-display-line-numbers-mode t)
+      (electric-pair-mode t)
 
+      ;; wrap lines
+      (global-visual-line-mode 1)
+
+      ;; save/restore opened files and windows config
+      (desktop-save-mode 1)))
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
 ;; This solves the problem that affects Emacs' speed while displaying Chinese characters
 (when (eq system-type 'windows-nt) (setq gc-cons-threshold (* 512 1024 1024))
-      (setq gc-cons-percentage 0.5) (run-with-idle-timer 5 t #'garbage-collect)
-      ;; 显示垃圾回收信息，这个可以作为调试用
-      ;; (setq garbage-collection-messages t)
-      )
-;; save/restore opened files and windows config
-(desktop-save-mode 1)
+    (setq gc-cons-percentage 0.5) (run-with-idle-timer 5 t #'garbage-collect)
+    ;; 显示垃圾回收信息，这个可以作为调试用
+    ;; (setq garbage-collection-messages t)
+    )
 ;; show-paren-mode
 (show-paren-mode 1)
 (setq show-paren-style 'mixed)
-
 ;; h -> human readable
 (setq dired-listing-switches "-alh")
 #+end_src
@@ -331,49 +333,54 @@ Mostly consists of system settings.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;          Frame and Window          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(set-frame-size (selected-frame) 1350 950 t)
-(defmacro gen-frame-size-func (w-or-h inc)
-  "inc/dec-frame-width/height"
-  ;; (set-frame-height (selected-frame) (+ (frame-native-height (selected-frame)) 20) nil t)
-  ;; use let* so that we can refer to the `inc-or-dec' right away in `let'.
-  (let* ((set-func (intern (concat "set-frame-" w-or-h)))
-         (get-func (intern (concat "frame-native-" w-or-h)))
-         ;; not sure why but it seems 20 is the minimum offset required for the change to take effect
-         (value (if (string-equal w-or-h "width") 40 40))
-         (inc-or-dec (if inc "inc" "dec"))
-         (doc (format "%s the current frame %s." inc-or-dec w-or-h))
-         (positive (if inc 1 -1)))
+(if (display-graphic-p) 
+    (progn
+      (set-frame-size (selected-frame) 1350 950 t)
+      (defmacro gen-frame-size-func (w-or-h inc)
+        "inc/dec-frame-width/height"
+        ;; (set-frame-height (selected-frame) (+ (frame-native-height (selected-frame)) 20) nil t)
+        ;; use let* so that we can refer to the `inc-or-dec' right away in `let'.
+        (let* ((set-func (intern (concat "set-frame-" w-or-h)))
+               (get-func (intern (concat "frame-native-" w-or-h)))
+               ;; not sure why but it seems 20 is the minimum offset required for the change to take effect
+               (value (if (string-equal w-or-h "width") 40 40))
+               (inc-or-dec (if inc "inc" "dec"))
+               (doc (format "%s the current frame %s." inc-or-dec w-or-h))
+               (positive (if inc 1 -1)))
 
-    ;; The comma `,' causes Emacs to evaluate everything in the list it precedes
-    ;; so there is no need to place a comma before the variables in the list
-    ;; if you want it to be evaluated.
-    ;; FIXME: Need to figure out what @ does.
-    `(defun ,(intern (concat inc-or-dec "-frame-" w-or-h)) ()
-       ,doc
-       (interactive)
-       (message ,(number-to-string (* positive value)))
-       (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t)
-       )
-    )
-  )
-(gen-frame-size-func "width" t)
-(gen-frame-size-func "width" nil)
-(gen-frame-size-func "height" nil)
-(gen-frame-size-func "height" t)
+          ;; The comma `,' causes Emacs to evaluate everything in the list it precedes
+          ;; so there is no need to place a comma before the variables in the list
+          ;; if you want it to be evaluated.
+          ;; FIXME: Need to figure out what @ does.
+          `(defun ,(intern (concat inc-or-dec "-frame-" w-or-h)) ()
+             ,doc
+             (interactive)
+             (message ,(number-to-string (* positive value)))
+             (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t)
+             )
+          )
+        )
+
+      (gen-frame-size-func "width" t)
+      (gen-frame-size-func "width" nil)
+      (gen-frame-size-func "height" nil)
+      (gen-frame-size-func "height" t)))
 #+end_src
 * Aesthetics
 #+begin_src emacs-lisp :tangle yes
-(load-theme 'dracula t)
-(require 'powerline)
-(powerline-center-evil-theme)
-;; Set cursor color
-(set-cursor-color "white")
+(if (display-graphic-p)
+    (progn 
+      (load-theme 'dracula t)
+      (require 'powerline)
+      (powerline-center-evil-theme)
+      ;; Set cursor color
+      (set-cursor-color "white")
 
-;; Set mouse color
-(set-mouse-color "white")
+      ;; Set mouse color
+      (set-mouse-color "white")
 
-(global-emojify-mode t)
-(global-emojify-mode-line-mode t)
+      (global-emojify-mode t)
+      (global-emojify-mode-line-mode t)))
 #+end_src
 ** Mode line
 #+begin_src emacs-lisp :tangle yes
@@ -903,36 +910,40 @@ Org-tree-slide for presentation.
 * pyim
 
 #+begin_src emacs-lisp :tangle yes
-;; pyim
-(require 'posframe)
-(require 'pyim)
-(require 'pyim-basedict)
-(pyim-basedict-enable)
-(setq default-input-method "pyim")
-(setq pyim-default-scheme 'quanpin)
-(setq pyim-fuzzy-pinyin-alist '())
-(require 'pyim-wbdict)
-(pyim-wbdict-v98-enable)
-(global-set-key (kbd "C-\\") 'toggle-input-method)
-;; 使用 popup-el 来绘制选词框, 如果用 emacs26, 建议设置
-;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
-;; 手动安装 posframe 包。
-(setq pyim-page-tooltip 'posframe)
-;; (设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
-;; 我自己使用的中英文动态切换规则是：
-;; 1. 光标只有在注释里面时，才可以输入中文。
-;; 2. 光标前是汉字字符时，才能输入中文。
-;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
-(setq-default pyim-english-input-switch-functions
-              '(pyim-probe-dynamic-english
-                pyim-probe-isearch-mode
-                pyim-probe-program-mode
-                pyim-probe-org-structure-template))
-(setq pyim-punctuation-translate-p '(auto yes no))   ; 文使用全角标点，英文使用半角标点。
-(setq-default pyim-punctuation-half-width-functions
-              '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
-(global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;  pyim-probe-dynamic-english 配合
-(global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
+(if (display-graphic-p)
+    (progn 
+      ;; pyim
+      (require 'posframe)
+      (require 'pyim)
+      (require 'pyim-basedict)
+      (pyim-basedict-enable)
+      (setq default-input-method "pyim")
+      (setq pyim-default-scheme 'quanpin)
+      (setq pyim-fuzzy-pinyin-alist '())
+      (require 'pyim-wbdict)
+      (pyim-wbdict-v98-enable)
+      (global-set-key (kbd "C-\\") 'toggle-input-method)
+      ;; 使用 popup-el 来绘制选词框, 如果用 emacs26, 建议设置
+      ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
+      ;; 手动安装 posframe 包。
+      (setq pyim-page-tooltip 'posframe)
+      ;; (设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
+      ;; 我自己使用的中英文动态切换规则是：
+      ;; 1. 光标只有在注释里面时，才可以输入中文。
+      ;; 2. 光标前是汉字字符时，才能输入中文。
+      ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
+      (setq-default pyim-english-input-switch-functions
+                    '(pyim-probe-dynamic-english
+                      pyim-probe-isearch-mode
+                      pyim-probe-program-mode
+                      pyim-probe-org-structure-template))
+      (setq pyim-punctuation-translate-p '(auto yes no))   ; 文使用全角标点，英文使用半角标点。
+      (setq-default pyim-punctuation-half-width-functions
+                    '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
+      (global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;  pyim-probe-dynamic-english 配合
+      (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
+
+      ))
 #+end_src
 * Testing
 :LOGBOOK:
