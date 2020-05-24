@@ -374,11 +374,11 @@ Mostly consists of system settings.
 #+end_src
 * Aesthetics
 #+begin_src emacs-lisp :tangle yes
+(load-theme 'dracula t)
+(require 'powerline)
+(powerline-center-evil-theme)
 (if (display-graphic-p)
     (progn 
-      (load-theme 'dracula t)
-      (require 'powerline)
-      (powerline-center-evil-theme)
       ;; Set cursor color
       (set-cursor-color "white")
 
