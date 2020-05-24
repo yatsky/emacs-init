@@ -810,7 +810,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
         (progn
           (setq bds (bounds-of-thing-at-point 'symbol))
           (setq pos1 (car bds) pos2 (cdr bds))))
-      (shell-command (concat "\"/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe\" https://www.startpage.com/do/dsearch?query=" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))
+      (shell-command (concat "'/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe' 'https://www.startpage.com/do/dsearch?query='" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))
       ))
   ;;(define-key org-mode-map (kbd "C-c g") 'search-word)
   )
