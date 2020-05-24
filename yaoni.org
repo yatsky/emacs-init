@@ -371,7 +371,7 @@ Mostly consists of system settings.
 ** Keyfreq
 Keyfreq exclude some commands
 #+begin_src emacs-lisp :tangle yes
-(setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command 
+(setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
                                                       evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char))
 #+end_src
 ** Other
@@ -384,7 +384,7 @@ Keyfreq exclude some commands
 (require 'powerline)
 (powerline-center-evil-theme)
 (if (display-graphic-p)
-    (progn 
+    (progn
       ;; Set cursor color
       (set-cursor-color "white")
 
@@ -1082,7 +1082,7 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
       (let ((heading (nth 4 (org-heading-components))))
         (if (member heading yaoni-org-edited-headings)
             (message "Already in edited headings")
-          (setq-local yaoni-org-edited-headings 
+          (setq-local yaoni-org-edited-headings
                       (push heading yaoni-org-edited-headings))
           ))))
 
@@ -1099,7 +1099,7 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
 ;; Format code here
 (defun yaoni-org-format-code-under-heading (heading)
   "Format code under HEADING in org buffer."
-  (save-excursion 
+  (save-excursion
     ;; Quick error handling
     (condition-case nil
         (progn
