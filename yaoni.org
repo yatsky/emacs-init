@@ -1206,3 +1206,10 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 #+end_src
 *** Demo
 [[file:./project-org-jump-demo.gif]]
+* Updates
+** TODO Cleaning up
+:LOGBOOK:
+CLOCK: [2020-05-24 Sun 15:20]--[2020-05-24 Sun 15:24] =>  0:04
+CLOCK: [2020-04-29 Wed 09:30]--[2020-04-29 Wed 09:39] =>  0:09
+CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
+:END:
