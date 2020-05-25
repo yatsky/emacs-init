@@ -299,7 +299,8 @@ Stuff that I haven't decided where to put (or never will!).
 Mostly consists of system settings.
 ** vanilla Emacs
 #+begin_src emacs-lisp :tangle yes
-(tool-bar-mode nil)
+;; Setting (tool-bar-mode nil) actually enables tool bar when running lisp code.
+(tool-bar-mode -1)
 (global-display-line-numbers-mode t)
 (electric-pair-mode t)
 
