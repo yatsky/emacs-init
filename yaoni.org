@@ -869,6 +869,10 @@ The fix is from: https://emacs-china.org/t/orgmode/9740/17
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 (org-element-update-syntax)
 #+end_src
+Set up time format in clock report.
+#+begin_src emacs-lisp :tangle yes
+(setq org-duration-format (quote h:mm))
+#+end_src
 ** modules
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
