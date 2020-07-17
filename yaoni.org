@@ -752,6 +752,9 @@ This is set to nil because once it is set by `defvar', it cannot be changed.")
         (split-string (buffer-string) "\n" t)))
 #+end_src
 * org
+:LOGBOOK:
+CLOCK: [2020-07-17 Fri 21:42]--[2020-07-17 Fri 21:48] =>  0:06
+:END:
 My org mode setup.
 ** global
 #+begin_src emacs-lisp :tangle yes
