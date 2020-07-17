@@ -907,6 +907,15 @@ Set up time format in clock report.
                 (setup-ditaa)
               )))
 #+end_src
+
+ox-reveal settings.
+This block makes ox-reveal to export images wrapped in ~<figure>~ tag
+so that we can later add a ~r-stretch~ class to them for fitting them vertically.
+See: https://github.com/yjwen/org-reveal/issues/388
+#+begin_src emacs-lisp :tangle yes
+(setq org-html-html5-fancy t
+      org-html-doctype "html5")
+#+end_src
 ** org-tree-slide
 Org-tree-slide for presentation.
 #+begin_src emacs-lisp :tangle yes
