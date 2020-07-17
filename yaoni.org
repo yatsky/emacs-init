@@ -860,6 +860,15 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
   )
 
 #+end_src
+
+org mode seems to be not respecting formats with Chinese characters after certain version.
+It will not render *bold*, /italic/ or _underscore_.
+The fix is from: https://emacs-china.org/t/orgmode/9740/17
+#+begin_src elisp :tangle yes
+(setq org-emphasis-regexp-components '("-[:multibyte:][:space:]('\"{" "-[:multibyte:][:space:].,:!?;'\")}\\[" "[:space:]" "." 1))
+(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+(org-element-update-syntax)
+#+end_src
 ** modules
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
