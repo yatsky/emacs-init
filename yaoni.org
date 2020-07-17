@@ -1027,10 +1027,7 @@ Org-tree-slide for presentation.
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
 * Testing
-#+begin_src emacs-lisp :tangle no
-(setq org-duration-format (quote h:mm))
-#+end_src
-beamer
+
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
