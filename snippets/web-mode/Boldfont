@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: HTML
+# key: fb
+# --
+
+<span class="font-weight-bold">$0</span>

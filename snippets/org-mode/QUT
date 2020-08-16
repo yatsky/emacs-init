@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: QUT-git-tutorial
+# key: qb
+# --
+
+#+name: $1
+#+caption: $1
+#+begin_src bash :dir /tmp/contest-project :results output replace code
+$0
+#+end_src
+
+#+name: Results: $1
+#+RESULTS: Results: $1
+#+begin_src bash
+#+end_src
