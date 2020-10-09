@@ -293,8 +293,14 @@ Magit settings.
   :ensure t
   :init
   ;; call this function so that eshell can use magit-get-current-branch.
+  ;; https://github.com/magit/ssh-agency/issues/19
   (magit-version)
-  )
+  (setq ssh-agency-socket-locaters '((ssh-agency-find-socket-from-ss :glob "*ssh*" :regexp #1="/\\(?:agent[.][0-9]+\\|ssh\\)\\'")
+                                     (ssh-agency-find-socket-from-netstat :regexp #1#)
+                                     (ssh-agency-find-socket-from-glob "/tmp/ssh-*/agent.*")))
+  (setq ssh-agency-socket-locaters
+        (assq-delete-all 'ssh-agency-find-socket-from-netstat
+                         ssh-agency-socket-locaters)))
 #+end_src
 * Miscellaneous setup
 Stuff that I haven't decided where to put (or never will!).
