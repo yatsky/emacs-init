@@ -1092,7 +1092,7 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
         ;;        ))
          (todo "TODO"
                ((org-agenda-overriding-header "Projects")
-                (org-agenda-files '(,org-default-notes-file))
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") ".*org$"))
                 ))
         ;; (todo "TODO"
         ;;       ((org-agenda-overriding-header "One-off Tasks")
