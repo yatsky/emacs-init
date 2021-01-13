@@ -781,7 +781,7 @@ CLOCK: [2020-07-26 Sun 11:05]--[2020-07-26 Sun 11:05] =>  0:00
 (add-hook 'org-mode-hook 'org-indent-mode)
 
 ;; capture
-(setq org-default-notes-file (concat org-directory "capture/quick_notes.org"))
+(setq org-default-notes-file (concat org-directory "/brain/inbox.org"))
 
 ;; cater for whitespace sensetive languages
 (setq org-edit-src-content-indentation 4)
