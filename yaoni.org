@@ -1049,7 +1049,58 @@ Org-tree-slide for presentation.
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
 * Testing
+** org-roam
+:LOGBOOK:
+CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
+:END:
+#+begin_src emacs-lisp :tangle yes
+(setq org-roam-directory org-directory)
+(add-hook 'after-init-hook 'org-roam-mode)
 
+(setq org-capture-templates
+      `(("i" "inbox" entry (file org-default-notes-file)
+         "* TODO %?")
+        ("l" "link" entry (file org-default-notes-file)
+         "* TODO %(org-cliplink-capture)" :immediate-finish t)
+        ("c" "org-protocol-capture" entry (file org-default-notes-file)
+         "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
+#+end_src
+*** TODO [[https://github.com/rexim/org-cliplink][GitHub - rexim/org-cliplink: Insert org-mode links from clipboard]]
+:PROPERTIES:
+:ID:       73fc703f-0d6d-47bf-bfe7-5d03c90c49e0
+:END:
+** org agenda view customisation
+[[https://github.com/jethrokuan/.emacs.d/blob/master/init.el][github repo]]
+#+begin_src emacs-lisp :tangle yes
+(setq yaoni/org-agenda-todo-view
+      `("y" "Agenda"
+        ((agenda ""
+                 ((org-agenda-span 'day)
+                  (org-deadline-warning-days 365)))
+         (todo "TODO"
+               ((org-agenda-overriding-header "To Refile")
+                (org-agenda-files '(,org-default-notes-file))))
+         
+        ;; (todo "TODO"
+        ;;       ((org-agenda-overriding-header "Emails")
+        ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "emails.org")))))
+        ;; (todo "NEXT"
+        ;;       ((org-agenda-overriding-header "In Progress")
+        ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "someday.org")
+        ;;                            ,(concat jethro/org-agenda-directory "projects.org")
+        ;;                            ,(concat jethro/org-agenda-directory "next.org")))
+        ;;        ))
+         (todo "TODO"
+               ((org-agenda-overriding-header "Projects")
+                (org-agenda-files '(,org-default-notes-file))
+                ))
+        ;; (todo "TODO"
+        ;;       ((org-agenda-overriding-header "One-off Tasks")
+        ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "next.org")))
+        ;;        (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))
+         nil)))
+(add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
+#+end_src
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
