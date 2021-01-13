@@ -1101,6 +1101,11 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
          nil)))
 (add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
 #+end_src
+** Save auto-save files in a dedicated folder
+#+begin_src emacs-lisp :tangle yes
+(setq backup-directory-alist
+        `(("." . ,(concat user-emacs-directory "backups"))))
+#+end_src
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
