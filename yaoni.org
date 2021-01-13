@@ -1106,6 +1106,19 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 (setq backup-directory-alist
         `(("." . ,(concat user-emacs-directory "backups"))))
 #+end_src
+** org tags
+[[https://orgmode.org/manual/Setting-Tags.html][Setting Tags (The Org Manual)]]
+#+begin_src emacs-lisp :tangle yes
+(setq org-tag-alist (quote (("@errand" . ?e)
+                            ("@office" . ?o)
+                            ("@home" . ?h)
+                            ("@qut" . ?q)
+                            ("@customology" . ?c)
+                            (:newline)
+                            ("WAITING" . ?w)
+                            ("HOLD" . ?H)
+                            ("CANCELLED" . ?C))))
+#+end_src
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
