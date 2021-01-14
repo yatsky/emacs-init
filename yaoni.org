@@ -1102,10 +1102,18 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
          nil)))
 (add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
 #+end_src
-** Save auto-save files in a dedicated folder
+
+*** DONE set number of spaces between item and tags in org-agenda-view
+SCHEDULED: <2021-01-14 Thu>
+:PROPERTIES:
+:ID:       8d883d08-421c-4f7a-b9e2-49ed78ae2f42
+:END:
+:LOGBOOK:
+CLOCK: [2021-01-14 Thu 10:22]--[2021-01-14 Thu 10:45] =>  0:23
+:END:
 #+begin_src emacs-lisp :tangle yes
-(setq backup-directory-alist
-        `(("." . ,(concat user-emacs-directory "backups"))))
+;; left align tags in org-agenda view
+(setq org-agenda-tags-column 0)
 #+end_src
 ** org tags
 [[https://orgmode.org/manual/Setting-Tags.html][Setting Tags (The Org Manual)]]
