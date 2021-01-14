@@ -1102,10 +1102,10 @@ CLOCK: [2021-01-14 Thu 20:27]--[2021-01-14 Thu 20:33] =>  0:06
                 ;; "^[^\.].*\.org$" ignores Emacs backup files.
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Customology.org$"))
                 ))
-         ;; (todo "TODO"
-         ;;       ((org-agenda-overriding-header "One-off Tasks")
-         ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "next.org")))
-         ;;        (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))
+         (tags-todo "once"
+               ((org-agenda-overriding-header "One-off Tasks")
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
+                ))
          nil)))
 (add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
 #+end_src
