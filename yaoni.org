@@ -1077,6 +1077,7 @@ CLOCK: [2021-01-14 Thu 20:27]--[2021-01-14 Thu 20:33] =>  0:06
 [[https://github.com/jethrokuan/.emacs.d/blob/master/init.el][github repo]]
 #+begin_src emacs-lisp :tangle yes
 (setq org-agenda-block-separator nil)
+(setq org-agenda-start-with-log-mode t)
 (setq yaoni/org-agenda-todo-view
       `("y" "Agenda"
         ((agenda ""
