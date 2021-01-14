@@ -1082,24 +1082,27 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
                ((org-agenda-overriding-header "To Refile")
                 (org-agenda-files '(,org-default-notes-file))))
          
-        ;; (todo "TODO"
-        ;;       ((org-agenda-overriding-header "Emails")
-        ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "emails.org")))))
-        ;; (todo "NEXT"
-        ;;       ((org-agenda-overriding-header "In Progress")
-        ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "someday.org")
-        ;;                            ,(concat jethro/org-agenda-directory "projects.org")
-        ;;                            ,(concat jethro/org-agenda-directory "next.org")))
-        ;;        ))
-         (todo "TODO"
-               ((org-agenda-overriding-header "Projects")
-                ;; "^[^\.].*\.org$" ignores Emacs backup files.
+         ;; (todo "TODO"
+         ;;       ((org-agenda-overriding-header "Emails")
+         ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "emails.org")))))
+         (todo "NEXT"
+               ((org-agenda-overriding-header "In Progress")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
                 ))
-        ;; (todo "TODO"
-        ;;       ((org-agenda-overriding-header "One-off Tasks")
-        ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "next.org")))
-        ;;        (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))
+         (tags-todo "@qut"
+               ((org-agenda-overriding-header "QUT")
+                ;; "^[^\.].*\.org$" ignores Emacs backup files.
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "QUT.org$"))
+                ))
+         (tags-todo "@customology"
+               ((org-agenda-overriding-header "Customology")
+                ;; "^[^\.].*\.org$" ignores Emacs backup files.
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Customology.org$"))
+                ))
+         ;; (todo "TODO"
+         ;;       ((org-agenda-overriding-header "One-off Tasks")
+         ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "next.org")))
+         ;;        (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))
          nil)))
 (add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
 #+end_src
