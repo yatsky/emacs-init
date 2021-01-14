@@ -1133,7 +1133,9 @@ CLOCK: [2021-01-14 Thu 10:22]--[2021-01-14 Thu 10:45] =>  0:23
                             (:newline)
                             ("WAITING" . ?w)
                             ("HOLD" . ?H)
-                            ("CANCELLED" . ?C))))
+                            ("CANCELLED" . ?C)
+                            (:newline)
+                            ("once" . ?O))))
 #+end_src
 ** org todo keywords
 #+begin_src emacs-lisp :tangle yes
