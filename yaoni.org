@@ -1120,6 +1120,12 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
                             ("HOLD" . ?H)
                             ("CANCELLED" . ?C))))
 #+end_src
+** org todo keywords
+#+begin_src emacs-lisp :tangle yes
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+        (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
+#+end_src
 * Programming aids
 ** Yasnippet
 #+begin_src emacs-lisp :tangle yes
