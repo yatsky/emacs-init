@@ -1106,6 +1106,10 @@ CLOCK: [2021-01-14 Thu 20:27]--[2021-01-14 Thu 20:33] =>  0:06
                ((org-agenda-overriding-header "One-off Tasks")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
                 ))
+         (todo "TODO"
+               ((org-agenda-overriding-header "Personal")
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Personal.org$"))
+                ))
          nil)))
 (add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
 #+end_src
