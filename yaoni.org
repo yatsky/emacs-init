@@ -827,7 +827,8 @@ See also [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, comma
       `("y" "Agenda"
         ((agenda ""
                  ((org-agenda-span 'day)
-                  (org-deadline-warning-days 365)))
+                  (org-deadline-warning-days 365)
+                  (org-agenda-sorting-strategy '(time-up))))
          (todo "TODO"
                ((org-agenda-overriding-header "To Refile")
                 (org-agenda-files '(,org-default-notes-file))))
