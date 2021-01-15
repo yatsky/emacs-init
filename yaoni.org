@@ -1110,6 +1110,10 @@ See also [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, comma
                ((org-agenda-overriding-header "One-off Tasks")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
                 ))
+         (tags-todo "repeater"
+               ((org-agenda-overriding-header "Repeaters")
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
+                ))
          (todo "TODO"
                ((org-agenda-overriding-header "Personal")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Personal.org$"))
@@ -1144,6 +1148,7 @@ CLOCK: [2021-01-14 Thu 10:22]--[2021-01-14 Thu 10:45] =>  0:23
                             ("HOLD" . ?H)
                             ("CANCELLED" . ?C)
                             (:newline)
+                            ("repeater" . ?r)
                             ("once" . ?O))))
 #+end_src
 ** org todo keywords
