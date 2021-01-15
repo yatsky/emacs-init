@@ -1096,11 +1096,12 @@ See also [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, comma
                ((org-agenda-overriding-header "In Progress")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
                 ))
-         (tags-todo "@qut"
-               ((org-agenda-overriding-header "QUT")
-                ;; "^[^\.].*\.org$" ignores Emacs backup files.
-                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "QUT.org$"))
-                ))
+         ;; don't show HOLD and DONE
+         (tags "+@qut-TODO=\"HOLD\"-TODO=\"DONE\""
+                    ((org-agenda-overriding-header "QUT")
+                     ;; "^[^\.].*\.org$" ignores Emacs backup files.
+                     (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "QUT.org$"))
+                     ))
          (tags-todo "@customology"
                ((org-agenda-overriding-header "Customology")
                 ;; "^[^\.].*\.org$" ignores Emacs backup files.
