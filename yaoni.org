@@ -1072,9 +1072,11 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 :END:
 ** org agenda view customisation
 :LOGBOOK:
+CLOCK: [2021-01-15 Fri 18:36]--[2021-01-15 Fri 18:41] =>  0:05
 CLOCK: [2021-01-14 Thu 20:27]--[2021-01-14 Thu 20:33] =>  0:06
 :END:
 [[https://github.com/jethrokuan/.emacs.d/blob/master/init.el][github repo]]
+See also [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, commands and options]]
 #+begin_src emacs-lisp :tangle yes
 (setq org-agenda-block-separator nil)
 (setq org-agenda-start-with-log-mode t)
@@ -1112,7 +1114,8 @@ CLOCK: [2021-01-14 Thu 20:27]--[2021-01-14 Thu 20:33] =>  0:06
                ((org-agenda-overriding-header "Personal")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Personal.org$"))
                 ))
-         nil)))
+         nil)
+        ((org-agenda-sorting-strategy '(priority-down todo-state-up alpha-up)))))
 (add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
 #+end_src
 
