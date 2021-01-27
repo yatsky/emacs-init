@@ -797,16 +797,20 @@ Org-tree-slide for presentation.
 CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 :END:
 #+begin_src emacs-lisp :tangle yes
-(setq org-roam-directory org-directory)
-(add-hook 'after-init-hook 'org-roam-mode)
+(use-package org-roam
+  :ensure t
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (setq org-roam-directory org-directory)
 
-(setq org-capture-templates
-      `(("i" "inbox" entry (file org-default-notes-file)
-         "* TODO %?")
-        ("l" "link" entry (file org-default-notes-file)
-         "* TODO %(org-cliplink-capture)" :immediate-finish t)
-        ("c" "org-protocol-capture" entry (file org-default-notes-file)
-         "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
+  (setq org-capture-templates
+        `(("i" "inbox" entry (file org-default-notes-file)
+           "* TODO %?")
+          ("l" "link" entry (file org-default-notes-file)
+           "* TODO %(org-cliplink-capture)" :immediate-finish t)
+          ("c" "org-protocol-capture" entry (file org-default-notes-file)
+           "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t))))
 #+end_src
 *** TODO [[https://github.com/rexim/org-cliplink][GitHub - rexim/org-cliplink: Insert org-mode links from clipboard]]
 :PROPERTIES:
