@@ -1,2 +1,21 @@
 *~
 backups/*
+elpa/*
+cnfonts/*
+
+# individual files
+*#
+.emacs.desktop
+.org-id-locations
+ac-comphist.dat
+bookmarks
+emojis/*
+eshell/*
+org-roam.db
+projectile-bookmarks.eld
+pyim/*
+snippets/org-mode/C1
+snippets/org-mode/C1 arrears
+transient/*
+url/*
+yaoni.el
