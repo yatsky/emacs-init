@@ -390,8 +390,13 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
 ** Keyfreq
 Keyfreq exclude some commands
 #+begin_src emacs-lisp :tangle yes
-(setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
-                                                      evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char))
+(use-package keyfreq
+  :init
+  (setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
+                                                        evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char))
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
 #+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
@@ -460,9 +465,6 @@ Mode line customization.
 (setq gif-screencast-output-directory (concat org-directory "screencasts"))
 
 
-(require 'keyfreq)
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
 
 (require 'helm-config)
 (helm-mode 1)
