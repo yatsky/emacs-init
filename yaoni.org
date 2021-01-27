@@ -766,7 +766,9 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
   :ensure t
   :hook
   (after-init . org-roam-mode)
-  :custom
+  ;; using custom here seems to be not working.
+  ;; we need to set the vars first then run the hook above
+  :init
   (setq org-roam-directory org-directory)
 
   (setq org-capture-templates
