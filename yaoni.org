@@ -29,6 +29,7 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
         (find-file
          (get-wd))))
 (add-to-list 'load-path "~/.emacs.d/elpa/")
+(add-to-list 'load-path "~/.emacs.d/elpa/casease/")
 #+end_src
 * cnfonts
 ~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[https://github.com/tumashu/cnfonts/issues/113][my issue]].
@@ -914,6 +915,18 @@ CLOCK: [2021-01-15 Fri 22:23]--[2021-01-15 Fri 22:24] =>  0:01
 #+begin_src emacs-lisp :tangle yes
 (advice-add 'org-agenda-clock-in :after 'org-save-all-org-buffers)
 (advice-add 'org-agenda-clock-out :after 'org-save-all-org-buffers)
+#+end_src
+** casease
+#+begin_src emacs-lisp :tangle yes
+(require 'casease)
+
+(casease-setup
+    :hook python-mode-hook
+    :separator ?-
+    :entries
+    ((pascal "\\(-\\)[a-z]" "[A-Z]")
+    (snake "[a-z]")))
+;;; hook will be setup, re-run after changing rules or separator
 #+end_src
 * Programming aids
 ** Yasnippet

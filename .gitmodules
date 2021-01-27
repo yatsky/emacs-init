@@ -1,0 +1,3 @@
+[submodule "elpa/casease"]
+	path = elpa/casease
+	url = git@github.com:DogLooksGood/casease.git
