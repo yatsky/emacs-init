@@ -853,6 +853,10 @@ See also [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, comma
                 ;; "^[^\.].*\.org$" ignores Emacs backup files.
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Customology.org$"))
                 ))
+         (todo "TODO"
+               ((org-agenda-overriding-header "Company")
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Easytex.org$"))
+                ))
          (tags-todo "once"
                ((org-agenda-overriding-header "One-off Tasks")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
