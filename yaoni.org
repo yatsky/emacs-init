@@ -34,11 +34,12 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
 * cnfonts
 ~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[https://github.com/tumashu/cnfonts/issues/113][my issue]].
 #+begin_src emacs-lisp :tangle yes
-(require 'cnfonts)
-;; 让 cnfonts 随着 Emacs 自动生效。
-(cnfonts-enable)
-(setq cnfonts-profiles
-      '("program" "org-mode" "read-book"))
+(use-package cnfonts
+  :config
+  ;; 让 cnfonts 随着 Emacs 自动生效。
+  (cnfonts-enable)
+  (setq cnfonts-profiles
+        '("program" "org-mode" "read-book")))
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
 ;; (cnfonts-set-spacemacs-fallback-fonts)
 #+end_src
