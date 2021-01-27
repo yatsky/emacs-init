@@ -266,25 +266,30 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 #+end_src
 * Evil
 #+begin_src emacs-lisp :tangle yes
-;; evil org
-(setq evil-want-keybinding nil)
-;; enable TAB in terminal mode
-;; https://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
-(setq evil-want-C-i-jump nil)
-(require 'evil)
-(when (require 'evil-collection nil t)
-  (evil-collection-init))
-(require 'evil-org)
-(add-hook 'org-mode-hook 'evil-org-mode)
-(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
-(require 'evil-org-agenda)
-(evil-org-agenda-set-keys)
-(evil-mode 1)
+(use-package evil
+  :init
+  ;; evil org
+  (setq evil-want-keybinding nil)
+  ;; enable TAB in terminal mode
+  ;; https://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
+  (setq evil-want-C-i-jump nil)
+  :config
+  (when (require 'evil-collection nil t)
+    (evil-collection-init)))
+
+(use-package evil-org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (evil-org-set-key-theme '(navigation insert textobjects additional calendar)))
+(use-package evil-org-agenda
+  :config
+  (evil-org-agenda-set-keys)
+  (evil-mode 1))
 
 ;; evil surround
-(require 'evil-surround)
-(add-hook 'org-mode-hook 'turn-on-evil-surround-mode)
-;; rg-brain config
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
 ;; org-brain using evil
 (evil-set-initial-state 'org-brain-visualize-mode 'emacs)
 #+end_src
