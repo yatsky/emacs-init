@@ -461,7 +461,6 @@ Mode line customization.
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 
-(which-key-mode)
 (setq gif-screencast-output-directory (concat org-directory "screencasts"))
 
 
@@ -1161,6 +1160,12 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 #+end_src
 *** Demo
 [[file:./project-org-jump-demo.gif]]
+* Which-key
+#+begin_src elisp :tangle yes
+(use-package which-key
+  :config
+  (which-key-mode))
+#+end_src
 * Updates
 ** DONE Cleaning up
 :LOGBOOK:
