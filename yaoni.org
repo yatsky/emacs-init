@@ -1161,6 +1161,12 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 #+end_src
 *** Demo
 [[file:./project-org-jump-demo.gif]]
+* Use-package
+:LOGBOOK:
+CLOCK: [2021-01-27 Wed 21:15]--[2021-01-27 Wed 21:31] =>  0:16
+CLOCK: [2021-01-27 Wed 21:04]--[2021-01-27 Wed 21:13] =>  0:09
+CLOCK: [2021-01-27 Wed 21:02]--[2021-01-27 Wed 21:04] =>  0:02
+:END:
 * Which-key
 #+begin_src elisp :tangle yes
 (use-package which-key
