@@ -264,6 +264,14 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   (define-key ac-complete-mode-map "\C-n" 'ac-next)
   (define-key ac-complete-mode-map "\C-p" 'ac-previous))
 #+end_src
+** Jumping between parens (sexp)
+#+begin_src elisp :tangle yes
+(my-global-leader
+
+  "m f" 'forward-sexp
+  "m b" 'backward-sexp
+)
+#+end_src
 * Evil
 #+begin_src emacs-lisp :tangle yes
 (use-package evil
