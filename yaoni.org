@@ -272,6 +272,15 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   "m b" 'backward-sexp
 )
 #+end_src
+
+#+begin_src elisp :tangle yes
+(use-package smartparens-config
+  :ensure smartparens
+  :config (progn (show-smartparens-global-mode t)))
+
+(add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+(add-hook 'org-mode-hook 'turn-on-smartparens-strict-mode)
+#+end_src
 * Evil
 #+begin_src emacs-lisp :tangle yes
 (use-package evil
