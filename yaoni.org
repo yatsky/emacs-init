@@ -836,6 +836,14 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 (global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;  pyim-probe-dynamic-english 配合
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
+* quelpa
+#+begin_src elisp :tangle yes
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
+#+end_src
 * Testing
 ** org agenda view customisation
 :LOGBOOK:
