@@ -295,6 +295,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
     (evil-collection-init)))
 
 (use-package evil-org
+  :ensure t
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
   (evil-org-set-key-theme '(navigation insert textobjects additional calendar)))
@@ -305,6 +306,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
 ;; evil surround
 (use-package evil-surround
+  :ensure t
   :config
   (global-evil-surround-mode 1))
 ;; org-brain using evil
@@ -408,6 +410,7 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
 Keyfreq exclude some commands
 #+begin_src emacs-lisp :tangle yes
 (use-package keyfreq
+  :ensure t
   :init
   (setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
                                                         evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char))
@@ -1210,6 +1213,7 @@ CLOCK: [2021-01-27 Wed 21:02]--[2021-01-27 Wed 21:04] =>  0:02
 * yaml-mode
 #+begin_src elisp :tangle yes
 (use-package yaml-mode
+  :ensure t
   :config
   ;; yaml support
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
