@@ -618,13 +618,14 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     :states 'normal
     :keymaps 'override
     "t" (kbd "C-u M-x org-time-stamp-inactive")
-    "r" 'org-drill-resume
     "l" 'org-shiftright
     "h" 'org-shiftleft
     "o" 'org-open-org-directory
     "c i" 'org-clock-in
     "c o" 'org-clock-out
     "g" 'search-word
+    "r i" 'org-roam-insert
+    "r f" 'org-roam-find-file
     )
   (require 'ox-md nil t)
 
