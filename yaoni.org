@@ -793,6 +793,7 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
   ;; we need to set the vars first then run the hook above
   :init
   (setq org-roam-directory org-directory)
+  (setq org-roam-tag-sources '(prop all-directories))
 
   (setq org-capture-templates
         `(("i" "inbox" entry (file org-default-notes-file)
