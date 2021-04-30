@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Healthia refresh clinit list
+# key: mfd
+# --
+{{mfd}}: ${1} insert(s), ${2} update(s), ${3} delete(s).
+{{mfd_phys}}: ${4} insert(s), ${5} update(s), ${6} delete(s).
