@@ -842,7 +842,7 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
 * quelpa
-#+begin_src elisp :tangle yes
+#+begin_src emacs-lisp :tangle yes
 (quelpa
  '(quelpa-use-package
    :fetcher git
