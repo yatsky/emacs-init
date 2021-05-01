@@ -19,7 +19,7 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
   (if
       (is-gnu-linux)
       "/mnt/c/Users/thoma/Dev"
-    "C:\\Users\\thoma\\Dev")
+    "/Users/yi.wang/Dev")
   )
 (setq initial-buffer-choice
       ;; We have to use find-file to open the buffer
