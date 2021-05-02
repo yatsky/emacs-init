@@ -607,7 +607,6 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
 (defun my-org-setup ()
   "Set up my org settings."
                                         ;(define-key org-mode-map (kbd "C-c t") (kbd "C-u M-x org-time-stamp"))
-                                        ;(define-key org-mode-map (kbd "C-c r") 'org-drill-resume)
                                         ;(define-key org-mode-map (kbd "C-c l") 'org-shiftright)
                                         ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
   (defun org-open-org-directory ()

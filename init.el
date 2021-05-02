@@ -53,14 +53,12 @@
      (shell . t)
      (ditaa . t))))
  '(org-confirm-babel-evaluate nil)
- '(org-drill-learn-fraction 0.45)
- '(org-drill-maximum-items-per-session 80)
  '(org-export-use-babel nil)
  '(org-html-htmlize-output-type (quote css))
  '(org-html-preamble-format (quote (("en" "<p>%t</p></p>%d</p>"))))
  '(org-modules
    (quote
-    (org-bbdb org-bibtex org-docview org-eww org-gnus org-info org-irc org-mhe org-rmail org-w3m org-drill)))
+    (org-bbdb org-bibtex org-docview org-eww org-gnus org-info org-irc org-mhe org-rmail org-w3m)))
  '(org-refile-targets
    (quote
     ((org-agenda-files :regexp . "*")
@@ -70,7 +68,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (xah-find ox-reveal nov org-noter blacken command-log-mode org-tree-slide emojify pyim-wbdict all-the-icons use-package helm-core virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-brain org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil org undo-tree)))
+    (xah-find ox-reveal nov org-noter blacken command-log-mode org-tree-slide emojify pyim-wbdict all-the-icons use-package helm-core virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil org undo-tree)))
  '(pdf-view-midnight-colors (quote ("white smoke" . "black"))))
 
 
