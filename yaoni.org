@@ -862,6 +862,7 @@ See also [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, comma
                 ))
          nil)
         ((org-agenda-sorting-strategy '(priority-down todo-state-up alpha-up)))))
+(setq org-agenda-custom-commands ())
 (add-to-list 'org-agenda-custom-commands `,yaoni/org-agenda-todo-view)
 #+end_src
 
