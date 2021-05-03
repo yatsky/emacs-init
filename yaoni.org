@@ -191,6 +191,11 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   :prefix "SPC o"
   :non-normal-prefix "C-c")
 
+(general-create-definer yaoni-tag-leader-def
+  :states '(normal visual insert)
+  :prefix "SPC n"
+  :non-normal-prefix "C-c n")
+
 (my-global-text-leader
   :states '(motion normal)
   :keymaps 'override
@@ -933,19 +938,6 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
 #+begin_src elisp :tangle yes
 (exec-path-from-shell-initialize)
 #+end_src
-** hide-show
-See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../Dev/orgs/20210501214605-xml_on_emacs.org][XML on Emacs]].
-#+begin_src emacs-lisp :tangle yes
-(add-hook 'nxml-mode-hook (lambda() (hs-minor-mode 1)))
-
-(add-to-list 'hs-special-modes-alist
-             '(nxml-mode
-               "<!--\\|<[^/>]*[^/]>" ;; regexp for start block
-               "-->\\|</[^/>]*[^/]>" ;; regexp for end block
-               "<!--"
-               nxml-forward-element
-               nil))
-#+end_src
 
 * Programming aids
 ** Yasnippet
@@ -1187,6 +1179,36 @@ CLOCK: [2021-01-27 Wed 21:02]--[2021-01-27 Wed 21:04] =>  0:02
   :config
   ;; yaml support
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+#+end_src
+* Tag navigation
+** evil-matchit
+Easily jumping between beginning and ending tags.
+https://github.com/redguardtoo/evil-matchit
+#+begin_src emacs-lisp :tangle yes
+(use-package evil-matchit
+  :ensure t
+  :config
+;; (require 'evil-matchit)
+  (global-evil-matchit-mode 1)
+)
+(yaoni-tag-leader-def
+  :states '(motion normal)
+  :keymaps 'override
+  "j" 'evilmi-jump-items
+)
+#+end_src
+** nxml
+See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../Dev/orgs/20210501214605-xml_on_emacs.org][XML on Emacs]].
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'nxml-mode-hook (lambda() (hs-minor-mode 1)))
+
+(add-to-list 'hs-special-modes-alist
+             '(nxml-mode
+               "<!--\\|<[^/>]*[^/]>" ;; regexp for start block
+               "-->\\|</[^/>]*[^/]>" ;; regexp for end block
+               "<!--"
+               nxml-forward-element
+               nil))
 #+end_src
 * Updates
 ** DONE Cleaning up
