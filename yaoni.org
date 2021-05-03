@@ -54,6 +54,7 @@ Extracted from here: http://www.modernemacs.com/post/custom-eshell/
 Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 #+begin_src emacs-lisp :tangle yes
 
+(require 'cl)
 (require 'dash)
 (require 's)
 
