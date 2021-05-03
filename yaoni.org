@@ -21,6 +21,10 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
       "/mnt/c/Users/thoma/Dev"
     "/Users/yi.wang/Dev")
   )
+(defun get-workspace()
+  "Get Workspace"
+  "/Users/yi.wang/Documents/workspace/"
+)
 (setq initial-buffer-choice
       ;; We have to use find-file to open the buffer
       ;; because initial-buffer-choice selects the buffer the function returns.
