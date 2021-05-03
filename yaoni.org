@@ -436,105 +436,6 @@ Keyfreq exclude some commands
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 #+end_src
-* Aesthetics
-#+begin_src emacs-lisp :tangle yes
-(load-theme 'dracula t)
-(require 'powerline)
-(powerline-center-evil-theme)
-(if (display-graphic-p)
-    (progn
-      ;; Set cursor color
-      (set-cursor-color "white")
-
-      ;; Set mouse color
-      (set-mouse-color "white")
-
-      (global-emojify-mode t)
-      (global-emojify-mode-line-mode t)))
-#+end_src
-** Mode line
-Mode line customization.
-#+begin_src emacs-lisp :tangle yes
-;; see: https://emacs.stackexchange.com/questions/3925/hide-list-of-minor-modes-in-mode-line
-(defvar hidden-minor-modes ; example, write your own list of hidden
-  '(abbrev-mode            ; minor modes
-    org-indent-mode
-    yas-minor-mode
-    evil-org-mode
-    eldoc-mode
-    undo-tree-mode
-    which-key-mode
-    helm-mode
-    visual-line-mode
-    auto-revert-mode))
-
-(defun purge-minor-modes ()
-  (interactive)
-  (dolist (x hidden-minor-modes nil)
-    (let ((trg (cdr (assoc x minor-mode-alist))))
-      (when trg
-        (setcar trg "")))))
-
-(add-hook 'after-change-major-mode-hook 'purge-minor-modes)
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-(setq display-time-format "%a %d/%m")
-(setq display-time-default-load-average nil)
-#+end_src
-#+begin_src emacs-lisp :tangle yes
-(setq projectile-mode-line-prefix " Prj")
-#+end_src
-
-** Other
-#+begin_src emacs-lisp :tangle yes
-
-(global-undo-tree-mode)
-
-
-(setq gif-screencast-output-directory (concat org-directory "screencasts"))
-
-
-
-(require 'helm-config)
-(helm-mode 1)
-
-(pdf-tools-install)
-
-;; Projectile
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
-;; Dired
-(require 'dired-x)
-(setq-default dired-omit-files-p t);; uffer-local variable
-(setq dired-omit-files (concat dired-omit-files "|.+~$"))
-
-;; virtualenvwrapper
-(require 'virtualenvwrapper)
-(venv-initialize-interactive-shells) ;; if you want interactive shell support
-(venv-initialize-eshell) ;; if you want eshell support
-;; note that setting `venv-location` is not necessary if you
-;; use the default location (`~/.virtualenvs`), or if the
-;; the environment variable `WORKON_HOME` points to the right place
-
-(defun open-working-directory ()
-  (interactive)
-  (find-file (get-wd))
-  )
-
-(yaoni-org-leader-def
-  :states '(motion normal)
-  :keymaps 'override
-
-  "d" 'open-working-directory)
-
-#+end_src
-
-All the icons to display and show icons.
-#+begin_src emacs-lisp :tangle yes
-(use-package all-the-icons)
-#+end_src
 * org
 :LOGBOOK:
 CLOCK: [2020-07-17 Fri 21:42]--[2020-07-17 Fri 21:48] =>  0:06
@@ -1218,3 +1119,118 @@ CLOCK: [2020-05-24 Sun 15:20]--[2020-05-24 Sun 15:24] =>  0:04
 CLOCK: [2020-04-29 Wed 09:30]--[2020-04-29 Wed 09:39] =>  0:09
 CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 :END:
+
+* Aesthetics
+#+begin_src emacs-lisp :tangle yes
+(use-package storybook-theme
+    :quelpa (storybook-theme :fetcher github :repo "yatsky/storybook-theme")
+    :init
+    (require 'storybook-theme)
+    (load-theme 'storybook t)
+)
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+;; (load-theme 'dracula t)
+(require 'powerline)
+;; (powerline-center-evil-theme)
+(if (display-graphic-p)
+    (progn
+      ;; Set cursor color
+      (set-cursor-color "black")
+
+      ;; Set mouse color
+      (set-mouse-color "black")
+
+      (global-emojify-mode t)
+      (global-emojify-mode-line-mode t)))
+#+end_src
+** Mode line
+Mode line customization.
+#+begin_src emacs-lisp :tangle yes
+;; see: https://emacs.stackexchange.com/questions/3925/hide-list-of-minor-modes-in-mode-line
+(defvar hidden-minor-modes ; example, write your own list of hidden
+  '(abbrev-mode            ; minor modes
+    org-indent-mode
+    yas-minor-mode
+    evil-org-mode
+    eldoc-mode
+    undo-tree-mode
+    which-key-mode
+    helm-mode
+    visual-line-mode
+    auto-revert-mode))
+
+(defun purge-minor-modes ()
+  (interactive)
+  (dolist (x hidden-minor-modes nil)
+    (let ((trg (cdr (assoc x minor-mode-alist))))
+      (when trg
+        (setcar trg "")))))
+
+(add-hook 'after-change-major-mode-hook 'purge-minor-modes)
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(setq display-time-format "%a %d/%m")
+(setq display-time-default-load-average nil)
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(setq projectile-mode-line-prefix " Prj")
+#+end_src
+
+** Other
+#+begin_src emacs-lisp :tangle yes
+
+(global-undo-tree-mode)
+
+
+(setq gif-screencast-output-directory (concat org-directory "screencasts"))
+
+
+
+(require 'helm-config)
+(helm-mode 1)
+
+(pdf-tools-install)
+
+;; Projectile
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+;; Dired
+(require 'dired-x)
+(setq-default dired-omit-files-p t);; uffer-local variable
+(setq dired-omit-files (concat dired-omit-files "|.+~$"))
+
+;; virtualenvwrapper
+(require 'virtualenvwrapper)
+(venv-initialize-interactive-shells) ;; if you want interactive shell support
+(venv-initialize-eshell) ;; if you want eshell support
+;; note that setting `venv-location` is not necessary if you
+;; use the default location (`~/.virtualenvs`), or if the
+;; the environment variable `WORKON_HOME` points to the right place
+
+(defun open-working-directory ()
+  (interactive)
+  (find-file (get-wd))
+  )
+
+(defun open-workspace ()
+  (interactive)
+  (find-file (get-workspace))
+)
+
+(yaoni-org-leader-def
+  :states '(motion normal)
+  :keymaps 'override
+
+  "d" 'open-working-directory
+  "w" 'open-workspace
+)
+
+#+end_src
+
+All the icons to display and show icons.
+#+begin_src emacs-lisp :tangle yes
+(use-package all-the-icons)
+#+end_src
