@@ -23,53 +23,49 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("947190b4f17f78c39b0ab1ea95b1e6097cc9202d55c73a702395fc817f899393" "b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default)))
+   '("947190b4f17f78c39b0ab1ea95b1e6097cc9202d55c73a702395fc817f899393" "b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default))
  '(debug-on-error t)
- '(ein:completion-backend (quote ein:use-none-backend))
+ '(ein:completion-backend 'ein:use-none-backend)
+ '(ein:output-area-inlined-images t)
  '(ein:polymode t)
- '(elfeed-feeds (quote ("https://nyaa.si/?page=rss")))
+ '(elfeed-feeds '("https://nyaa.si/?page=rss"))
  '(global-display-line-numbers-mode t)
  '(global-emojify-mode t)
  '(global-emojify-mode-line-mode t)
- '(helm-completion-style (quote emacs))
+ '(helm-completion-style 'emacs)
+ '(helm-minibuffer-history-key "M-p")
  '(load-prefer-newer t)
  '(ob-ein-languages
-   (quote
-    (("ein-python" . python)
+   '(("ein-python" . python)
      ("ein-R" . R)
      ("ein-r" . R)
-     ("ein-julia" . julia))))
+     ("ein-julia" . julia)))
  '(org-agenda-search-headline-for-time nil)
  '(org-agenda-skip-additional-timestamps-same-entry t)
  '(org-agenda-skip-timestamp-if-deadline-is-shown nil)
  '(org-babel-load-languages
-   (quote
-    ((js . t)
+   '((js . t)
      (java . t)
      (python . t)
      (emacs-lisp . t)
      (ein . t)
      (shell . t)
-     (ditaa . t))))
+     (ditaa . t)))
  '(org-confirm-babel-evaluate nil)
  '(org-export-use-babel nil)
- '(org-html-htmlize-output-type (quote css))
- '(org-html-preamble-format (quote (("en" "<p>%t</p></p>%d</p>"))))
+ '(org-html-htmlize-output-type 'css)
+ '(org-html-preamble-format '(("en" "<p>%t</p></p>%d</p>")))
  '(org-modules
-   (quote
-    (org-bbdb org-bibtex org-docview org-eww org-gnus org-info org-irc org-mhe org-rmail org-w3m)))
+   '(org-bbdb org-bibtex org-docview org-eww org-gnus org-info org-irc org-mhe org-rmail org-w3m))
  '(org-refile-targets
-   (quote
-    ((org-agenda-files :regexp . "*")
-     (org-agenda-files :maxlevel . 5))))
+   '((org-agenda-files :regexp . "*")
+     (org-agenda-files :maxlevel . 5)))
  '(org-screenshot-image-directory "/tmp/images/")
  '(org-src-tab-acts-natively t)
  '(package-check-signature nil)
  '(package-selected-packages
-   (quote
-    (xah-find ox-reveal nov org-noter blacken command-log-mode org-tree-slide emojify pyim-wbdict all-the-icons use-package helm-core virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil org undo-tree)))
- '(pdf-view-midnight-colors (quote ("white smoke" . "black"))))
+   '(xah-find ox-reveal nov org-noter blacken command-log-mode org-tree-slide emojify pyim-wbdict all-the-icons use-package helm-core virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit org-plus-contrib el-get gnu-elpa-keyring-update jedi-core cnfonts ein request-deferred elfeed exec-path-from-shell indium htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil org undo-tree))
+ '(pdf-view-midnight-colors '("white smoke" . "black")))
 
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/yaoni.org"))
