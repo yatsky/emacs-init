@@ -974,7 +974,7 @@ CLOCK: [2021-01-15 Fri 22:23]--[2021-01-15 Fri 22:24] =>  0:01
 CLOCK: [2021-02-21 Sun 22:07]--[2021-02-21 Sun 22:08] =>  0:01
 CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
 :END:
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package casease
   :quelpa (casease :fetcher github :repo "DogLooksGood/casease")
   :config (casease-setup
