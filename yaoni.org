@@ -265,6 +265,8 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   "x" 'evil-ex
 
   "k" 'kill-buffer
+
+  "h s" 'hs-toggle-hiding
   )
 
 
@@ -706,6 +708,18 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
 #+end_src
 * Testing
+** ejc-sql
+:LOGBOOK:
+CLOCK: [2021-03-11 Thu 11:44]--[2021-03-11 Thu 14:24] =>  2:40
+:END:
+#+begin_src emacs-lisp :tangle yes
+(require 'ejc-sql)
+#+end_src
+** sqlformat
+#+begin_src emacs-lisp :tangle yes
+(setq sqlformat-args '("-r" "-s" "--comma_first" "TRUE" "--indent_width" "4" "--k" "upper"))
+(setq sqlformat-command 'sqlformat)
+#+end_src
 ** org agenda view customisation
 :LOGBOOK:
 CLOCK: [2021-01-16 Sat 07:50]--[2021-01-16 Sat 07:56] =>  0:06
