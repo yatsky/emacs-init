@@ -1302,8 +1302,6 @@ https://github.com/redguardtoo/evil-matchit
 ** nxml
 See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../Dev/orgs/20210501214605-xml_on_emacs.org][XML on Emacs]].
 #+begin_src emacs-lisp :tangle yes
-(add-hook 'nxml-mode-hook (lambda() (hs-minor-mode 1)))
-
 (add-to-list 'hs-special-modes-alist
              '(nxml-mode
                "<!--\\|<[^/>]*[^/]>" ;; regexp for start block
@@ -1311,6 +1309,12 @@ See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../
                "<!--"
                nxml-forward-element
                nil))
+;; we want to insert tabs for CTL in Clover graphs
+(add-hook 'nxml-mode-hook
+    (lambda ()
+        (setq-default indent-tabs-mode t)
+        (setq-default tab-width 4)
+		(hs-minor-mode 1)))
 #+end_src
 * Updates
 ** DONE Cleaning up
