@@ -1263,6 +1263,7 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
   :commands helm-lsp-workspace-symbol)
 #+end_src
 ** Clover
+
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'auto-mode-alist '("\\.ctl\\'" . js-mode))
 ;; we want to insert tabs for CTL in Clover graphs
@@ -1271,6 +1272,13 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
         (setq-default indent-tabs-mode t)
         (setq-default tab-width 4)
 		(hs-minor-mode 1)))
+(defun maybe-indent-with-tab ()
+  (when (and (buffer-file-name)
+             (equal (file-name-extension (buffer-file-name)) "ctl"))
+	(setq indent-tabs-mode t)
+    (setq tab-width 4)))
+
+(add-hook 'js-mode-hook 'maybe-indent-with-tab)
 #+end_src
 * Use-package
 :LOGBOOK:
