@@ -1240,6 +1240,16 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
   :ensure t
   :commands helm-lsp-workspace-symbol)
 #+end_src
+** Clover
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'auto-mode-alist '("\\.ctl\\'" . js-mode))
+;; we want to insert tabs for CTL in Clover graphs
+(add-hook 'nxml-mode-hook
+    (lambda ()
+        (setq-default indent-tabs-mode t)
+        (setq-default tab-width 4)
+		(hs-minor-mode 1)))
+#+end_src
 * Use-package
 :LOGBOOK:
 CLOCK: [2021-01-27 Wed 21:15]--[2021-01-27 Wed 21:31] =>  0:16
@@ -1287,12 +1297,6 @@ See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../
                "<!--"
                nxml-forward-element
                nil))
-;; we want to insert tabs for CTL in Clover graphs
-(add-hook 'nxml-mode-hook
-    (lambda ()
-        (setq-default indent-tabs-mode t)
-        (setq-default tab-width 4)
-		(hs-minor-mode 1)))
 #+end_src
 * Updates
 ** DONE Cleaning up
