@@ -1305,6 +1305,12 @@ See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../
                "<!--"
                nxml-forward-element
                nil))
+;; we want to insert tabs for CTL in Clover graphs
+(add-hook 'nxml-mode-hook
+    (lambda ()
+        (setq-default indent-tabs-mode t)
+        (setq-default tab-width 4)
+		(hs-minor-mode 1)))
 #+end_src
 * Updates
 ** DONE Cleaning up
