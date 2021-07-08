@@ -441,6 +441,8 @@ Keyfreq exclude some commands
 ** Other
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+;; always turn on hs-minor-mode in any program mode
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 #+end_src
 * org
 :LOGBOOK:
