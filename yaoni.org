@@ -434,7 +434,13 @@ Keyfreq exclude some commands
   :ensure t
   :init
   (setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
-                                                        evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char))
+                                                        evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char
+                                                        evil-normal-state
+                                                        evil-insert
+                                                        ;; backspace in insert mode
+                                                        evil-delete-backward-char-and-join
+                                                        ;; used in evil-search-word-forward for incremental search
+                                                        isearch-printing-char))
   :config
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
