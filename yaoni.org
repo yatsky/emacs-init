@@ -270,6 +270,9 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   "v w" 'venv-workon
 
   "g t" 'git-timemachine-toggle
+
+  ;; don't confirm revert-buffer
+  "r b" '(lambda() (interactive) (revert-buffer nil t))
   )
 
 
