@@ -349,6 +349,13 @@ Magit settings.
         (assq-delete-all 'ssh-agency-find-socket-from-netstat
                          ssh-agency-socket-locaters)))
 #+end_src
+* git-gutter
+#+begin_src emacs-lisp :tangle yes
+(use-package git-gutter
+    :ensure t
+    :init
+    (global-git-gutter-mode +1))
+#+end_src
 * Miscellaneous setup
 Stuff that I haven't decided where to put (or never will!).
 Mostly consists of system settings.
