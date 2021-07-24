@@ -267,6 +267,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   "k" 'kill-buffer
 
   "h s" 'hs-toggle-hiding
+  "v w" 'venv-workon
   )
 
 
