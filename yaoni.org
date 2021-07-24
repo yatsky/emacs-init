@@ -268,6 +268,8 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
   "h s" 'hs-toggle-hiding
   "v w" 'venv-workon
+
+  "g t" 'git-timemachine-toggle
   )
 
 
@@ -355,6 +357,11 @@ Magit settings.
     :ensure t
     :init
     (global-git-gutter-mode +1))
+#+end_src
+* git-timemachine
+#+begin_src emacs-lisp :tangle yes
+(use-package git-timemachine
+    :ensure t)
 #+end_src
 * Miscellaneous setup
 Stuff that I haven't decided where to put (or never will!).
