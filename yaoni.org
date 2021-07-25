@@ -572,6 +572,8 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "g" 'search-word
     "r i" 'org-roam-insert
     "r f" 'org-roam-find-file
+    "n" 'org-babel-next-src-block
+    "p" 'org-babel-previous-src-block
     )
   (require 'ox-md nil t)
 
