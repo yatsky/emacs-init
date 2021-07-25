@@ -1,13 +1,11 @@
 # -*- mode: snippet -*-
 # name: ein-python snippet
-# key: ein-py
+# key: ep
 # --
 #+caption: ${1:name-this-code}
 #+name: $1
-#+begin_src ein-python :session ${2:localhost} :results ${3:output} ${4:code} 
+#+begin_src ein-python :session ${2:localhost} :results ${3:output} ${4:drawer} 
 $0
 #+end_src
-
-#+caption: $1-results
 
 #+RESULTS: $1
