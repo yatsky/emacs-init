@@ -4,7 +4,7 @@
 # --
 #+caption: ${1:name-this-code}
 #+name: $1
-#+begin_src ein-python :session ${2:localhost} :results ${3:output} ${4:drawer} 
+#+begin_src ein-python :session ${2:localhost} :results ${3:output} ${4:vector} 
 $0
 #+end_src
 
