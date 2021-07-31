@@ -848,7 +848,7 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
 :LOGBOOK:
 CLOCK: [2021-03-11 Thu 11:44]--[2021-03-11 Thu 14:24] =>  2:40
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (require 'ejc-sql)
 #+end_src
 ** sqlformat
