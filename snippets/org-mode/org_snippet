@@ -4,7 +4,7 @@
 # --
 #+caption: ${1:name-this-code}
 #+name: $1
-#+begin_src ein-python :session ${2:localhost} :results ${3:output} ${4:vector} 
+#+begin_src ein-python :session localhost :results output html :async-post format_output(data=*this*)
 $0
 #+end_src
 
