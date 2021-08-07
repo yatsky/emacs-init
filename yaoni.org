@@ -773,6 +773,7 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
   (setq org-roam-v2-ack t)
   (setq org-roam-server-mode t)
   (setq org-roam-directory org-directory)
+  (setq org-roam-v2-ack t)
   (setq org-roam-tag-sources '(prop all-directories))
 
   (setq org-capture-templates
