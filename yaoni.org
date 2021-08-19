@@ -708,6 +708,27 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 :PROPERTIES:
 :ID:       73fc703f-0d6d-47bf-bfe7-5d03c90c49e0
 :END:
+** org-roam-ui
+:LOGBOOK:
+CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
+:END:
+#+begin_src emacs-lisp :tangle yes
+(use-package org-roam-ui
+  :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+
+#+end_src
 * pyim
 
 #+begin_src emacs-lisp :tangle yes
@@ -741,6 +762,22 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
               '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
 (global-set-key (kbd"M-j") 'pyim-convert-string-at-point) ;  pyim-probe-dynamic-english 配合
 (global-set-key (kbd"C-;") 'pyim-delete-word-from-personal-buffer)
+#+end_src
+* straight
+#+begin_src emacs-lisp :tangle yes
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 #+end_src
 * Testing
 ** ejc-sql
