@@ -371,11 +371,22 @@ Magit settings.
                          ssh-agency-socket-locaters)))
 #+end_src
 * git-gutter
+:LOGBOOK:
+CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
+:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package git-gutter
     :ensure t
     :init
-    (global-git-gutter-mode +1))
+    (global-git-gutter-mode +1)
+    :general
+    (my-global-leader
+	  ;; git-gutter
+	  "g g p" 'git-gutter:previous-hunk
+	  "g g n" 'git-gutter:next-hunk
+	  "g g m" 'git-gutter:mark-hunk
+	  "g g s" 'git-gutter:stage-hunk
+	  "g g r" 'git-gutter:revert-hunk))
 #+end_src
 * git-timemachine
 #+begin_src emacs-lisp :tangle yes
