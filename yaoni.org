@@ -390,8 +390,8 @@ CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
 	  "g g m" 'git-gutter:mark-hunk
 	  "g g s" 'git-gutter:stage-hunk
 	  "g g r" 'git-gutter:revert-hunk
-	  "g g h p" 'git-gutter-reset-to-head-parent
-	  "g g h d" 'git-gutter-reset-to-default))
+	  "g g h p" '(lambda () (interactive) (git-gutter-reset-to-head-parent))
+	  "g g h d" '(lambda () (interactive) (git-gutter-reset-to-default))))
 #+end_src
 
 Compare current HEAD with its parent.
