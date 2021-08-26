@@ -372,6 +372,9 @@ Magit settings.
 #+end_src
 * git-gutter
 :LOGBOOK:
+CLOCK: [2021-08-26 Thu 10:55]--[2021-08-26 Thu 11:05] =>  0:10
+CLOCK: [2021-08-26 Thu 10:51]--[2021-08-26 Thu 10:54] =>  0:03
+CLOCK: [2021-08-26 Thu 10:24]--[2021-08-26 Thu 10:49] =>  0:25
 CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
 :END:
 #+begin_src emacs-lisp :tangle yes
@@ -387,6 +390,23 @@ CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
 	  "g g m" 'git-gutter:mark-hunk
 	  "g g s" 'git-gutter:stage-hunk
 	  "g g r" 'git-gutter:revert-hunk))
+#+end_src
+
+Compare current HEAD with its parent.
+https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/developer-guide-en.org#git
+#+begin_src emacs-lisp :tangle yes
+(defun git-gutter-reset-to-head-parent()
+  (interactive)
+  (let (parent (filename (buffer-file-name)))
+    (if (eq git-gutter:vcs-type 'svn)
+        (setq parent "PREV")
+      (setq parent (if filename (concat (shell-command-to-string (concat "git --no-pager log --oneline -n1 --pretty=\"format:%H\" " filename)) "^") "HEAD^")))
+    (git-gutter:set-start-revision parent)
+    (message (concat "git-gutter:set-start-revision " parent))))
+(defun git-gutter-reset-to-default ()
+  (interactive)
+  (git-gutter:set-start-revision nil)
+  (message "git-gutter reset"))
 #+end_src
 * git-timemachine
 #+begin_src emacs-lisp :tangle yes
