@@ -623,6 +623,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "r f" 'org-roam-node-find
     ;; org roam add id
     "r a i" 'org-id-get-create
+    "r a t" 'org-roam-tag-add
     "n" 'org-babel-next-src-block
     "p" 'org-babel-previous-src-block
     )
