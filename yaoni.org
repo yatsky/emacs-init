@@ -758,10 +758,10 @@ Org-tree-slide for presentation.
 #+end_src
 * org-roam
 :LOGBOOK:
+CLOCK: [2021-09-03 Fri 21:58]
 CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
 :END:
 #+begin_src emacs-lisp :tangle yes
-(setq org-roam-v2-ack t)
 (use-package org-roam
   :ensure t
   :hook
@@ -769,6 +769,8 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
   ;; using custom here seems to be not working.
   ;; we need to set the vars first then run the hook above
   :init
+  (setq org-roam-v2-ack t)
+  (setq org-roam-server-mode t)
   (setq org-roam-directory org-directory)
   (setq org-roam-tag-sources '(prop all-directories))
 

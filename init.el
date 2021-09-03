@@ -60,7 +60,6 @@
  '(org-refile-targets
    '((org-agenda-files :regexp . "*")
      (org-agenda-files :maxlevel . 5)))
- '(org-roam-server-mode t)
  '(org-screenshot-image-directory "/tmp/images/")
  '(org-src-tab-acts-natively t)
  '(package-check-signature nil)
