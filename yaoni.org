@@ -1176,7 +1176,7 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 (yaoni-org-leader-def
   :states 'normal
   :keymaps 'override
-  "p" 'org-project-jump
+  "j" 'org-project-jump
   )
 #+end_src
 *** Demo
