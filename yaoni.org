@@ -661,6 +661,32 @@ Set up time format in clock report.
 #+begin_src emacs-lisp :tangle yes
 (setq org-duration-format (quote h:mm))
 #+end_src
+
+The following allows any #+LAST_MODIFIED headers to be updated on file-save:
+(copied from [[https://github.com/skx/dotfiles/blob/master/.emacs.d/init.md#org-mode-timestamping][here]]).
+#+begin_src emacs-lisp :tangle yes
+(defun yaoni/update-org-modified-property ()
+  "If a file contains a '#+LAST_MODIFIED' property update it to contain
+  the current date/time"
+  (interactive)
+  (save-excursion
+    (widen)
+    (goto-char (point-min))
+    (when (re-search-forward "^#\\+LAST_MODIFIED:" (point-max) t)
+      (progn
+        (kill-line)
+        (insert (format-time-string " %d/%m/%Y %H:%M:%S") )))))
+#+end_src
+
+Add it to org-mode hook.
+#+begin_src emacs-lisp :tangle yes
+(defun yaoni-org-mode-before-save-hook ()
+  (when (eq major-mode 'org-mode)
+    (yaoni/update-org-modified-property)))
+
+(add-hook 'before-save-hook #'yaoni-org-mode-before-save-hook)
+
+#+end_src
 ** modules
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
