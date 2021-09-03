@@ -758,8 +758,9 @@ Org-tree-slide for presentation.
 #+end_src
 * org-roam
 :LOGBOOK:
-CLOCK: [2021-09-03 Fri 21:58]
-CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 22:08] => 13:24
+CLOCK: [2021-09-03 Fri 22:14]--[2021-09-03 Fri 22:14] =>  0:00
+CLOCK: [2021-09-03 Fri 21:58]--[2021-09-03 Fri 22:14] =>  0:16
+CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
 :END:
 #+begin_src emacs-lisp :tangle yes
 (use-package org-roam
