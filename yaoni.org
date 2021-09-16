@@ -760,6 +760,28 @@ Org-tree-slide for presentation.
   (setq org-id-track-globally t)
   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
 #+end_src
+** org-download
+Configuration from [[https://zzamboni.org/post/how-to-insert-screenshots-in-org-documents-on-macos/][here]].
+
+Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
+#+begin_src emacs-lisp :tangle yes
+(use-package org-download
+  :ensure t
+  :after org
+  :defer nil
+  :custom
+  (org-download-method 'directory)
+  (org-download-image-dir "images")
+  (org-download-heading-lvl nil)
+  (org-download-timestamp "%Y%m%d-%H%M%S_")
+  (org-image-actual-width 400)
+  (org-download-screenshot-method "/usr/local/bin/pngpaste %s")
+  :bind
+  ("C-M-y" . org-download-screenshot)
+  :config
+  (require 'org-download))
+#+end_src
+
 * org-roam
 :LOGBOOK:
 CLOCK: [2021-09-03 Fri 22:14]--[2021-09-03 Fri 22:14] =>  0:00
