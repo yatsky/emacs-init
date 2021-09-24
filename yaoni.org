@@ -771,10 +771,13 @@ Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
   :defer nil
   :custom
   (org-download-method 'directory)
+  ;; Can only use jpeg. png files will have a greyed out/washed effect on the image.
+  ;; see: https://github.com/jcsalterego/pngpaste/issues/16
+  (org-download-screenshot-basename "screenshot.jpeg")
   (org-download-image-dir "images")
   (org-download-heading-lvl nil)
   (org-download-timestamp "%Y%m%d-%H%M%S_")
-  (org-image-actual-width 400)
+  (org-image-actual-width 1000)
   (org-download-screenshot-method "/usr/local/bin/pngpaste %s")
   :bind
   ("C-M-y" . org-download-screenshot)
