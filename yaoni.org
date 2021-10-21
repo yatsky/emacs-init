@@ -596,7 +596,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
 ;; enable javascript source code eval
 (require 'ob-js)
 (require 'ob-shell)
-;;(add-to-list 'org-babel-load-languages '(js . t))
+(add-to-list 'org-babel-load-languages '(ditaa . t))
 (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
 #+end_src
 ** my org setup
