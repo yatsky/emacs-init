@@ -2,7 +2,7 @@
 # name: ein-python snippet
 # key: ep
 # --
-#+caption: ${1:name-this-code}
+#+caption: ${1:`(insert-random-uuid)`}
 #+name: $1
 #+begin_src ein-python :session localhost :results output html :async-post format_output(data=*this*)
 $0
