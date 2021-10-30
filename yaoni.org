@@ -816,13 +816,16 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
   (setq org-roam-directory org-directory)
   (setq org-roam-tag-sources '(prop all-directories))
 
-  (setq org-capture-templates
-        `(("i" "inbox" entry (file org-default-notes-file)
-           "* TODO %?")
-          ("l" "link" entry (file org-default-notes-file)
-           "* TODO %(org-cliplink-capture)" :immediate-finish t)
-          ("c" "org-protocol-capture" entry (file org-default-notes-file)
-           "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t))))
+  (setq org-roam-capture-templates
+        `(("d" "default" plain "%?"
+		   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+							  "#+title: ${title}\n")
+		   :unnarrowed t)))
+
+  (setq org-roam-dailies-capture-templates
+		`(("d" "encrypted-daily" plain "%?"
+           :if-new (file+head "%<%Y-%m-%d>.org.gpg"
+							  "#+title: %<%Y-%m-%d>\n")))))
 #+end_src
 ** TODO [[https://github.com/rexim/org-cliplink][GitHub - rexim/org-cliplink: Insert org-mode links from clipboard]]
 :PROPERTIES:
