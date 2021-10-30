@@ -799,6 +799,7 @@ Copy the content in the current source block to the kill-ring.
 
 * org-roam
 :LOGBOOK:
+CLOCK: [2021-10-30 Sat 21:47]--[2021-10-30 Sat 22:21] =>  0:34
 CLOCK: [2021-09-03 Fri 22:14]--[2021-09-03 Fri 22:14] =>  0:00
 CLOCK: [2021-09-03 Fri 21:58]--[2021-09-03 Fri 22:14] =>  0:16
 CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
