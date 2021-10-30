@@ -820,6 +820,10 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
         `(("d" "default" plain "%?"
 		   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 							  "#+title: ${title}\n")
+		   :unnarrowed t)
+		  ("e" "encrypted-note" plain "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg"
+							  "#+title: ${title}\n")
 		   :unnarrowed t)))
 
   (setq org-roam-dailies-capture-templates
