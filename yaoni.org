@@ -1259,6 +1259,28 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 #+end_src
 *** Demo
 [[file:./project-org-jump-demo.gif]]
+** copy lines matching regex
+:LOGBOOK:
+CLOCK: [2021-12-05 Sun 15:22]--[2021-12-05 Sun 15:34] =>  0:12
+:END:
+https://stackoverflow.com/questions/2289883/emacs-copy-matching-lines
+#+begin_src elisp :tangle yes
+(defun copy-lines-matching-re (re)
+  "find all lines matching the regexp RE in the current buffer
+putting the matching lines in a buffer named *matching*"
+  (interactive "sRegexp to match: ")
+  (let ((result-buffer (get-buffer-create "*matching*")))
+    (with-current-buffer result-buffer 
+      (erase-buffer))
+    (save-match-data 
+      (save-excursion
+        (goto-char (point-min))
+        (while (re-search-forward re nil t)
+          (princ (buffer-substring-no-properties (line-beginning-position) 
+                                                 (line-beginning-position 2))
+                 result-buffer))))
+    (pop-to-buffer result-buffer)))
+#+end_src
 ** lsp-mode
 :LOGBOOK:
 CLOCK: [2021-05-08 Sat 15:58]--[2021-05-08 Sat 16:39] =>  0:41
