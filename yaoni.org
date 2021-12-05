@@ -1280,7 +1280,7 @@ putting the matching lines in a buffer named *matching*"
                                                  (line-beginning-position 2))
                  result-buffer))))
     (pop-to-buffer result-buffer)))
-
+#+end_src
 ** lsp-mode
 :LOGBOOK:
 CLOCK: [2021-05-08 Sat 15:58]--[2021-05-08 Sat 16:39] =>  0:41
