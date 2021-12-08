@@ -515,7 +515,13 @@ Keyfreq exclude some commands
                                                         ;; backspace in insert mode
                                                         evil-delete-backward-char-and-join
                                                         ;; used in evil-search-word-forward for incremental search
-                                                        isearch-printing-char))
+                                                        isearch-printing-char
+                                                        evil-next-visual-line
+                                                        save-buffer
+                                                        evil-previous-visual-line
+                                                        evil-forward-word-end
+                                                        other-window
+                                                        ))
   :config
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
