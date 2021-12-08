@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: table tag
+# key: tbl
+# --
+<table>
+	<tbody>
+		<tr>
+			<td>
+			$0
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+			</td>
+		</tr>
+	</tbody>
+</table>

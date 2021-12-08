@@ -19,8 +19,12 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
   (if
       (is-gnu-linux)
       "/mnt/c/Users/thoma/Dev"
-    "C:\\Users\\thoma\\Dev")
+    "/Users/yi.wang/Dev")
   )
+(defun get-workspace()
+  "Get Workspace"
+  "/Users/yi.wang/Documents/workspace/"
+)
 (setq initial-buffer-choice
       ;; We have to use find-file to open the buffer
       ;; because initial-buffer-choice selects the buffer the function returns.
@@ -597,7 +601,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
 ;; enable javascript source code eval
 (require 'ob-js)
 (require 'ob-shell)
-;;(add-to-list 'org-babel-load-languages '(js . t))
+(add-to-list 'org-babel-load-languages '(ditaa . t))
 (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
 #+end_src
 ** my org setup
@@ -631,6 +635,8 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "r a t" 'org-roam-tag-add
     "n" 'org-babel-next-src-block
     "p" 'org-babel-previous-src-block
+	;; org copy src
+	"c s" 'org-copy-src-block
     )
   (require 'ox-md nil t)
 
@@ -761,8 +767,44 @@ Org-tree-slide for presentation.
   (setq org-id-track-globally t)
   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
 #+end_src
+** org-download
+Configuration from [[https://zzamboni.org/post/how-to-insert-screenshots-in-org-documents-on-macos/][here]].
+
+Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
+#+begin_src emacs-lisp :tangle yes
+(use-package org-download
+  :ensure t
+  :after org
+  :defer nil
+  :custom
+  (org-download-method 'directory)
+  ;; Can only use jpeg. png files will have a greyed out/washed effect on the image.
+  ;; see: https://github.com/jcsalterego/pngpaste/issues/16
+  (org-download-screenshot-basename "screenshot.jpeg")
+  (org-download-image-dir "images")
+  (org-download-heading-lvl nil)
+  (org-download-timestamp "%Y%m%d-%H%M%S_")
+  (org-image-actual-width 1000)
+  (org-download-screenshot-method "/usr/local/bin/pngpaste %s")
+  :bind
+  ("C-M-y" . org-download-screenshot)
+  :config
+  (require 'org-download))
+#+end_src
+** custom functions
+Copy the content in the current source block to the kill-ring.
+#+begin_src emacs-lisp :tangle yes
+(defun org-copy-src-block ()
+  (interactive)
+  (org-edit-src-code)
+  (mark-whole-buffer)
+  (kill-ring-save nil nil t)
+  (org-edit-src-abort))
+#+end_src
+
 * org-roam
 :LOGBOOK:
+CLOCK: [2021-10-30 Sat 21:47]--[2021-10-30 Sat 22:21] =>  0:34
 CLOCK: [2021-09-03 Fri 22:14]--[2021-09-03 Fri 22:14] =>  0:00
 CLOCK: [2021-09-03 Fri 21:58]--[2021-09-03 Fri 22:14] =>  0:16
 CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
@@ -780,13 +822,20 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
   (setq org-roam-directory org-directory)
   (setq org-roam-tag-sources '(prop all-directories))
 
-  (setq org-capture-templates
-        `(("i" "inbox" entry (file org-default-notes-file)
-           "* TODO %?")
-          ("l" "link" entry (file org-default-notes-file)
-           "* TODO %(org-cliplink-capture)" :immediate-finish t)
-          ("c" "org-protocol-capture" entry (file org-default-notes-file)
-           "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t))))
+  (setq org-roam-capture-templates
+        `(("d" "default" plain "%?"
+		   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+							  "#+title: ${title}\n")
+		   :unnarrowed t)
+		  ("e" "encrypted-note" plain "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg"
+							  "#+title: ${title}\n")
+		   :unnarrowed t)))
+
+  (setq org-roam-dailies-capture-templates
+		`(("d" "encrypted-daily" plain "%?"
+           :if-new (file+head "%<%Y-%m-%d>.org.gpg"
+							  "#+title: %<%Y-%m-%d>\n")))))
 #+end_src
 ** TODO [[https://github.com/rexim/org-cliplink][GitHub - rexim/org-cliplink: Insert org-mode links from clipboard]]
 :PROPERTIES:
@@ -1217,7 +1266,7 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 [[file:./project-org-jump-demo.gif]]
 ** copy lines matching regex
 :LOGBOOK:
-CLOCK: [2021-12-05 Sun 15:22]
+CLOCK: [2021-12-05 Sun 15:22]--[2021-12-05 Sun 15:34] =>  0:12
 :END:
 https://stackoverflow.com/questions/2289883/emacs-copy-matching-lines
 #+begin_src elisp :tangle yes
@@ -1236,7 +1285,89 @@ putting the matching lines in a buffer named *matching*"
                                                  (line-beginning-position 2))
                  result-buffer))))
     (pop-to-buffer result-buffer)))
+#+end_src
+** lsp-mode
+:LOGBOOK:
+CLOCK: [2021-05-08 Sat 15:58]--[2021-05-08 Sat 16:39] =>  0:41
+CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
+:END:
+#+begin_src emacs-lisp :tangle no
+(use-package lsp-mode
+  :ensure t
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (nxml-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
+;; optionally
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+;; if you are helm user
+(use-package helm-lsp
+  :ensure t
+  :commands helm-lsp-workspace-symbol)
+#+end_src
+** Clover
+
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'auto-mode-alist '("\\.ctl\\'" . js-mode))
+;; we want to insert tabs for CTL in Clover graphs
+(add-hook 'nxml-mode-hook
+    (lambda ()
+        (setq-default indent-tabs-mode t)
+        (setq-default tab-width 4)
+		(hs-minor-mode 1)))
+(defun maybe-indent-with-tab ()
+  (when (and (buffer-file-name)
+             (equal (file-name-extension (buffer-file-name)) "ctl"))
+	(setq indent-tabs-mode t)
+    (setq tab-width 4)))
+
+(add-hook 'js-mode-hook 'maybe-indent-with-tab)
+#+end_src
+** uuid generator
+#+begin_src elisp :tangle yes
+;; see: https://emacs.stackexchange.com/questions/24470/warning-yasnippet-modified-buffer-in-a-backquote-expression
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+(defun insert-random-uuid ()
+  "Insert a UUID.
+This commands calls “uuidgen” on MacOS, Linux, and calls PowelShell on Microsoft Windows.
+URL `http://ergoemacs.org/emacs/elisp_generate_uuid.html'
+Version 2020-06-04"
+  (interactive)
+  (cond
+   ((string-equal system-type "windows-nt")
+    (shell-command "pwsh.exe -Command [guid]::NewGuid().toString()" t))
+   ((string-equal system-type "darwin") ; Mac
+    (shell-command "uuidgen" t))
+   ((string-equal system-type "gnu/linux")
+    (shell-command "uuidgen" t))
+   (t
+    ;; code here by Christopher Wellons, 2011-11-18.
+    ;; and editted Hideki Saito further to generate all valid variants for "N" in xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx format.
+    (let ((myStr (md5 (format "%s%s%s%s%s%s%s%s%s%s"
+                              (user-uid)
+                              (emacs-pid)
+                              (system-name)
+                              (user-full-name)
+                              (current-time)
+                              (emacs-uptime)
+                              (garbage-collect)
+                              (buffer-string)
+                              (random)
+                              (recent-keys)))))
+      (insert (format "%s-%s-4%s-%s%s-%s"
+                      (substring myStr 0 8)
+                      (substring myStr 8 12)
+                      (substring myStr 13 16)
+                      (format "%x" (+ 8 (random 4)))
+                      (substring myStr 17 20)
+                      (substring myStr 20 32)))))))
 #+end_src
 * Use-package
 :LOGBOOK:
@@ -1278,8 +1409,6 @@ https://github.com/redguardtoo/evil-matchit
 ** nxml
 See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../Dev/orgs/20210501214605-xml_on_emacs.org][XML on Emacs]].
 #+begin_src emacs-lisp :tangle yes
-(add-hook 'nxml-mode-hook (lambda() (hs-minor-mode 1)))
-
 (add-to-list 'hs-special-modes-alist
              '(nxml-mode
                "<!--\\|<[^/>]*[^/]>" ;; regexp for start block
@@ -1287,6 +1416,12 @@ See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../
                "<!--"
                nxml-forward-element
                nil))
+;; we want to insert tabs for CTL in Clover graphs
+(add-hook 'nxml-mode-hook
+    (lambda ()
+        (setq-default indent-tabs-mode t)
+        (setq-default tab-width 4)
+		(hs-minor-mode 1)))
 #+end_src
 * Updates
 ** DONE Cleaning up
@@ -1307,7 +1442,7 @@ CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 )
 #+end_src
 #+begin_src emacs-lisp :tangle yes
-;; (load-theme 'dracula t)
+(load-theme 'dracula t)
 (require 'powerline)
 ;; (powerline-center-evil-theme)
 (if (display-graphic-p)
@@ -1386,6 +1521,7 @@ Mode line customization.
 ;; note that setting `venv-location` is not necessary if you
 ;; use the default location (`~/.virtualenvs`), or if the
 ;; the environment variable `WORKON_HOME` points to the right place
+(venv-workon "data")
 
 (defun open-working-directory ()
   (interactive)
