@@ -259,6 +259,11 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   ;;  -> search
   "s i" 'isearch-forward
 
+  ;;  -> search grep current directory
+  "s g c" 'helm-grep-do-git-grep
+  ;;  -> search grep project directory (where .git/ is)
+  "s g p" '(lambda() (interactive) (helm-grep-do-git-grep 1))
+
   ;;  -> write
   "w b" 'save-buffer
 
