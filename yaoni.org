@@ -21,10 +21,13 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
       "/mnt/c/Users/thoma/Dev"
     "/Users/yi.wang/Dev")
   )
-(defun get-workspace()
-  "Get Workspace"
-  "/Users/yi.wang/Documents/workspace/"
-)
+(defun get-workspace(&optional ver)
+  "Get Workspace. If `ver' is set then it's that Clover version's workspace."
+  (let ((prefix "/Users/yi.wang/Documents/workspace/"))
+    (if ver
+        (replace-regexp-in-string "workspace" (concat "workspace" "_" (number-to-string ver)) prefix)
+      prefix)))
+
 (setq initial-buffer-choice
       ;; We have to use find-file to open the buffer
       ;; because initial-buffer-choice selects the buffer the function returns.
@@ -1536,9 +1539,9 @@ Mode line customization.
   (find-file (get-wd))
   )
 
-(defun open-workspace ()
+(defun open-workspace (&optional ver)
   (interactive)
-  (find-file (get-workspace))
+  (find-file (get-workspace ver))
 )
 
 (yaoni-org-leader-def
@@ -1547,6 +1550,7 @@ Mode line customization.
 
   "d" 'open-working-directory
   "w" 'open-workspace
+  "5" (lambda() (interactive) (open-workspace 5))
 )
 
 #+end_src
