@@ -1063,6 +1063,8 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
 (add-to-list 'load-path
              "~/.emacs.d/plugins/yasnippet")
 (yas-global-mode 1)
+;; see: https://emacs.stackexchange.com/questions/24470/warning-yasnippet-modified-buffer-in-a-backquote-expression
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 #+end_src
 ** Jedi
 #+begin_src emacs-lisp :tangle yes
@@ -1345,8 +1347,6 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
 #+end_src
 ** uuid generator
 #+begin_src elisp :tangle yes
-;; see: https://emacs.stackexchange.com/questions/24470/warning-yasnippet-modified-buffer-in-a-backquote-expression
-(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 (defun insert-random-uuid ()
   "Insert a UUID.
 This commands calls “uuidgen” on MacOS, Linux, and calls PowelShell on Microsoft Windows.
