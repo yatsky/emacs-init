@@ -269,6 +269,9 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   ;;  -> search grep project directory (where .git/ is)
   "s g p" 'counsel-git-grep
 
+  ;;  -> search grep filename (where .git/ is)
+  "s g f" 'counsel-git
+
   ;;  -> write
   "w b" 'save-buffer
 
