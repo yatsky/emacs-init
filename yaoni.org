@@ -924,6 +924,7 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
         '((t . eh-ivy-cregexp)))
 #+end_src
 * ivy
+Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/
 #+begin_src emacs-lisp :tangle yes
 (use-package counsel
   :ensure t
