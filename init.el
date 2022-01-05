@@ -18,6 +18,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(straight-use-package '(org :host github
+                                   :repo "yatsky/org"
+                                   :branch "publish-project-matching-tag"))
 
 
 (custom-set-variables

@@ -40,6 +40,7 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
 #+end_src
 * straight
 :LOGBOOK:
+CLOCK: [2022-01-05 Wed 22:07]--[2022-01-05 Wed 22:37] =>  0:30
 CLOCK: [2022-01-05 Wed 18:23]--[2022-01-05 Wed 18:30] =>  0:07
 CLOCK: [2022-01-05 Wed 16:18]--[2022-01-05 Wed 17:22] =>  1:04
 :END:
@@ -1108,6 +1109,9 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
 (exec-path-from-shell-copy-env "CMG_DB_PWD")
 #+end_src
 ** org-jekyll
+:LOGBOOK:
+CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
+:END:
 #+begin_src emacs-lisp :tangle yes
 (setq org-publish-project-alist
       '(("yatsky.github.io"
