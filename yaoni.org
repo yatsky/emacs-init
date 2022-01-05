@@ -39,20 +39,12 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
 (add-to-list 'load-path "~/.emacs.d/elpa/casease/")
 #+end_src
 * straight
+:LOGBOOK:
+CLOCK: [2022-01-05 Wed 18:23]--[2022-01-05 Wed 18:30] =>  0:07
+CLOCK: [2022-01-05 Wed 16:18]--[2022-01-05 Wed 17:22] =>  1:04
+:END:
 #+begin_src emacs-lisp :tangle yes
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
+(straight-use-package 'use-package)
 #+end_src
 * quelpa
 #+begin_src emacs-lisp :tangle yes
@@ -352,7 +344,7 @@ Turning off this because it's giving me two closing brackets when I type one ope
     (evil-collection-init)))
 
 (use-package evil-org
-  :ensure t
+  :straight t
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
   (evil-org-set-key-theme '(navigation insert textobjects additional calendar)))
@@ -363,7 +355,7 @@ Turning off this because it's giving me two closing brackets when I type one ope
 
 ;; evil surround
 (use-package evil-surround
-  :ensure t
+  :straight t
   :config
   (global-evil-surround-mode 1))
 ;; org-brain using evil
@@ -373,7 +365,7 @@ Turning off this because it's giving me two closing brackets when I type one ope
 Magit settings.
 #+begin_src emacs-lisp :tangle yes
 (use-package magit
-  :ensure t
+  :straight t
   :init
   ;; call this function so that eshell can use magit-get-current-branch.
   ;; https://github.com/magit/ssh-agency/issues/19
@@ -394,7 +386,7 @@ CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
 :END:
 #+begin_src emacs-lisp :tangle yes
 (use-package git-gutter
-    :ensure t
+    :straight t
     :init
     (global-git-gutter-mode +1)
     :general
@@ -428,7 +420,7 @@ https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/dev
 * git-timemachine
 #+begin_src emacs-lisp :tangle yes
 (use-package git-timemachine
-    :ensure t)
+    :straight t)
 #+end_src
 * Miscellaneous setup
 Stuff that I haven't decided where to put (or never will!).
@@ -512,7 +504,7 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
 Keyfreq exclude some commands
 #+begin_src emacs-lisp :tangle yes
 (use-package keyfreq
-  :ensure t
+  :straight t
   :init
   (setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
                                                         evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char
@@ -785,7 +777,7 @@ Configuration from [[https://zzamboni.org/post/how-to-insert-screenshots-in-org-
 Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
 #+begin_src emacs-lisp :tangle yes
 (use-package org-download
-  :ensure t
+  :straight t
   :after org
   :defer nil
   :custom
@@ -823,7 +815,7 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
 :END:
 #+begin_src emacs-lisp :tangle yes
 (use-package org-roam
-  :ensure t
+  :straight t
   :hook
   (after-init . org-roam-mode)
   ;; using custom here seems to be not working.
@@ -930,12 +922,12 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
 Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/
 #+begin_src emacs-lisp :tangle yes
 (use-package counsel
-  :ensure t
+  :straight t
   :after ivy
   :config (counsel-mode))
 
 (use-package ivy
-  :ensure t
+  :straight t
   :defer 0.1
   :diminish
   :bind (("C-c C-r" . ivy-resume)
@@ -946,7 +938,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   :config (ivy-mode))
 
 (use-package ivy-rich
-  :ensure t
+  :straight t
   :after ivy
   :custom
   (ivy-virtual-abbreviate 'full
@@ -956,7 +948,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   (ivy-rich-mode))
 
 (use-package swiper
-  :ensure t
+  :straight t
   :after ivy
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
@@ -1376,7 +1368,7 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
 :END:
 #+begin_src emacs-lisp :tangle no
 (use-package lsp-mode
-  :ensure t
+  :straight t
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
@@ -1388,7 +1380,7 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
 
 ;; optionally
 (use-package lsp-ui
-  :ensure t
+  :straight t
   :commands lsp-ui-mode)
 #+end_src
 ** Clover
@@ -1412,7 +1404,7 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
 ** uuid generator
 #+begin_src elisp :tangle yes
 ;; see: https://emacs.stackexchange.com/questions/24470/warning-yasnippet-modified-buffer-in-a-backquote-expression
-(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+;; (add-to-list 'warning-suppress-types '(yasnippet backquote-change))
 (defun insert-random-uuid ()
   "Insert a UUID.
 This commands calls “uuidgen” on MacOS, Linux, and calls PowelShell on Microsoft Windows.
@@ -1463,7 +1455,7 @@ CLOCK: [2021-01-27 Wed 21:02]--[2021-01-27 Wed 21:04] =>  0:02
 * yaml-mode
 #+begin_src elisp :tangle yes
 (use-package yaml-mode
-  :ensure t
+  :straight t
   :config
   ;; yaml support
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
@@ -1474,7 +1466,7 @@ Easily jumping between beginning and ending tags.
 https://github.com/redguardtoo/evil-matchit
 #+begin_src emacs-lisp :tangle yes
 (use-package evil-matchit
-  :ensure t
+  :straight t
   :config
 ;; (require 'evil-matchit)
   (global-evil-matchit-mode 1)
