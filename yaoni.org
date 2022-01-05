@@ -829,7 +829,7 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
   (setq org-roam-capture-templates
         `(("d" "default" plain "%?"
 		   :if-new (file+head "%<%Y-%m-%d-%H%M%S>-${slug}.org"
-							  "#+title: ${title}\n#+begin_export html\n---\nlayout: post\ntitle: \"${title}\"\nexcerpt:\n---\n#+end_export")
+							  "#+title: ${title}\n\n#+begin_export html\n---\nlayout: post\ntitle: \"${title}\"\nexcerpt:\n---\n#+end_export")
 		   :unnarrowed t)
 		  ("e" "encrypted-note" plain "%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg"
@@ -841,6 +841,12 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
            :if-new (file+head "%<%Y-%m-%d>.org.gpg"
 							  "#+title: %<%Y-%m-%d>\n")))))
 #+end_src
+function to update all org roam file ids. see: https://org-roam.discourse.group/t/org-roam-v2-org-id-id-link-resolution-problem/1491
+Otherwise export won't work and you can't jump between files using `C-x C-o'.
+#+begin_src emacs-lisp :tangle no
+(org-id-update-id-locations (org-roam-list-files))
+#+end_src
+
 ** TODO [[https://github.com/rexim/org-cliplink][GitHub - rexim/org-cliplink: Insert org-mode links from clipboard]]
 :PROPERTIES:
 :ID:       73fc703f-0d6d-47bf-bfe7-5d03c90c49e0
@@ -1108,6 +1114,7 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
          ;; Path to org files.
          :base-directory "~/Dev/orgs"
          :base-extension "org"
+         ;; :base-extension "gpg"
          ;; Path to Jekyll Posts
          :publishing-directory "~/yatsky_blog/_posts/"
          :recursive t
@@ -1116,7 +1123,24 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
          :html-extension "html"
          :body-only t
          :with-toc nil ;; ignore toc as it'll break jekyll front matter
-         )))
+         :exclude "Customology.org"
+         ;; only include files with tag blog
+         :include-file-tags "blog"
+         )
+
+        ("images"
+         :base-directory "~/Dev/orgs/images"
+         :base-extension "png\\|jpg\\|gif\\|jpeg"
+         :publishing-directory "~/yatsky_blog/images"
+         :publishing-function org-publish-attachment
+         )
+
+        ("blog" :components (
+                             "yatsky.github.io"
+                             "images"
+                             ))
+        ))
+(setq org-export-with-broken-links 'mark)
 #+end_src
 * Programming aids
 ** Yasnippet
