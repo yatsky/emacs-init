@@ -44,6 +44,7 @@ CLOCK: [2022-01-05 Wed 22:07]--[2022-01-05 Wed 22:37] =>  0:30
 CLOCK: [2022-01-05 Wed 18:23]--[2022-01-05 Wed 18:30] =>  0:07
 CLOCK: [2022-01-05 Wed 16:18]--[2022-01-05 Wed 17:22] =>  1:04
 :END:
+https://systemcrafters.cc/advanced-package-management/using-straight-el/
 #+begin_src emacs-lisp :tangle yes
 (straight-use-package 'use-package)
 #+end_src
