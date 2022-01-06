@@ -844,7 +844,7 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
 #+end_src
 function to update all org roam file ids. see: https://org-roam.discourse.group/t/org-roam-v2-org-id-id-link-resolution-problem/1491
 Otherwise export won't work and you can't jump between files using `C-x C-o'.
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (org-id-update-id-locations (org-roam-list-files))
 #+end_src
 
