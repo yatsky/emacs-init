@@ -943,6 +943,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
+  (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done)
   :config (ivy-mode))
 
 (use-package ivy-rich
