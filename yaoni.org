@@ -58,7 +58,7 @@ https://systemcrafters.cc/advanced-package-management/using-straight-el/
 #+end_src
 * ein
 :LOGBOOK:
-CLOCK: [2022-01-20 Thu 09:06]
+CLOCK: [2022-01-20 Thu 09:06]--[2022-01-20 Thu 09:23] =>  0:17
 CLOCK: [2022-01-20 Thu 08:54]--[2022-01-20 Thu 08:59] =>  0:05
 :END:
 Use straight to manage ein.
@@ -80,6 +80,13 @@ Use straight to manage ein.
           (emacs-lisp . t)
           (shell . t)
           (ditaa . t))))
+#+end_src
+* elpy
+#+begin_src emacs-lisp :tangle yes
+(use-package elpy
+  :straight t
+  :init
+  (elpy-enable))
 #+end_src
 * cnfonts
 ~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[https://github.com/tumashu/cnfonts/issues/113][my issue]].
