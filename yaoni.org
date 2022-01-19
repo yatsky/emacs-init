@@ -276,6 +276,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
   ;;  -> run
 
   ;; Ivy version of ‘execute-extended-command’.
+  ;; https://github.com/abo-abo/swiper/issues/294#issuecomment-157871131
   "e" 'counsel-M-x
 
   ;;  -> switch
@@ -943,7 +944,8 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
 ;; https://emacs-china.org/t/topic/6069/30?u=tumashu
 ;; 添加ivy中文搜索
 (defun eh-ivy-cregexp (str)
-  (let ((x (ivy--regex-plus str))
+  ;; https://github.com/abo-abo/swiper/issues/294#issuecomment-157871131
+  (let ((x (ivy--regex-fuzzy str))
         (case-fold-search nil))
     (if (listp x)
         (mapcar (lambda (y)
