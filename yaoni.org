@@ -56,6 +56,31 @@ https://systemcrafters.cc/advanced-package-management/using-straight-el/
    :url "https://github.com/quelpa/quelpa-use-package.git"))
 (require 'quelpa-use-package)
 #+end_src
+* ein
+:LOGBOOK:
+CLOCK: [2022-01-20 Thu 09:06]
+CLOCK: [2022-01-20 Thu 08:54]--[2022-01-20 Thu 08:59] =>  0:05
+:END:
+Use straight to manage ein.
+#+begin_src emacs-lisp :tangle yes
+(use-package ein
+  :straight t
+  :init
+  (setq ein:output-area-inlined-images t)
+  (setq ein:polymode t)
+  (setq ob-ein-languages
+        '(("ein-python" . python)
+          ("ein-R" . R)
+          ("ein-r" . R)
+          ("ein-julia" . julia)))
+  (setq org-babel-load-languages
+        '((js . t)
+          (java . t)
+          (python . t)
+          (emacs-lisp . t)
+          (shell . t)
+          (ditaa . t))))
+#+end_src
 * cnfonts
 ~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[https://github.com/tumashu/cnfonts/issues/113][my issue]].
 #+begin_src emacs-lisp :tangle yes
