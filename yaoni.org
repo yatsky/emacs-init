@@ -76,7 +76,8 @@ Use straight to manage ein.
           (python . t)
           (emacs-lisp . t)
           (shell . t)
-          (ditaa . t))))
+          (ditaa . t)
+          (ein . t))))
 #+end_src
 * elpy
 #+begin_src emacs-lisp :tangle yes
