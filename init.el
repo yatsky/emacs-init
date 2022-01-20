@@ -35,8 +35,6 @@
  '(global-display-line-numbers-mode t)
  '(global-emojify-mode t)
  '(global-emojify-mode-line-mode t)
- '(helm-completion-style 'emacs)
- '(helm-minibuffer-history-key "M-p")
  '(load-prefer-newer t)
  '(org-agenda-search-headline-for-time nil)
  '(org-agenda-skip-additional-timestamps-same-entry t)
@@ -61,7 +59,7 @@
  '(org-src-tab-acts-natively t)
  '(package-check-signature nil)
  '(package-selected-packages
-   '(ox-jira dired-sidebar dired-subtree xah-find ox-reveal nov org-noter blacken command-log-mode org-tree-slide emojify pyim-wbdict all-the-icons use-package helm-core virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit el-get gnu-elpa-keyring-update jedi-core cnfonts request-deferred elfeed exec-path-from-shell htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit helm org-evil evil org undo-tree))
+   '(ox-jira dired-sidebar dired-subtree xah-find ox-reveal nov org-noter blacken command-log-mode org-tree-slide emojify pyim-wbdict all-the-icons use-package virtualenvwrapper projectile pdf-tools posframe pyim json-mode elisp-format general gif-screencast which-key org-mime evil-collection flycheck tide web-mode rjsx-mode org-bullets magit el-get gnu-elpa-keyring-update jedi-core cnfonts request-deferred elfeed exec-path-from-shell htmlize auctex yasnippet-snippets jedi powerline dracula-theme evil-magit org-evil evil org undo-tree))
  '(pdf-view-midnight-colors '("white smoke" . "black"))
  '(smartparens-global-strict-mode t))
 
