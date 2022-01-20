@@ -1528,6 +1528,7 @@ Version 2020-06-04"
 :LOGBOOK:
 CLOCK: [2022-01-20 Thu 13:43]--[2022-01-20 Thu 14:00] =>  0:17
 :END:
+First install Aspell with Homebrew.
 #+begin_src emacs-lisp :tangle yes
 (use-package wucuo
   :straight t
