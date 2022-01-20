@@ -20,3 +20,10 @@ transient/*
 url/*
 yaoni.el
 quelpa/*
+straight/*
+request/*
+recentf
+elpy/*
+.lsp-session*
+.emacs.desktop*
+.cache/
