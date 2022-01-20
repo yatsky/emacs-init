@@ -34,7 +34,6 @@ It is renamed to "Basic config" so that it appears on top of the file and gets c
         (find-file
          (get-wd))))
 (add-to-list 'load-path "~/.emacs.d/elpa/")
-(add-to-list 'load-path "~/.emacs.d/elpa/casease/")
 #+end_src
 * straight
 :LOGBOOK:
@@ -1120,6 +1119,7 @@ CLOCK: [2021-01-15 Fri 22:23]--[2021-01-15 Fri 22:24] =>  0:01
 #+end_src
 ** casease
 :LOGBOOK:
+CLOCK: [2022-01-20 Thu 14:02]--[2022-01-20 Thu 14:09] =>  0:07
 CLOCK: [2022-01-20 Thu 09:23]--[2022-01-20 Thu 09:41] =>  0:18
 CLOCK: [2021-02-21 Sun 22:07]--[2021-02-21 Sun 22:08] =>  0:01
 CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
