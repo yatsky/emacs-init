@@ -1264,6 +1264,7 @@ This is the original idea.
 When in org mode, we save the modified headings in a +temporary buffer+ variable, then before saving the buffer, we use this information to let the ~format-code-before-save-buffer~ function know where to format.
 *** Code
 :LOGBOOK:
+CLOCK: [2022-01-20 Thu 10:33]--[2022-01-20 Thu 10:45] =>  0:12
 CLOCK: [2020-03-26 Thu 15:16]--[2020-03-26 Thu 15:16] =>  0:00
 CLOCK: [2020-03-26 Thu 14:22]--[2020-03-26 Thu 14:26] =>  0:04
 CLOCK: [2020-03-26 Thu 14:06]--[2020-03-26 Thu 14:22] =>  0:16
@@ -1316,12 +1317,12 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
 (defun format-code-before-save-buffer ()
   "Format code and then save buffer."
   (interactive)
-  (save-excursion
-    (cond ((eq major-mode 'org-mode)
-           ;; (mapc 'yaoni-org-format-code-under-heading yaoni-org-edited-headings)
-           (setq-local yaoni-org-edited-headings (list)))
-          ((eq major-mode 'python-mode) (blacken-buffer)))
-    ))
+  (cond ((eq major-mode 'org-mode)
+         ;; (mapc 'yaoni-org-format-code-under-heading yaoni-org-edited-headings)
+         (setq-local yaoni-org-edited-headings (list)))
+        ((eq major-mode 'python-mode) (let ((saved-position (point)))
+                                        (blacken-buffer)
+                                        (goto-char saved-position)))))
 (add-hook 'before-save-hook #'format-code-before-save-buffer)
 #+end_src
 ** Project-Org entry jump
