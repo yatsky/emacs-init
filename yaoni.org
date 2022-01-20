@@ -1,5 +1,3 @@
-#+SETUPFILE: /mnt/c/Users/thoma/Dev/orgs/theme-readtheorg.setup
-#+EXPORT_FILE_NAME: /mnt/c/Users/thoma/Dev/yaoni.html
 * Introduction
 This is my personal Emacs init file in org.
 
@@ -1162,6 +1160,8 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
          :headline-levels 4
          :html-extension "html"
          :body-only t
+	 :html-head nil
+		 :html-head-include-default-style nil
          :with-toc nil ;; ignore toc as it'll break jekyll front matter
          :exclude "Customology.org"
          ;; only include files with tag blog
