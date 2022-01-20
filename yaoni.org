@@ -1575,9 +1575,7 @@ CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 (use-package storybook-theme
     :quelpa (storybook-theme :fetcher github :repo "yatsky/storybook-theme")
     :init
-    (require 'storybook-theme)
-    (load-theme 'storybook t)
-)
+    (require 'storybook-theme))
 #+end_src
 #+begin_src emacs-lisp :tangle yes
 (load-theme 'dracula t)
