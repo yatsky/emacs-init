@@ -1219,7 +1219,7 @@ Virtual env support seems to be out of the box.
   (setq blacken-skip-string-normalization t))
 #+end_src
 ** Typescript
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 ;; tide for TypeScript
 (defun setup-tide-mode ()
   (interactive)
