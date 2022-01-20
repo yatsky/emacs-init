@@ -1194,6 +1194,11 @@ CLOCK: [2022-01-20 Thu 11:44]--[2022-01-20 Thu 11:48] =>  0:04
   (yas-global-mode 1)
   (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
 #+end_src
+** Flycheck
+:LOGBOOK:
+CLOCK: [2022-01-20 Thu 10:11]--[2022-01-20 Thu 10:32] =>  0:21
+:END:
+Virtual env support seems to be out of the box.
 ** Jedi
 #+begin_src emacs-lisp :tangle yes
 ;; jedi
