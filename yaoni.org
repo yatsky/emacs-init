@@ -1620,10 +1620,10 @@ CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 (if (display-graphic-p)
     (progn
       ;; Set cursor color
-      (set-cursor-color "black")
+      (set-cursor-color "white")
 
       ;; Set mouse color
-      (set-mouse-color "black")
+      (set-mouse-color "white")
 
       (global-emojify-mode t)
       (global-emojify-mode-line-mode t)))
