@@ -1184,11 +1184,15 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 #+end_src
 * Programming aids
 ** Yasnippet
+:LOGBOOK:
+CLOCK: [2022-01-20 Thu 11:44]--[2022-01-20 Thu 11:48] =>  0:04
+:END:
 #+begin_src emacs-lisp :tangle yes
-;; yasnippet
-(add-to-list 'load-path
-             "~/.emacs.d/plugins/yasnippet")
-(yas-global-mode 1)
+(use-package yasnippet
+  :straight t
+  :config
+  (yas-global-mode 1)
+  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
 #+end_src
 ** Jedi
 #+begin_src emacs-lisp :tangle yes
