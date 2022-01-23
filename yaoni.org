@@ -578,7 +578,7 @@ CLOCK: [2020-07-26 Sun 11:05]--[2020-07-26 Sun 11:05] =>  0:00
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             Org-global            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq org-directory (concat (get-wd) "/orgs/"))
+(setq org-directory (mapconcat 'file-name-as-directory `(,(get-wd) "orgs") ""))
 ;; include entries from the Emacs diary into Org mode's agenda
 (setq org-agenda-include-diary t)
 ;; turn on indent mode in Org
@@ -625,8 +625,8 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
 (setq org-agenda-files (append org-agenda-files (directory-files-recursively (concat org-directory "/brain") ".*org$")))
 (setq org-agenda-files (append org-agenda-files (directory-files-recursively (concat org-directory "/knowledge_base") ".*org$")))
 (setq org-agenda-files (append org-agenda-files '("~/.emacs.d/yaoni.org")))
-(setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (get-wd) "/Study/Leetcode/*.org"))))
-(setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (get-wd) "/Work/QUT/Brownbag/git-tutorial/*.org"))))
+(setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (mapconcat 'file-name-as-directory `(,(get-wd) "orgs" "leetcode") "") "*.org"))))
+;; (setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (get-wd) "/brain/Work/QUT/Brownbag/git-tutorial/*.org"))))
 #+end_src
 ** ob-lang
 #+begin_src emacs-lisp :tangle yes
