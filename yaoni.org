@@ -998,7 +998,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
 :LOGBOOK:
 CLOCK: [2021-03-11 Thu 11:44]--[2021-03-11 Thu 14:24] =>  2:40
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (require 'ejc-sql)
 #+end_src
 ** sqlformat
