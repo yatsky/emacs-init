@@ -492,7 +492,7 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
       (global-visual-line-mode 1)
 
       ;; save/restore opened files and windows config
-      (desktop-save-mode 1)))
+      (desktop-save-mode nil)))
 #+end_src
 
 ** Frame and window
@@ -799,7 +799,7 @@ Org-tree-slide for presentation.
 #+begin_src emacs-lisp :tangle yes
 (require 'org-tree-slide)
 #+end_src
-** org-brain
+** org-id
 #+begin_src emacs-lisp :tangle yes
   (setq org-id-track-globally t)
   (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
