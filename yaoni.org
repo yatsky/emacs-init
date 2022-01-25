@@ -1557,6 +1557,20 @@ First install Aspell with Homebrew.
   (my-global-leader
     "wc" 'wucuo-spell-check-visible-region))
 #+end_src
+** lisp
+:LOGBOOK:
+CLOCK: [2022-01-25 Tue 17:03]--[2022-01-25 Tue 17:03] =>  0:00
+CLOCK: [2022-01-25 Tue 16:50]--[2022-01-25 Tue 16:55] =>  0:05
+CLOCK: [2022-01-25 Tue 16:35]--[2022-01-25 Tue 16:50] =>  0:15
+:END:
+#+begin_src emacs-lisp :tangle yes
+(use-package rainbow-delimiters
+  :straight t
+  :init
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+(use-package paredit
+  :straight t)
+#+end_src
 * Use-package
 :LOGBOOK:
 CLOCK: [2021-01-27 Wed 21:15]--[2021-01-27 Wed 21:31] =>  0:16
