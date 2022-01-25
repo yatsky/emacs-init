@@ -1529,17 +1529,23 @@ Version 2020-06-04"
 #+end_src
 ** wucuo
 :LOGBOOK:
+CLOCK: [2022-01-25 Tue 16:29]--[2022-01-25 Tue 16:33] =>  0:04
 CLOCK: [2022-01-25 Tue 15:40]--[2022-01-25 Tue 15:55] =>  0:15
 CLOCK: [2022-01-20 Thu 15:34]--[2022-01-20 Thu 15:34] =>  0:00
 CLOCK: [2022-01-20 Thu 13:43]--[2022-01-20 Thu 14:00] =>  0:17
 :END:
 First install Aspell with Homebrew.
 #+begin_src emacs-lisp :tangle yes
+(defun yaoni/wucuo-maybe-start()
+  "Check the size of the buffer to see if we should start wucuo."
+  (if (< (buffer-size) 100000)
+      (wucuo-start)
+    (wucuo-stop)))
 (use-package wucuo
   :straight t
   :init
-  (add-hook 'prog-mode-hook #'wucuo-start)
-  (add-hook 'text-mode-hook #'wucuo-start)
+  (add-hook 'prog-mode-hook #'yaoni/wucuo-maybe-start)
+  (add-hook 'text-mode-hook #'yaoni/wucuo-maybe-start)
   (setq ispell-program-name "aspell")
   ;; You could add extra option "--camel-case" for camel case code spell checking if Aspell 0.60.8+ is installed
   ;; @see https://github.com/redguardtoo/emacs.d/issues/796
