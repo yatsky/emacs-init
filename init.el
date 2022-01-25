@@ -1,5 +1,11 @@
-(setq load-path (remove "/usr/local/Cellar/emacs-mac/emacs-27.2-mac-8.2/share/emacs/27.2/lisp/org" load-path)) 
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
+;; remove unwanted built-in org.
+(mapc (lambda (x) (setq load-path (remove x load-path))) '("/usr/local/Cellar/emacs-mac/emacs-27.2-mac-8.2/share/emacs/27.2/lisp/org" "/usr/share/emacs/27.1/lisp/org"))
 (defvar bootstrap-version)
+(setq straight-repository-branch "develop")
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
