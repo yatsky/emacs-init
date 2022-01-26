@@ -694,14 +694,12 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
         (progn
           (setq bds (bounds-of-thing-at-point 'symbol))
           (setq pos1 (car bds) pos2 (cdr bds))))
-      (shell-command (concat "'/mnt/c/Program Files (x86)/Microsoft/Edge Dev/Application/msedge.exe' 'https://www.startpage.com/do/dsearch?query='" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))
-      ))
+      (shell-command (concat "'/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe' 'https://www.startpage.com/do/dsearch?query='" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))))
   ;;(define-key org-mode-map (kbd "C-c g") 'search-word)
   )
 
 (with-eval-after-load "org"
-  (my-org-setup)
-  )
+  (my-org-setup))
 
 #+end_src
 
@@ -910,8 +908,6 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
-
-
 #+end_src
 * pyim
 
@@ -1387,31 +1383,25 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
     (if file-location
         (find-file file-location)
       ;; else
-      (message "File location is not present.")
-      )
-    )
-  )
+      (message "File location is not present."))))
 #+end_src
 *** Open project org file from project
 #+begin_src emacs-lisp :tangle yes
 (defun open-org-file-from-project ()
   "Open project-related org file from project."
   (interactive)
-  (let ((file-location (concat org-directory "/"
-                               (with-temp-buffer
-                                 (insert-file-contents
-                                  (concat
-                                   (locate-dominating-file default-directory "org-entry")
-                                   "/org-entry"))
-                                 (buffer-string))
-                               )))
-    (if (file-exists-p file-location)
-        (find-file file-location)
-      ;; else
-      (message "org-entry is not present.")
-      )
-    )
-  )
+  (let ((file-location (concat org-directory (file-name-as-directory 
+                                              (with-temp-buffer
+                                                (insert-file-contents
+                                                 (concat
+                                                  (locate-dominating-file default-directory "org-entry")
+                                                  "/org-entry"))
+                                                (buffer-string)))))
+        (if (file-exists-p file-location)
+            (find-file file-location)
+          ;; else
+          (message "org-entry is not present.")
+          ))))
 #+end_src
 *** Keymap
 #+begin_src emacs-lisp :tangle yes
@@ -1422,9 +1412,7 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
   (interactive)
   (if (eq major-mode 'org-mode)
       (open-project-from-entry-location)
-    (open-org-file-from-project)
-    )
-  )
+    (open-org-file-from-project)))
 ;; 快捷键设置，我用的是 general.el
 (yaoni-org-leader-def
   :states 'normal
@@ -1634,8 +1622,12 @@ See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../
 		(hs-minor-mode 1)))
 #+end_src
 * Updates
+:LOGBOOK:
+CLOCK: [2022-01-26 Wed 17:27]--[2022-01-26 Wed 17:27] =>  0:00
+:END:
 ** DONE Cleaning up
 :LOGBOOK:
+CLOCK: [2022-01-26 Wed 17:27]--[2022-01-26 Wed 17:34] =>  0:07
 CLOCK: [2020-05-24 Sun 15:25]--[2020-05-24 Sun 15:26] =>  0:01
 CLOCK: [2020-05-24 Sun 15:20]--[2020-05-24 Sun 15:24] =>  0:04
 CLOCK: [2020-04-29 Wed 09:30]--[2020-04-29 Wed 09:39] =>  0:09
