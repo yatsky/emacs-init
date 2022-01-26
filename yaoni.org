@@ -910,6 +910,20 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
 #+end_src
+* latex
+:LOGBOOK:
+CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
+:END:
+#+begin_src emacs-lisp :tangle yes
+(use-package org-latex-impatient
+  :straight t
+  :defer t
+  :hook (org-mode . org-latex-impatient-mode)
+  :init
+  (setq org-latex-impatient-tex2svg-bin
+        ;; location of tex2svg executable
+        "~/node_modules/mathjax-node-cli/bin/tex2svg"))
+#+end_src
 * pyim
 
 #+begin_src emacs-lisp :tangle yes
