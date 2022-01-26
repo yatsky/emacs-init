@@ -265,7 +265,6 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
   ;;  -> load
   "l i" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
-  "m u" 'mu4e
   "o a" 'org-agenda
   "." 'evil-repeat
 
