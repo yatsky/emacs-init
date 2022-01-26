@@ -353,8 +353,8 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 #+end_src
 
 * Smartparens
-Turning off this because it's giving me two closing brackets when I type one opening.
-#+begin_src elisp :tangle no
+Lisp editing.
+#+begin_src elisp :tangle yes
 (use-package smartparens-config
   :ensure smartparens
   :config
