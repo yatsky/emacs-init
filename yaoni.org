@@ -352,17 +352,25 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 )
 #+end_src
 
-** Smartparens
+* Smartparens
 Turning off this because it's giving me two closing brackets when I type one opening.
 #+begin_src elisp :tangle no
 (use-package smartparens-config
   :ensure smartparens
-  :config (progn (show-smartparens-global-mode t)))
-
+  :config
+  (progn
+    (show-smartparens-global-mode t)
+    (my-global-leader
+      "s s f" 'sp-forward-slurp-sexp
+      "s s b" 'sp-backward-slurp-sexp
+      ;; barf -> vomit -> v
+      "s v f" 'sp-forward-barf-sexp
+      "s v b" 'sp-backward-barf-sexp)))
 ;; might not work in PHP but I don't program PHP.
 (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
 ;; in org mode there are a lot of non-matching parens so ignore them.
 ;; (add-hook 'org-mode-hook 'turn-on-smartparens-strict-mode)
+
 #+end_src
 * Evil
 #+begin_src emacs-lisp :tangle yes
