@@ -1,27 +1,26 @@
 * Introduction
 This is my personal Emacs init file in org.
-
-Entries here are alphabetically ordrered except for this *Introduction*
 * Basic config
+:LOGBOOK:
+CLOCK: [2022-01-26 Wed 17:05]--[2022-01-26 Wed 17:15] =>  0:10
+:END:
 Some very basic config of my own.
 This was called "utils" before being compiled into this file.
-It is renamed to "Basic config" so that it appears on top of the file and gets compiled early.
 #+begin_src emacs-lisp :tangle yes
 (defun is-gnu-linux ()
   "Return true is the current os is gnu/linux"
-  (string-equal system-type "gnu/linux")
-  )
+  (string-equal system-type "gnu/linux"))
 
 (defun get-wd ()
   "Get my working directory"
   (if
       (is-gnu-linux)
       "/mnt/c/Users/thoma/Dev"
-    "/Users/yi.wang/Dev")
-  )
+    "~/Dev"))
+
 (defun get-workspace(&optional ver)
   "Get Workspace. If `ver' is set then it's that Clover version's workspace."
-  (let ((prefix "/Users/yi.wang/Documents/workspace/"))
+  (let ((prefix (mapconcat 'file-name-as-directory `(,(expand-file-name "~") "Documents" "workspace") "")))
     (if ver
         (replace-regexp-in-string "workspace" (concat "workspace" "_" (number-to-string ver)) prefix)
       prefix)))
