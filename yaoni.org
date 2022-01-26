@@ -1560,6 +1560,7 @@ First install Aspell with Homebrew.
 #+end_src
 ** lisp
 :LOGBOOK:
+CLOCK: [2022-01-26 Wed 12:45]--[2022-01-26 Wed 13:05] =>  0:20
 CLOCK: [2022-01-25 Tue 19:57]--[2022-01-25 Tue 20:09] =>  0:12
 CLOCK: [2022-01-25 Tue 17:03]--[2022-01-25 Tue 17:03] =>  0:00
 CLOCK: [2022-01-25 Tue 16:50]--[2022-01-25 Tue 16:55] =>  0:05
@@ -1570,10 +1571,6 @@ CLOCK: [2022-01-25 Tue 16:35]--[2022-01-25 Tue 16:50] =>  0:15
   :straight t
   :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-(use-package paredit
-  :straight t
-  :init
-  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
 #+end_src
 * Use-package
 :LOGBOOK:
