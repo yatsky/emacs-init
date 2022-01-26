@@ -361,9 +361,11 @@ Lisp editing.
     (my-global-leader
       "s s f" 'sp-forward-slurp-sexp
       "s s b" 'sp-backward-slurp-sexp
-      ;; barf -> vomit -> v
+      ;; barf - vomit - v
       "s v f" 'sp-forward-barf-sexp
-      "s v b" 'sp-backward-barf-sexp)))
+      "s v b" 'sp-backward-barf-sexp
+      "s w r" 'sp-wrap-round
+      "s w c" 'sp-unwrap-sexp)))
 ;; might not work in PHP but I don't program PHP.
 (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
 ;; in org mode there are a lot of non-matching parens so ignore them.
