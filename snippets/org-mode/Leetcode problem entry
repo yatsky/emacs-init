@@ -1,26 +1,27 @@
-# key: lcpentry
+# key: lcpe
 # name: Leetcode problem entry
 # --
-** ${1:Problem number} ${2:Problem name}
-*** Description
+* Description
+${1: Problem number} ${2: Problem question}
+
 $0
 
 Constraints:
 
-**** Examples:
+** Examples:
 #+name: $1 $2 example
 #+caption: $1 $2 example
 #+begin_example
 
 #+end_example
 
-*** Solution
+* Solution
 
-**** Understanding the problem
+** Understanding the problem
 
-**** Algorithm
+** Algorithm
 
-**** Code
+** Code
 #+name: $1 $2 my solution
 #+caption: $1 $2 my solution
 #+begin_src python :results output code :noweb yes
@@ -34,12 +35,12 @@ Constraints:
 #+begin_src none
 
 #+end_src
-***** Complexity
-****** Time complexity:
+*** Complexity
+**** Time complexity:
 
-****** Space complexity: 
+**** Space complexity: 
 
-**** Leetcode solution
+** Leetcode solution
 
 #+name: $1 $2 leetcode solution
 #+caption: $1 $2 leetcode solution
@@ -54,11 +55,12 @@ Constraints:
 #+begin_src none
 
 #+end_src
-***** Time complexity:
+*** Time complexity:
 
-***** Space complexity: 
+*** Space complexity: 
 
-*** More analysis
-**** General thoughts
-**** Related problems
+* More analysis
+** General thoughts
+** Related problems
 
+* Log time
