@@ -873,6 +873,11 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
 		   (file+head "%<%Y-%m-%d-%H%M%S>-${slug}.org"
 					  "#+title: ${title}\n\n#+begin_export html\n---\nlayout: post\ntitle: \"${title}\"\nexcerpt:\n---\n#+end_export")
 		   :unnarrowed t)
+		  ("l" "leetcode" plain "%?"
+		   :if-new
+		   (file+head ,(concat (file-name-as-directory org-roam-directory) "leetcode/%<%Y-%m-%d-%H%M%S>-${slug}.org")
+					  "#+title: ${title}\n\n#+begin_export html\n---\nlayout: post\ntitle: \"${title}\"\nexcerpt:\n---\n#+end_export")
+		   :unnarrowed t)
 		  ("e" "encrypted-note" plain "%?"
            :if-new
 		   (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg"
