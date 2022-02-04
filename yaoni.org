@@ -1644,6 +1644,12 @@ See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../
         (setq-default tab-width 4)
 		(hs-minor-mode 1)))
 #+end_src
+* org-plus-contrib
+See [[https://github.com/raxod502/straight.el/issues/753][issue]] and [[https://github.com/raxod502/straight.el/commit/9eb2e058665ad1144c66d2b1b816f9effa37907e][commit]].
+#+begin_src emacs-lisp :tangle yes
+(use-package org-contrib
+  :straight t)
+#+end_src
 * Updates
 :LOGBOOK:
 CLOCK: [2022-01-26 Wed 17:27]--[2022-01-26 Wed 17:27] =>  0:00
