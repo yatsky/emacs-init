@@ -1658,7 +1658,7 @@ CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 :END:
 
 * Aesthetics
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package storybook-theme
     :quelpa (storybook-theme :fetcher github :repo "yatsky/storybook-theme")
     :init
