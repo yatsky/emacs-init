@@ -1490,22 +1490,12 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
   :commands lsp-ui-mode)
 #+end_src
 ** Clover
-
+:LOGBOOK:
+CLOCK: [2022-02-04 Fri 20:07]--[2022-02-04 Fri 20:09] =>  0:02
+:END:
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'auto-mode-alist '("\\.ctl\\'" . js-mode))
-;; we want to insert tabs for CTL in Clover graphs
-(add-hook 'nxml-mode-hook
-    (lambda ()
-        (setq-default indent-tabs-mode t)
-        (setq-default tab-width 4)
-		(hs-minor-mode 1)))
-(defun maybe-indent-with-tab ()
-  (when (and (buffer-file-name)
-             (equal (file-name-extension (buffer-file-name)) "ctl"))
-	(setq indent-tabs-mode t)
-    (setq tab-width 4)))
-
-(add-hook 'js-mode-hook 'maybe-indent-with-tab)
+(use-package ctl-mode
+  :straight (:host github :repo "yatsky/ctl-mode" :branch "master" :files ("*.el" "out")))
 #+end_src
 ** uuid generator
 #+begin_src elisp :tangle yes
