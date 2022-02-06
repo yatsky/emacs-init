@@ -80,11 +80,37 @@ Use straight to manage ein.
           (ein . t))))
 #+end_src
 * elpy
+:LOGBOOK:
+CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
+:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package elpy
   :straight t
   :init
-  (elpy-enable))
+  (elpy-enable)
+  (setq elpy-shell-echo-output nil)
+  (setq python-shell-completion-native-enable nil)
+  (setq elpy-rpc-backend "jedi")
+  (setq python-indent-offset 4
+        python-indent 4)
+  (my-global-leader
+	"g d" 'elpy-goto-definition)
+  (my-global-leader
+	"g a" 'elpy-goto-assignment)
+  (define-key elpy-mode-map (kbd "C-o") 'xref-pop-marker-stack)
+  (setq elpy-rpc-timeout 10)
+  )
+;; jedi
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)    ; ptional
+;; (setq ac-max-width 0.4)
+
+(use-package company-quickhelp
+  :straight t
+  :config
+  (company-quickhelp-mode 1)
+  (eval-after-load 'company
+	'(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin)))
 #+end_src
 * cnfonts
 ~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[https://github.com/tumashu/cnfonts/issues/113][my issue]].
@@ -1242,9 +1268,10 @@ Virtual env support seems to be out of the box.
 ** Jedi
 #+begin_src emacs-lisp :tangle yes
 ;; jedi
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)    ; ptional
-(setq ac-max-width 0.4)
+; (add-hook 'python-mode-hook 'jedi:setup)
+; (setq jedi:complete-on-dot t)    ; ptional
+; (setq ac-max-width 0.4)
+#+end_src
 #+end_src
 ** Blacken
 #+begin_src emacs-lisp :tangle yes
