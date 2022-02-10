@@ -1272,6 +1272,14 @@ Virtual env support seems to be out of the box.
 ; (setq jedi:complete-on-dot t)    ; ptional
 ; (setq ac-max-width 0.4)
 #+end_src
+** realgud
+:LOGBOOK:
+CLOCK: [2022-02-06 Sun 19:46]--[2022-02-06 Sun 19:51] =>  0:05
+:END:
+Python debugger.
+#+begin_src emacs-lisp :tangle yes
+(use-package realgud
+  :straight t)
 #+end_src
 ** Blacken
 #+begin_src emacs-lisp :tangle yes
