@@ -996,7 +996,7 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
 ;; 添加ivy中文搜索
 (defun eh-ivy-cregexp (str)
   ;; https://github.com/abo-abo/swiper/issues/294#issuecomment-157871131
-  (let ((x (ivy--regex-fuzzy str))
+  (let ((x (ivy--regex-plus str))
         (case-fold-search nil))
     (if (listp x)
         (mapcar (lambda (y)
