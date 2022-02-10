@@ -46,7 +46,7 @@ https://systemcrafters.cc/advanced-package-management/using-straight-el/
 (straight-use-package 'use-package)
 #+end_src
 * quelpa
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (quelpa
  '(quelpa-use-package
    :fetcher git
@@ -769,7 +769,7 @@ Add it to org-mode hook.
 
 #+end_src
 ** modules
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            org-modules            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -829,7 +829,7 @@ ox-latex settings.
 #+end_src
 ** org-tree-slide
 Org-tree-slide for presentation.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (require 'org-tree-slide)
 #+end_src
 ** org-id
@@ -960,7 +960,7 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
 #+end_src
 * pyim
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 ;; pyim
 (require 'posframe)
 (require 'pyim)
@@ -1198,6 +1198,8 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
 #+end_src
 ** exec-path-from-shell
 #+begin_src elisp :tangle yes
+(use-package exec-path-from-shell
+  :straight t)
 (exec-path-from-shell-initialize)
 ;; so that I get passwords from my env to be used for my work
 (exec-path-from-shell-copy-env "CMG_DB_PWD")
@@ -1315,7 +1317,7 @@ Python debugger.
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 #+end_src
 ** Web-mode
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 
 (require 'web-mode)
 (setq web-mode-engines-alist
@@ -1785,7 +1787,8 @@ CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 #+end_src
 #+begin_src emacs-lisp :tangle yes
 (load-theme 'dracula t)
-(require 'powerline)
+(use-package powerline
+  :straight t)
 ;; (powerline-center-evil-theme)
 (if (display-graphic-p)
     (progn
@@ -1854,7 +1857,8 @@ Mode line customization.
 (setq dired-omit-files (concat dired-omit-files "|.+~$"))
 
 ;; virtualenvwrapper
-(require 'virtualenvwrapper)
+(use-package virtualenvwrapper
+  :straight t)
 (venv-initialize-interactive-shells) ;; if you want interactive shell support
 (venv-initialize-eshell) ;; if you want eshell support
 ;; note that setting `venv-location` is not necessary if you
