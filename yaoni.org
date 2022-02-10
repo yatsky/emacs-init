@@ -659,10 +659,8 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
       (setq new-list (cons (concat cur-wd element) new-list)))))
 
 (setq org-agenda-files nil)
-(setq org-agenda-files (append org-agenda-files (directory-files-recursively (concat org-directory "/brain") ".*org$")))
-(setq org-agenda-files (append org-agenda-files (directory-files-recursively (concat org-directory "/knowledge_base") ".*org$")))
+(setq org-agenda-files (append org-agenda-files (directory-files-recursively org-directory ".*org$")))
 (setq org-agenda-files (append org-agenda-files '("~/.emacs.d/yaoni.org")))
-(setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (mapconcat 'file-name-as-directory `(,(get-wd) "orgs" "leetcode") "") "*.org"))))
 ;; (setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (get-wd) "/brain/Work/QUT/Brownbag/git-tutorial/*.org"))))
 #+end_src
 ** ob-lang
