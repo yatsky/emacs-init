@@ -61,7 +61,7 @@ CLOCK: [2022-01-20 Thu 08:54]--[2022-01-20 Thu 08:59] =>  0:05
 Use straight to manage ein.
 #+begin_src emacs-lisp :tangle yes
 (use-package ein
-  :straight t
+  :straight (:host github :repo "yatsky/emacs-ipython-notebook" :branch "yaoni")
   :init
   (setq ein:output-area-inlined-images t)
   (setq ein:polymode t)
