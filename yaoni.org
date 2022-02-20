@@ -1587,6 +1587,18 @@ CLOCK: [2022-01-20 Thu 13:43]--[2022-01-20 Thu 14:00] =>  0:17
 :END:
 First install Aspell with Homebrew.
 #+begin_src emacs-lisp :tangle yes
+(defun add-word-to-aspell-list ()
+  "Add word at point to .aspell.en.pws"
+  (interactive)
+  (let (pos1 pos2 bds)
+	(if (use-region-p)
+		(setq pos1 (region-beginning) pos2 (region-end))
+	  (progn
+		(setq bds (bounds-of-thing-at-point 'word))
+		(setq pos1 (car bds) pos2 (cdr bds))))
+	(append-to-file
+	 (concat (buffer-substring pos1 pos2) "\n") nil "~/.aspell.en.pws")))
+
 (defun yaoni/wucuo-maybe-start()
   "Check the size of the buffer to see if we should start wucuo."
   (if (< (buffer-size) 100000)
@@ -1606,7 +1618,8 @@ First install Aspell with Homebrew.
                             "--run-together-limit=16"
                             ,(if (string-match "6.\.[89]" (shell-command-to-string "aspell --versioin")) "--camel-case" "")))
   (my-global-leader
-    "wc" 'wucuo-spell-check-visible-region))
+    "wc" 'wucuo-spell-check-visible-region
+	"wa" 'add-word-to-aspell-list))
 #+end_src
 ** lisp
 :LOGBOOK:
