@@ -1249,6 +1249,11 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
                              ))))
 (setq org-export-with-broken-links 'mark)
 #+end_src
+** jira
+#+begin_src emacs-lisp :tangle yes
+(use-package ox-jira
+  :straight t)
+#+end_src
 * Programming aids
 ** Yasnippet
 :LOGBOOK:
