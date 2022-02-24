@@ -1935,3 +1935,27 @@ All the icons to display and show icons.
 #+begin_src emacs-lisp :tangle yes
 (use-package all-the-icons)
 #+end_src
+
+** shackle
+:LOGBOOK:
+CLOCK: [2022-02-24 Thu 18:44]--[2022-02-24 Thu 19:01] =>  0:17
+:END:
+See: https://depp.brause.cc/shackle/
+
+shackle gives you the means to put an end to popped up buffers not behaving they way you'd like them to. By setting up simple rules you can for instance make Emacs always select help buffers for you or make everything reuse your currently selected window.
+#+begin_src emacs-lisp :tangle yes
+(use-package shackle
+  :straight t
+  :hook (after-init . shackle-mode)
+  :config
+  (setq shackle-default-size 0.4
+        shackle-rules `((help-mode                :select t :align right :size 0.3)
+                        ("*Messages*"             :select t :align t)
+						(magit-status-mode        :select t :align right :size 0.3)
+                        (special-mode             :align t)
+                        (process-menu-mode        :align t)
+                        (compilation-mode         :align t)
+                        (flycheck-error-list-mode :align t)
+                        ("*Shell Command Output*" :align t)
+                        ("*Async Shell Command*"  :align t))))
+#+end_src
