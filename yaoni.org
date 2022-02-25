@@ -1870,9 +1870,6 @@ Mode line customization.
 (setq display-time-format "%a %d/%m")
 (setq display-time-default-load-average nil)
 #+end_src
-#+begin_src emacs-lisp :tangle yes
-(setq projectile-mode-line-prefix " Prj")
-#+end_src
 
 ** Other
 #+begin_src emacs-lisp :tangle yes
@@ -1883,13 +1880,8 @@ Mode line customization.
 (setq gif-screencast-output-directory (concat org-directory "screencasts"))
 
 
-
-
 (pdf-tools-install)
 
-;; Projectile
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Dired
 (require 'dired-x)
