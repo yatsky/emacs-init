@@ -513,15 +513,13 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
       ;; (setq garbage-collection-messages t)
       )
 ;; show-paren-mode
-(show-paren-mode 1)
-(setq show-paren-style 'mixed)
+;; (show-paren-mode 1)
+;; (setq show-paren-style 'mixed)
 ;; h -> human readable
 (setq dired-listing-switches "-alh")
 
-
 (if (display-graphic-p)
     (progn
-
       ;; disable sound
       (setq visible-bell 1)
 
