@@ -825,11 +825,6 @@ ox-latex settings.
 (setq org-latex-minted-options
 '(("frame" "lines")  ("linenos" "") ("style" "friendly")))
 #+end_src
-** org-tree-slide
-Org-tree-slide for presentation.
-#+begin_src emacs-lisp :tangle no
-(require 'org-tree-slide)
-#+end_src
 ** org-id
 #+begin_src emacs-lisp :tangle yes
   (setq org-id-track-globally t)
