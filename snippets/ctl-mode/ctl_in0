@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ctl in0
+# key: in0
+# --
+$in.0.

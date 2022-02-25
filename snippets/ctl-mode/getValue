@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: getValue map return
+# key: gv
+# --
+getValue(mapReturn);

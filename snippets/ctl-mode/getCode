@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: getCode map return
+# key: gc
+# --
+getCode(mapReturn);
