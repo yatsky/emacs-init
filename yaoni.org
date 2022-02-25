@@ -708,7 +708,6 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
 	;; org copy src
 	"c s" 'org-copy-src-block
     )
-  (require 'ox-md nil t)
 
   (defun search-word ()
     "Search the word marked or at point."
