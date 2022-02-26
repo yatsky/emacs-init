@@ -646,6 +646,9 @@ CLOCK: [2020-07-26 Sun 11:05]--[2020-07-26 Sun 11:05] =>  0:00
 ;; long I have spent on the current task.
 ;; This also makes it easier to use the Tomato Timer.
 (setq org-clock-mode-line-total 'current)
+
+;; So that when I run org-clock-in it doesn't check every org file for dangling clocks.
+(setq org-clock-auto-clock-resolution nil)
 #+end_src
 ** agenda
 :LOGBOOK:
@@ -1813,6 +1816,9 @@ See [[https://github.com/raxod502/straight.el/issues/753][issue]] and [[https://
 #+end_src
 * Updates
 :LOGBOOK:
+CLOCK: [2022-02-26 Sat 19:02]--[2022-02-26 Sat 19:02] =>  0:00
+CLOCK: [2022-02-26 Sat 18:28]--[2022-02-26 Sat 18:59] =>  0:31
+CLOCK: [2022-02-26 Sat 17:15]--[2022-02-26 Sat 18:21] =>  1:06
 CLOCK: [2022-01-26 Wed 17:27]--[2022-01-26 Wed 17:27] =>  0:00
 :END:
 ** DONE Cleaning up
