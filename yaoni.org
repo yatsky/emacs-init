@@ -1831,11 +1831,9 @@ CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 :END:
 
 * Aesthetics
-#+begin_src emacs-lisp :tangle no
-(use-package storybook-theme
-    :quelpa (storybook-theme :fetcher github :repo "yatsky/storybook-theme")
-    :init
-    (require 'storybook-theme))
+#+begin_src emacs-lisp :tangle yes
+(use-package twilight-bright-theme
+  :straight t)
 #+end_src
 #+begin_src emacs-lisp :tangle yes
 (load-theme 'dracula t)
