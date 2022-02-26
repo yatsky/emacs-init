@@ -962,7 +962,7 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
 #+end_src
 * pyim
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 ;; pyim
 (require 'posframe)
 (require 'pyim)
