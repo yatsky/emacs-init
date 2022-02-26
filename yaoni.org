@@ -61,6 +61,7 @@ CLOCK: [2022-01-20 Thu 08:54]--[2022-01-20 Thu 08:59] =>  0:05
 Use straight to manage ein.
 #+begin_src emacs-lisp :tangle yes
 (use-package ein
+  :defer t
   :straight (:host github :repo "yatsky/emacs-ipython-notebook" :branch "yaoni")
   :init
   (setq ein:output-area-inlined-images t)
@@ -83,6 +84,7 @@ Use straight to manage ein.
 ~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[https://github.com/tumashu/cnfonts/issues/113][my issue]].
 #+begin_src emacs-lisp :tangle yes
 (use-package cnfonts
+  :defer t
   :config
   ;; 让 cnfonts 随着 Emacs 自动生效。
   (cnfonts-enable)
@@ -192,6 +194,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 * Keymaps
 #+begin_src emacs-lisp :tangle yes
 (use-package general
+  :defer t
   :straight t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;     Functions for key bindings    ;;
@@ -351,6 +354,7 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 :END:
 #+begin_src emacs-lisp :tangle yes
 (use-package elpy
+  :defer t
   :straight t
   :init
   (elpy-enable)
@@ -372,6 +376,7 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 ;; (setq ac-max-width 0.4)
 
 (use-package company-quickhelp
+  :defer t
   :straight t
   :config
   (company-quickhelp-mode 1)
@@ -383,6 +388,7 @@ Lisp editing.
 #+begin_src elisp :tangle yes
 (use-package smartparens-config
   :ensure smartparens
+  :defer t
   :config
   (progn
     (show-smartparens-global-mode t)
@@ -436,6 +442,7 @@ Magit settings.
 #+begin_src emacs-lisp :tangle yes
 (use-package magit
   :straight t
+  :defer t
   :init
   ;; call this function so that eshell can use magit-get-current-branch.
   ;; https://github.com/magit/ssh-agency/issues/19
@@ -456,19 +463,20 @@ CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
 :END:
 #+begin_src emacs-lisp :tangle yes
 (use-package git-gutter
-    :straight t
-    :init
-    (global-git-gutter-mode +1)
-    :general
-    (my-global-leader
-	  ;; git-gutter
-	  "g g p" 'git-gutter:previous-hunk
-	  "g g n" 'git-gutter:next-hunk
-	  "g g m" 'git-gutter:mark-hunk
-	  "g g s" 'git-gutter:stage-hunk
-	  "g g r" 'git-gutter:revert-hunk
-	  "g g h p" '(lambda () (interactive) (git-gutter-reset-to-head-parent))
-	  "g g h d" '(lambda () (interactive) (git-gutter-reset-to-default))))
+  :straight t
+  :defer t
+  :init
+  (global-git-gutter-mode +1)
+  :general
+  (my-global-leader
+    ;; git-gutter
+    "g g p" 'git-gutter:previous-hunk
+    "g g n" 'git-gutter:next-hunk
+    "g g m" 'git-gutter:mark-hunk
+    "g g s" 'git-gutter:stage-hunk
+    "g g r" 'git-gutter:revert-hunk
+    "g g h p" '(lambda () (interactive) (git-gutter-reset-to-head-parent))
+    "g g h d" '(lambda () (interactive) (git-gutter-reset-to-default))))
 #+end_src
 
 Compare current HEAD with its parent.
@@ -490,7 +498,8 @@ https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/dev
 * git-timemachine
 #+begin_src emacs-lisp :tangle yes
 (use-package git-timemachine
-    :straight t)
+  :straight t
+  :defer t)
 #+end_src
 * Miscellaneous setup
 Stuff that I haven't decided where to put (or never will!).
@@ -573,6 +582,7 @@ Keyfreq exclude some commands
 #+begin_src emacs-lisp :tangle yes
 (use-package keyfreq
   :straight t
+  :defer t
   :init
   (setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
                                                         evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char
@@ -836,7 +846,7 @@ Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
 (use-package org-download
   :straight t
   :after org
-  :defer nil
+  :defer t
   :custom
   (org-download-method 'directory)
   ;; Can only use jpeg. png files will have a greyed out/washed effect on the image.
