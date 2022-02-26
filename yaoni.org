@@ -388,7 +388,6 @@ Lisp editing.
 #+begin_src elisp :tangle yes
 (use-package smartparens-config
   :ensure smartparens
-  :defer t
   :config
   (progn
     (show-smartparens-global-mode t)
