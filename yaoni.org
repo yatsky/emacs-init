@@ -465,8 +465,6 @@ CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
 (use-package git-gutter
   :straight t
   :defer t
-  :init
-  (global-git-gutter-mode +1)
   :general
   (my-global-leader
     ;; git-gutter
