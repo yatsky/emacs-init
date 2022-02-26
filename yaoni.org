@@ -884,8 +884,6 @@ CLOCK: [2021-01-13 Wed 08:44]--[2021-01-13 Wed 10:08] =>  1:24
 #+begin_src emacs-lisp :tangle yes
 (use-package org-roam
   :straight t
-  :hook
-  (after-init . org-roam-mode)
   ;; using custom here seems to be not working.
   ;; we need to set the vars first then run the hook above
   :init
