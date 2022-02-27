@@ -1857,7 +1857,7 @@ Example: Sat Feb 26 22:03:50 2022 and get 22."
   :straight (:host github :repo "dracula/emacs")
   :if (>= (get-current-hour-as-int (current-time-string)) 17)
   :config
-  (load-theme 'dracula)
+  (load-theme 'dracula))
 
 (use-package powerline
   :straight t)
