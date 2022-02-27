@@ -358,7 +358,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 CLOCK: [2022-02-27 Sun 10:50]--[2022-02-27 Sun 11:09] =>  0:19
 CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package elpy
   :defer t
   :straight t
@@ -376,8 +376,10 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
   (define-key elpy-mode-map (kbd "C-o") 'xref-pop-marker-stack)
   (setq elpy-rpc-timeout 10)
   )
+#+end_src
 
 
+#+begin_src emacs-lisp :tangle yes
 (use-package company
   :straight t)
 
@@ -1297,7 +1299,7 @@ CLOCK: [2022-01-20 Thu 11:44]--[2022-01-20 Thu 11:48] =>  0:04
   :straight t
   :config
   (yas-global-mode 1)
-  (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
+  )
 #+end_src
 ** Flycheck
 :LOGBOOK:
@@ -1549,17 +1551,22 @@ putting the matching lines in a buffer named *matching*"
 #+end_src
 ** lsp-mode
 :LOGBOOK:
+CLOCK: [2022-02-27 Sun 15:46]--[2022-02-27 Sun 15:53] =>  0:07
+CLOCK: [2022-02-27 Sun 14:46]--[2022-02-27 Sun 15:46] =>  1:00
 CLOCK: [2021-05-08 Sat 15:58]--[2021-05-08 Sat 16:39] =>  0:41
 CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
 :END:
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package lsp-mode
   :straight t
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
+  :custom
+  (lsp-headerline-breadcrumb-enable nil)
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (nxml-mode . lsp)
+         (python-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
