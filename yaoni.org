@@ -1758,6 +1758,11 @@ Version 2020-06-26 2021-07-21 2021-08-15"
                 (throw 'EndReached t)
               (forward-char))))))))
 #+end_src
+** wgrep
+#+begin_src emacs-lisp :tangle yes
+(use-package wgrep
+  :straight t)
+#+end_src
 * Use-package
 :LOGBOOK:
 CLOCK: [2021-01-27 Wed 21:15]--[2021-01-27 Wed 21:31] =>  0:16
