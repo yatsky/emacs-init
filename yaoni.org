@@ -98,6 +98,11 @@ Use straight to manage ein.
 #+name: Testing table of cnfonts
 | h1   | h1   |
 | 中文 | 中文 |
+* diminish
+#+begin_src emacs-lisp :tangle yes
+(use-package diminish
+  :straight t)
+#+end_src
 * eshell
 Extracted from here: http://www.modernemacs.com/post/custom-eshell/
 
