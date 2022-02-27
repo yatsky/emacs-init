@@ -1014,8 +1014,6 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
                     (list (pyim-cregexp-build (car y)))))
                 x)
       (pyim-cregexp-build x))))
-(setq ivy-re-builders-alist
-        '((t . eh-ivy-cregexp)))
 #+end_src
 * ivy
 Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/
@@ -1027,13 +1025,16 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
 
 (use-package ivy
   :straight t
-  :defer 0.1
+  :after flx
   :diminish
   :bind (("C-c C-r" . ivy-resume)
          ("C-x B" . ivy-switch-buffer-other-window))
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
+  (ivy-flx-limit 1000)
+  (ivy-re-builders-alist
+        '((t . eh-ivy-cregexp)))
   :config
   (ivy-mode)
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
@@ -1057,7 +1058,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
 ;; Need to install flx to make sure counsel-M-x would do what I mean
 (use-package flx
   :straight t
-  :after ivy)
+  :ensure t)
 #+end_src
 * Testing
 ** ejc-sql
@@ -1825,7 +1826,8 @@ See [[https://github.com/raxod502/straight.el/issues/753][issue]] and [[https://
 #+end_src
 * Updates
 :LOGBOOK:
-CLOCK: [2022-02-26 Sat 21:52]--[2022-02-26 Sat 22:23] =>  0:31
+CLOCK: [2022-02-27 Sun 07:00]--[2022-02-27 Sun 08:35] =>  1:35
+CLOCK: [2022-02-26 Sat 21:52]--[2022-02-26 Sat 23:42] =>  1:50
 CLOCK: [2022-02-26 Sat 19:02]--[2022-02-26 Sat 19:02] =>  0:00
 CLOCK: [2022-02-26 Sat 18:28]--[2022-02-26 Sat 18:59] =>  0:31
 CLOCK: [2022-02-26 Sat 17:15]--[2022-02-26 Sat 18:21] =>  1:06
