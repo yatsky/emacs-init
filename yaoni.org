@@ -355,6 +355,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
 * elpy
 :LOGBOOK:
+CLOCK: [2022-02-27 Sun 10:50]--[2022-02-27 Sun 11:09] =>  0:19
 CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 :END:
 #+begin_src emacs-lisp :tangle yes
@@ -375,14 +376,15 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
   (define-key elpy-mode-map (kbd "C-o") 'xref-pop-marker-stack)
   (setq elpy-rpc-timeout 10)
   )
-;; jedi
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)    ; ptional
-;; (setq ac-max-width 0.4)
+
+
+(use-package company
+  :straight t)
 
 (use-package company-quickhelp
   :defer t
   :straight t
+  :after company
   :config
   (company-quickhelp-mode 1)
   (eval-after-load 'company
