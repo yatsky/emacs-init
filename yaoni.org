@@ -1023,7 +1023,14 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
 (use-package counsel
   :straight t
   :after ivy
-  :config (counsel-mode))
+  :general
+  (my-global-leader
+	;; run-at-time: https://oremacs.com/2015/07/16/callback-quit/
+	;; makes ivy-occur run after counsel-yank-pop
+	;; This doesn't work: (lambda () (interactive) (counsel-yank-pop) (ivy-occur))
+	"c y" '(lambda () (interactive) (run-at-time nil nil #'ivy-occur) (counsel-yank-pop)))
+  :config
+  (counsel-mode))
 
 (use-package ivy
   :straight t
@@ -1036,7 +1043,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   (ivy-use-virtual-buffers t)
   (ivy-flx-limit 1000)
   (ivy-re-builders-alist
-        '((t . eh-ivy-cregexp)))
+   '((t . eh-ivy-cregexp)))
   :config
   (ivy-mode)
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
@@ -1976,6 +1983,7 @@ shackle gives you the means to put an end to popped up buffers not behaving they
         shackle-rules `((help-mode                :select t :align right :size 0.3)
                         ("*Messages*"             :select t :align t)
 						(magit-status-mode        :select t :align right :size 0.3)
+						(ivy-occur-mode        :select t :align right :size 0.3)
                         (special-mode             :align t)
                         (process-menu-mode        :align t)
                         (compilation-mode         :align t)
