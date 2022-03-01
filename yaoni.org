@@ -1991,3 +1991,15 @@ shackle gives you the means to put an end to popped up buffers not behaving they
                         ("*Shell Command Output*" :align t)
                         ("*Async Shell Command*"  :align t))))
 #+end_src
+
+** beacon
+Use beacon to remind yourself where the cursor is at when you scroll cross the window.
+#+begin_src emacs-lisp :tangle yes
+(use-package beacon
+  :straight (:host github :repo "Malabarba/beacon")
+  :custom
+  (beacon-color "#00adb8")
+  (beacon-size 80)
+  :config
+  (beacon-mode 1))
+#+end_src
