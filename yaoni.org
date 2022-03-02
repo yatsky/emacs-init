@@ -2000,6 +2000,7 @@ Use beacon to remind yourself where the cursor is at when you scroll cross the w
   :custom
   (beacon-color "#00adb8")
   (beacon-size 80)
+  (beacon-blink-delay 0.1)
   :config
   (beacon-mode 1))
 #+end_src
