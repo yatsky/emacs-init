@@ -363,6 +363,8 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
   :defer t
   :straight t
   :init
+  ;; tell elpy to use the virtual env set by virtualenv
+  (setq elpy-rpc-virtualenv-path 'current)
   (elpy-enable)
   (setq elpy-shell-echo-output nil)
   (setq python-shell-completion-native-enable nil)
