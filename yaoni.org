@@ -434,6 +434,11 @@ Lisp editing.
   (when (require 'evil-collection nil t)
     (evil-collection-init)))
 
+(use-package evil-collection
+  :straight t
+  :config
+  (evil-collection-init))
+
 (use-package evil-org
   :straight t
   :config
