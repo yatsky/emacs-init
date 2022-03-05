@@ -545,14 +545,13 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
 ;; h -> human readable
 (setq dired-listing-switches "-alh")
 
+;; wrap lines
+(global-visual-line-mode 1)
+
 (if (display-graphic-p)
     (progn
       ;; disable sound
       (setq visible-bell 1)
-
-      ;; wrap lines
-      (global-visual-line-mode 1)
-
       ;; save/restore opened files and windows config
       (desktop-save-mode nil)))
 #+end_src
