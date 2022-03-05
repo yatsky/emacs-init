@@ -359,6 +359,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 
 * elpy
 :LOGBOOK:
+CLOCK: [2022-03-04 Fri 17:21]--[2022-03-04 Fri 17:23] =>  0:02
 CLOCK: [2022-02-27 Sun 10:50]--[2022-02-27 Sun 11:09] =>  0:19
 CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 :END:
@@ -366,22 +367,22 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 (use-package elpy
   :defer t
   :straight t
-  :init
+  :custom
   ;; tell elpy to use the virtual env set by virtualenv
-  (setq elpy-rpc-virtualenv-path 'current)
+  (elpy-rpc-virtualenv-path 'current)
+  (elpy-shell-echo-output nil)
+  (python-shell-completion-native-enable nil)
+  (elpy-rpc-backend "jedi")
+  (python-indent-offset 4)
+  (python-indent 4)
+  (define-key elpy-mode-map (kbd "C-o") 'xref-pop-marker-stack)
+  (elpy-rpc-timeout 10)
+  :config
   (elpy-enable)
-  (setq elpy-shell-echo-output nil)
-  (setq python-shell-completion-native-enable nil)
-  (setq elpy-rpc-backend "jedi")
-  (setq python-indent-offset 4
-        python-indent 4)
   (my-global-leader
 	"g d" 'elpy-goto-definition)
   (my-global-leader
-	"g a" 'elpy-goto-assignment)
-  (define-key elpy-mode-map (kbd "C-o") 'xref-pop-marker-stack)
-  (setq elpy-rpc-timeout 10)
-  )
+	"g a" 'elpy-goto-assignment))
 
 
 (use-package company
