@@ -35,7 +35,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("691421cecade32cf48772346303b19ea5a1af275122c1593c631e6d846549dd0" "81c3de64d684e23455236abde277cda4b66509ef2c28f66e059aa925b8b12534" "947190b4f17f78c39b0ab1ea95b1e6097cc9202d55c73a702395fc817f899393" "b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default))
+   '("03f28a4e25d3ce7e8826b0a67441826c744cbf47077fb5bc9ddb18afe115005f" "691421cecade32cf48772346303b19ea5a1af275122c1593c631e6d846549dd0" "81c3de64d684e23455236abde277cda4b66509ef2c28f66e059aa925b8b12534" "947190b4f17f78c39b0ab1ea95b1e6097cc9202d55c73a702395fc817f899393" "b46ee2c193e350d07529fcd50948ca54ad3b38446dcbd9b28d0378792db5c088" default))
  '(debug-on-error t)
  '(elfeed-feeds '("https://nyaa.si/?page=rss"))
  '(global-display-line-numbers-mode t)
