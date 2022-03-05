@@ -399,8 +399,11 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 * Smartparens
 Lisp editing.
 #+begin_src elisp :tangle yes
-(use-package smartparens-config
-  :ensure smartparens
+(use-package smartparens
+  :straight t
+  :ensure t
+  :init
+  (require 'smartparens-config)
   :config
   (progn
     (show-smartparens-global-mode t)
