@@ -7,6 +7,10 @@ CLOCK: [2022-01-26 Wed 17:05]--[2022-01-26 Wed 17:15] =>  0:10
 Some very basic config of my own.
 This was called "utils" before being compiled into this file.
 #+begin_src emacs-lisp :tangle yes
+(use-package s
+  :straight  (:host github :repo "magnars/s.el" :files ("*.el" "out"))
+  :ensure t)
+
 (defun is-gnu-linux ()
   "Return true is the current os is gnu/linux"
   (string-equal system-type "gnu/linux"))
