@@ -1866,6 +1866,7 @@ See [[https://github.com/raxod502/straight.el/issues/753][issue]] and [[https://
 #+end_src
 * Updates
 :LOGBOOK:
+CLOCK: [2022-03-06 Sun 10:10]--[2022-03-06 Sun 10:19] =>  0:09
 CLOCK: [2022-03-05 Sat 23:29]--[2022-03-05 Sat 23:57] =>  0:28
 CLOCK: [2022-03-05 Sat 23:07]--[2022-03-05 Sat 23:17] =>  0:10
 CLOCK: [2022-03-05 Sat 22:45]--[2022-03-05 Sat 23:07] =>  0:22
@@ -2044,4 +2045,15 @@ Use beacon to remind yourself where the cursor is at when you scroll cross the w
   (beacon-blink-delay 0.1)
   :config
   (beacon-mode 1))
+#+end_src
+
+* os intergration
+Allow Emacs to copy to and paste from the GUI clipboard
+when running in text terminal.
+#+begin_src emacs-lisp :tangle yes
+(use-package xclip
+  :straight t
+  :ensure t
+  :config
+  (xclip-mode))
 #+end_src
