@@ -88,7 +88,7 @@ Use straight to manage ein.
 ~cnfonts~ might not work with some fonts. Also need to make sure that the fonts that you want to use are both in the system and in the ~cnfonts--custom-set-fontnames~. See [[https://github.com/tumashu/cnfonts/issues/113][my issue]].
 #+begin_src emacs-lisp :tangle yes
 (use-package cnfonts
-  :defer t
+  :straight t
   :config
   ;; 让 cnfonts 随着 Emacs 自动生效。
   (cnfonts-enable)
@@ -425,6 +425,7 @@ Lisp editing.
 * Evil
 #+begin_src emacs-lisp :tangle yes
 (use-package evil
+  :straight t
   :init
   ;; evil org
   (setq evil-want-keybinding nil)
@@ -1368,6 +1369,7 @@ Python debugger.
 ** Blacken
 #+begin_src emacs-lisp :tangle yes
 (use-package blacken
+  :straight t
   :config
   (setq blacken-skip-string-normalization t))
 #+end_src
@@ -2009,7 +2011,8 @@ Mode line customization.
 
 All the icons to display and show icons.
 #+begin_src emacs-lisp :tangle yes
-(use-package all-the-icons)
+(use-package all-the-icons
+  :straight t)
 #+end_src
 
 ** shackle
