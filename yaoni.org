@@ -1863,7 +1863,9 @@ See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../
 See [[https://github.com/raxod502/straight.el/issues/753][issue]] and [[https://github.com/raxod502/straight.el/commit/9eb2e058665ad1144c66d2b1b816f9effa37907e][commit]].
 #+begin_src emacs-lisp :tangle yes
 (use-package org-contrib
-  :straight t)
+  :straight t
+  :config
+  (require 'ox-confluence))
 #+end_src
 * Updates
 :LOGBOOK:
