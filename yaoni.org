@@ -1335,6 +1335,7 @@ CLOCK: [2022-01-20 Thu 11:44]--[2022-01-20 Thu 11:48] =>  0:04
   :straight t
   :config
   (yas-global-mode 1)
+  (require 'warnings)
   (add-to-list 'warning-suppress-types '(yasnippet backquote-change)))
 #+end_src
 ** Flycheck
