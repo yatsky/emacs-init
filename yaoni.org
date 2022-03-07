@@ -2064,8 +2064,9 @@ when running in text terminal.
   :straight t
   :ensure t
   :init
-  (if (is-gnu-linux)
-      (setq xclip-method 'powershell))
+  (and (is-gnu-linux)
+       (file-directory-p "/mnt/c")
+       (setq xclip-method 'powershell))
   :config
   (xclip-mode))
 #+end_src
