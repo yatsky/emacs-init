@@ -1259,6 +1259,7 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
 #+end_src
 ** org-jekyll
 :LOGBOOK:
+CLOCK: [2022-03-16 Wed 20:37]--[2022-03-16 Wed 21:37] =>  1:00
 CLOCK: [2022-02-24 Thu 19:51]--[2022-02-24 Thu 20:50] =>  0:59
 CLOCK: [2022-02-24 Thu 19:15]--[2022-02-24 Thu 19:51] =>  0:36
 CLOCK: [2022-01-23 Sun 20:03]--[2022-01-23 Sun 20:18] =>  0:15
@@ -1320,6 +1321,20 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 
 (add-hook 'org-export-before-parsing-hook #'add-post-frontmatter)
 
+(defun fix-post-link (org-fn dst-fn)
+  "Fix the post link in `DST-FN'."
+  (with-temp-buffer
+	(insert-file-contents dst-fn)
+	(while (re-search-forward "\\([0-9]\\{4\\}\\)-\\([0-9]\\{2\\}\\)-\\([0-9]\\{2\\}\\)-" nil t)
+        (replace-match "\\1/\\2/\\3/"))
+	(goto-char (point-min))
+	(while (re-search-forward "href=\\(.*?\\)>" nil t)
+        (replace-match "href={{ \\1 | absolute_url }}>"))
+	(when (file-writable-p dst-fn)
+	  (write-region (point-min)
+					(point-max)
+					dst-fn))))
+(add-hook 'org-publish-after-publishing-hook #'fix-post-link)
 #+end_src
 ** jira
 #+begin_src emacs-lisp :tangle yes
