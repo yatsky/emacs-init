@@ -1259,6 +1259,7 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
 #+end_src
 ** org-jekyll
 :LOGBOOK:
+CLOCK: [2022-03-17 Thu 21:23]--[2022-03-17 Thu 21:48] =>  0:25
 CLOCK: [2022-03-16 Wed 20:37]--[2022-03-16 Wed 21:37] =>  1:00
 CLOCK: [2022-02-24 Thu 19:51]--[2022-02-24 Thu 20:50] =>  0:59
 CLOCK: [2022-02-24 Thu 19:15]--[2022-02-24 Thu 19:51] =>  0:36
@@ -1267,45 +1268,45 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 :END:
 #+begin_src emacs-lisp :tangle yes
 (setq org-publish-project-alist
-      `(("yatsky.github.io"
-         ;; Path to org files.
-         :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs")
-         :base-extension "org"
-         ;; :base-extension "gpg"
-         ;; Path to Jekyll Posts
-         :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/_posts")
-         :recursive t
-         :publishing-function org-html-publish-to-html
-         :headline-levels 4
-         :html-extension "html"
-         :body-only t
-         :html-head nil
-         :html-head-include-default-style nil
-         :with-toc nil ;; ignore toc as it'll break jekyll front matter
-         :exclude "Customology.org"
-         ;; only include files with tag blog
-         :include-file-tags "blog"
-         )
+	  `(("yatsky.github.io"
+		 ;; Path to org files.
+		 :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs")
+		 :base-extension "org"
+		 ;; :base-extension "gpg"
+		 ;; Path to Jekyll Posts
+		 :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/_posts")
+		 :recursive t
+		 :publishing-function org-html-publish-to-html
+		 :headline-levels 4
+		 :html-extension "html"
+		 :body-only t
+		 :html-head nil
+		 :html-head-include-default-style nil
+		 :with-toc nil ;; ignore toc as it'll break jekyll front matter
+		 :exclude "Customology.org"
+		 ;; only include files with tag blog
+		 :include-file-tags "blog"
+		 )
 
-        ("images"
-         :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs/images")
-         :base-extension "png\\|jpg\\|gif\\|jpeg"
-         :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/assets/images")
-         :publishing-function org-publish-attachment
-         )
+		("images"
+		 :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs/images")
+		 :base-extension "png\\|jpg\\|gif\\|jpeg"
+		 :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/assets/images")
+		 :publishing-function org-publish-attachment
+		 )
 
-        ("blog" :components (
-                             "yatsky.github.io"
-                             "images"
-                             )
+		("blog" :components (
+							 "yatsky.github.io"
+							 "images"
+							 )
 	 )))
 (setq org-export-with-broken-links 'mark)
 
 (defun get-org-buffer-title ()
   "Get the title of the current org buffer from #+title."
   (with-current-buffer (current-buffer)
-    (let ((ast (org-element-parse-buffer 'greater-element)))
-      (org-element-map ast '(keyword)
+	(let ((ast (org-element-parse-buffer 'greater-element)))
+	  (org-element-map ast '(keyword)
 	(lambda(kw) (plist-get (cadr kw) :value))
 	nil
 	t))))
@@ -1313,7 +1314,7 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 (defun add-post-frontmatter (backend)
   "BACKEND is the export back-end being used, as a symbol."
   (if (org-export-derived-backend-p backend 'html)
-      (with-current-buffer (current-buffer)
+	  (with-current-buffer (current-buffer)
 	(goto-char (re-search-forward ":END:"))
 	(insert (concat "\n#+begin_export html\n---\nlayout: post\ntitle: \""
 			(get-org-buffer-title)
@@ -1325,11 +1326,19 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
   "Fix the post link in `DST-FN'."
   (with-temp-buffer
 	(insert-file-contents dst-fn)
+	;; Fix post link
+	;; two pass
 	(while (re-search-forward "\\([0-9]\\{4\\}\\)-\\([0-9]\\{2\\}\\)-\\([0-9]\\{2\\}\\)-" nil t)
-        (replace-match "\\1/\\2/\\3/"))
+		(replace-match "\\1/\\2/\\3/"))
 	(goto-char (point-min))
 	(while (re-search-forward "href=\\(.*?\\)>" nil t)
-        (replace-match "href={{ \\1 | absolute_url }}>"))
+		(replace-match "href={{ \\1 | absolute_url }}>"))
+
+	;; Fix image link
+	(goto-char (point-min))
+	(while (re-search-forward "img src=\"\\(.*?\\)\"" nil t)
+		(replace-match "img src={{ \"assets/\\1\" || absolute_url }}"))
+
 	(when (file-writable-p dst-fn)
 	  (write-region (point-min)
 					(point-max)
