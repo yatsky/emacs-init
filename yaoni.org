@@ -897,6 +897,8 @@ Copy the content in the current source block to the kill-ring.
 
 * org-roam
 :LOGBOOK:
+CLOCK: [2022-03-18 Fri 21:31]--[2022-03-18 Fri 21:44] =>  0:13
+CLOCK: [2022-03-18 Fri 21:06]--[2022-03-18 Fri 21:29] =>  0:23
 CLOCK: [2022-01-25 Tue 15:28]--[2022-01-25 Tue 15:37] =>  0:09
 CLOCK: [2021-10-30 Sat 21:47]--[2021-10-30 Sat 22:21] =>  0:34
 CLOCK: [2021-09-03 Fri 22:14]--[2021-09-03 Fri 22:14] =>  0:00
@@ -928,16 +930,45 @@ So run this ~sudo apt-get install gdb~.
 					  "#+title: ${title}\n")
 		   :unnarrowed t)
 		  ("e" "encrypted-note" plain "%?"
-           :if-new
+	   :if-new
 		   (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg"
 					  "#+title: ${title}\n")
 		   :unnarrowed t)))
   (setq org-roam-dailies-capture-templates
 		`(("d" "encrypted-daily" plain "%?"
-           :if-new
+	   :if-new
 		   (file+head "%<%Y-%m-%d>.org.gpg"
 					  "#+title: %<%Y-%m-%d>\n"))))
-  (setq org-roam-file-exclude-regexp ".*.org.gpg"))
+  (setq org-roam-file-exclude-regexp ".*.org.gpg")
+  :config
+  ;; reference: https://orgmode-exocortex.com/2021/07/22/configure-org-roam-v2-to-update-database-only-when-idle/
+  (defvar yaoni/org-roam-db-update-queue (list)
+    "List of files to be updated.")
+  ;; save the original update function;
+  (setq orig-update-file (symbol-function 'org-roam-db-update-file))
+
+  ;; then redefine the db update function to add the filename to a queue
+  (defun yaoni/org-roam-db-push-file (&optional file-path)
+    ;; do same logic as original to determine current file-path if not passed as arg
+    (setq file-path (or file-path (buffer-file-name (buffer-base-buffer))))
+    (message "org-roam: scheduling update of %s" file-path)
+    (if (not (memq file-path yaoni/org-roam-db-update-queue))
+	(push file-path yaoni/org-roam-db-update-queue)))
+
+  ;; this function will be called when emacs is idle for a few seconds
+  (defun yaoni/org-roam-db-idle-update-files ()
+    ;; go through queued filenames one-by-one and update db
+    ;; if we're not idle anymore, stop. will get rest of queue next idle.
+    (message "org-roam: updating db")
+    (while (and yaoni/org-roam-db-update-queue (current-idle-time))
+      ;; apply takes function var and list
+      (apply orig-update-file (list (pop yaoni/org-roam-db-update-queue)))))
+
+  ;; add to local hook 'after-save-hook when in org-mode
+  (add-hook 'org-mode-hook
+	    (lambda () (add-hook 'after-save-hook #'yaoni/org-roam-db-push-file nil 1)))
+  ;; we'll only start updating db if we've been idle for this many seconds
+  (run-with-idle-timer 5 t #'yaoni/org-roam-db-idle-update-files))
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
