@@ -380,7 +380,7 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
   :config
   (elpy-enable)
   (my-global-leader
-	"g d" 'elpy-goto-definition)
+	"g d" 'elpy-goto-definition-other-window)
   (my-global-leader
 	"g a" 'elpy-goto-assignment))
 
