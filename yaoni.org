@@ -201,6 +201,11 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 (setq eshell-prompt-function 'esh-prompt-func)
 #+end_src
 * Keymaps
+:LOGBOOK:
+CLOCK: [2022-03-27 Sun 14:49]--[2022-03-27 Sun 14:52] =>  0:03
+CLOCK: [2022-03-27 Sun 14:35]--[2022-03-27 Sun 14:41] =>  0:06
+CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
+:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package general
   :defer t
