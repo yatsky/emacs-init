@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Jupyter Python
+# key: jp 
+# --
+#+caption: ${1:`(insert-random-uuid)`}
+#+name: $1
+#+begin_src jupyter-python :session localhost :results output html
+$0
+#+end_src
+
+#+RESULTS: $1
+
