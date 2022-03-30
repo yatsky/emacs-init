@@ -2127,8 +2127,11 @@ when running in text terminal.
   :ensure t
   :init
   (and (is-gnu-linux)
+       (not (display-graphic-p))
        (file-directory-p "/mnt/c")
        (setq xclip-method 'powershell))
   :config
-  (xclip-mode))
+  (when
+    (not (display-graphic-p))
+    (xclip-mode)))
 #+end_src
