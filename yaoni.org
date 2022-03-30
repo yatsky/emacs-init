@@ -1954,6 +1954,8 @@ CLOCK: [2020-04-29 Wed 09:02]--[2020-04-29 Wed 09:11] =>  0:09
 :END:
 
 * Aesthetics
+To get the text property of ~#+begin_src emacs-lisp :tangle yes~, use ~describe-char~ on any character below or ~what-cursor-position~ with any character from the line as argument (~C-u C-x =~).
+
 #+begin_src emacs-lisp :tangle yes
 (defun get-current-hour-as-int (time-string)
   "Get the current hour from `TIME-STRING'.
@@ -1961,7 +1963,7 @@ Example: Sat Feb 26 22:03:50 2022 and get 22."
   (string-to-number (nth 0 (split-string (nth 3 (split-string time-string)) ":"))))
 
 (use-package twilight-bright-theme
-  :straight t
+  :straight (:host github :repo "yatsky/twilight-bright-theme.el")
   :if (< (get-current-hour-as-int (current-time-string)) 17)
   :config
   (load-theme 'twilight-bright))
