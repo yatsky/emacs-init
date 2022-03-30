@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: h4 heading
+# key: h4
+# --
+<h4>
+    $0
+</h4>
