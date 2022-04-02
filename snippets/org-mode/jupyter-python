@@ -4,7 +4,7 @@
 # --
 #+caption: ${1:`(insert-random-uuid)`}
 #+name: $1
-#+begin_src jupyter-python :session localhost :results output html
+#+begin_src jupyter-python :session localhost :results output
 $0
 #+end_src
 
