@@ -2160,6 +2160,60 @@ Use beacon to remind yourself where the cursor is at when you scroll cross the w
   (parrot-mode))
 #+end_src
 
+** customise theme
+:LOGBOOK:
+CLOCK: [2022-04-02 Sat 22:15]--[2022-04-02 Sat 22:36] =>  0:21
+CLOCK: [2022-04-02 Sat 21:15]--[2022-04-02 Sat 22:12] =>  0:57
+:END:
+I want to always have a some sort of background for ~org-block-begin-line~ and ~org-block-end-line~.
+
+Reference: https://protesilaos.com/codelog/2020-08-28-notes-emacs-theme-devs/
+*** Useful functions
+List all faces, using the same sample text in each.
+#+begin_src emacs-lisp :tangle no
+(list-faces-display)
+#+end_src
+
+Set face attribute.
+#+begin_src emacs-lisp :tangle no
+(set-face-attribute 'cursor nil :background "unspecified")
+(set-face-attribute 'cursor nil :background "red")
+(dolist (face '(default fixed-pitch))
+  (set-face-attibute face nil :backgroun "Monospace"))
+#+end_src
+
+Add a hook to theme change.
+#+begin_src emacs-lisp :tangle no
+(defvar after-load-theme-hook nil
+  "Hook run after a color theme is loaded using `load-theme'.")
+(defadvice load-theme (after run-after-load-theme-hook activate)
+  "Run `after-load-theme-hook'."
+  (run-hooks 'after-load-theme-hook))
+
+(add-hook 'after-load-theme-hook (lambda () (set-face-attribute 'cursor nil :background "red")))
+#+end_src
+
+Code to be tangled.
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Advice-Combinators.html#Advice-Combinators
+#+begin_src emacs-lisp :tangle yes
+(defun yaoni/custom-org-block (theme)
+  "Customise my org block to make them pop."
+  (dolist (face '(org-block-begin-line org-block-end-line))
+    (set-face-attribute face nil :overline "#A7A6AA" :foreground "#555555" :background "#E2E1D5"))
+  (let ((bg-color
+	 (if (eq theme 'dracula)
+	     "#000000"
+	   "#EEEEF0")))
+    (set-face-attribute 'org-block nil :background bg-color)))
+
+(defun themeadvice@load-theme (&rest args)
+  "Run `after-load-theme-hook'."
+  (let (theme (ad-get-argument args 0))
+    (yaoni/custom-org-block theme)))
+
+(advice-add 'enable-theme :after #'themeadvice@load-theme)
+
+#+end_src
 * os intergration
 :LOGBOOK:
 CLOCK: [2022-03-06 Sun 22:01]--[2022-03-06 Sun 22:38] =>  0:37
