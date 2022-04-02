@@ -743,6 +743,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "p" 'org-babel-previous-src-block
 	;; org copy src
 	"c s" 'org-copy-src-block
+	"s i" 'org-display-inline-images
     )
 
   (defun search-word ()
