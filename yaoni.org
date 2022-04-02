@@ -1871,6 +1871,33 @@ Version 2020-06-26 2021-07-21 2021-08-15"
 (use-package wgrep
   :straight t)
 #+end_src
+** avy
+#+begin_src emacs-lisp :tangle yes
+(use-package avy
+  :straight t)
+
+#+end_src
+* emacs-jupyter
+#+begin_src emacs-lisp :tangle yes
+(use-package jupyter
+  :straight (:host github :repo "nnicandro/emacs-jupyter"))
+#+end_src
+* scimax
+:LOGBOOK:
+CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
+:END:
+#+begin_src emacs-lisp :tangle no
+(use-package hydra
+    :straight t
+
+  )
+(use-package pretty-hydra
+    :straight t
+  )
+(use-package scimax-jupyter
+  :straight (:host github :repo "jkitchin/scimax")
+)
+#+end_src
 * Use-package
 :LOGBOOK:
 CLOCK: [2021-01-27 Wed 21:15]--[2021-01-27 Wed 21:31] =>  0:16
