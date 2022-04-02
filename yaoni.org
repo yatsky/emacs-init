@@ -238,9 +238,9 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
  )
 ;; Remap SPC in evil mode to a leader key
 (general-create-definer my-global-leader
-  :states '(normal motion visual insert)
-  :keymaps 'override
+  :states '(normal visual)
   ;; :prefix my-leader
+  :keymaps 'override
   :prefix "SPC"
   :non-normal-prefix "C-SPC")
 
@@ -254,7 +254,7 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
 
 ;; Remap SPC o to org mode leader key
 (general-create-definer yaoni-org-leader-def
-  :states '(normal visual insert)
+  :states '(normal visual)
   :prefix "SPC o"
   :non-normal-prefix "C-c")
 
