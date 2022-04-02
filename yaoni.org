@@ -1130,8 +1130,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
 (use-package swiper
   :straight t
   :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
+  :bind (("C-s" . swiper)))
 ;; https://www.reddit.com/r/emacs/comments/3xzas3/help_with_ivycounsel_fuzzy_matching_and_sorting/
 ;; Need to install flx to make sure counsel-M-x would do what I mean
 (use-package flx
