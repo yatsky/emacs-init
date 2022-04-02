@@ -2203,7 +2203,7 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Advice-Combinators.htm
   (let ((bg-color
 	 (if (eq theme 'dracula)
 	     "#000000"
-	   "#EEEEF0")))
+	   "#FFFFE0")))
     (set-face-attribute 'org-block nil :background bg-color)))
 
 (defun themeadvice@load-theme (&rest args)
