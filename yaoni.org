@@ -2204,9 +2204,9 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Advice-Combinators.htm
   (dolist (face '(org-block-begin-line org-block-end-line))
     (set-face-attribute face nil :overline "#A7A6AA" :foreground "#555555" :background "#E2E1D5"))
   (let ((bg-color
-	 (if (eq theme 'dracula)
-	     "#000000"
-	   "#FFFFE0")))
+   (if (eq theme 'dracula)
+       "#000000"
+     "#FFFFE0")))
     (set-face-attribute 'org-block nil :background bg-color)))
 
 (defun themeadvice@load-theme (&rest args)
@@ -2225,13 +2225,13 @@ Can reference [[https://github.com/minad/consult/blob/main/consult.el][consult-t
   "Easily switch theme without manually typing `disable-theme' and `enable-theme'."
   (interactive)
   (let ((cur-theme
-	 (car custom-enabled-themes))
-	(new-theme
-	 (intern
-	  (ivy-completing-read
-	   "Choose a theme to switch to:"
-	   custom-known-themes
-	   nil t ""))))
+   (car custom-enabled-themes))
+  (new-theme
+   (intern
+    (ivy-completing-read
+     "Choose a theme to switch to:"
+     custom-known-themes
+     nil t ""))))
     (disable-theme cur-theme)
     (enable-theme new-theme)))
 
