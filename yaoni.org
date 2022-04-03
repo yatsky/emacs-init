@@ -2230,7 +2230,7 @@ Can reference [[https://github.com/minad/consult/blob/main/consult.el][consult-t
 	 (intern
 	  (ivy-completing-read
 	   "Choose a theme to switch to:"
-	   (custom-available-themes)
+	   custom-known-themes
 	   nil t ""))))
     (disable-theme cur-theme)
     (enable-theme new-theme)))
