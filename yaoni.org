@@ -2169,6 +2169,9 @@ I want to always have a some sort of background for ~org-block-begin-line~ and ~
 
 Reference: https://protesilaos.com/codelog/2020-08-28-notes-emacs-theme-devs/
 *** Useful functions
+:LOGBOOK:
+CLOCK: [2022-04-03 Sun 09:29]--[2022-04-03 Sun 10:12] =>  0:43
+:END:
 List all faces, using the same sample text in each.
 #+begin_src emacs-lisp :tangle no
 (list-faces-display)
@@ -2213,6 +2216,27 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Advice-Combinators.htm
 
 (advice-add 'enable-theme :after #'themeadvice@load-theme)
 
+#+end_src
+
+Add a command to easily switch between themes (I couldn't find a command to do this in Emacs).
+Can reference [[https://github.com/minad/consult/blob/main/consult.el][consult-theme]] for improvement.
+#+begin_src emacs-lisp :tangle yes
+(defun switch-theme ()
+  "Easily switch theme without manually typing `disable-theme' and `enable-theme'."
+  (interactive)
+  (let ((cur-theme
+	 (car custom-enabled-themes))
+	(new-theme
+	 (intern
+	  (ivy-completing-read
+	   "Choose a theme to switch to:"
+	   (custom-available-themes)
+	   nil t ""))))
+    (disable-theme cur-theme)
+    (enable-theme new-theme)))
+
+(my-global-leader
+  "s t" 'switch-theme)
 #+end_src
 * os intergration
 :LOGBOOK:
