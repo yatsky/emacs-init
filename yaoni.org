@@ -2211,7 +2211,7 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Advice-Combinators.htm
 
 (defun themeadvice@load-theme (&rest args)
   "Run `after-load-theme-hook'."
-  (let (theme (ad-get-argument args 0))
+  (let ((theme (ad-get-argument args 0)))
     (yaoni/custom-org-block theme)))
 
 (advice-add 'enable-theme :after #'themeadvice@load-theme)
