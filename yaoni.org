@@ -1888,7 +1888,7 @@ Version 2020-06-26 2021-07-21 2021-08-15"
 :LOGBOOK:
 CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
 :END:
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package hydra
     :straight t
 
