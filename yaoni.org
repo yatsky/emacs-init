@@ -1354,7 +1354,9 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 	(goto-char (re-search-forward ":END:"))
 	(insert (concat "\n#+begin_export html\n---\nlayout: post\ntitle: \""
 			(get-org-buffer-title)
-			"\"\nexcerpt:\n---\n#+end_export\n")))))
+			"\"\nexcerpt:\nmodified_date: "
+			(format-time-string "%Y-%m-%d-%H:%M")
+			"\n---\n#+end_export\n")))))
 
 (add-hook 'org-export-before-parsing-hook #'add-post-frontmatter)
 
