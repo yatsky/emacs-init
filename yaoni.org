@@ -1022,7 +1022,7 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
 #+end_src
 * pyim
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 ;; pyim
 (use-package pyim
   :straight
@@ -1112,7 +1112,7 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   (ivy-use-virtual-buffers t)
   (ivy-flx-limit 1000)
   (ivy-re-builders-alist
-   '((t . pyim-cregexp-ivy)))
+   '((t . ivy--regex-plus)))
   :config
   (ivy-mode)
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
