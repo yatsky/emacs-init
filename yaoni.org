@@ -63,7 +63,7 @@ CLOCK: [2022-01-20 Thu 09:06]--[2022-01-20 Thu 09:23] =>  0:17
 CLOCK: [2022-01-20 Thu 08:54]--[2022-01-20 Thu 08:59] =>  0:05
 :END:
 Use straight to manage ein.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package ein
   :defer t
   :straight (:host github :repo "yatsky/emacs-ipython-notebook" :branch "yaoni")
@@ -1891,13 +1891,13 @@ CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
 #+begin_src emacs-lisp :tangle yes
 (use-package hydra
     :straight t
-
-  )
+)
 (use-package pretty-hydra
     :straight t
   )
 (use-package scimax-jupyter
   :straight (:host github :repo "jkitchin/scimax")
+  :ensure nil
 )
 #+end_src
 * Use-package
