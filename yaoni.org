@@ -248,6 +248,11 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   ;; for faster text operations
   :prefix ",")
 
+(general-create-definer grammatical-edit-leader
+  :states '(normal visual)
+  :keymaps 'grammatical-edit-mode-map
+  :prefix "g")
+
 (general-create-definer my-global-misc-leader
   ;; for future operations
   :prefix "m")
@@ -1872,6 +1877,52 @@ Version 2020-06-26 2021-07-21 2021-08-15"
 #+begin_src emacs-lisp :tangle yes
 (use-package wgrep
   :straight t)
+#+end_src
+** grammatical-edit
+:LOGBOOK:
+CLOCK: [2022-04-24 Sun 23:43]--[2022-04-24 Sun 23:53] =>  0:10
+CLOCK: [2022-04-24 Sun 23:24]--[2022-04-24 Sun 23:32] =>  0:08
+CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
+:END:
+#+begin_src emacs-lisp :tangle yes
+(use-package tree-sitter
+  :straight t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(use-package tree-sitter-langs
+  :straight t)
+(use-package grammatical-edit
+  :straight (:host github :repo "manateelazycat/grammatical-edit" :brnach main)
+  :after tree-sitter
+  :config
+  (dolist (hook (list
+               'java-mode-hook
+               'haskell-mode-hook
+               'emacs-lisp-mode-hook
+               'lisp-interaction-mode-hook
+               'lisp-mode-hook
+               'sh-mode-hook
+               'makefile-gmake-mode-hook
+               'php-mode-hook
+               'python-mode-hook
+               'js-mode-hook
+               'css-mode-hook
+               'minibuffer-inactive-mode-hook
+               ))
+  (add-hook hook '(lambda () (grammatical-edit-mode 1)))))
+(grammatical-edit-leader
+    "\"" 'grammatical-edit-double-quote
+    "k" 'grammatical-edit-kill
+    "e \"" 'grammatical-edit-wrap-double-quote
+    "e '" 'grammatical-edit-wrap-single-quote
+    "e [" 'grammatical-edit-wrap-bracket
+    "e {" 'grammatical-edit-wrap-curly
+    "e (" 'grammatical-edit-wrap-round
+    "e )" 'grammatical-edit-unwrap
+    "r" 'grammatical-edit-jump-right
+    "l" 'grammatical-edit-jump-left
+    "n" 'grammatical-edit-jump-out-pair-and-newline)
 #+end_src
 ** avy
 #+begin_src emacs-lisp :tangle yes
