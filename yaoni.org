@@ -1395,6 +1395,32 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 (use-package ox-jira
   :straight t)
 #+end_src
+** org check dependant task state
+#+begin_src emacs-lisp :tangle no
+(defun check-dependant-task-state (args)
+  "Check if the dependant task has been completed (DONE)."
+  (message "%s" args)
+  (let* ((to (plist-get args :to))
+     (depend-id (org-element-property :DEPEND_ID (org-element-at-point)))
+     (depend-task-state (when (and depend-id
+                       (not (string= depend-id "")))
+                  (save-excursion
+                (goto-char (org-find-entry-with-id depend-id))
+                (nth 2 (org-heading-components))))))
+    (or (not (string= to "DONE"))
+    (not depend-task-state)
+    (member depend-task-state '("DONE")))))
+
+(add-hook 'org-blocker-hook #'check-dependant-task-state)
+#+end_src
+*** TODO task 1
+:PROPERTIES:
+:ID:       34EC5057-72D1-4D60-8CAD-DDB467C48F20
+:END:
+*** NEXT task 2
+:PROPERTIES:
+:DEPEND_ID: 34EC5057-72D1-4D60-8CAD-DDB467C48F20
+:END:
 ** project
 #+begin_src emacs-lisp :tangle yes
 (use-package project
