@@ -2331,3 +2331,48 @@ when running in text terminal.
     (not (display-graphic-p))
     (xclip-mode)))
 #+end_src
+
+* EAF
+:LOGBOOK:
+CLOCK: [2022-03-27 Sun 16:13]--[2022-03-27 Sun 16:26] =>  0:13
+CLOCK: [2022-03-27 Sun 15:37]--[2022-03-27 Sun 16:06] =>  0:29
+:END:
+Doesn't really work.
+#+begin_src emacs-lisp :tangle no
+
+(require 'eaf-demo)
+(require 'eaf-file-sender)
+(require 'eaf-music-player)
+(require 'eaf-camera)
+(require 'eaf-terminal)
+(require 'eaf-vue-demo)
+(require 'eaf-pdf-viewer)
+(require 'eaf-browser)
+(require 'eaf-markdown-previewer)
+(require 'eaf-file-browser)
+;; (require 'eaf-mermaid)
+(require 'eaf-file-manager)
+(require 'eaf-mindmap)
+(require 'eaf-video-player)
+(require 'eaf-org-previewer)
+(require 'eaf-airshare)
+(require 'eaf)
+(require 'eaf-jupyter)
+(require 'eaf-netease-cloud-music)
+(require 'eaf-system-monitor)
+(use-package eaf
+  :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
+  :init
+  (setq eaf-python-command "~/.virtualenvs/data/bin/python")  ; this path needs to be changed based on your OS
+  :custom
+  ; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
+  (eaf-browser-continue-where-left-off t)
+  (eaf-browser-enable-adblocker t)
+  (browse-url-browser-function 'eaf-open-browser)
+  :config
+  (defalias 'browse-web #'eaf-open-browser)
+  (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
+  (eaf-bind-key take_photo "p" eaf-camera-keybinding)
+  (eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
+#+end_src
