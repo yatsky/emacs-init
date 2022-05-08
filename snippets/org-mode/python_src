@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: python src
+# key: py
+# --
+
+#+begin_src python :results output
+$0
+#+end_src
