@@ -1395,6 +1395,12 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 (use-package ox-jira
   :straight t)
 #+end_src
+** project
+#+begin_src emacs-lisp :tangle yes
+(use-package project
+  :straight t)
+#+end_src
+
 * Programming aids
 ** Yasnippet
 :LOGBOOK:
