@@ -1922,7 +1922,8 @@ CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
     "e )" 'grammatical-edit-unwrap
     "r" 'grammatical-edit-jump-right
     "l" 'grammatical-edit-jump-left
-    "n" 'grammatical-edit-jump-out-pair-and-newline)
+    "n" 'grammatical-edit-jump-out-pair-and-newline
+	"u" 'grammatical-edit-jump-up)
 #+end_src
 ** avy
 #+begin_src emacs-lisp :tangle yes
