@@ -533,6 +533,13 @@ https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/dev
   :straight t
   :defer t)
 #+end_src
+* vc-msg
+#+begin_src emacs-lisp :tangle yes
+(use-package vc-msg
+  :straight
+    (:host github :repo "redguardtoo/vc-msg" :branch "master" :files ("*.el" "out"))
+  :defer t)
+#+end_src
 * Miscellaneous setup
 Stuff that I haven't decided where to put (or never will!).
 Mostly consists of system settings.
