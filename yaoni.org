@@ -551,7 +551,6 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
 ;; Setting (tool-bar-mode nil) actually enables tool bar when running lisp code.
 (tool-bar-mode -1)
 (global-display-line-numbers-mode t)
-(electric-pair-mode t)
 
 ;; 设置垃圾回收，在Windows下，emacs25版本会频繁出发垃圾回收，所以需要设置
 ;; This solves the problem that affects Emacs' speed while displaying Chinese characters
@@ -1529,7 +1528,6 @@ Python debugger.
   (when (string-equal "tsx" (file-name-extension buffer-file-name))
     (setup-tide-mode))
   (message "Web-mode on")
-  (electric-pair-local-mode -1)
   )
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
