@@ -1383,8 +1383,10 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 	(while (re-search-forward "\\([0-9]\\{4\\}\\)-\\([0-9]\\{2\\}\\)-\\([0-9]\\{2\\}\\)-" nil t)
 		(replace-match "\\1/\\2/\\3/"))
 	(goto-char (point-min))
-	(while (re-search-forward "href=\\(.*?\\)>" nil t)
-		(replace-match "href={{ \\1 | absolute_url }}>"))
+	(while (re-search-forward "href=\\([^org].*?\\)>" nil t)
+	  ;; ignore org internal links
+	  (if (not (string-match-p ".*#org.*" (match-string 0)))
+		  (replace-match "href={{ \\1 | absolute_url }}>")))
 
 	;; Fix image link
 	(goto-char (point-min))
