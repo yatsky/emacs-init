@@ -1131,16 +1131,6 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   (ivy-mode)
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
 
-(use-package ivy-rich
-  :straight t
-  :after ivy
-  :custom
-  (ivy-virtual-abbreviate 'full
-                          ivy-rich-switch-buffer-align-virtual-buffer t
-                          ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-rich-mode))
-
 (use-package swiper
   :straight t
   :after ivy
