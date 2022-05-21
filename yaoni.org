@@ -1358,7 +1358,7 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
   (with-current-buffer (current-buffer)
     (let ((ast (org-element-parse-buffer 'greater-element)))
       (org-element-map ast '(paragraph)
-    (lambda(para) (substring (buffer-string) (1- (plist-get (cadr para) :begin)) (1- (plist-get (cadr para) :end))))
+    (lambda(para) (buffer-substring-no-properties (plist-get (cadr para) :begin) (plist-get (cadr para) :end)))
     nil
     t))))
 
