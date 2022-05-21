@@ -2230,6 +2230,7 @@ All the icons to display and show icons.
 
 ** shackle
 :LOGBOOK:
+CLOCK: [2022-05-21 Sat 22:07]--[2022-05-21 Sat 22:09] =>  0:02
 CLOCK: [2022-02-24 Thu 18:44]--[2022-02-24 Thu 19:01] =>  0:17
 :END:
 See: https://depp.brause.cc/shackle/
@@ -2238,19 +2239,20 @@ shackle gives you the means to put an end to popped up buffers not behaving they
 #+begin_src emacs-lisp :tangle yes
 (use-package shackle
   :straight t
-  :hook (after-init . shackle-mode)
   :config
   (setq shackle-default-size 0.4
         shackle-rules `((help-mode                :select t :align right :size 0.3)
                         ("*Messages*"             :select t :align t)
-						(magit-status-mode        :select t :align right :size 0.3)
-						(ivy-occur-mode        :select t :align right :size 0.3)
+                        (magit-status-mode        :select t :align right :size 0.3)
+                        (ivy-occur-mode        :select t :align right :size 0.3)
                         (special-mode             :align t)
                         (process-menu-mode        :align t)
                         (compilation-mode         :align t)
                         (flycheck-error-list-mode :align t)
                         ("*Shell Command Output*" :align t)
-                        ("*Async Shell Command*"  :align t))))
+                        ("*Async Shell Command*"  :align t)))
+  :config
+  (shackle-mode 1))
 #+end_src
 
 ** beacon
