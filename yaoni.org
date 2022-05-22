@@ -1834,7 +1834,7 @@ CLOCK: [2022-01-25 Tue 16:35]--[2022-01-25 Tue 16:50] =>  0:15
 #+end_src
 
 *** Indentation
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle yes
 (use-package aggressive-indent
   :straight t
   :hook (emacs-lisp-mode . aggressive-indent-mode))
