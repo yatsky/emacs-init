@@ -2366,6 +2366,14 @@ Can reference [[https://github.com/minad/consult/blob/main/consult.el][consult-t
 (my-global-leader
   "s t" 'switch-theme)
 #+end_src
+** auto-dim-other-buffers
+#+begin_src emacs-lisp :tangle yes
+(use-package auto-dim-other-buffers
+  :straight  (:host github :repo "mina86/auto-dim-other-buffers.el" :files ("*.el" "out"))
+  :hook (after-init . (lambda ()
+						(when (fboundp 'auto-dim-other-buffers-mode)
+						  (auto-dim-other-buffers-mode t)))))
+#+end_src
 * os intergration
 :LOGBOOK:
 CLOCK: [2022-03-06 Sun 22:01]--[2022-03-06 Sun 22:38] =>  0:37
