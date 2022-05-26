@@ -276,7 +276,7 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   "b" 'evil-beginning-of-line
   "a" 'evil-append-line
   "s" 'swiper-thing-at-point
-  "m" 'mark-node
+  "m" 'yaoni/mark-node
   )
 
 (my-global-leader
@@ -1991,9 +1991,9 @@ CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
 CLOCK: [2022-04-27 Wed 20:48]--[2022-04-27 Wed 21:00] =>  0:12
 CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
 :END:
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (require 'tree-sitter)
-(defun mark-node ()
+(defun yaoni/mark-node ()
   "Mark the current node under cursor using tree-sitter."
   (interactive)
   (let* ((node (tree-sitter-node-at-pos))
