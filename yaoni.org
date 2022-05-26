@@ -223,6 +223,7 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   "Go to the previous window"
   (interactive)
   (other-window -1))
+
 (general-define-key
  :states '(motion visual normal)
  :keymaps 'override
@@ -233,9 +234,8 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
  "2" 'other-window
  "3" 'split-window-right
  "4" 'split-window-below
- "5" 'delete-other-windows
+ "5" 'delete-other-windows)
 
- )
 ;; Remap SPC in evil mode to a leader key
 (general-create-definer my-global-leader
   :states '(normal visual)
@@ -281,13 +281,12 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
 
 (my-global-leader
 
-
   ;;  -> load
   "l i" (lambda() (interactive) (load-file "~/.emacs.d/init.el"))
   "o a" 'org-agenda
   "." 'evil-repeat
 
-                                        ;  -> delete
+  ;;  -> delete
   "d o w" 'delete-other-windows
   ;;  -> run
 
@@ -536,8 +535,10 @@ https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/dev
 * vc-msg
 #+begin_src emacs-lisp :tangle yes
 (use-package vc-msg
-  :straight
-    (:host github :repo "redguardtoo/vc-msg" :branch "master" :files ("*.el" "out"))
+  :straight (:host github
+             :repo "redguardtoo/vc-msg"
+             :branch "master"
+             :files ("*.el" "out"))
   :defer t)
 #+end_src
 * Miscellaneous setup
@@ -604,10 +605,7 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
              ,doc
              (interactive)
              (message ,(number-to-string (* positive value)))
-             (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t)
-             )
-          )
-        )
+             (,set-func (selected-frame) (+ (,get-func (selected-frame)) ,(* positive value)) nil t))))
 
       (gen-frame-size-func "width" t)
       (gen-frame-size-func "width" nil)
@@ -621,20 +619,21 @@ Keyfreq exclude some commands
   :straight t
   :defer t
   :init
-  (setq keyfreq-excluded-commands '(self-insert-command org-self-insert-command
-                                                        evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char
-                                                        evil-normal-state
-                                                        evil-insert
-                                                        ;; backspace in insert mode
-                                                        evil-delete-backward-char-and-join
-                                                        ;; used in evil-search-word-forward for incremental search
-                                                        isearch-printing-char
-                                                        evil-next-visual-line
-                                                        save-buffer
-                                                        evil-previous-visual-line
-                                                        evil-forward-word-end
-                                                        other-window
-                                                        ))
+  (setq keyfreq-excluded-commands
+        '(self-insert-command org-self-insert-command
+                              evil-next-line evil-previous-line evil-forward-word-begin evil-backward-word-begin evil-forward-char
+                              evil-normal-state
+                              evil-insert
+                              ;; backspace in insert mode
+                              evil-delete-backward-char-and-join
+                              ;; used in evil-search-word-forward for incremental search
+                              isearch-printing-char
+                              evil-next-visual-line
+                              save-buffer
+                              evil-previous-visual-line
+                              evil-forward-word-end
+                              other-window
+                              ))
   :config
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
@@ -735,8 +734,8 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
                                         ;(define-key org-mode-map (kbd "C-c h") 'org-shiftleft)
   (defun org-open-org-directory ()
     (interactive)
-    (find-file org-directory)
-    )
+    (find-file org-directory))
+
   (yaoni-org-leader-def
     :states 'normal
     :keymaps 'override
@@ -754,12 +753,11 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "r a t" 'org-roam-tag-add
     "n" 'org-babel-next-src-block
     "p" 'org-babel-previous-src-block
-	;; org copy src
-	"c s" 'org-copy-src-block
-	"s i" 'org-display-inline-images
-	"s n" 'org-narrow-to-subtree
-	"s w" 'widen
-    )
+    ;; org copy src
+    "c s" 'org-copy-src-block
+    "s i" 'org-display-inline-images
+    "s n" 'org-narrow-to-subtree
+    "s w" 'widen)
 
   (defun search-word ()
     "Search the word marked or at point."
@@ -770,9 +768,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
         (progn
           (setq bds (bounds-of-thing-at-point 'symbol))
           (setq pos1 (car bds) pos2 (cdr bds))))
-      (shell-command (concat "'/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe' 'https://www.startpage.com/do/dsearch?query='" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2))))))
-  ;;(define-key org-mode-map (kbd "C-c g") 'search-word)
-  )
+      (shell-command (concat "'/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe' 'https://www.startpage.com/do/dsearch?query='" (replace-regexp-in-string " " "+" (buffer-substring-no-properties pos1 pos2)))))))
 
 (with-eval-after-load "org"
   (my-org-setup))
@@ -848,8 +844,7 @@ Add it to org-mode hook.
             (if (string-match-p (regexp-quote "ditaa") (buffer-name))
                 ;; fixme: need to fix this
                 ;; seems to be not calling this function
-                (setup-ditaa)
-              )))
+                (setup-ditaa))))
 #+end_src
 
 ox-reveal settings.
@@ -938,28 +933,28 @@ So run this ~sudo apt-get install gdb~.
   (setq org-roam-server-mode t)
   (setq org-roam-directory org-directory)
   (setq org-roam-tag-sources
-		'(prop all-directories))
+        '(prop all-directories))
   (setq org-roam-capture-templates
-		`(("d" "default" plain "%?"
-		   :if-new
-		   (file+head "%<%Y-%m-%d-%H%M%S>-${slug}.org"
-					  "#+title: ${title}\n")
-		   :unnarrowed t)
-		  ("l" "leetcode" plain "%?"
-		   :if-new
-		   (file+head ,(concat (file-name-as-directory org-roam-directory) "leetcode/%<%Y-%m-%d-%H%M%S>-${slug}.org")
-					  "#+title: ${title}\n")
-		   :unnarrowed t)
-		  ("e" "encrypted-note" plain "%?"
-	   :if-new
-		   (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg"
-					  "#+title: ${title}\n")
-		   :unnarrowed t)))
+        `(("d" "default" plain "%?"
+           :if-new
+           (file+head "%<%Y-%m-%d-%H%M%S>-${slug}.org"
+                      "#+title: ${title}\n")
+           :unnarrowed t)
+          ("l" "leetcode" plain "%?"
+           :if-new
+           (file+head ,(concat (file-name-as-directory org-roam-directory) "leetcode/%<%Y-%m-%d-%H%M%S>-${slug}.org")
+                      "#+title: ${title}\n")
+           :unnarrowed t)
+          ("e" "encrypted-note" plain "%?"
+           :if-new
+           (file+head "%<%Y%m%d%H%M%S>-${slug}.org.gpg"
+                      "#+title: ${title}\n")
+           :unnarrowed t)))
   (setq org-roam-dailies-capture-templates
-		`(("d" "encrypted-daily" plain "%?"
-	   :if-new
-		   (file+head "%<%Y-%m-%d>.org.gpg"
-					  "#+title: %<%Y-%m-%d>\n"))))
+        `(("d" "encrypted-daily" plain "%?"
+           :if-new
+           (file+head "%<%Y-%m-%d>.org.gpg"
+                      "#+title: %<%Y-%m-%d>\n"))))
   (setq org-roam-file-exclude-regexp ".*.org.gpg")
   :config
   ;; reference: https://orgmode-exocortex.com/2021/07/22/configure-org-roam-v2-to-update-database-only-when-idle/
@@ -974,7 +969,7 @@ So run this ~sudo apt-get install gdb~.
     (setq file-path (or file-path (buffer-file-name (buffer-base-buffer))))
     ;; (message "org-roam: scheduling update of %s" file-path)
     (if (not (memq file-path yaoni/org-roam-db-update-queue))
-	(push file-path yaoni/org-roam-db-update-queue)))
+        (push file-path yaoni/org-roam-db-update-queue)))
 
   ;; this function will be called when emacs is idle for a few seconds
   (defun yaoni/org-roam-db-idle-update-files ()
@@ -987,7 +982,7 @@ So run this ~sudo apt-get install gdb~.
 
   ;; add to local hook 'after-save-hook when in org-mode
   (add-hook 'org-mode-hook
-	    (lambda () (add-hook 'after-save-hook #'yaoni/org-roam-db-push-file nil 1)))
+            (lambda () (add-hook 'after-save-hook #'yaoni/org-roam-db-push-file nil 1)))
   ;; we'll only start updating db if we've been idle for this many seconds
   (run-with-idle-timer 60 t #'yaoni/org-roam-db-idle-update-files))
 #+end_src
@@ -1009,17 +1004,17 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
 #+begin_src emacs-lisp :tangle yes
 (use-package org-roam-ui
   :straight
-    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-    :after org-roam
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+  :after org-roam
+  ;; normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;; a hookable mode anymore, you're advised to pick something yourself
+  ;; if you don't care about startup time, use
+  ;; :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 #+end_src
 * latex
 :LOGBOOK:
@@ -1042,7 +1037,7 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
 (use-package pyim
   :straight
   (:host github :repo "tumashu/pyim" :files
-	 ("*.el" "out"))
+         ("*.el" "out"))
   :init
   ;; (设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
   ;; 我自己使用的中英文动态切换规则是：
@@ -1050,13 +1045,13 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
   ;; 2. 光标前是汉字字符时，才能输入中文。
   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
   (setq-default pyim-english-input-switch-functions
-		'(pyim-probe-dynamic-english
-          pyim-probe-isearch-mode
-          pyim-probe-program-mode
-          pyim-probe-org-structure-template))
+                '(pyim-probe-dynamic-english
+                  pyim-probe-isearch-mode
+                  pyim-probe-program-mode
+                  pyim-probe-org-structure-template))
   ;; 文使用全角标点，英文使用半角标点。
   (setq-default pyim-punctuation-half-width-functions
-		'(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
+                '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
   :bind
   ("C-\\" . toggle-input-method)
   ("M-j" . pyim-convert-string-at-point)
@@ -1084,22 +1079,22 @@ CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
 (defun eh-ivy-cregexp (str)
   ;; https://github.com/abo-abo/swiper/issues/294#issuecomment-157871131
   (let ((x (ivy--regex-fuzzy str))
-	(case-fold-search nil))
-  (if (listp x)
-	(mapcar
-	 (lambda (y)
-	   (if (cdr y)
-	     (list
-		(if (equal (car y) "")
-		  ""
-		  (pyim-cregexp-build
-		   (car y)))
-		(cdr y))
-	   (list
-	    (pyim-cregexp-build
-	     (car y)))))
-	 x)
-    (pyim-cregexp-build x))))
+        (case-fold-search nil))
+    (if (listp x)
+        (mapcar
+         (lambda (y)
+           (if (cdr y)
+               (list
+                (if (equal (car y) "")
+                    ""
+                  (pyim-cregexp-build
+                   (car y)))
+                (cdr y))
+             (list
+              (pyim-cregexp-build
+               (car y)))))
+         x)
+      (pyim-cregexp-build x))))
 #+end_src
 * ivy
 Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/
@@ -1109,10 +1104,10 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   :after ivy
   :general
   (my-global-leader
-	;; run-at-time: https://oremacs.com/2015/07/16/callback-quit/
-	;; makes ivy-occur run after counsel-yank-pop
-	;; This doesn't work: (lambda () (interactive) (counsel-yank-pop) (ivy-occur))
-	"c y" '(lambda () (interactive) (run-at-time nil nil #'ivy-occur) (counsel-yank-pop)))
+    ;; run-at-time: https://oremacs.com/2015/07/16/callback-quit/
+    ;; makes ivy-occur run after counsel-yank-pop
+    ;; This doesn't work: (lambda () (interactive) (counsel-yank-pop) (ivy-occur))
+    "c y" '(lambda () (interactive) (run-at-time nil nil #'ivy-occur) (counsel-yank-pop)))
   :config
   (counsel-mode))
 
@@ -1181,37 +1176,31 @@ See also [[https://orgmode.org/worg/doc.html][Documentation for Org hooks, comma
          (todo "TODO"
                ((org-agenda-overriding-header "To Refile")
                 (org-agenda-files '(,org-default-notes-file))))
-         
+
          ;; (todo "TODO"
          ;;       ((org-agenda-overriding-header "Emails")
          ;;        (org-agenda-files '(,(concat jethro/org-agenda-directory "emails.org")))))
          (todo "NEXT"
                ((org-agenda-overriding-header "In Progress")
-                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
-                ))
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))))
          ;; don't show HOLD and DONE
          (tags-todo "+@qut-TODO=\"HOLD\"-TODO=\"DONE\""
                     ((org-agenda-overriding-header "QUT")
                      ;; "^[^\.].*\.org$" ignores Emacs backup files.
-                     (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "QUT.org$"))
-                     ))
+                     (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "QUT.org$"))))
          (tags-todo "@customology"
-               ((org-agenda-overriding-header "Customology")
-                ;; "^[^\.].*\.org$" ignores Emacs backup files.
-                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Customology.org$"))
-                ))
+                    ((org-agenda-overriding-header "Customology")
+                     ;; "^[^\.].*\.org$" ignores Emacs backup files.
+                     (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Customology.org$"))))
          (todo "TODO"
                ((org-agenda-overriding-header "Company")
-                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Easytex.org$"))
-                ))
+                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Easytex.org$"))))
          (tags-todo "once"
-               ((org-agenda-overriding-header "One-off Tasks")
-                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
-                ))
+                    ((org-agenda-overriding-header "One-off Tasks")
+                     (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))))
          (tags-todo "repeater"
-               ((org-agenda-overriding-header "Repeaters")
-                (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))
-                ))
+                    ((org-agenda-overriding-header "Repeaters")
+                     (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "^[^\.].*\.org$"))))
          (todo "TODO"
                ((org-agenda-overriding-header "Personal")
                 (org-agenda-files (directory-files-recursively (concat org-directory "/brain") "Personal.org$"))
@@ -1313,37 +1302,32 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 #+begin_src emacs-lisp :tangle yes
 (setq org-publish-project-alist
       `(("yatsky.github.io"
-     ;; Path to org files.
-     :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs")
-     :base-extension "org"
-     ;; :base-extension "gpg"
-     ;; Path to Jekyll Posts
-     :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/_posts")
-     :recursive t
-     :publishing-function org-html-publish-to-html
-     :headline-levels 4
-     :html-extension "html"
-     :body-only t
-     :html-head nil
-     :html-head-include-default-style nil
-     :with-toc nil ;; ignore toc as it'll break jekyll front matter
-     :exclude "Customology.org"
-     ;; only include files with tag blog
-     :include-file-tags "blog"
-     )
+         ;; Path to org files.
+         :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs")
+         :base-extension "org"
+         ;; :base-extension "gpg"
+         ;; Path to Jekyll Posts
+         :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/_posts")
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :headline-levels 4
+         :html-extension "html"
+         :body-only t
+         :html-head nil
+         :html-head-include-default-style nil
+         :with-toc nil ;; ignore toc as it'll break jekyll front matter
+         :exclude "Customology.org"
+         ;; only include files with tag blog
+         :include-file-tags "blog")
 
-    ("images"
-     :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs/images")
-     :base-extension "png\\|jpg\\|gif\\|jpeg"
-     :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/assets/images")
-     :publishing-function org-publish-attachment
-     )
+        ("images"
+         :base-directory ,(concat (file-name-as-directory (get-wd)) "orgs/images")
+         :base-extension "png\\|jpg\\|gif\\|jpeg"
+         :publishing-directory ,(concat (file-name-as-directory (get-wd)) "yatsky.github.io/assets/images")
+         :publishing-function org-publish-attachment)
+        ("blog" :components ("yatsky.github.io"
+                             "images"))))
 
-    ("blog" :components (
-                 "yatsky.github.io"
-                 "images"
-                 )
-     )))
 (setq org-export-with-broken-links 'mark)
 
 (defun get-org-buffer-title ()
@@ -1351,32 +1335,35 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
   (with-current-buffer (current-buffer)
     (let ((ast (org-element-parse-buffer 'greater-element)))
       (org-element-map ast '(keyword)
-    (lambda(kw) (plist-get (cadr kw) :value))
-    nil
-    t))))
+
+        (lambda(kw) (plist-get (cadr kw) :value))
+        nil
+        t))))
+
 (defun get-org-excerpt ()
   "Get the first paragraph of the current org buffer to be used as the excerpt."
   (with-current-buffer (current-buffer)
     (let ((ast (org-element-parse-buffer 'greater-element)))
       (org-element-map ast '(paragraph)
-    (lambda(para) (buffer-substring-no-properties (plist-get (cadr para) :begin) (plist-get (cadr para) :end)))
-    nil
-    t))))
+
+        (lambda(para) (buffer-substring-no-properties (plist-get (cadr para) :begin) (plist-get (cadr para) :end)))
+        nil
+        t))))
 
 (defun add-post-frontmatter (backend)
   "BACKEND is the export back-end being used, as a symbol."
   (if (org-export-derived-backend-p backend 'html)
       (with-current-buffer (current-buffer)
-    (goto-char (re-search-forward ":END:"))
-    (insert (concat "\n#+begin_export html\n---\nlayout: post\ntitle: \""
-            (get-org-buffer-title)
-            "\"\nexcerpt: "
-            "\""
-            (get-org-excerpt)
-            "\""
-            "\nmodified_date: "
-            (format-time-string "%Y-%m-%d-%H:%M")
-            "\n---\n#+end_export\n")))))
+        (goto-char (re-search-forward ":END:"))
+        (insert (concat "\n#+begin_export html\n---\nlayout: post\ntitle: \""
+                        (get-org-buffer-title)
+                        "\"\nexcerpt: "
+                        "\""
+                        (get-org-excerpt)
+                        "\""
+                        "\nmodified_date: "
+                        (format-time-string "%Y-%m-%d-%H:%M")
+                        "\n---\n#+end_export\n")))))
 
 (add-hook 'org-export-before-parsing-hook #'add-post-frontmatter)
 
@@ -1392,7 +1379,7 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
     (while (re-search-forward "href=\\([^org].*?\\)>" nil t)
       ;; ignore org internal links
       (if (not (string-match-p ".*#org.*" (match-string 0)))
-      (replace-match "href={{ \\1 | absolute_url }}>")))
+          (replace-match "href={{ \\1 | absolute_url }}>")))
 
     ;; Fix image link
     (goto-char (point-min))
@@ -1401,8 +1388,9 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 
     (when (file-writable-p dst-fn)
       (write-region (point-min)
-            (point-max)
-            dst-fn))))
+                    (point-max)
+                    dst-fn))))
+
 (add-hook 'org-publish-after-publishing-hook #'fix-post-link)
 #+end_src
 ** jira
@@ -1505,8 +1493,7 @@ Python debugger.
   (company-mode +1)
 
   ;; enable typescript-tslint checker
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
-  )
+  (flycheck-add-mode 'typescript-tslint 'web-mode))
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
@@ -1518,19 +1505,18 @@ Python debugger.
 #+end_src
 ** Web-mode
 #+begin_src emacs-lisp :tangle no
-
 (require 'web-mode)
 (setq web-mode-engines-alist
-      '(("django"  . "\\.html\\'"))
-      )
+      '(("django"  . "\\.html\\'")))
+
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
 (defun my-web-mode-hook ()
   (when (string-equal "tsx" (file-name-extension buffer-file-name))
     (setup-tide-mode))
-  (message "Web-mode on")
-  )
+  (message "Web-mode on"))
+
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 #+end_src
@@ -1566,16 +1552,14 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
         (if (member heading yaoni-org-edited-headings)
             (message "Already in edited headings")
           (setq-local yaoni-org-edited-headings
-                      (push heading yaoni-org-edited-headings))
-          ))))
+                      (push heading yaoni-org-edited-headings))))))
 
 
 (defun yaoni-format-code-org-setup ()
   "Setup to be run in org-mode-hook."
   (setq-local yaoni-org-edited-headings ())
   ;; store the heading everytime there's a change
-  (add-hook 'evil-insert-state-exit-hook 'store-org-edited-headings)
-  )
+  (add-hook 'evil-insert-state-exit-hook 'store-org-edited-headings))
 
 (add-hook 'org-mode-hook 'yaoni-format-code-org-setup)
 
@@ -1590,10 +1574,7 @@ CLOCK: [2020-03-26 Thu 09:25]--[2020-03-26 Thu 10:32] =>  1:07
           (search-backward heading)
           (org-mark-subtree)
           (indent-region (region-beginning) (region-end)))
-      (error nil)
-      )
-    )
-  )
+      (error nil))))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -1649,13 +1630,15 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
 (defun open-org-file-from-project ()
   "Open project-related org file from project."
   (interactive)
-  (let ((file-location (concat org-directory (file-name-as-directory 
-                                              (with-temp-buffer
-                                                (insert-file-contents
-                                                 (concat
-                                                  (locate-dominating-file default-directory "org-entry")
-                                                  "/org-entry"))
-                                                (buffer-string)))))
+  (let ((file-location (concat
+                        org-directory
+                        (file-name-as-directory 
+                         (with-temp-buffer
+                           (insert-file-contents
+                            (concat
+                             (locate-dominating-file default-directory "org-entry")
+                             "/org-entry"))
+                           (buffer-string)))))
         (if (file-exists-p file-location)
             (find-file file-location)
           ;; else
@@ -1692,13 +1675,13 @@ https://stackoverflow.com/questions/2289883/emacs-copy-matching-lines
 putting the matching lines in a buffer named *matching*"
   (interactive "sRegexp to match: ")
   (let ((result-buffer (get-buffer-create "*matching*")))
-    (with-current-buffer result-buffer 
+    (with-current-buffer result-buffer
       (erase-buffer))
-    (save-match-data 
+    (save-match-data
       (save-excursion
         (goto-char (point-min))
         (while (re-search-forward re nil t)
-          (princ (buffer-substring-no-properties (line-beginning-position) 
+          (princ (buffer-substring-no-properties (line-beginning-position)
                                                  (line-beginning-position 2))
                  result-buffer))))
     (pop-to-buffer result-buffer)))
@@ -1746,35 +1729,36 @@ This commands calls “uuidgen” on MacOS, Linux, and calls PowelShell on Micro
 URL `http://ergoemacs.org/emacs/elisp_generate_uuid.html'
 Version 2020-06-04"
   (interactive)
-  (insert (replace-regexp-in-string "\n" ""
-							 (cond
-							  ((string-equal system-type "windows-nt")
-							   (shell-command-to-string "pwsh.exe -Command [guid]::NewGuid().toString()" t))
-							  ((string-equal system-type "darwin") ; Mac
-							   (shell-command-to-string "uuidgen"))
-							  ((string-equal system-type "gnu/linux")
-							   (shell-command-to-string "uuidgen" t))
-							  (t
-							   ;; code here by Christopher Wellons, 2011-11-18.
-							   ;; and editted Hideki Saito further to generate all valid variants for "N" in xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx format.
-							   (let ((myStr (md5 (format "%s%s%s%s%s%s%s%s%s%s"
-														 (user-uid)
-														 (emacs-pid)
-														 (system-name)
-														 (user-full-name)
-														 (current-time)
-														 (emacs-uptime)
-														 (garbage-collect)
-														 (buffer-string)
-														 (random)
-														 (recent-keys)))))
-								 (format "%s-%s-4%s-%s%s-%s"
-												 (substring myStr 0 8)
-												 (substring myStr 8 12)
-												 (substring myStr 13 16)
-												 (format "%x" (+ 8 (random 4)))
-												 (substring myStr 17 20)
-												 (substring myStr 20 32))))))))
+  (insert
+   (replace-regexp-in-string "\n" ""
+                             (cond ((string-equal system-type "windows-nt")
+                                    (shell-command-to-string "pwsh.exe -Command [guid]::NewGuid().toString()" t))
+                                   ((string-equal system-type "darwin") ; Mac
+                                    (shell-command-to-string "uuidgen"))
+                                   ((string-equal system-type "gnu/linux")
+                                    (shell-command-to-string "uuidgen" t))
+                                   (t
+                                    ;; code here by Christopher Wellons, 2011-11-18.
+                                    ;; and editted Hideki Saito further to generate all valid variants for "N" in xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx format.
+                                    (let ((myStr (md5
+												  (format "%s%s%s%s%s%s%s%s%s%s"
+                                                          (user-uid)
+                                                          (emacs-pid)
+                                                          (system-name)
+                                                          (user-full-name)
+                                                          (current-time)
+                                                          (emacs-uptime)
+                                                          (garbage-collect)
+                                                          (buffer-string)
+                                                          (random)
+                                                          (recent-keys)))))
+                                      (format "%s-%s-4%s-%s%s-%s"
+                                              (substring myStr 0 8)
+                                              (substring myStr 8 12)
+                                              (substring myStr 13 16)
+                                              (format "%x" (+ 8 (random 4)))
+                                              (substring myStr 17 20)
+                                              (substring myStr 20 32))))))))
 #+end_src
 ** wucuo
 :LOGBOOK:
@@ -1954,20 +1938,19 @@ CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
   :after tree-sitter
   :config
   (dolist (hook (list
-               'java-mode-hook
-               'haskell-mode-hook
-               'emacs-lisp-mode-hook
-               'lisp-interaction-mode-hook
-               'lisp-mode-hook
-               'sh-mode-hook
-               'makefile-gmake-mode-hook
-               'php-mode-hook
-               'python-mode-hook
-               'js-mode-hook
-               'css-mode-hook
-               'minibuffer-inactive-mode-hook
-               ))
-  (add-hook hook '(lambda () (grammatical-edit-mode 1)))))
+				 'java-mode-hook
+				 'haskell-mode-hook
+				 'emacs-lisp-mode-hook
+				 'lisp-interaction-mode-hook
+				 'lisp-mode-hook
+				 'sh-mode-hook
+				 'makefile-gmake-mode-hook
+				 'php-mode-hook
+				 'python-mode-hook
+				 'js-mode-hook
+				 'css-mode-hook
+				 'minibuffer-inactive-mode-hook))
+	(add-hook hook '(lambda () (grammatical-edit-mode 1)))))
 (grammatical-edit-leader
     "\"" 'grammatical-edit-double-quote
     "k" 'grammatical-edit-kill
@@ -2000,7 +1983,7 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
   (interactive)
   (let* ((node (tree-sitter-node-at-pos))
 		 (start-pos (tsc-node-start-position node))
-		(end-pos (tsc-node-end-position node)))
+		 (end-pos (tsc-node-end-position node)))
 	(goto-char start-pos)
 	(push-mark end-pos)
 	(setq mark-active t)))
@@ -2090,6 +2073,7 @@ See [[https://github.com/raxod502/straight.el/issues/753][issue]] and [[https://
 #+end_src
 * Updates
 :LOGBOOK:
+CLOCK: [2022-05-26 Thu 22:21]--[2022-05-26 Thu 23:00] =>  0:39
 CLOCK: [2022-03-06 Sun 10:10]--[2022-03-06 Sun 10:19] =>  0:09
 CLOCK: [2022-03-05 Sat 23:29]--[2022-03-05 Sat 23:57] =>  0:28
 CLOCK: [2022-03-05 Sat 23:07]--[2022-03-05 Sat 23:17] =>  0:10
