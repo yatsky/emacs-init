@@ -757,6 +757,8 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
 	;; org copy src
 	"c s" 'org-copy-src-block
 	"s i" 'org-display-inline-images
+	"s n" 'org-narrow-to-subtree
+	"s w" 'widen
     )
 
   (defun search-word ()
