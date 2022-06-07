@@ -745,7 +745,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "o" 'org-open-org-directory
     "c i" 'org-clock-in
     "c o" 'org-clock-out
-    "g" 'search-word
+    "g g" 'search-word
     "r i" 'org-roam-node-insert
     "r f" 'org-roam-node-find
     ;; org roam add id
@@ -757,7 +757,8 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "c s" 'org-copy-src-block
     "s i" 'org-display-inline-images
     "s n" 'org-narrow-to-subtree
-    "s w" 'widen)
+    "s w" 'widen
+	"g h" 'yaoni/org-get-heading)
 
   (defun search-word ()
     "Search the word marked or at point."
