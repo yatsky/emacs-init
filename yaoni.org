@@ -902,6 +902,9 @@ Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
   (require 'org-download))
 #+end_src
 ** custom functions
+:LOGBOOK:
+CLOCK: [2022-06-03 Fri 20:04]--[2022-06-03 Fri 20:11] =>  0:07
+:END:
 Copy the content in the current source block to the kill-ring.
 #+begin_src emacs-lisp :tangle yes
 (defun org-copy-src-block ()
@@ -910,6 +913,14 @@ Copy the content in the current source block to the kill-ring.
   (mark-whole-buffer)
   (kill-ring-save nil nil t)
   (org-edit-src-abort))
+#+end_src
+
+Get the heading text. Quite useful for getting Jira ticket number.
+#+begin_src emacs-lisp :tangle yes
+(defun yaoni/org-get-heading ()
+  "Get the heading text."
+  (interactive)
+  (kill-new (nth 4 (org-heading-components))))
 #+end_src
 
 * org-roam
