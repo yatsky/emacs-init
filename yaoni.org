@@ -925,6 +925,7 @@ Get the heading text. Quite useful for getting Jira ticket number.
 
 * org-roam
 :LOGBOOK:
+CLOCK: [2022-06-16 Thu 14:01]--[2022-06-16 Thu 14:41] =>  0:40
 CLOCK: [2022-03-18 Fri 21:31]--[2022-03-18 Fri 21:44] =>  0:13
 CLOCK: [2022-03-18 Fri 21:06]--[2022-03-18 Fri 21:29] =>  0:23
 CLOCK: [2022-01-25 Tue 15:28]--[2022-01-25 Tue 15:37] =>  0:09
@@ -1004,6 +1005,68 @@ So run this ~sudo apt-get install gdb~.
 ;; Otherwise export won't work and you can't jump between files using `C-c C-o'.
 (org-id-update-id-locations
  (org-roam-list-files))
+#+end_src
+
+How to export backlinks on org-export.
+https://org-roam.discourse.group/t/export-backlinks-on-org-export/1756/33?page=2
+#+begin_src emacs-lisp :tangle no
+(defun collect-backlinks-string (backend)
+  (when (org-roam-node-at-point)
+    (let* ((source-node (org-roam-node-at-point))
+           (source-file (org-roam-node-file source-node))
+           ;; Sort the nodes by the point to avoid errors when inserting the
+           ;; references
+           (nodes-in-file (--sort (< (org-roam-node-point it)
+                                     (org-roam-node-point other))
+                                  (-filter (lambda (node)
+                                             (s-equals?
+                                              (org-roam-node-file node)
+                                              source-file))
+                                           (org-roam-node-list))))
+           ;; Nodes don't store the last position so, get the next node position
+           ;; and subtract one character
+           (nodes-start-position (-map (lambda (node) (org-roam-node-point node))
+                                       nodes-in-file))
+           (nodes-end-position (-concat (-map (lambda (next-node-position)
+                                                (- next-node-position 1))
+                                              (-drop 1 nodes-start-position))
+                                        (list (point-max))))
+           ;; Keep track of the current-node index
+           (current-node 0)
+           ;; Keep track of the amount of text added
+           (character-count 0))
+      (dolist (node nodes-in-file)
+        (when (org-roam-backlinks-get node)
+          ;; Go to the end of the node and don't forget about previously inserted
+          ;; text
+          (goto-char (+ (nth current-node nodes-end-position) character-count))
+          ;; Add the references as a subtree of the node
+          (setq heading (format "\n\n%s References\n"
+                                (s-repeat (+ (org-roam-node-level node) 1) "*")))
+          ;; Count the characters and count the new lines (4)
+          (setq character-count (+ 3 character-count (string-width heading)))
+          (insert heading)
+          ;; Insert properties drawer
+          (setq properties-drawer ":PROPERTIES:\n:HTML_CONTAINER_CLASS: references\n:END:\n")
+          ;; Count the characters and count the new lines (3)
+          (setq character-count (+ 3 character-count (string-width properties-drawer)))
+          (insert properties-drawer)
+          (dolist (backlink (org-roam-backlinks-get node))
+            (let* ((source-node (org-roam-backlink-source-node backlink))
+                   (point (org-roam-backlink-point backlink))
+                   (text (with-temp-buffer
+						   (message "%s" (org-roam-node-file source-node))
+						   (insert-file-contents (org-roam-node-file source-node))
+						   (buffer-substring point (point-max))))
+				   (references (format "* [[./%s][%s]]: %s\n\n"
+									   (file-relative-name (org-roam-node-file source-node))
+									   (org-roam-node-title source-node)
+									   text)))
+              ;; Also count the new lines (2)
+              (setq character-count (+ 2 character-count (string-width references)))
+              (insert references))))
+		(setq current-node (+ current-node 1))))))
+(add-hook 'org-export-before-processing-hook 'collect-backlinks-string)
 #+end_src
 ** TODO [[https://github.com/rexim/org-cliplink][GitHub - rexim/org-cliplink: Insert org-mode links from clipboard]]
 :PROPERTIES:
