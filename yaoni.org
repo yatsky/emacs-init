@@ -2063,6 +2063,62 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
 	(push-mark end-pos)
 	(setq mark-active t)))
 #+end_src
+** Other
+#+begin_src emacs-lisp :tangle yes
+
+(global-undo-tree-mode)
+
+
+(setq gif-screencast-output-directory (concat org-directory "screencasts"))
+
+
+;; no point get pdf support in terminal
+(if (display-graphic-p)
+    (pdf-tools-install))
+
+;; Dired
+(require 'dired-x)
+(setq-default dired-omit-files-p t);; uffer-local variable
+(setq dired-omit-files (concat dired-omit-files "|.+~$"))
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+;; virtualenvwrapper
+(use-package virtualenvwrapper
+  :straight t)
+(venv-initialize-interactive-shells) ;; if you want interactive shell support
+(venv-initialize-eshell) ;; if you want eshell support
+;; note that setting `venv-location` is not necessary if you
+;; use the default location (`~/.virtualenvs`), or if the
+;; the environment variable `WORKON_HOME` points to the right place
+(venv-workon "data")
+
+(defun open-working-directory ()
+  (interactive)
+  (find-file (get-wd))
+  )
+
+(defun open-workspace (&optional ver)
+  (interactive)
+  (find-file (get-workspace ver))
+)
+
+(yaoni-org-leader-def
+  :states '(motion normal)
+  :keymaps 'override
+
+  "d" 'open-working-directory
+  "w" 'open-workspace
+  "5" (lambda() (interactive) (open-workspace 5))
+)
+
+#+end_src
+
+All the icons to display and show icons.
+#+begin_src emacs-lisp :tangle yes
+(use-package all-the-icons
+  :straight t)
+#+end_src
+
 * emacs-jupyter
 #+begin_src emacs-lisp :tangle yes
 (use-package jupyter
@@ -2238,62 +2294,6 @@ Mode line customization.
 #+begin_src emacs-lisp :tangle yes
 (setq display-time-format "%a %d/%m")
 (setq display-time-default-load-average nil)
-#+end_src
-
-** Other
-#+begin_src emacs-lisp :tangle yes
-
-(global-undo-tree-mode)
-
-
-(setq gif-screencast-output-directory (concat org-directory "screencasts"))
-
-
-;; no point get pdf support in terminal
-(if (display-graphic-p)
-    (pdf-tools-install))
-
-;; Dired
-(require 'dired-x)
-(setq-default dired-omit-files-p t);; uffer-local variable
-(setq dired-omit-files (concat dired-omit-files "|.+~$"))
-(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
-
-;; virtualenvwrapper
-(use-package virtualenvwrapper
-  :straight t)
-(venv-initialize-interactive-shells) ;; if you want interactive shell support
-(venv-initialize-eshell) ;; if you want eshell support
-;; note that setting `venv-location` is not necessary if you
-;; use the default location (`~/.virtualenvs`), or if the
-;; the environment variable `WORKON_HOME` points to the right place
-(venv-workon "data")
-
-(defun open-working-directory ()
-  (interactive)
-  (find-file (get-wd))
-  )
-
-(defun open-workspace (&optional ver)
-  (interactive)
-  (find-file (get-workspace ver))
-)
-
-(yaoni-org-leader-def
-  :states '(motion normal)
-  :keymaps 'override
-
-  "d" 'open-working-directory
-  "w" 'open-workspace
-  "5" (lambda() (interactive) (open-workspace 5))
-)
-
-#+end_src
-
-All the icons to display and show icons.
-#+begin_src emacs-lisp :tangle yes
-(use-package all-the-icons
-  :straight t)
 #+end_src
 
 ** shackle
