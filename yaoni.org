@@ -1811,12 +1811,12 @@ Version 2020-06-04"
                                    ((string-equal system-type "darwin") ; Mac
                                     (shell-command-to-string "uuidgen"))
                                    ((string-equal system-type "gnu/linux")
-                                    (shell-command-to-string "uuidgen" t))
+                                    (shell-command-to-string "uuidgen"))
                                    (t
                                     ;; code here by Christopher Wellons, 2011-11-18.
                                     ;; and editted Hideki Saito further to generate all valid variants for "N" in xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx format.
                                     (let ((myStr (md5
-												  (format "%s%s%s%s%s%s%s%s%s%s"
+						  (format "%s%s%s%s%s%s%s%s%s%s"
                                                           (user-uid)
                                                           (emacs-pid)
                                                           (system-name)
@@ -2078,7 +2078,7 @@ CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
 )
 (use-package pretty-hydra
     :straight t
-  )
+)
 (use-package scimax-jupyter
   :straight (:host github :repo "jkitchin/scimax")
   :ensure nil
