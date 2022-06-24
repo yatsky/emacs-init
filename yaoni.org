@@ -2069,6 +2069,18 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
 	(push-mark end-pos)
 	(setq mark-active t)))
 #+end_src
+** expand-region
+#+begin_src emacs-lisp :tangle yes
+(use-package expand-region
+  :straight t
+  :bind ("C-=" . er/expand-region))
+#+end_src
+** smex
+https://github.com/nonsequitur/smex
+#+begin_src emacs-lisp :tangle yes
+(use-package smex
+  :straight t)
+#+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
 
