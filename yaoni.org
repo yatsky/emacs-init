@@ -2078,6 +2078,8 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
 (setq gif-screencast-output-directory (concat org-directory "screencasts"))
 
 
+(use-package pdf-tools
+  :straight t)
 ;; no point get pdf support in terminal
 (if (display-graphic-p)
     (pdf-tools-install))
