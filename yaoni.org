@@ -1519,6 +1519,16 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 #+end_src
 
 * Programming aids
+** Company-mode
+:LOGBOOK:
+CLOCK: [2022-06-25 Sat 20:47]--[2022-06-25 Sat 20:51] =>  0:04
+:END:
+#+begin_src emacs-lisp :tangle yes
+(use-package company
+  :straight t
+  :hook
+  (after-init . 'global-company-mode))
+#+end_src
 ** Yasnippet
 :LOGBOOK:
 CLOCK: [2022-01-20 Thu 11:44]--[2022-01-20 Thu 11:48] =>  0:04
