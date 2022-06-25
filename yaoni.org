@@ -441,6 +441,9 @@ Lisp editing.
 
 #+end_src
 * Evil
+:LOGBOOK:
+CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
+:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package evil
   :straight t
@@ -452,7 +455,10 @@ Lisp editing.
   (setq evil-want-C-i-jump nil)
   :config
   (when (require 'evil-collection nil t)
-    (evil-collection-init)))
+    (evil-collection-init))
+  :general
+  (evil-insert-state-map
+   "C-y" 'evil-paste-before))
 
 (use-package evil-collection
   :straight t
