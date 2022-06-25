@@ -325,6 +325,7 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
 
   ;;  -> open
   "o f" 'counsel-find-file
+  "o z" (lambda() (interactive) (counsel-find-file nil (vc-root-dir)))
   ;; et-key expects an interactive command
   "o i" (lambda() (interactive) (find-file "~/.emacs.d"))
   ;; rame size
@@ -2054,20 +2055,33 @@ CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
 #+end_src
 ** thing at point
 :LOGBOOK:
+CLOCK: [2022-06-25 Sat 12:19]--[2022-06-25 Sat 12:55] =>  0:36
 CLOCK: [2022-04-27 Wed 20:48]--[2022-04-27 Wed 21:00] =>  0:12
 CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
 :END:
 #+begin_src emacs-lisp :tangle yes
 (require 'tree-sitter)
+
+(defun yaoni/python-mark-node ()
+  (let* ((node (tree-sitter-node-at-pos))
+	 (start-pos (tsc-node-start-position node))
+	 (end-pos (tsc-node-end-position node)))
+    (cons (start-pos . end-pos))))
+
+(defun yaoni/base-mark-node ()
+  (bounds-of-thing-at-point 'symbol))
+
 (defun yaoni/mark-node ()
   "Mark the current node under cursor using tree-sitter."
   (interactive)
-  (let* ((node (tree-sitter-node-at-pos))
-		 (start-pos (tsc-node-start-position node))
-		 (end-pos (tsc-node-end-position node)))
-	(goto-char start-pos)
-	(push-mark end-pos)
-	(setq mark-active t)))
+  (let ((bnds (cond
+               ((eq major-mode 'python-mode) (yaoni/python-mark-node))
+               (t (yaoni/base-mark-node)))))
+    (goto-char (car bnds))
+    (push-mark (cdr bnds))
+    (setq mark-active t)))
+
+
 #+end_src
 ** expand-region
 #+begin_src emacs-lisp :tangle yes
@@ -2110,7 +2124,7 @@ https://github.com/nonsequitur/smex
 ;; note that setting `venv-location` is not necessary if you
 ;; use the default location (`~/.virtualenvs`), or if the
 ;; the environment variable `WORKON_HOME` points to the right place
-(venv-workon "data")
+(venv-workon "data_2")
 
 (defun open-working-directory ()
   (interactive)
@@ -2156,7 +2170,7 @@ CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
     :straight t
 )
 (use-package scimax-jupyter
-  :straight (:host github :repo "jkitchin/scimax")
+  :straight (:host github :repo "yatsky/scimax")
   :ensure nil
 )
 #+end_src
