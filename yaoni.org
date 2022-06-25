@@ -2125,6 +2125,22 @@ https://github.com/nonsequitur/smex
 (use-package smex
   :straight t)
 #+end_src
+** venv
+:LOGBOOK:
+CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
+:END:
+#+begin_src emacs-lisp :tangle yes
+;; virtualenvwrapper
+(use-package virtualenvwrapper
+  :straight t)
+(venv-initialize-interactive-shells) ;; if you want interactive shell support
+(venv-initialize-eshell) ;; if you want eshell support
+
+;; note that setting `venv-location` is not necessary if you
+;; use the default location (`~/.virtualenvs`), or if the
+;; the environment variable `WORKON_HOME` points to the right place
+;; (venv-workon "data")
+#+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
 
@@ -2146,15 +2162,6 @@ https://github.com/nonsequitur/smex
 (setq dired-omit-files (concat dired-omit-files "|.+~$"))
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
-;; virtualenvwrapper
-(use-package virtualenvwrapper
-  :straight t)
-(venv-initialize-interactive-shells) ;; if you want interactive shell support
-(venv-initialize-eshell) ;; if you want eshell support
-;; note that setting `venv-location` is not necessary if you
-;; use the default location (`~/.virtualenvs`), or if the
-;; the environment variable `WORKON_HOME` points to the right place
-(venv-workon "data_2")
 
 (defun open-working-directory ()
   (interactive)
