@@ -878,8 +878,8 @@ ox-latex settings.
 #+end_src
 ** org-id
 #+begin_src emacs-lisp :tangle yes
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+(setq org-id-track-globally t)
+(setq org-id-locations-file "~/.emacs.d/.org-id-locations")
 #+end_src
 ** org-download
 Configuration from [[https://zzamboni.org/post/how-to-insert-screenshots-in-org-documents-on-macos/][here]].
