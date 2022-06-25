@@ -2197,19 +2197,20 @@ All the icons to display and show icons.
 #+end_src
 * scimax
 :LOGBOOK:
+CLOCK: [2022-06-25 Sat 21:52]--[2022-06-25 Sat 22:05] =>  0:13
 CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
 :END:
 #+begin_src emacs-lisp :tangle yes
 (use-package hydra
-    :straight t
-)
+  :straight t)
+
 (use-package pretty-hydra
-    :straight t
-)
+  :straight t)
+
 (use-package scimax-jupyter
   :straight (:host github :repo "yatsky/scimax")
-  :ensure nil
-)
+  :if (executable-find "jupyter")
+  :ensure nil)
 #+end_src
 * Use-package
 :LOGBOOK:
