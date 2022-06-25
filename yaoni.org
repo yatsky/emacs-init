@@ -403,17 +403,6 @@ CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 	"g a" 'elpy-goto-assignment))
 
 
-(use-package company
-  :straight t)
-
-(use-package company-quickhelp
-  :defer t
-  :straight t
-  :after company
-  :config
-  (company-quickhelp-mode 1)
-  (eval-after-load 'company
-	'(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin)))
 #+end_src
 * Smartparens
 Lisp editing.
@@ -453,9 +442,6 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   ;; enable TAB in terminal mode
   ;; https://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
   (setq evil-want-C-i-jump nil)
-  :config
-  (when (require 'evil-collection nil t)
-    (evil-collection-init))
   :general
   (evil-insert-state-map
    "C-y" 'evil-paste-before))
@@ -1521,13 +1507,22 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 * Programming aids
 ** Company-mode
 :LOGBOOK:
-CLOCK: [2022-06-25 Sat 20:47]--[2022-06-25 Sat 20:51] =>  0:04
+CLOCK: [2022-06-25 Sat 20:47]--[2022-06-25 Sat 21:15] =>  0:28
 :END:
 #+begin_src emacs-lisp :tangle yes
 (use-package company
   :straight t
-  :hook
-  (after-init . 'global-company-mode))
+  :config
+  (global-company-mode 1))
+
+(use-package company-quickhelp
+  :defer t
+  :straight t
+  :after company
+  :config
+  (company-quickhelp-mode 1)
+  (eval-after-load 'company
+	'(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin)))
 #+end_src
 ** Yasnippet
 :LOGBOOK:
