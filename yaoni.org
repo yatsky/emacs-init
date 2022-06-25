@@ -2055,6 +2055,8 @@ CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
 #+end_src
 ** thing at point
 :LOGBOOK:
+CLOCK: [2022-06-25 Sat 19:53]--[2022-06-25 Sat 19:58] =>  0:05
+CLOCK: [2022-06-25 Sat 19:35]--[2022-06-25 Sat 19:51] =>  0:16
 CLOCK: [2022-06-25 Sat 12:19]--[2022-06-25 Sat 12:55] =>  0:36
 CLOCK: [2022-04-27 Wed 20:48]--[2022-04-27 Wed 21:00] =>  0:12
 CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
@@ -2063,12 +2065,14 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
 (require 'tree-sitter)
 
 (defun yaoni/python-mark-node ()
+  "Use tree-sitter to get the thing at point more accurately."
   (let* ((node (tree-sitter-node-at-pos))
 	 (start-pos (tsc-node-start-position node))
 	 (end-pos (tsc-node-end-position node)))
     (cons (start-pos . end-pos))))
 
 (defun yaoni/base-mark-node ()
+  "I only care about symbole at the moment."
   (bounds-of-thing-at-point 'symbol))
 
 (defun yaoni/mark-node ()
@@ -2077,13 +2081,23 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
   (let ((bnds (cond
                ((eq major-mode 'python-mode) (yaoni/python-mark-node))
                (t (yaoni/base-mark-node)))))
-    (goto-char (car bnds))
-    (push-mark (cdr bnds))
-    (setq mark-active t)))
+    (cond ((eq bnds nil)
+           (message "Not a valid symbol to be marked. Using `er/expand-region' to mark it.")
+           (if (featurep 'expand-region)
+               (call-interactively #'er/expand-region)
+             (message "`expand-region' is not available. Do nothing")))
+          ((not (eq bnds nil))
+           (goto-char (car bnds))
+           (push-mark (cdr bnds))
+           (setq mark-active t))
+          (t (message "Something is wrong.")))))
 
 
 #+end_src
 ** expand-region
+:LOGBOOK:
+CLOCK: [2022-06-25 Sat 19:53]--[2022-06-25 Sat 19:53] =>  0:00
+:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package expand-region
   :straight t
