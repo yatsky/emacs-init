@@ -814,13 +814,18 @@ Add it to org-mode hook.
 
 #+end_src
 ** modules
+:LOGBOOK:
+CLOCK: [2022-06-25 Sat 21:38]--[2022-06-25 Sat 21:41] =>  0:03
+:END:
 #+begin_src emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            org-modules            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-bullets
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :straight t
+  :hook
+  (org-mode . (lambda () (org-bullets-mode 1))))
 
 ;; do not use any tabs
 ;; this is added to prevent picture mode from inserting tabs
