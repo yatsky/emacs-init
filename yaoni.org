@@ -2560,3 +2560,24 @@ Doesn't really work.
   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
   (eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
 #+end_src
+
+* lsp-bridge
+#+begin_src emacs-lisp :tangle yes
+(use-package markdown-mode
+  :straight t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown"))
+#+end_src
+#+begin_src emacs-lisp :tangle no
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "/home/yaoni/.emacs.d/elpa/lsp-bridge")
+
+(require 'lsp-bridge)
+(global-lsp-bridge-mode)
+#+end_src
