@@ -3,6 +3,7 @@
 # key: ba
 # --
 
-#+begin_src bash
+#+begin_src bash :results output
+#!/bin/bash
 $0
 #+end_src
