@@ -2381,7 +2381,7 @@ shackle gives you the means to put an end to popped up buffers not behaving they
 
 ** beacon
 Use beacon to remind yourself where the cursor is at when you scroll cross the window.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package beacon
   :straight (:host github :repo "Malabarba/beacon")
   :custom
