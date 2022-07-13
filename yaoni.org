@@ -748,14 +748,15 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     ;; org roam add id
     "r a i" 'org-id-get-create
     "r a t" 'org-roam-tag-add
-    "n" 'org-babel-next-src-block
-    "p" 'org-babel-previous-src-block
+    ;; forward one line so that the cursor is not on the begin_src line
+    "n" '(lambda () (interactive) (org-babel-next-src-block) (forward-line))
+    "p" '(lambda () (interactive) (org-babel-previous-src-block) (forward-line))
     ;; org copy src
     "c s" 'org-copy-src-block
     "s i" 'org-display-inline-images
     "s n" 'org-narrow-to-subtree
     "s w" 'widen
-	"g h" 'yaoni/org-get-heading)
+    "g h" 'yaoni/org-get-heading)
 
   (defun search-word ()
     "Search the word marked or at point."
