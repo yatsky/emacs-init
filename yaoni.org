@@ -2515,6 +2515,11 @@ when running in text terminal.
     (xclip-mode)))
 #+end_src
 
+Somehow in Emacs 28 I need to explicitly set this variable because right command defaults to Super.
+#+begin_src emacs-lisp :tangle yes
+(unless (version< emacs-version "28")
+  (setq mac-right-command-modifier 'meta))
+#+end_src
 * EAF
 :LOGBOOK:
 CLOCK: [2022-03-27 Sun 16:13]--[2022-03-27 Sun 16:26] =>  0:13
