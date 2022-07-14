@@ -2525,6 +2525,12 @@ Somehow in Emacs 28 I need to explicitly set this variable because right command
 (unless (version< emacs-version "28")
   (setq mac-right-command-modifier 'meta))
 #+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(use-package vterm
+    :straight t)
+
+#+end_src
 * EAF
 :LOGBOOK:
 CLOCK: [2022-03-27 Sun 16:13]--[2022-03-27 Sun 16:26] =>  0:13
