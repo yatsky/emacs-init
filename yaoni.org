@@ -2619,3 +2619,10 @@ Reference config here: https://github.com/KaratasFurkan/.emacs.d/issues/1
 (use-package dockerfile-mode
   :straight t)
 #+end_src
+
+* terraform
+#+begin_src emacs-lisp :tangle yes
+(use-package terraform-mode
+    :straight  (:host github :repo "emacsorphanage/terraform-mode" :files ("*.el" "out")))
+#+end_src
+
