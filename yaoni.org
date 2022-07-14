@@ -2578,12 +2578,14 @@ Doesn't really work.
 
 * lsp-bridge
 #+begin_src emacs-lisp :tangle yes
+(use-package f
+  :straight t)
 (use-package markdown-mode
   :straight t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
 #+end_src
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
@@ -2591,8 +2593,12 @@ Doesn't really work.
                           (lsp))))  ; or lsp-deferred
 #+end_src
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'load-path "/home/yaoni/.emacs.d/elpa/lsp-bridge")
+(add-to-list 'load-path "/Users/yiwang/.emacs.d/other-packages/lsp-bridge")
 
 (require 'lsp-bridge)
-(global-lsp-bridge-mode)
+;; (global-lsp-bridge-mode)
+(setq lsp-bridge-default-mode-hooks
+        (remove 'org-mode-hook lsp-bridge-default-mode-hooks))
+#+end_src
+
 #+end_src
