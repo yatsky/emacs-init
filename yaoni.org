@@ -1000,7 +1000,10 @@ So run this ~sudo apt-get install gdb~.
   (add-hook 'org-mode-hook
             (lambda () (add-hook 'after-save-hook #'yaoni/org-roam-db-push-file nil 1)))
   ;; we'll only start updating db if we've been idle for this many seconds
-  (run-with-idle-timer 60 t #'yaoni/org-roam-db-idle-update-files))
+  (run-with-idle-timer 60 t #'yaoni/org-roam-db-idle-update-files)
+
+  :bind (:map evil-insert-state-map
+              ("C-M-i" . org-roam-node-insert)))
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
