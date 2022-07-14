@@ -2613,3 +2613,9 @@ Reference config here: https://github.com/KaratasFurkan/.emacs.d/issues/1
                               (setq-local company-backends '(company-wordfreq))
                               (setq-local company-transformers nil))))
 #+end_src
+
+* dockerfile mode
+#+begin_src emacs-lisp :tangle yes
+(use-package dockerfile-mode
+  :straight t)
+#+end_src
