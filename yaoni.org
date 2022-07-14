@@ -2406,6 +2406,7 @@ Use beacon to remind yourself where the cursor is at when you scroll cross the w
   (setq parrot-keep-partying t)
   (setq parrot-spaces-before 2)
   (setq parrot-spaces-after 2)
+  (setq parrot-num-rotations nil)
   :config
   (parrot-mode))
 #+end_src
