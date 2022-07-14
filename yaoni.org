@@ -2601,4 +2601,15 @@ Doesn't really work.
         (remove 'org-mode-hook lsp-bridge-default-mode-hooks))
 #+end_src
 
+* company wordfreq
+Reference config here: https://github.com/KaratasFurkan/.emacs.d/issues/1
+#+begin_src emacs-lisp :tangle yes
+(use-package company-wordfreq
+  :straight  (:host github :repo "johannes-mueller/company-wordfreq.el")
+  :custom
+  (ispell-local-dictionary "english")
+  :config
+  (add-hook 'text-mode-hook (lambda ()
+                              (setq-local company-backends '(company-wordfreq))
+                              (setq-local company-transformers nil))))
 #+end_src
