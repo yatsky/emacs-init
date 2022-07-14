@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: case
+# key: ca
+# --
+case "$$1" in
+    ${2:pattern_1})
+        $0
+        ;; # case stops here
+    ${3:pattern_2})
+        ;;
+    ${4:pattern_3})
+        ;;
+esac
