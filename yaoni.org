@@ -240,7 +240,8 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
  "2" 'other-window
  "3" 'split-window-right
  "4" 'split-window-below
- "5" 'delete-other-windows)
+ "5" 'delete-other-windows
+ "9" 'other-frame)
 
 ;; Remap SPC in evil mode to a leader key
 (general-create-definer my-global-leader
