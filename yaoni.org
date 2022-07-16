@@ -2135,7 +2135,8 @@ CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
 ** Other
 #+begin_src emacs-lisp :tangle yes
 
-(global-undo-tree-mode)
+(if (version< emacs-version "28")
+    (global-undo-tree-mode))
 
 
 (setq gif-screencast-output-directory (concat org-directory "screencasts"))
