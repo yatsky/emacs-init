@@ -961,7 +961,7 @@ So run this ~sudo apt-get install gdb~.
         `(("d" "default" plain "%?"
            :if-new
            (file+head "%<%Y-%m-%d-%H%M%S>-${slug}.org"
-                      "#+title: ${title}\n")
+                      "#+title: ${title}\n\n\n* Source\n\n* Log time")
            :unnarrowed t)
           ("l" "leetcode" plain "%?"
            :if-new
