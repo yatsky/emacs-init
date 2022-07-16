@@ -4,7 +4,16 @@ This is my personal Emacs init file in org.
 :LOGBOOK:
 CLOCK: [2022-01-26 Wed 17:05]--[2022-01-26 Wed 17:15] =>  0:10
 :END:
-Some very basic config of my own.
+** exec-path-from-shell
+#+begin_src elisp :tangle yes
+(use-package exec-path-from-shell
+  :straight t)
+(exec-path-from-shell-initialize)
+;; so that I get passwords from my env to be used for my work
+(exec-path-from-shell-copy-env "CMG_DB_PWD")
+(exec-path-from-shell-copy-env "DEV_DIR")
+#+end_src
+** Some very basic config of my own.
 This was called "utils" before being compiled into this file.
 #+begin_src emacs-lisp :tangle yes
 (use-package s
@@ -17,10 +26,7 @@ This was called "utils" before being compiled into this file.
 
 (defun get-wd ()
   "Get my working directory"
-  (if
-      (is-gnu-linux)
-      "/mnt/c/Users/thoma/Dev"
-    "~/Dev"))
+  (getenv "DEV_DIR"))
 
 (defun get-workspace(&optional ver)
   "Get Workspace. If `ver' is set then it's that Clover version's workspace."
@@ -1346,14 +1352,6 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
            ((snake "[a-z0-9]"))))
 ;;; hook will be setup, re-run after changing rules or separator
 #+end_src
-** exec-path-from-shell
-#+begin_src elisp :tangle yes
-(use-package exec-path-from-shell
-  :straight t)
-(exec-path-from-shell-initialize)
-;; so that I get passwords from my env to be used for my work
-(exec-path-from-shell-copy-env "CMG_DB_PWD")
-#+end_src
 ** org-jekyll
 :LOGBOOK:
 CLOCK: [2022-05-21 Sat 16:16]--[2022-05-21 Sat 16:44] =>  0:28
@@ -2594,7 +2592,7 @@ Doesn't really work.
                           (lsp))))  ; or lsp-deferred
 #+end_src
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'load-path "/Users/yiwang/.emacs.d/other-packages/lsp-bridge")
+(add-to-list 'load-path "~/.emacs.d/other-packages/lsp-bridge")
 
 (require 'lsp-bridge)
 ;; (global-lsp-bridge-mode)
