@@ -1,0 +1,4 @@
+# key: lo
+# name: logging
+# --
+(message "$1=%s" $1)
