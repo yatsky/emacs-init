@@ -1220,8 +1220,13 @@ CLOCK: [2021-03-11 Thu 11:44]--[2021-03-11 Thu 14:24] =>  2:40
 #+end_src
 ** sqlformat
 #+begin_src emacs-lisp :tangle yes
-(setq sqlformat-args '("-r" "-s" "--comma_first" "TRUE" "--indent_width" "4" "--k" "upper"))
-(setq sqlformat-command 'sqlformat)
+(use-package sqlformat
+	:straight  (:host github :repo "purcell/sqlformat" :files ("*.el")))
+
+(setq sqlformat-command 'sqlfluff)
+(setq sqlformat-args '("--dialect" "snowflake"))
+(add-hook 'sql-mode-hook 'sqlformat-on-save-mode)
+
 #+end_src
 ** org agenda view customisation
 :LOGBOOK:
