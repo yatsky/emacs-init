@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: data
+# key: da
+# --
+data "${1:resource}" "${2:name}" {
+  filter {
+	name = "${3:thing you look for}"
+	values = [${4:value}]
+  }
+}
