@@ -2576,6 +2576,9 @@ Doesn't really work.
 #+end_src
 
 * lsp-bridge
+:LOGBOOK:
+CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
+:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package f
   :straight t)
@@ -2595,9 +2598,9 @@ Doesn't really work.
 (add-to-list 'load-path "~/.emacs.d/other-packages/lsp-bridge")
 
 (require 'lsp-bridge)
-;; (global-lsp-bridge-mode)
 (setq lsp-bridge-default-mode-hooks
         (remove 'org-mode-hook lsp-bridge-default-mode-hooks))
+(global-lsp-bridge-mode)
 #+end_src
 
 * company wordfreq
