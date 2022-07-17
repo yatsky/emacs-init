@@ -2099,6 +2099,14 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
            (setq mark-active t))
           (t (message "Something is wrong.")))))
 
+(defun yaoni/copy-node ()
+  "Copy the node."
+  (interactive)
+  (yaoni/mark-node)
+  (evil-yank (region-beginning) (region-end))
+  (deactivate-mark))
+
+(bind-key ",y" 'yaoni/copy-node 'evil-normal-state-map)
 
 #+end_src
 ** expand-region
