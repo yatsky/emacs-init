@@ -1788,6 +1788,7 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
   (setq lsp-keymap-prefix "C-c l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (nxml-mode . lsp)
+         (terraform-mode . lsp-deferred)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
@@ -2612,8 +2613,14 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 (add-to-list 'load-path "~/.emacs.d/other-packages/lsp-bridge")
 
 (require 'lsp-bridge)
+
+(push '(terraform-mode . "terraform-ls") lsp-bridge-lang-server-mode-list)
+
+(push 'terraform-mode-hook lsp-bridge-default-mode-hooks)
+(push '(terraform-mode . 2) lsp-bridge-formatting-indent-alist)
+
 (setq lsp-bridge-default-mode-hooks
-        (remove 'org-mode-hook lsp-bridge-default-mode-hooks))
+      (remove 'org-mode-hook lsp-bridge-default-mode-hooks))
 (global-lsp-bridge-mode)
 #+end_src
 
