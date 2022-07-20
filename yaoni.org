@@ -2208,10 +2208,23 @@ CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
 (use-package pretty-hydra
   :straight t)
 
+(defun scimax-jupyter-ansi ()
+  "Colorize the results block produced by scimax-jupyter."
+  (let* ((r (org-babel-where-is-src-block-result))
+	 (result (when r
+		   (save-excursion
+		     (goto-char r)
+		     (org-element-context)))))
+    (when result
+      (ansi-color-apply-on-region (org-element-property :begin result)
+				  (org-element-property :end result)))
+    t))
 (use-package scimax-jupyter
   :straight (:host github :repo "yatsky/scimax")
   :if (executable-find "jupyter")
-  :ensure nil)
+  :ensure nil
+  :init
+  (add-to-list 'org-babel-after-execute-hook 'scimax-jupyter-ansi t))
 #+end_src
 * Use-package
 :LOGBOOK:
