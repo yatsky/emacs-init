@@ -2558,6 +2558,24 @@ Somehow in Emacs 28 I need to explicitly set this variable because right command
     :straight t)
 
 #+end_src
+** dired
+https://xenodium.com/showhide-emacs-dired-details-in-style/
+#+begin_src emacs-lisp :tangle yes
+(use-package dired
+  :hook (dired-mode . dired-hide-details-mode)
+  :config
+  ;; Colourful columns.
+  (use-package diredfl
+    :straight t
+    :ensure t
+    :config
+    (diredfl-global-mode 1))
+  (use-package dired-git-info
+    :straight t
+    :ensure t
+    :bind (:map evil-normal-state-map
+                (")" . dired-git-info-mode))))
+#+end_src
 * EAF
 :LOGBOOK:
 CLOCK: [2022-03-27 Sun 16:13]--[2022-03-27 Sun 16:26] =>  0:13
