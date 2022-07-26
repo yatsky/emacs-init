@@ -2658,8 +2658,9 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 (push 'terraform-mode-hook lsp-bridge-default-mode-hooks)
 (push '(terraform-mode . 2) lsp-bridge-formatting-indent-alist)
 
-(setq lsp-bridge-default-mode-hooks
-      (remove 'org-mode-hook lsp-bridge-default-mode-hooks))
+(dolist (hook '(org-mode-hook terraform-mode-hook))
+  (setq lsp-bridge-default-mode-hooks
+        (remove hook lsp-bridge-default-mode-hooks)))
 (global-lsp-bridge-mode)
 #+end_src
 
