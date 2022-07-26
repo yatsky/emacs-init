@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: provider
+# key: pr
+# --
+provider "${1:aws}" {
+  region = var.region
+}
