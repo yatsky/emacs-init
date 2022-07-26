@@ -2331,17 +2331,25 @@ To get the text property of ~#+begin_src emacs-lisp :tangle yes~, use ~describe-
 Example: Sat Feb 26 22:03:50 2022 and get 22."
   (string-to-number (nth 0 (split-string (nth 3 (split-string time-string)) ":"))))
 
+(defun yaoni/enable-theme ()
+  "Disable all themes in `custom-enabled-themes' and load a single theme.
+`THEME' is the theme you want to enable."
+  (interactive)
+  (let (theme
+        (intern
+         (ivy-completing-read
+          "Choose a theme to enable:"
+          custom-known-themes
+          nil t "")))
+    (while (length> custom-enabled-themes 0)
+      (disable-theme (car custom-enabled-themes)))
+    (enable-theme theme)))
+
 (use-package twilight-bright-theme
-  :straight (:host github :repo "yatsky/twilight-bright-theme.el")
-  :if (< (get-current-hour-as-int (current-time-string)) 17)
-  :config
-  (load-theme 'twilight-bright))
+  :straight (:host github :repo "yatsky/twilight-bright-theme.el"))
 
 (use-package dracula-theme
-  :straight (:host github :repo "dracula/emacs")
-  :if (>= (get-current-hour-as-int (current-time-string)) 17)
-  :config
-  (load-theme 'dracula))
+  :straight (:host github :repo "dracula/emacs"))
 
 (use-package powerline
   :straight t)
