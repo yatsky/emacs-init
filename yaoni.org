@@ -1548,8 +1548,7 @@ CLOCK: [2022-01-20 Thu 10:11]--[2022-01-20 Thu 10:32] =>  0:21
 Virtual env support seems to be out of the box.
 #+begin_src emacs-lisp :tangle yes
 (use-package flycheck
-  :straight t
-  :init (global-flycheck-mode))
+  :straight t)
 #+end_src
 ** Jedi
 #+begin_src emacs-lisp :tangle yes
