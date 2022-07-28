@@ -2489,9 +2489,9 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Advice-Combinators.htm
   (dolist (face '(org-block-begin-line org-block-end-line))
     (set-face-attribute face nil :overline "#A7A6AA" :foreground "#555555" :background "#E2E1D5"))
   (let ((bg-color
-	 (if (eq theme 'dracula)
-	     "#000000"
-	   "#FFFFE0")))
+         (cond ((eq theme 'dracula) "#000000")
+               ((eq theme 'modus-vivendi) "#543f78")
+               (t "#ffffe0"))))
     (set-face-attribute 'org-block nil :background bg-color)))
 
 (defun themeadvice@load-theme (&rest args)
