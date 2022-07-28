@@ -1517,7 +1517,7 @@ CLOCK: [2022-06-25 Sat 20:47]--[2022-06-25 Sat 21:15] =>  0:28
 (use-package company
   :straight t
   :config
-  (global-company-mode 1))
+  (add-hook 'org-mode-hook (lambda () (company-mode 1))))
 
 (use-package company-quickhelp
   :defer t
