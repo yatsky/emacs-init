@@ -2712,7 +2712,7 @@ Reference config here: https://github.com/KaratasFurkan/.emacs.d/issues/1
 #+end_src
 
 * modus themes
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package modus-themes
   :ensure
   :init
