@@ -2534,6 +2534,12 @@ CLOCK: [2022-06-20 Mon 19:56]--[2022-06-20 Mon 20:07] =>  0:11
 			(when (fboundp 'auto-dim-other-buffers-mode)
 			  (auto-dim-other-buffers-mode t)))))
 #+end_src
+** rainbow mode
+Show colors under color text codes.
+#+begin_src emacs-lisp :tangle yes
+(use-package rainbow-mode
+    :straight  t)
+#+end_src
 * os intergration
 :LOGBOOK:
 CLOCK: [2022-03-06 Sun 22:01]--[2022-03-06 Sun 22:38] =>  0:37
