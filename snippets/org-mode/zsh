@@ -1,0 +1,7 @@
+# key: zs
+# name: zsh
+# --
+#+begin_src sh :session localhost :results output
+#!/bin/zsh
+$0
+#+end_src
