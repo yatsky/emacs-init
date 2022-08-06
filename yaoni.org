@@ -711,6 +711,7 @@ CLOCK: [2020-07-26 Sun 11:05]--[2020-07-26 Sun 11:05] =>  0:00
 #+end_src
 ** agenda
 :LOGBOOK:
+CLOCK: [2022-08-06 Sat 20:54]--[2022-08-06 Sat 21:06] =>  0:12
 CLOCK: [2020-05-11 Mon 19:29]--[2020-05-11 Mon 19:31] =>  0:02
 CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
 :END:
@@ -725,10 +726,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     (dolist (element list new-list)
       (setq new-list (cons (concat cur-wd element) new-list)))))
 
-(setq org-agenda-files nil)
-(setq org-agenda-files (append org-agenda-files (directory-files-recursively org-directory ".*org$")))
-(setq org-agenda-files (append org-agenda-files '("~/.emacs.d/yaoni.org")))
-;; (setq org-agenda-files (append org-agenda-files (file-expand-wildcards (concat (get-wd) "/brain/Work/QUT/Brownbag/git-tutorial/*.org"))))
+(load-file "~/.emacs.d/private.el")
 #+end_src
 ** ob-lang
 #+begin_src emacs-lisp :tangle yes
