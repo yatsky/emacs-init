@@ -1614,20 +1614,31 @@ Python debugger.
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 #+end_src
 ** Web-mode
-#+begin_src emacs-lisp :tangle no
-(require 'web-mode)
-(setq web-mode-engines-alist
-      '(("django"  . "\\.html\\'")))
+#+begin_src emacs-lisp :tangle yes
+;; (defun my-web-mode-hook ()
+;;   (when (string-equal "tsx" (file-name-extension buffer-file-name))
+;;     (setup-tide-mode))
+;;   (message "Web-mode on"))
 
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+;; (add-hook 'web-mode-hook 'my-web-mode-hook)
+(use-package web-mode
+  :straight t
+  :init
+  ;; https://emacs.stackexchange.com/a/33249/24363
+  ;; With the default HTML mode as of Emacs 24.4,
+  ;; you can get the same behavior as Sublime Text
+  ;; (automatic insertion of the closing tag if you type </)
+  ;; by putting the following line in your init file:
+  (setq sgml-quick-keys 'close)
+  (setq web-mode-engines-alist
+        '(("django"  . "\\.html\\'")))
+  ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
-(defun my-web-mode-hook ()
-  (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (setup-tide-mode))
-  (message "Web-mode on"))
-
-(add-hook 'web-mode-hook 'my-web-mode-hook)
+  :config
+  ;; When enabled, editing an opening markup tag automatically updates the closing tag.
+  (sgml-electric-tag-pair-mode t))
+  ;; > this is to balance the pairs
 
 #+end_src
 ** Format code and save-buffer
