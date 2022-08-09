@@ -2979,3 +2979,15 @@ Summertime
 (require 'yaoni-evil-object)
 (require 'yaoni-set-theme-by-mode)
 #+end_src
+
+* topsy and org-sticky-header
+Add sticky headeer at the top of the window.
+#+begin_src emacs-lisp :tangle yes
+(use-package topsy
+  :straight (:host github :repo "alphapapa/topsy.el")
+  :hook (prog-mode . topsy-mode))
+
+(use-package org-sticky-header
+  :straight (:host github :repo "alphapapa/org-sticky-header")
+  :hook (org-mode . org-sticky-header-mode))
+#+end_src
