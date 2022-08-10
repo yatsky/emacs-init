@@ -55,6 +55,98 @@ https://systemcrafters.cc/advanced-package-management/using-straight-el/
 #+begin_src emacs-lisp :tangle yes
 (straight-use-package 'use-package)
 #+end_src
+* meow edit mode
+#+begin_src emacs-lisp :tangle yes
+  (use-package meow
+    :straight  t
+    :config
+    (defun meow-setup ()
+      (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+      (meow-motion-overwrite-define-key
+       '("j" . meow-next)
+       '("k" . meow-prev)
+       '("<escape>" . ignore))
+      (meow-leader-define-key
+       ;; SPC j/k will run the original command in MOTION state.
+       '("j" . "H-j")
+       '("k" . "H-k")
+       ;; Use SPC (0-9) for digit arguments.
+       '("1" . meow-digit-argument)
+       '("2" . meow-digit-argument)
+       '("3" . meow-digit-argument)
+       '("4" . meow-digit-argument)
+       '("5" . meow-digit-argument)
+       '("6" . meow-digit-argument)
+       '("7" . meow-digit-argument)
+       '("8" . meow-digit-argument)
+       '("9" . meow-digit-argument)
+       '("0" . meow-digit-argument)
+       '("/" . meow-keypad-describe-key)
+       '("?" . meow-cheatsheet))
+      (meow-normal-define-key
+       '("0" . meow-expand-0)
+       '("9" . meow-expand-9)
+       '("8" . meow-expand-8)
+       '("7" . meow-expand-7)
+       '("6" . meow-expand-6)
+       '("5" . meow-expand-5)
+       '("4" . meow-expand-4)
+       '("3" . meow-expand-3)
+       '("2" . meow-expand-2)
+       '("1" . meow-expand-1)
+       '("-" . negative-argument)
+       '(";" . meow-reverse)
+       '("," . meow-inner-of-thing)
+       '("." . meow-bounds-of-thing)
+       '("[" . meow-beginning-of-thing)
+       '("]" . meow-end-of-thing)
+       '("a" . meow-append)
+       '("A" . meow-open-below)
+       '("b" . meow-back-word)
+       '("B" . meow-back-symbol)
+       '("c" . meow-change)
+       '("d" . meow-delete)
+       '("D" . meow-backward-delete)
+       '("e" . meow-next-word)
+       '("E" . meow-next-symbol)
+       '("f" . meow-find)
+       '("g" . meow-cancel-selection)
+       '("G" . meow-grab)
+       '("h" . meow-left)
+       '("H" . meow-left-expand)
+       '("i" . meow-insert)
+       '("I" . meow-open-above)
+       '("j" . meow-next)
+       '("J" . meow-next-expand)
+       '("k" . meow-prev)
+       '("K" . meow-prev-expand)
+       '("l" . meow-right)
+       '("L" . meow-right-expand)
+       '("m" . meow-join)
+       '("n" . meow-search)
+       '("o" . meow-block)
+       '("O" . meow-to-block)
+       '("p" . meow-yank)
+       '("q" . meow-quit)
+       '("Q" . meow-goto-line)
+       '("r" . meow-replace)
+       '("R" . meow-swap-grab)
+       '("s" . meow-kill)
+       '("t" . meow-till)
+       '("u" . meow-undo)
+       '("U" . meow-undo-in-selection)
+       '("v" . meow-visit)
+       '("w" . meow-mark-word)
+       '("W" . meow-mark-symbol)
+       '("x" . meow-line)
+       '("X" . meow-goto-line)
+       '("y" . meow-save)
+       '("Y" . meow-sync-grab)
+       '("z" . meow-pop-selection)
+       '("'" . repeat)
+       '("<escape>" . ignore)))
+    (meow-setup))
+#+end_src
 * quelpa
 #+begin_src emacs-lisp :tangle no
 (quelpa
@@ -218,7 +310,7 @@ CLOCK: [2022-03-27 Sun 14:49]--[2022-03-27 Sun 14:52] =>  0:03
 CLOCK: [2022-03-27 Sun 14:35]--[2022-03-27 Sun 14:41] =>  0:06
 CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package general
   :defer t
   :straight t)
@@ -374,12 +466,12 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   (define-key ac-complete-mode-map "\C-p" 'ac-previous))
 #+end_src
 ** Jumping between parens (sexp)
-#+begin_src elisp :tangle yes
-(my-global-leader
+#+begin_src elisp :tangle no
+  (my-global-leader
 
-  "m f" 'forward-sexp
-  "m b" 'backward-sexp
-)
+    "m f" 'forward-sexp
+    "m b" 'backward-sexp
+  )
 #+end_src
 
 * elpy
@@ -389,31 +481,31 @@ CLOCK: [2022-02-27 Sun 10:50]--[2022-02-27 Sun 11:09] =>  0:19
 CLOCK: [2022-02-06 Sun 20:25]--[2022-02-06 Sun 21:03] =>  0:38
 :END:
 #+begin_src emacs-lisp :tangle yes
-(use-package elpy
-  :defer t
-  :straight t
-  :custom
-  ;; tell elpy to use the virtual env set by virtualenv
-  (elpy-rpc-virtualenv-path 'current)
-  (elpy-shell-echo-output nil)
-  (python-shell-completion-native-enable nil)
-  (elpy-rpc-backend "jedi")
-  (python-indent-offset 4)
-  (python-indent 4)
-  (define-key elpy-mode-map (kbd "C-o") 'xref-pop-marker-stack)
-  (elpy-rpc-timeout 10)
-  :config
-  (elpy-enable)
-  (my-global-leader
-	"g d" 'elpy-goto-definition-other-window)
-  (my-global-leader
-	"g a" 'elpy-goto-assignment))
-
+  (use-package elpy
+    :defer t
+    :straight t
+    :custom
+    ;; tell elpy to use the virtual env set by virtualenv
+    (elpy-rpc-virtualenv-path 'current)
+    (elpy-shell-echo-output nil)
+    (python-shell-completion-native-enable nil)
+    (elpy-rpc-backend "jedi")
+    (python-indent-offset 4)
+    (python-indent 4)
+    (define-key elpy-mode-map (kbd "C-o") 'xref-pop-marker-stack)
+    (elpy-rpc-timeout 10)
+    :config
+    (elpy-enable)
+  ;;  (my-global-leader
+  ;;	"g d" 'elpy-goto-definition-other-window)
+  ;;  (my-global-leader
+  ;;	"g a" 'elpy-goto-assignment))
+    )
 
 #+end_src
 * Smartparens
 Lisp editing.
-#+begin_src elisp :tangle yes
+#+begin_src elisp :tangle no
 (use-package smartparens
   :straight t
   :ensure t
@@ -440,7 +532,7 @@ Lisp editing.
 :LOGBOOK:
 CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package evil
   :straight t
   :init
@@ -449,9 +541,10 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   ;; enable TAB in terminal mode
   ;; https://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
   (setq evil-want-C-i-jump nil)
-  :general
-  (evil-insert-state-map
-   "C-y" 'evil-paste-before))
+;;  :general
+;;  (evil-insert-state-map
+;;   "C-y" 'evil-paste-before)
+  )
 
 (use-package evil-collection
   :straight t
@@ -504,16 +597,17 @@ CLOCK: [2021-08-26 Thu 10:07]--[2021-08-26 Thu 10:17] =>  0:10
 (use-package git-gutter
   :straight t
   :defer t
-  :general
-  (my-global-leader
-    ;; git-gutter
-    "g g p" 'git-gutter:previous-hunk
-    "g g n" 'git-gutter:next-hunk
-    "g g m" 'git-gutter:mark-hunk
-    "g g s" 'git-gutter:stage-hunk
-    "g g r" 'git-gutter:revert-hunk
-    "g g h p" '(lambda () (interactive) (git-gutter-reset-to-head-parent))
-    "g g h d" '(lambda () (interactive) (git-gutter-reset-to-default))))
+;;  :general
+;;  (my-global-leader
+;;    ;; git-gutter
+;;    "g g p" 'git-gutter:previous-hunk
+;;    "g g n" 'git-gutter:next-hunk
+;;    "g g m" 'git-gutter:mark-hunk
+;;    "g g s" 'git-gutter:stage-hunk
+;;    "g g r" 'git-gutter:revert-hunk
+;;    "g g h p" '(lambda () (interactive) (git-gutter-reset-to-head-parent))
+;;    "g g h d" '(lambda () (interactive) (git-gutter-reset-to-default))))
+)
 #+end_src
 
 Compare current HEAD with its parent.
@@ -635,7 +729,7 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
 #+end_src
 ** Keyfreq
 Keyfreq exclude some commands
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package keyfreq
   :straight t
   :defer t
@@ -753,31 +847,31 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     (interactive)
     (find-file org-directory))
 
-  (yaoni-org-leader-def
-    :states 'normal
-    :keymaps 'override
-    "t" (kbd "C-u M-x org-time-stamp-inactive")
-    "l" 'org-shiftright
-    "h" 'org-shiftleft
-    "o" 'org-open-org-directory
-    "c i" 'org-clock-in
-    "c o" 'org-clock-out
-    "c f" 'counsel-org-goto
-    "g g" 'search-word
-    "r i" 'org-roam-node-insert
-    "r f" 'org-roam-node-find
-    ;; org roam add id
-    "r a i" 'org-id-get-create
-    "r a t" 'org-roam-tag-add
-    ;; forward one line so that the cursor is not on the begin_src line
-    "n" '(lambda () (interactive) (org-babel-next-src-block) (forward-line))
-    "p" '(lambda () (interactive) (org-babel-previous-src-block) (forward-line))
-    ;; org copy src
-    "c s" 'org-copy-src-block
-    "s i" 'org-display-inline-images
-    "s n" 'org-narrow-to-subtree
-    "s w" 'widen
-    "g h" 'yaoni/org-get-heading)
+;;  (yaoni-org-leader-def
+;;    :states 'normal
+;;    :keymaps 'override
+;;    "t" (kbd "C-u M-x org-time-stamp-inactive")
+;;    "l" 'org-shiftright
+;;    "h" 'org-shiftleft
+;;    "o" 'org-open-org-directory
+;;    "c i" 'org-clock-in
+;;    "c o" 'org-clock-out
+;;    "c f" 'counsel-org-goto
+;;    "g g" 'search-word
+;;    "r i" 'org-roam-node-insert
+;;    "r f" 'org-roam-node-find
+;;    ;; org roam add id
+;;    "r a i" 'org-id-get-create
+;;    "r a t" 'org-roam-tag-add
+;;    ;; forward one line so that the cursor is not on the begin_src line
+;;    "n" '(lambda () (interactive) (org-babel-next-src-block) (forward-line))
+;;    "p" '(lambda () (interactive) (org-babel-previous-src-block) (forward-line))
+;;    ;; org copy src
+;;    "c s" 'org-copy-src-block
+;;    "s i" 'org-display-inline-images
+;;    "s n" 'org-narrow-to-subtree
+;;    "s w" 'widen
+;;    "g h" 'yaoni/org-get-heading)
 
   (defun search-word ()
     "Search the word marked or at point."
@@ -1189,12 +1283,12 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
 (use-package counsel
   :straight t
   :after ivy
-  :general
-  (my-global-leader
-    ;; run-at-time: https://oremacs.com/2015/07/16/callback-quit/
-    ;; makes ivy-occur run after counsel-yank-pop
-    ;; This doesn't work: (lambda () (interactive) (counsel-yank-pop) (ivy-occur))
-    "c y" '(lambda () (interactive) (run-at-time nil nil #'ivy-occur) (counsel-yank-pop)))
+;;  :general
+;;  (my-global-leader
+;;    ;; run-at-time: https://oremacs.com/2015/07/16/callback-quit/
+;;    ;; makes ivy-occur run after counsel-yank-pop
+;;    ;; This doesn't work: (lambda () (interactive) (counsel-yank-pop) (ivy-occur))
+;;    "c y" '(lambda () (interactive) (run-at-time nil nil #'ivy-occur) (counsel-yank-pop)))
   :config
   (counsel-mode))
 
@@ -1637,7 +1731,8 @@ Python debugger.
 
   :config
   ;; When enabled, editing an opening markup tag automatically updates the closing tag.
-  (sgml-electric-tag-pair-mode t))
+  ;; (sgml-electric-tag-pair-mode t)
+  )
   ;; > this is to balance the pairs
 
 #+end_src
@@ -1777,11 +1872,11 @@ CLOCK: [2020-03-25 Wed 20:39]--[2020-03-25 Wed 21:01] =>  0:22
       (open-project-from-entry-location)
     (open-org-file-from-project)))
 ;; 快捷键设置，我用的是 general.el
-(yaoni-org-leader-def
-  :states 'normal
-  :keymaps 'override
-  "j" 'org-project-jump
-  )
+;; (yaoni-org-leader-def
+;;   :states 'normal
+;;   :keymaps 'override
+;;   "j" 'org-project-jump
+;;   )
 #+end_src
 *** Demo
 [[file:./project-org-jump-demo.gif]]
@@ -1921,9 +2016,10 @@ First install Aspell with Homebrew.
                             "--run-together"
                             "--run-together-limit=16"
                             ,(if (string-match "6.\.[89]" (shell-command-to-string "aspell --versioin")) "--camel-case" "")))
-  (my-global-leader
-    "wc" 'wucuo-spell-check-visible-region
-	"wa" 'add-word-to-aspell-list))
+;;  (my-global-leader
+;;    "wc" 'wucuo-spell-check-visible-region
+;;	"wa" 'add-word-to-aspell-list))
+  )
 #+end_src
 ** lisp
 :LOGBOOK:
@@ -2073,19 +2169,19 @@ CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
                  'css-mode-hook
                  'minibuffer-inactive-mode-hook))
     (add-hook hook '(lambda () (grammatical-edit-mode 1)))))
-(grammatical-edit-leader
-  "\"" 'grammatical-edit-double-quote
-  "k" 'grammatical-edit-kill
-  "e \"" 'grammatical-edit-wrap-double-quote
-  "e '" 'grammatical-edit-wrap-single-quote
-  "e [" 'grammatical-edit-wrap-bracket
-  "e {" 'grammatical-edit-wrap-curly
-  "e (" 'grammatical-edit-wrap-round
-  "e )" 'grammatical-edit-unwrap
-  "r" 'grammatical-edit-jump-right
-  "l" 'grammatical-edit-jump-left
-  "n" 'grammatical-edit-jump-out-pair-and-newline
-  "u" 'grammatical-edit-jump-up)
+;;(grammatical-edit-leader
+;;  "\"" 'grammatical-edit-double-quote
+;;  "k" 'grammatical-edit-kill
+;;  "e \"" 'grammatical-edit-wrap-double-quote
+;;  "e '" 'grammatical-edit-wrap-single-quote
+;;  "e [" 'grammatical-edit-wrap-bracket
+;;  "e {" 'grammatical-edit-wrap-curly
+;;  "e (" 'grammatical-edit-wrap-round
+;;  "e )" 'grammatical-edit-unwrap
+;;  "r" 'grammatical-edit-jump-right
+;;  "l" 'grammatical-edit-jump-left
+;;  "n" 'grammatical-edit-jump-out-pair-and-newline
+;;  "u" 'grammatical-edit-jump-up)
 #+end_src
 ** avy
 #+begin_src emacs-lisp :tangle yes
@@ -2139,7 +2235,6 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
   (evil-yank (region-beginning) (region-end))
   (deactivate-mark))
 
-(bind-key ",y" 'yaoni/copy-node 'evil-normal-state-map)
 
 #+end_src
 ** expand-region
@@ -2172,7 +2267,7 @@ CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
 ;; note that setting `venv-location` is not necessary if you
 ;; use the default location (`~/.virtualenvs`), or if the
 ;; the environment variable `WORKON_HOME` points to the right place
-(venv-workon "otree-3")
+(venv-workon "otree")
 #+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
@@ -2207,14 +2302,14 @@ CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
   (find-file (get-workspace ver))
 )
 
-(yaoni-org-leader-def
-  :states '(motion normal)
-  :keymaps 'override
-
-  "d" 'open-working-directory
-  "w" 'open-workspace
-  "5" (lambda() (interactive) (open-workspace 5))
-)
+;;(yaoni-org-leader-def
+;;  :states '(motion normal)
+;;  :keymaps 'override
+;;
+;;  "d" 'open-working-directory
+;;  "w" 'open-workspace
+;;  "5" (lambda() (interactive) (open-workspace 5))
+;;)
 
 #+end_src
 
@@ -2291,11 +2386,11 @@ https://github.com/redguardtoo/evil-matchit
 ;; (require 'evil-matchit)
   (global-evil-matchit-mode 1)
 )
-(yaoni-tag-leader-def
-  :states '(motion normal)
-  :keymaps 'override
-  "j" 'evilmi-jump-items
-)
+;; (yaoni-tag-leader-def
+;;   :states '(motion normal)
+;;   :keymaps 'override
+;;   "j" 'evilmi-jump-items
+;; )
 #+end_src
 ** nxml
 See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../Dev/orgs/20210501214605-xml_on_emacs.org][XML on Emacs]].
@@ -2545,8 +2640,8 @@ Can reference [[https://github.com/minad/consult/blob/main/consult.el][consult-t
     (disable-theme cur-theme)
     (enable-theme new-theme)))
 
-(my-global-leader
-  "s t" 'switch-theme)
+;;(my-global-leader
+;;  "s t" 'switch-theme)
 #+end_src
 ** auto-dim-other-buffers
 :LOGBOOK:
@@ -2612,7 +2707,7 @@ https://xenodium.com/showhide-emacs-dired-details-in-style/
   (use-package dired-git-info
     :straight t
     :ensure t
-    :bind (:map evil-normal-state-map
+    :bind (:map meow-motion-state-keymap
                 (")" . dired-git-info-mode))))
 #+end_src
 * EAF
@@ -2684,7 +2779,7 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 
 (require 'lsp-bridge)
 
-(push '(terraform-mode . "terraform-ls") lsp-bridge-lang-server-mode-list)
+(push '(terraform-mode . "terraform-ls") lsp-bridge-multi-lang-server-mode-list)
 
 (push 'terraform-mode-hook lsp-bridge-default-mode-hooks)
 (push '(terraform-mode . 2) lsp-bridge-formatting-indent-alist)
@@ -2991,3 +3086,4 @@ Add sticky headeer at the top of the window.
   :straight (:host github :repo "alphapapa/org-sticky-header")
   :hook (org-mode . org-sticky-header-mode))
 #+end_src
+
