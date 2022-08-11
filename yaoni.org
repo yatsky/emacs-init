@@ -919,7 +919,7 @@ Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
   (org-download-heading-lvl nil)
   (org-download-timestamp "%Y%m%d-%H%M%S_")
   (org-image-actual-width 1000)
-  (org-download-screenshot-method "/usr/local/bin/pngpaste %s")
+  (org-download-screenshot-method "pngpaste %s")
   :bind
   ("C-M-y" . org-download-screenshot)
   :config
