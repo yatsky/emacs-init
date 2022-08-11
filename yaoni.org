@@ -1635,10 +1635,10 @@ Python debugger.
   ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
-  :config
+  :hook
   ;; When enabled, editing an opening markup tag automatically updates the closing tag.
-  (sgml-electric-tag-pair-mode t))
-  ;; > this is to balance the pairs
+  (web-mode . (lambda () (sgml-electric-tag-pair-mode t))))
+;; > this is to balance the pairs
 
 #+end_src
 ** Format code and save-buffer
