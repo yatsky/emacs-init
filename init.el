@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(setq native-comp-async-report-warnings-errors nil)
 ;; remove unwanted built-in org.
 (mapc (lambda (x) (setq load-path (remove x load-path))) '("/usr/local/Cellar/emacs-mac/emacs-27.2-mac-8.2/share/emacs/27.2/lisp/org" "/usr/share/emacs/27.1/lisp/org"))
 (defvar bootstrap-version)
