@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: sqlite
+# key: sq
+# --
+
+#+name: $1
+#+begin_src sqlite results raw :db test-sqlite.db :dir /tmp/ :separator \ :list
+$0
+#+end_src
