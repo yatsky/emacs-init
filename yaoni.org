@@ -2214,6 +2214,13 @@ Highlight current line.
 
   (setq hs-set-up-overlay 'hideshow-folded-overlay-fn))
 #+end_src
+** so-long
+Handle extremely long lines gracefully.
+#+begin_src emacs-lisp :tangle yes
+(use-package so-long
+  :ensure nil
+  :config (global-so-long-mode 1))
+#+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
 
