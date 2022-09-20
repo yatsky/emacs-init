@@ -1,8 +1,10 @@
 # key: js
 # name: Javascript essentials code
 # --
-#+name: ${1: name}
-#+caption: $1
-#+begin_src js
+#+caption: ${1:`(insert-random-uuid)`}
+#+name: $1
+#+begin_src js :results output
 $0
 #+end_src
+
+#+RESULTS: $1
