@@ -1591,6 +1591,24 @@ Python debugger.
 #+end_src
 ** Typescript
 #+begin_src emacs-lisp :tangle no
+(use-package typescript-mode
+  :straight  (:host github :repo "emacs-typescript/typescript.el" :files ("*.el" "out")))
+
+(use-package prettier-js
+  :straight  (:host github :repo "prettier/prettier-emacs" :files ("*.el" "out"))
+  :config
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode))
+
+(use-package add-node-modules-path
+  :straight  (:host github :repo "codesuki/add-node-modules-path" :files ("*.el" "out"))
+  (add-hook 'typescript-mode-hook 'add-node-modules-path))
+
+(use-package js2-mode
+  :straight t)
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
 ;; tide for TypeScript
 (defun setup-tide-mode ()
   (interactive)
