@@ -56,6 +56,7 @@
    '((js . t)
      (java . t)
      (python . t)
+     (sqlite . t)
      (emacs-lisp . t)
      (shell . t)
      (ditaa . t)))
