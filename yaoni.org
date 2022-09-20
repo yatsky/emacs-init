@@ -351,7 +351,6 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
 
   "k" 'kill-buffer
 
-  "h s" 'hs-toggle-hiding
   "v w" 'venv-workon
 
   "g t" 'git-timemachine-toggle
@@ -658,11 +657,6 @@ Keyfreq exclude some commands
   :config
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
-#+end_src
-** Other
-#+begin_src emacs-lisp :tangle yes
-;; always turn on hs-minor-mode in any program mode
-(add-hook 'prog-mode-hook #'hs-minor-mode)
 #+end_src
 * org
 :LOGBOOK:
@@ -2200,6 +2194,25 @@ Highlight current line.
 (use-package hl-line
   :ensure nil
   :hook (after-init . global-hl-line-mode))
+#+end_src
+** hideshow
+#+begin_src emacs-lisp :tangle yes
+;; see: https://github.com/condy0919/emacs-newbie/blob/master/introduction-to-builtin-modes.md
+(use-package hideshow
+  :ensure nil
+  :diminish hs-minor-mode
+  :hook (prog-mode . hs-minor-mode)
+  :init
+  ;; 这里额外启用了 :box t 属性使得提示更加明显
+  (defconst hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
+
+  (defun hideshow-folded-overlay-fn (ov)
+    (when (eq 'code (overlay-get ov 'hs))
+      (let* ((nlines (count-lines (overlay-start ov) (overlay-end ov)))
+             (info (format " ... #%d " nlines)))
+        (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
+
+  (setq hs-set-up-overlay 'hideshow-folded-overlay-fn))
 #+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
