@@ -1365,7 +1365,7 @@ CLOCK: [2021-02-21 Sun 21:51]--[2021-02-21 Sun 22:05] =>  0:14
    :hook python-mode-hook
    ;; use comma to input underscore
    ;; as it's not used in python variables
-   :separator ?,
+   :separator ?-
    :entries
    ;; ugh spent so much time on this because I didn't notice I used the wrong
    ;; regex [a-z][0-9], which means alphabet followed by number
