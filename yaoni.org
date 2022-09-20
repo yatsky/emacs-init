@@ -2194,6 +2194,13 @@ CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
 ;; the environment variable `WORKON_HOME` points to the right place
 (venv-workon "otree-3")
 #+end_src
+** hl-line
+Highlight current line.
+#+begin_src emacs-lisp :tangle yes
+(use-package hl-line
+  :ensure nil
+  :hook (after-init . global-hl-line-mode))
+#+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
 
