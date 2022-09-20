@@ -2221,6 +2221,16 @@ Handle extremely long lines gracefully.
   :ensure nil
   :config (global-so-long-mode 1))
 #+end_src
+** simple
+#+begin_src emacs-lisp :tangle yes
+(use-package simple
+  :ensure nil
+  :hook (after-init . (lambda ()
+                        (line-number-mode)
+                        (column-number-mode)
+						;; size of the file
+                        (size-indication-mode))))
+#+end_src
 ** Other
 #+begin_src emacs-lisp :tangle yes
 
