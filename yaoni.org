@@ -2991,3 +2991,34 @@ Add sticky headeer at the top of the window.
   :straight (:host github :repo "alphapapa/org-sticky-header")
   :hook (org-mode . org-sticky-header-mode))
 #+end_src
+
+* org-modern
+
+#+begin_src emacs-lisp :tangle yes
+(use-package org-modern
+	:straight  t)
+(global-org-modern-mode)
+(setq
+ ;; Edit settings
+ org-auto-align-tags nil
+ org-tags-column 0
+ org-catch-invisible-edits 'show-and-error
+ org-special-ctrl-a/e t
+ org-insert-heading-respect-content t
+
+ ;; Org styling, hide markup etc.
+ org-hide-emphasis-markers t
+ org-pretty-entities t
+ org-ellipsis "…"
+ org-pretty-entities-include-sub-superscripts nil
+ org-startup-numerated t
+)
+#+end_src
+
+
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "~/.emacs.d/other-packages/org-bars")
+(require 'org-bars)
+(add-hook 'org-mode-hook #'org-bars-mode)
+#+end_src
+
