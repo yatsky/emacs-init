@@ -1584,9 +1584,12 @@ Python debugger.
   (setq blacken-skip-string-normalization t))
 #+end_src
 ** Typescript
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package typescript-mode
-  :straight  (:host github :repo "emacs-typescript/typescript.el" :files ("*.el" "out")))
+  :straight  (:host github :repo "emacs-typescript/typescript.el" :files ("*.el" "out"))
+  :init
+  (setq typescript-indent-level 2)
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
 (use-package prettier-js
   :straight  (:host github :repo "prettier/prettier-emacs" :files ("*.el" "out"))
@@ -1596,6 +1599,7 @@ Python debugger.
 
 (use-package add-node-modules-path
   :straight  (:host github :repo "codesuki/add-node-modules-path" :files ("*.el" "out"))
+  :config
   (add-hook 'typescript-mode-hook 'add-node-modules-path))
 
 (use-package js2-mode
