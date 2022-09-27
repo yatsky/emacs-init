@@ -2753,6 +2753,8 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 (dolist (hook '(org-mode-hook terraform-mode-hook))
   (setq lsp-bridge-default-mode-hooks
         (remove hook lsp-bridge-default-mode-hooks)))
+(bind-key "M-N" 'lsp-bridge-popup-documentation-scroll-up) ;向下滚动文档
+(bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
 (global-lsp-bridge-mode)
 #+end_src
 
