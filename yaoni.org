@@ -720,6 +720,7 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     (dolist (element list new-list)
       (setq new-list (cons (concat cur-wd element) new-list)))))
 
+;; this is in work_files.org.gpg
 (load-file "~/.emacs.d/private.el")
 #+end_src
 ** ob-lang
