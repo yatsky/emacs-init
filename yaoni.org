@@ -721,7 +721,10 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
       (setq new-list (cons (concat cur-wd element) new-list)))))
 
 ;; this is in work_files.org.gpg
-(load-file "~/.emacs.d/private.el")
+(let ((private-file "~/.emacs.d/private.el"))
+  (if (file-directory-p private-file)
+      (load-file private-file)))
+
 #+end_src
 ** ob-lang
 #+begin_src emacs-lisp :tangle yes
