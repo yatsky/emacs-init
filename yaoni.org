@@ -2672,11 +2672,11 @@ https://xenodium.com/showhide-emacs-dired-details-in-style/
   :config
   (use-package dired-x
     :hook
-    (dired-mode (lambda () (dired-omit-mode 1)))
-    :init
+    (dired-mode . (lambda () (dired-omit-mode 1)))
+    :config
+    (setq dired-omit-files (concat dired-omit-files "|.+~$"))
     ;; buffer-local variable
-    (setq-default dired-omit-files-p t)
-    (setq dired-omit-files (concat dired-omit-files "|.+~$")))
+    (setq-default dired-omit-files-p t))
   ;; Colourful columns.
   (use-package diredfl
     :straight t
