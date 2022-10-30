@@ -568,8 +568,6 @@ CLOCK: [2020-06-27 Sat 17:10]--[2020-06-27 Sat 17:13] =>  0:03
 ;; show-paren-mode
 ;; (show-paren-mode 1)
 ;; (setq show-paren-style 'mixed)
-;; h -> human readable
-(setq dired-listing-switches "-alh")
 
 ;; wrap lines
 (global-visual-line-mode 1)
@@ -2255,11 +2253,6 @@ Handle extremely long lines gracefully.
 (if (display-graphic-p)
     (pdf-tools-install))
 
-;; Dired
-(require 'dired-x)
-(setq-default dired-omit-files-p t);; uffer-local variable
-(setq dired-omit-files (concat dired-omit-files "|.+~$"))
-(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
 
 (defun open-working-directory ()
@@ -2667,7 +2660,23 @@ https://xenodium.com/showhide-emacs-dired-details-in-style/
 #+begin_src emacs-lisp :tangle yes
 (use-package dired
   :hook (dired-mode . dired-hide-details-mode)
+  :init
+  ;; If non-nil, Dired tries to guess a default target directory.
+  ;; This means: if there is a Dired buffer displayed in some window,
+  ;; use its current directory, instead of this Dired buffer’s
+  ;; current directory.
+  (setq dired-dwim-target t)
+  ;; h -> human readable
+  (setq dired-listing-switches "-alh")
+  ;; Dired
   :config
+  (use-package dired-x
+    :hook
+    (dired-mode (lambda () (dired-omit-mode 1)))
+    :init
+    ;; buffer-local variable
+    (setq-default dired-omit-files-p t)
+    (setq dired-omit-files (concat dired-omit-files "|.+~$")))
   ;; Colourful columns.
   (use-package diredfl
     :straight t
