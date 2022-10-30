@@ -3090,3 +3090,17 @@ Add sticky headeer at the top of the window.
 (add-hook 'org-mode-hook #'org-bars-mode)
 #+end_src
 
+* emacs-maple-preview
+
+#+begin_src emacs-lisp :tangle yes
+(use-package web-server
+  :straight (:host github :repo "eschulte/emacs-web-server"))
+
+(use-package maple-preview
+  :straight (:host github :repo "honmaple/emacs-maple-preview" :files ("*.el" "index.html" "static"))
+  :init
+  ;; only enable preview within some special modes
+  (setq maple-preview:allow-modes '(org-mode markdown-mode html-mode web-mode gfm-mode))
+  :commands (maple-preview-mode))
+#+end_src
+
