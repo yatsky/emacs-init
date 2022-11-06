@@ -3080,6 +3080,7 @@ Add sticky headeer at the top of the window.
    org-catch-invisible-edits 'show-and-error
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
+   org-export-with-sub-superscripts nil
 
    ;; Org styling, hide markup etc.
    org-hide-emphasis-markers t
