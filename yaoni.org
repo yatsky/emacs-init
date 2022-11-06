@@ -3113,3 +3113,9 @@ Add sticky headeer at the top of the window.
   :commands (maple-preview-mode))
 #+end_src
 
+* csv-mode
+#+begin_src emacs-lisp :tangle yes
+(use-package csv-mode
+  :straight t)
+#+end_src
+
