@@ -1840,7 +1840,8 @@ CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
          (nxml-mode . lsp)
          (terraform-mode . lsp-deferred)
          ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
+         (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-mode . (lambda () (company-mode -1))))
   :commands lsp)
 
 ;; optionally
