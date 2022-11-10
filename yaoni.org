@@ -2282,7 +2282,7 @@ All the icons to display and show icons.
 #+end_src
 
 * emacs-jupyter
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle yes
 (use-package jupyter
   :straight (:host github :repo "nnicandro/emacs-jupyter"))
 #+end_src
