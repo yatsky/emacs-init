@@ -3066,6 +3066,7 @@ Summertime
 (add-to-list 'load-path "~/.emacs.d/other-packages/random-elisp-code")
 (require 'yaoni-evil-object)
 (require 'yaoni-set-theme-by-mode)
+(require 'yaoni-get-buffer-name)
 #+end_src
 
 * topsy and org-sticky-header
