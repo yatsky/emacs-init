@@ -3133,3 +3133,60 @@ Add sticky headeer at the top of the window.
   :straight t)
 #+end_src
 
+* blink-search
+:LOGBOOK:
+CLOCK: [2022-11-09 Wed 17:35]--[2022-11-09 Wed 17:47] =>  0:12
+:END:
+
+#+begin_src bash :results output
+brew install ripgrep
+#+end_src
+
+#+RESULTS:
+#+begin_example
+==> Downloading https://ghcr.io/v2/homebrew/core/ripgrep/manifests/13.0.0-1
+==> Downloading https://ghcr.io/v2/homebrew/core/ripgrep/blobs/sha256:d21429f4b0a97e94f87cf7588958f53b57bf067876377d6a2e7a30259fa94394
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:d21429f4b0a97e94f87cf7588958f53b57bf067876377d6a2e7a30259fa94394?se=2022-11-09T06%3A45%3A00Z&sig=%2FEIeVclOBmdmYhHPZwWIvR%2BykDEmOlaPAj3ACvIGwzU%3D&sp=r&spr=https&sr=b&sv=2019-12-12
+==> Pouring ripgrep--13.0.0.arm64_monterey.bottle.1.tar.gz
+==> Caveats
+zsh completions have been installed to:
+  /opt/homebrew/share/zsh/site-functions
+==> Summary
+🍺  /opt/homebrew/Cellar/ripgrep/13.0.0: 13 files, 5.8MB
+==> Running `brew cleanup ripgrep`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+#+end_example
+
+#+begin_src bash :results output
+#!/bin/bash
+brew install fd
+#+end_src
+
+#+RESULTS:
+#+begin_example
+==> Downloading https://ghcr.io/v2/homebrew/core/fd/manifests/8.5.2
+==> Downloading https://ghcr.io/v2/homebrew/core/fd/blobs/sha256:82a08148076268cafd169b92060efe1296a4dd829ba86326f39ed6a81a5a652a
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:82a08148076268cafd169b92060efe1296a4dd829ba86326f39ed6a81a5a652a?se=2022-11-10T04%3A40%3A00Z&sig=oTrlDlvwJnI90J6uogphF78p%2FeaKNaOMrh8fNFYLWpk%3D&sp=r&spr=https&sr=b&sv=2019-12-12
+==> Pouring fd--8.5.2.arm64_monterey.bottle.tar.gz
+==> Caveats
+zsh completions have been installed to:
+  /opt/homebrew/share/zsh/site-functions
+==> Summary
+🍺  /opt/homebrew/Cellar/fd/8.5.2: 13 files, 2.6MB
+==> Running `brew cleanup fd`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+#+end_example
+
+
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "~/.emacs.d/other-packages/blink-search")
+
+(require 'blink-search)
+(setq blink-search-enable-posframe t)
+
+(my-global-leader
+  "SPC" 'blink-search)
+#+end_src
+
