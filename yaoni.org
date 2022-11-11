@@ -3181,12 +3181,17 @@ Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
 
 
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'load-path "~/.emacs.d/other-packages/blink-search")
-
-(require 'blink-search)
-(setq blink-search-enable-posframe t)
-
-(my-global-leader
-  "SPC" 'blink-search)
+(use-package blink-search
+  :straight (:host github :repo "manateelazycat/blink-search"
+                   :files ("*.py" "*.el"
+                           ("backend" "backend/*")
+                           ("core" "core/*")
+                           ("icons" "icons/*")
+                           ("images" "images/*")))
+  :ensure t
+  :init
+  (setq blink-search-enable-posframe nil)
+  (my-global-leader
+    "SPC" 'blink-search))
 #+end_src
 
