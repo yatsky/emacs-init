@@ -2130,6 +2130,18 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
 	 (end-pos (tsc-node-end-position node)))
     (cons start-pos end-pos)))
 
+(defun yaoni/org-mark-node ()
+  "Remove tilde (~) surrounding code snippet if cursor is not in org src block."
+  (let ((bnds (bounds-of-thing-at-point 'symbol)))
+    (cond ((org-in-src-block-p) bnds)
+          (t
+           (let ((start (car bnds))
+                 (end (cdr bnds)))
+             (if (and (equal (char-after start) ?~)
+                      (equal (char-before end) ?~))
+                 (cons (+ start 1) (- end 1))
+               bnds))))))
+
 (defun yaoni/base-mark-node ()
   "I only care about symbole at the moment."
   (bounds-of-thing-at-point 'symbol))
@@ -2139,6 +2151,7 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
   (interactive)
   (let ((bnds (cond
                ((eq major-mode 'python-mode) (yaoni/python-mark-node))
+               ((eq major-mode 'org-mode) (yaoni/org-mark-node))
                (t (yaoni/base-mark-node)))))
     (cond ((eq bnds nil)
            (message "Not a valid symbol to be marked. Using `er/expand-region' to mark it.")
