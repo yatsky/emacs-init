@@ -2143,7 +2143,7 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
                bnds))))))
 
 (defun yaoni/base-mark-node ()
-  "I only care about symbole at the moment."
+  "I only care about symbol at the moment."
   (bounds-of-thing-at-point 'symbol))
 
 (defun yaoni/mark-node ()
