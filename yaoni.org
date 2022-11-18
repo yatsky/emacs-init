@@ -888,7 +888,9 @@ ox-latex settings.
         "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 (setq org-latex-minted-options
-'(("frame" "lines")  ("linenos" "") ("style" "friendly")))
+      '(("frame" "lines")  ("linenos" "") ("style" "friendly")))
+
+(require 'ox-md)
 #+end_src
 ** org-id
 #+begin_src emacs-lisp :tangle yes
