@@ -2247,7 +2247,20 @@ Highlight current line.
              (info (format " ... #%d " nlines)))
         (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
 
-  (setq hs-set-up-overlay 'hideshow-folded-overlay-fn))
+  (setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
+  ;; record if all blocks are hidden
+  (setq hs-all-hidden nil)
+  :general
+  (evil-normal-state-map "8" 'hs-toggle-hiding)
+  (my-global-leader "8" '(lambda ()
+                           (interactive)
+                           (if hs-all-hidden
+                               (progn
+                                 (hs-show-all)
+                                 (setq hs-all-hidden nil))
+                             (progn
+                               (hs-hide-all)
+                               (setq hs-all-hidden t))))))
 #+end_src
 ** so-long
 Handle extremely long lines gracefully.
