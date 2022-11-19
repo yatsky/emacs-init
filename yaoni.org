@@ -448,6 +448,8 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   ;; enable TAB in terminal mode
   ;; https://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
   (setq evil-want-C-i-jump nil)
+  ;; allow cursor to move to the newline character
+  (setq evil-move-beyond-eol t)
   :general
   (evil-insert-state-map
    "C-y" 'evil-paste-before))
@@ -476,7 +478,7 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
 (use-package evil-escape
   :straight t
   :init
-  (setq-default evil-escape-delay 0.3)
+  (setq evil-escape-delay 0.3)
   (setq evil-escape-unordered-key-sequence t)
   (setq evil-escape-excluded-major-modes '(dired-mode))
   (setq-default evil-escape-key-sequence "jk")
