@@ -449,10 +449,14 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   ;; https://stackoverflow.com/questions/22878668/emacs-org-mode-evil-mode-tab-key-not-working
   (setq evil-want-C-i-jump nil)
   ;; allow cursor to move to the newline character
-  (setq evil-move-beyond-eol t)
+  (setq evil-move-beyond-eol nil)
   :general
   (evil-insert-state-map
-   "C-y" 'evil-paste-before))
+   "C-y" 'evil-paste-before)
+  (evil-normal-state-map
+   "gh" 'beginning-of-defun)
+  (evil-normal-state-map
+   "gj" 'end-of-defun))
 
 (use-package evil-collection
   :straight t
