@@ -2192,7 +2192,15 @@ CLOCK: [2022-04-27 Wed 20:30]--[2022-04-27 Wed 20:48] =>  0:18
   (evil-yank (region-beginning) (region-end))
   (deactivate-mark))
 
+(defun yaoni/kill-node ()
+  "Kill the node (put it into kill-ring)."
+  (interactive)
+  (yaoni/mark-node)
+  (kill-region (region-beginning) (region-end))
+  (deactivate-mark))
+
 (bind-key ",y" 'yaoni/copy-node 'evil-normal-state-map)
+(bind-key ",k" 'yaoni/kill-node 'evil-normal-state-map)
 
 #+end_src
 ** expand-region
