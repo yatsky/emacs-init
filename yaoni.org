@@ -472,8 +472,19 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   :straight t
   :config
   (global-evil-surround-mode 1))
-;; org-brain using evil
-;; (evil-set-initial-state 'org-brain-visualize-mode 'emacs)
+
+(use-package evil-escape
+  :straight t
+  :init
+  (setq-default evil-escape-delay 0.3)
+  (setq evil-escape-unordered-key-sequence t)
+  (setq evil-escape-excluded-major-modes '(dired-mode))
+  (setq-default evil-escape-key-sequence "jk")
+  ;; Move back the cursor one position when exiting insert mode
+  (setq evil-move-cursor-back t)
+  :config
+  ;; disable evil-escape when input method is on
+  (evil-escape-mode 1))
 #+end_src
 * Magit
 Magit settings.
