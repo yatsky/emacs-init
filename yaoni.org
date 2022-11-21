@@ -235,7 +235,7 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   "Go to the previous window"
   (interactive)
   (other-window -1))
-
+;; {{
 (general-define-key
  :states '(motion visual normal)
  :keymaps 'override
@@ -247,7 +247,13 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
  "3" 'split-window-right
  "4" 'split-window-below
  "5" 'toggle-multi/one-window
- "9" 'other-frame)
+ "9" 'other-frame
+ "'" 'xah-forward-quote-smart
+ "\"" 'xah-backward-quote
+ ;; \"
+ "(" 'xah-backward-left-bracket
+ ")" 'xah-forward-bracket-smart)
+;; }}
 
 ;; Remap SPC in evil mode to a leader key
 (general-create-definer my-global-leader
@@ -1987,7 +1993,8 @@ CLOCK: [2022-01-25 Tue 16:35]--[2022-01-25 Tue 16:50] =>  0:15
   :straight t
   :hook (emacs-lisp-mode . aggressive-indent-mode))
 #+end_src
-** quote lines
+** brackets and quotes
+quote lines
 #+begin_src emacs-lisp :tangle yes
 (defun xah-get-bounds-of-block-or-region ()
   "If region is active, return its boundary, else same as `xah-get-bounds-of-block'.
@@ -2075,6 +2082,85 @@ Version 2020-06-26 2021-07-21 2021-08-15"
                 (throw 'EndReached t)
               (forward-char))))))))
 #+end_src
+
+Brackets & more quotes
+#+begin_src emacs-lisp :tangle yes
+(defvar xah-brackets '("“”" "()" "[]" "{}" "<>" "＜＞" "（）" "［］" "｛｝" "⦅⦆" "〚〛" "⦃⦄" "‹›" "«»" "「」" "〈〉" "《》" "【】" "〔〕" "⦗⦘" "『』" "〖〗" "〘〙" "｢｣" "⟦⟧" "⟨⟩" "⟪⟫" "⟮⟯" "⟬⟭" "⌈⌉" "⌊⌋" "⦇⦈" "⦉⦊" "❛❜" "❝❞" "❨❩" "❪❫" "❴❵" "❬❭" "❮❯" "❰❱" "❲❳" "〈〉" "⦑⦒" "⧼⧽" "﹙﹚" "﹛﹜" "﹝﹞" "⁽⁾" "₍₎" "⦋⦌" "⦍⦎" "⦏⦐" "⁅⁆" "⸢⸣" "⸤⸥" "⟅⟆" "⦓⦔" "⦕⦖" "⸦⸧" "⸨⸩" "｟｠")
+  "A list of strings, each element is a string of 2 chars, the left bracket and a matching right bracket. Used by `xah-select-text-in-quote' and others.")
+
+(defconst xah-left-brackets
+  (mapcar (lambda (x) (substring x 0 1)) xah-brackets)
+  "List of left bracket chars. Each element is a string.")
+
+(defconst xah-right-brackets
+  (mapcar (lambda (x) (substring x 1 2)) xah-brackets)
+  "List of right bracket chars. Each element is a string.")
+
+(defun xah-backward-left-bracket ()
+  "Move cursor to the previous occurrence of left bracket.
+The list of brackets to jump to is defined by `xah-left-brackets'.
+URL `http://xahlee.info/emacs/emacs/emacs_navigating_keys_for_brackets.html'
+Version 2015-10-01"
+  (interactive)
+  (re-search-backward (regexp-opt xah-left-brackets) nil t))
+
+(defun xah-forward-right-bracket ()
+  "Move cursor to the next occurrence of right bracket.
+The list of brackets to jump to is defined by `xah-right-brackets'.
+URL `http://xahlee.info/emacs/emacs/emacs_navigating_keys_for_brackets.html'
+Version 2015-10-01"
+  (interactive)
+  (re-search-forward (regexp-opt xah-right-brackets) nil t))
+
+(defun xah-forward-bracket-smart ()
+  "Move cursor to the current or next left bracket.
+Copy of `xah-forward-quote-smart'."
+  (interactive)
+  (let (($pos (point)))
+    (if (nth 3 (syntax-ppss))
+        (progn
+          (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
+          (forward-sexp)
+          (re-search-forward "(" nil t))
+      (progn (re-search-forward "(" nil t)))
+    (when (<= (point) $pos)
+      (progn (re-search-forward "(" nil t)))))
+
+
+;; quotes
+(defun xah-forward-quote-smart ()
+  "Move cursor to the current or next string quote.
+Place cursor at the position after the left quote.
+Repeated call will find the next string.
+URL `http://xahlee.info/emacs/emacs/emacs_navigating_keys_for_brackets.html'
+Version 2016-11-22"
+  (interactive)
+  (let (($pos (point)))
+    (if (nth 3 (syntax-ppss))
+        (progn
+          (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
+          (forward-sexp)
+          (re-search-forward "\\\"" nil t))
+      (progn (re-search-forward "\\\"" nil t)))
+    (when (<= (point) $pos)
+      (progn (re-search-forward "\\\"" nil t)))))
+
+(defun xah-backward-quote ()
+  "Move cursor to the previous occurrence of \".
+If there are consecutive quotes of the same char, keep moving until none.
+Returns `t' if found, else `nil'.
+URL `http://xahlee.info/emacs/emacs/emacs_navigating_keys_for_brackets.html'
+Version 2016-07-23"
+  (interactive)
+  (if (re-search-backward "\\\"+" nil t)
+      (when (char-before) ; isn't nil, at beginning of buffer
+        (while (char-equal (char-before) (char-after))
+          (left-char)
+          t))
+    (progn
+      (message "No more quotes before cursor.")
+      nil)))
+#+end_src
 ** wgrep
 #+begin_src emacs-lisp :tangle yes
 (use-package wgrep
@@ -2135,6 +2221,7 @@ CLOCK: [2022-03-22 Tue 21:52]--[2022-03-22 Tue 22:15] =>  0:23
 #+end_src
 ** thing at point
 :LOGBOOK:
+CLOCK: [2022-11-19 Sat 12:22]--[2022-11-19 Sat 12:46] =>  0:24
 CLOCK: [2022-06-25 Sat 19:53]--[2022-06-25 Sat 19:58] =>  0:05
 CLOCK: [2022-06-25 Sat 19:35]--[2022-06-25 Sat 19:51] =>  0:16
 CLOCK: [2022-06-25 Sat 12:19]--[2022-06-25 Sat 12:55] =>  0:36
