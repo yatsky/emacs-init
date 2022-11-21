@@ -1656,6 +1656,9 @@ Python debugger.
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 #+end_src
 ** Web-mode
+:LOGBOOK:
+CLOCK: [2022-11-21 Mon 20:30]--[2022-11-21 Mon 20:37] =>  0:07
+:END:
 #+begin_src emacs-lisp :tangle yes
 ;; (defun my-web-mode-hook ()
 ;;   (when (string-equal "tsx" (file-name-extension buffer-file-name))
