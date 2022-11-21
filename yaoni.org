@@ -1157,6 +1157,9 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
   (:host github :repo "tumashu/pyim" :files
          ("*.el" "out"))
   :init
+  (use-package pyim-tsinghua-dict
+    :straight (:host github :repo "redguardtoo/pyim-tsinghua-dict" :files
+                     ("*.el" "*.py" "*.pyim" "*.csv")))
   ;; (设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
   ;; 我自己使用的中英文动态切换规则是：
   ;; 1. 光标只有在注释里面时，才可以输入中文。
@@ -1194,7 +1197,7 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
   (pyim-punctuation-translate-p
    '(auto yes no))
   :config
-  (pyim-basedict-enable))
+  (pyim-tsinghua-dict-enable))
 #+end_src
 * ivy
 Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/
