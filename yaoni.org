@@ -860,12 +860,6 @@ CLOCK: [2022-06-25 Sat 21:38]--[2022-06-25 Sat 21:41] =>  0:03
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            org-modules            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; org-bullets
-(use-package org-bullets
-  :straight t
-  :hook
-  (org-mode . (lambda () (org-bullets-mode 1))))
-
 ;; do not use any tabs
 ;; this is added to prevent picture mode from inserting tabs
 ;; while we are drawing ascii images
