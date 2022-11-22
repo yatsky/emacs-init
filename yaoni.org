@@ -2140,10 +2140,10 @@ Version 2016-11-22"
         (progn
           (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
           (forward-sexp)
-          (re-search-forward "\\\"" nil t))
-      (progn (re-search-forward "\\\"" nil t)))
+          (re-search-forward "\\\"\\\|'" nil t))
+      (progn (re-search-forward "\\\"\\\|'" nil t)))
     (when (<= (point) $pos)
-      (progn (re-search-forward "\\\"" nil t)))))
+      (progn (re-search-forward "\\\"\\\|'" nil t)))))
 
 (defun xah-backward-quote ()
   "Move cursor to the previous occurrence of \".
