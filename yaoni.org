@@ -3247,8 +3247,7 @@ Add sticky headeer at the top of the window.
    org-hide-emphasis-markers t
    org-pretty-entities t
    org-ellipsis "…"
-   org-pretty-entities-include-sub-superscripts nil
-   org-startup-numerated t)
+   org-pretty-entities-include-sub-superscripts nil)
   :config
   (global-org-modern-mode))
 #+end_src
