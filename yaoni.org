@@ -2158,7 +2158,7 @@ Returns `t' if found, else `nil'.
 URL `http://xahlee.info/emacs/emacs/emacs_navigating_keys_for_brackets.html'
 Version 2016-07-23"
   (interactive)
-  (if (re-search-backward "\\\"+" nil t)
+  (if (re-search-backward "\\\"+\\\|'" nil t)
       (when (char-before) ; isn't nil, at beginning of buffer
         (while (char-equal (char-before) (char-after))
           (left-char)
