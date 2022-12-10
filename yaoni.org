@@ -942,8 +942,8 @@ Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
   (defun yaoni/org-download-yank ()
     "Yank image depending on the OS."
     (interactive)
-    (cond ((eq system-type "darwin")
-           (org-download-yank))
+    (cond ((eq system-type 'darwin)
+           (org-download-screenshot))
           (t
            (yaoni/yank-image-from-win-clipboard-through-powershell))))
   :custom
