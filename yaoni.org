@@ -457,6 +457,7 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   ;; allow cursor to move to the newline character
   ;; so that regex-search-forward can search properly
   (setq evil-move-beyond-eol t)
+  (setq evil-goto-definition-functions (append evil-goto-definition-functions '((lambda (string pos) (lsp-bridge-find-def)))))
   :general
   (evil-insert-state-map
    "C-y" 'evil-paste-before)
