@@ -2391,6 +2391,14 @@ Highlight current line.
                              (progn
                                (hs-hide-all)
                                (setq hs-all-hidden t))))))
+;; reactjs
+(add-to-list 'hs-special-modes-alist
+             ;; hide Tags, {}, and []
+             '(js-mode "<[A-Za-z]+[ a-zA-Z=\"]*>\\|{\\|\\["
+                       "<[/A-Za-z]+>\\|}\\|\\]"
+                       "//"
+                       (lambda (&arg)
+                         (evilmi-jump-items-internal 1))))
 #+end_src
 ** so-long
 Handle extremely long lines gracefully.
@@ -2528,6 +2536,10 @@ https://github.com/redguardtoo/evil-matchit
 )
 #+end_src
 ** nxml
+:LOGBOOK:
+CLOCK: [2022-12-25 Sun 23:01]--[2022-12-25 Sun 23:36] =>  0:35
+CLOCK: [2022-12-25 Sun 23:01]--[2022-12-25 Sun 23:01] =>  0:00
+:END:
 See: https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1 or [[file:../Dev/orgs/20210501214605-xml_on_emacs.org][XML on Emacs]].
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'hs-special-modes-alist
