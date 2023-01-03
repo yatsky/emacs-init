@@ -457,6 +457,7 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   ;; allow cursor to move to the newline character
   ;; so that regex-search-forward can search properly
   (setq evil-move-beyond-eol t)
+  :config
   (setq evil-goto-definition-functions (append evil-goto-definition-functions '((lambda (string pos) (lsp-bridge-find-def)))))
   :general
   (evil-insert-state-map
@@ -1709,9 +1710,10 @@ CLOCK: [2022-11-21 Mon 20:30]--[2022-11-21 Mon 20:37] =>  0:07
   ;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
-  :hook
+  ;; :hook
   ;; When enabled, editing an opening markup tag automatically updates the closing tag.
-  (web-mode . (lambda () (sgml-electric-tag-pair-mode t))))
+  ;; (web-mode . (lambda () (sgml-electric-tag-pair-mode t)))
+  )
 ;; > this is to balance the pairs
 
 #+end_src
@@ -2349,7 +2351,7 @@ CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
 ;; note that setting `venv-location` is not necessary if you
 ;; use the default location (`~/.virtualenvs`), or if the
 ;; the environment variable `WORKON_HOME` points to the right place
-(venv-workon "otree-3")
+;; (venv-workon "otree-3")
 #+end_src
 ** hl-line
 Highlight current line.
@@ -2947,14 +2949,14 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 #+end_src
 
 * deno-bridge
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (add-to-list 'load-path "~/.emacs.d/other-packages/deno-bridge")
 
 (require 'deno-bridge)
 #+end_src
 
 * deno-bridge-jieba
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/other-packages/deno-bridge-jieba"))
 (require 'deno-bridge-jieba)
 #+end_src
@@ -3282,7 +3284,7 @@ Add sticky headeer at the top of the window.
 #+end_src
 
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (add-to-list 'load-path "~/.emacs.d/other-packages/org-bars")
 (require 'org-bars)
 (add-hook 'org-mode-hook #'org-bars-mode)
