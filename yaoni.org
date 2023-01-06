@@ -1199,8 +1199,6 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
   (require 'pyim-cregexp-utils)
-  (setq ivy-re-builders-alist
-        '((t . pyim-cregexp-ivy)))
   ;; 不需要模糊音
   (setq pyim-pinyin-fuzzy-alist nil)
   ;; 使用 Google 云输入
@@ -1222,6 +1220,8 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
   (pyim-punctuation-translate-p
    '(auto yes no))
   :config
+  (setq ivy-re-builders-alist
+        '((t . pyim-cregexp-ivy)))
   (pyim-tsinghua-dict-enable))
 #+end_src
 * ivy
