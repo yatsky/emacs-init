@@ -1195,6 +1195,7 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
                   pyim-probe-isearch-mode
                   pyim-probe-program-mode
                   pyim-probe-org-structure-template))
+  (setq pyim-pinyin-fuzzy-alist nil)
   ;; 文使用全角标点，英文使用半角标点。
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning pyim-probe-punctuation-after-punctuation))
@@ -1219,9 +1220,9 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
   (pyim-page-tooltip 'posframe)
   (pyim-punctuation-translate-p
    '(auto yes no))
+  (ivy-re-builders-alist
+   '((t . pyim-cregexp-ivy)))
   :config
-  (setq ivy-re-builders-alist
-        '((t . pyim-cregexp-ivy)))
   (pyim-tsinghua-dict-enable))
 #+end_src
 * ivy
@@ -1249,8 +1250,6 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
   (ivy-flx-limit 1000)
-  (ivy-re-builders-alist
-   '((t . ivy--regex-plus)))
   :config
   (ivy-mode)
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
