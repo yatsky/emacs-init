@@ -467,6 +467,13 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   (evil-normal-state-map
    "gj" 'end-of-defun))
 
+;; Add this advice so that when I look at definition
+;; I won't lose the original code
+(defun yaoni/split-window-right (&rest args)
+  (split-window-right)
+  (balance-windows))
+(advice-add 'evil-goto-definition :before #'yaoni/split-window-right)
+
 (use-package evil-collection
   :straight t
   :config
