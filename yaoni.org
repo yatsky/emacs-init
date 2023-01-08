@@ -2882,49 +2882,72 @@ https://xenodium.com/showhide-emacs-dired-details-in-style/
 #+end_src
 * EAF
 :LOGBOOK:
+CLOCK: [2023-01-07 Sat 18:59]--[2023-01-07 Sat 19:15] =>  0:16
+CLOCK: [2023-01-07 Sat 15:16]--[2023-01-07 Sat 15:52] =>  0:36
+CLOCK: [2023-01-05 Thu 15:28]--[2023-01-05 Thu 15:47] =>  0:19
 CLOCK: [2022-03-27 Sun 16:13]--[2022-03-27 Sun 16:26] =>  0:13
 CLOCK: [2022-03-27 Sun 15:37]--[2022-03-27 Sun 16:06] =>  0:29
 :END:
 Doesn't really work.
-#+begin_src emacs-lisp :tangle no
-
-(require 'eaf-demo)
-(require 'eaf-file-sender)
-(require 'eaf-music-player)
-(require 'eaf-camera)
-(require 'eaf-terminal)
-(require 'eaf-vue-demo)
-(require 'eaf-pdf-viewer)
-(require 'eaf-browser)
-(require 'eaf-markdown-previewer)
-(require 'eaf-file-browser)
-;; (require 'eaf-mermaid)
-(require 'eaf-file-manager)
-(require 'eaf-mindmap)
-(require 'eaf-video-player)
-(require 'eaf-org-previewer)
-(require 'eaf-airshare)
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+(setq eaf-python-command "~/.pyenv/versions/data310/bin/python")  ; this path needs to be changed based on your OS
 (require 'eaf)
-(require 'eaf-jupyter)
-(require 'eaf-netease-cloud-music)
-(require 'eaf-system-monitor)
-(use-package eaf
-  :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
-  :init
-  (setq eaf-python-command "~/.virtualenvs/data/bin/python")  ; this path needs to be changed based on your OS
-  :custom
-  ; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
-  (eaf-browser-continue-where-left-off t)
-  (eaf-browser-enable-adblocker t)
-  (browse-url-browser-function 'eaf-open-browser)
-  :config
-  (defalias 'browse-web #'eaf-open-browser)
-  (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
-  (eaf-bind-key take_photo "p" eaf-camera-keybinding)
-  (eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
+;; (require 'eaf-evil)
+;; (setq eaf-evil-leader-key "SPC")
+;; (require 'eaf-file-sender)
+;; (require 'eaf-music-player)
+;; (require 'eaf-camera)
+;; (require 'eaf-terminal)
+;; (require 'eaf-vue-demo)
+(require 'eaf-pdf-viewer)
+;; (defalias 'browse-web #'eaf-open-browser)
+;; (require 'eaf-browser)
+;; (setq browse-url-browser-function 'eaf-open-browser)
+;; (defalias 'browse-web #'eaf-open-browser)
+;; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
+;; (setq eaf-browser-continue-where-left-off t)
+;; (setq eaf-browser-enable-adblocker t)
+;; (require 'eaf-markdown-previewer)
+;; (require 'eaf-file-browser)
+;; (require 'eaf-mermaid)
+;; (require 'eaf-file-manager)
+;; (require 'eaf-mindmap)
+;; (require 'eaf-video-player)
+;; (require 'eaf-org-previewer)
+;; (require 'eaf-airshare)
+;; (require 'eaf)
+;; (require 'eaf-jupyter)
+;; (require 'eaf-netease-cloud-music)
+;; (require 'eaf-system-monitor)
+(defun yaoni/eaf-pdf-setup ()
+  (display-line-numbers-mode -1)
+  (evil-emacs-state 1))
+(add-hook 'eaf-pdf-viewer-hook 'yaoni/eaf-pdf-setup)
+(general-define-key
+ :states '(motion visual normal)
+ :keymaps '(eaf-pdf-outline-mode-map)
+ "RET" 'eaf-pdf-outline-jump)
 #+end_src
 
+See: https://manateelazycat.github.io/linux/ocr/2022/12/19/install-paddocr.html
+#+begin_src bash :results output
+#!/bin/bash
+pip3 uninstall opencv-python
+pip3 install opencv-python==4.5.5.64
+
+pip3 uninstall packaging
+pip3 install packaging==21.3
+
+# run these separately
+# might need to run `brew install swig` for paddleocr
+pip3 install common dual tight data prox paddle paddlepaddle paddleocr
+# issue with paddleocr
+# ERROR: flag 'flagfile' was defined more than once (in files '/Users/grinay/paddleinference/Paddle/build/third_party/gflags/src/extern_gflags/src/gflags.cc' and '/tmp/gflags-20211021-3963-1mi18ai/gflags-2.2.2/src/gflags.cc').
+
+# so I'm using easyocr for the time being
+pip install easyocr
+#+end_src
 * lsp-bridge
 :LOGBOOK:
 CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
