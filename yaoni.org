@@ -3315,3 +3315,9 @@ Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
   (define-key global-map (kbd "C-c '") #'separedit))
 #+end_src
 
+* atomic-chrome
+
+#+begin_src emacs-lisp :tangle yes
+(use-package atomic-chrome
+  :straight t)
+#+end_src
