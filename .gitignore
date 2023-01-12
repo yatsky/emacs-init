@@ -27,3 +27,4 @@ elpy/*
 .lsp-session*
 .emacs.desktop*
 .cache/
+smex-items
