@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: query snowflake
+# key: qsnow
+# --
+
+sql = """
+select
+${1:*}
+from ${2:proddomaindw}.${3:scv_staging}.${4:email_sent_and_engagement}
+limit 1
+;
+"""
+
+df = pd.read_sql(sql, con)
+print(df.shape)
