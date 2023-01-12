@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: use-package
-# key: use
-# --
-(use-package $1
-  :straight  ${2:(:host github :repo "$3" :files ("*.el" "out"))}
-  $0
-)

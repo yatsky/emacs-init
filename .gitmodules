@@ -1,3 +1,6 @@
 [submodule "elpa/casease"]
 	path = elpa/casease
 	url = git@github.com:DogLooksGood/casease.git
+[submodule "yas-snippets"]
+	path = yas-snippets
+	url = git@github.com:yatsky/yas-snippets.git

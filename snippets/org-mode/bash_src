@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: bash
-# key: ba
-# --
-
-#+begin_src bash :results output
-#!/bin/bash
-$0
-#+end_src
