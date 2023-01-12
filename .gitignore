@@ -29,3 +29,5 @@ elpy/*
 .cache/
 smex-items
 tramp
+projects
+*.png
