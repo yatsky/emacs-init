@@ -11,7 +11,7 @@ ac-comphist.dat
 bookmarks
 emojis/*
 eshell/*
-org-roam.db
+*.db
 projectile-bookmarks.eld
 pyim/*
 snippets/org-mode/C1
