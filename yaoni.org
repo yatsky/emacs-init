@@ -1606,7 +1606,7 @@ CLOCK: [2022-01-20 Thu 11:44]--[2022-01-20 Thu 11:48] =>  0:04
 (use-package yasnippet
   :straight t
   :init
-  (setq yas/snippet-dirs "~/.emacs.d/yas-snippets")
+  (setq yas-snippet-dirs '("~/.emacs.d/yas-snippets"))
   :config
   (yas-global-mode 1)
   (require 'warnings)
