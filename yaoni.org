@@ -2361,6 +2361,15 @@ CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
 ;; use the default location (`~/.virtualenvs`), or if the
 ;; the environment variable `WORKON_HOME` points to the right place
 ;; (venv-workon "otree-3")
+
+(defun yaoni/venv-workon-advice ()
+  "Run this advice after `venv-workon'."
+  (if (functionp 'lsp-bridge-restart-process)
+      (lsp-bridge-restart-process))
+  (if (functionp (blink-search-restart-process))
+      (blink-search-restart-process)))
+
+(advice-add 'venv-workon :after #'yaoni/venv-workon-advice)
 #+end_src
 ** hl-line
 Highlight current line.
