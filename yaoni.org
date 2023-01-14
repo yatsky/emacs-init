@@ -3317,7 +3317,8 @@ Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
   (setq separedit-write-file-when-execute-save t)
   (setq separedit-remove-trailing-spaces-in-comment t)
   :config
-  (define-key global-map (kbd "C-c '") #'separedit))
+  (my-global-leader
+    "s e" 'separedit-dwim))
 #+end_src
 
 * atomic-chrome
