@@ -2978,6 +2978,9 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
   :straight t
   :mode ("README\\.md\\'" . gfm-mode)
   :init (setq markdown-command "multimarkdown"))
+
+(use-package ox-gfm
+  :straight t)
 #+end_src
 #+begin_src emacs-lisp :tangle yes
 (use-package lsp-pyright
