@@ -350,6 +350,7 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
 
   ;; agit-status
   "m s" 'magit-status
+  "m p" 'magit-pull-from-upstream
 
 
   ;; X command
