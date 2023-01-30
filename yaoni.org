@@ -1229,8 +1229,6 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
   (pyim-page-tooltip 'posframe)
   (pyim-punctuation-translate-p
    '(auto yes no))
-  (ivy-re-builders-alist
-   '((t . pyim-cregexp-ivy)))
   :config
   (pyim-tsinghua-dict-enable))
 #+end_src
@@ -1258,8 +1256,10 @@ Config based on: https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_i
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
-  (ivy-flx-limit 1000)
   :config
+  (setq ivy-flx-limit 1000)
+  (setq ivy-re-builders-alist
+   '((t . pyim-cregexp-ivy)))
   (ivy-mode)
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-immediate-done))
 
