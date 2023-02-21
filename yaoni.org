@@ -3009,8 +3009,12 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
   (dolist (hook '(org-mode-hook terraform-mode-hook))
     (setq lsp-bridge-default-mode-hooks
           (remove hook lsp-bridge-default-mode-hooks)))
+  (setq lsp-bridge-org-babel-lang-list (append lsp-bridge-org-babel-lang-list '("jupyter-python")))
   (global-lsp-bridge-mode))
 
+(with-eval-after-load 'org
+  (dolist (lang lsp-bridge-org-babel-lang-list)
+    (eval `(lsp-org-babel-enable ,lang))))
 #+end_src
 
 * company wordfreq
