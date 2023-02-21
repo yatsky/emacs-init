@@ -3182,6 +3182,8 @@ Summertime
 (require 'yaoni-evil-object)
 (require 'yaoni-set-theme-by-mode)
 (require 'yaoni-get-buffer-name)
+(require 'yaoni-org)
+(require 'yaoni-edit)
 #+end_src
 
 * topsy and org-sticky-header
