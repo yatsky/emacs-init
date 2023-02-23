@@ -364,6 +364,8 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
 
   ;; don't confirm revert-buffer
   "r b" '(lambda() (interactive) (revert-buffer nil t))
+  "r p" 'yaoni/replace-buffer-content
+  "c b" 'yaoni/copy-buffer
 
   "v c" 'vc-msg-show
   )
