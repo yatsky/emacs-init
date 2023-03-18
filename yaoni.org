@@ -3346,3 +3346,10 @@ Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
 (use-package atomic-chrome
   :straight t)
 #+end_src
+* org-ai
+#+begin_src emacs-lisp :tangle yes
+(use-package org-ai
+  :straight (:host github :repo "rksm/org-ai" :files ("*")))
+(setq org-ai-default-chat-model "gpt-3.5-turbo")
+(setq org-ai-default-max-tokens 2000)
+#+end_src
