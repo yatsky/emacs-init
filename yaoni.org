@@ -111,7 +111,13 @@ Use straight to manage ein.
 * diminish
 #+begin_src emacs-lisp :tangle yes
 (use-package diminish
-  :straight t)
+  :straight t
+  :config
+  (diminish 'python-mode " Py")
+  (diminish 'tree-sitter-mode)
+  (diminish 'lsp-mode)
+  (diminish 'casease-mode)
+  (diminish 'evil-collection-unimpaired-mode))
 #+end_src
 * eshell
 Extracted from here: http://www.modernemacs.com/post/custom-eshell/
