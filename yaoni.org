@@ -220,6 +220,7 @@ Code: https://gist.github.com/ekaschalk/f0ac91c406ad99e53bb97752683811a5
 #+end_src
 * Keymaps
 :LOGBOOK:
+CLOCK: [2023-04-14 Fri 14:40]--[2023-04-14 Fri 15:39] =>  0:59
 CLOCK: [2022-03-27 Sun 14:49]--[2022-03-27 Sun 14:52] =>  0:03
 CLOCK: [2022-03-27 Sun 14:35]--[2022-03-27 Sun 14:41] =>  0:06
 CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
@@ -335,9 +336,11 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   ;; "s g c"
   ;;  -> search grep project directory (where .git/ is)
   "s g p" 'counsel-git-grep
+  "s g c" 'yaoni/search-current-folder
 
   ;;  -> search grep filename (where .git/ is)
   "s g f" 'counsel-git
+  "s g d" 'yaoni/search-current-folder-file
 
   ;;  -> write
   "w b" 'save-buffer
@@ -3196,6 +3199,7 @@ Summertime
 (require 'yaoni-get-buffer-name)
 (require 'yaoni-org)
 (require 'yaoni-edit)
+(require 'yaoni-search)
 #+end_src
 
 * topsy and org-sticky-header
