@@ -470,7 +470,7 @@ CLOCK: [2022-06-25 Sat 20:26]--[2022-06-25 Sat 20:39] =>  0:13
   ;; so that regex-search-forward can search properly
   (setq evil-move-beyond-eol t)
   :config
-  (setq evil-goto-definition-functions (append evil-goto-definition-functions '((lambda (string pos) (lsp-bridge-find-def)))))
+(setq evil-goto-definition-functions (push '(lambda (string pos) (lsp-bridge-find-def-other-window)) evil-goto-definition-functions))
   :general
   (evil-insert-state-map
    "C-y" 'evil-paste-before)
