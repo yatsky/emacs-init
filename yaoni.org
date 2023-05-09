@@ -294,6 +294,16 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   :prefix "SPC n"
   :non-normal-prefix "C-c n")
 
+(general-create-definer yaoni-code-leader-def
+  :states '(normal visual)
+  :prefix "SPC y")
+
+(yaoni-code-leader-def
+  :states '(motion normal)
+  :keymaps 'override
+  "b" 'yaoni/get-buffer-name
+  "l" 'yaoni/get-code-location)
+
 (my-global-text-leader
   :states '(motion normal)
   :keymaps 'override
