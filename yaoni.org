@@ -1909,7 +1909,7 @@ putting the matching lines in a buffer named *matching*"
 CLOCK: [2021-05-08 Sat 15:58]--[2021-05-08 Sat 16:39] =>  0:41
 CLOCK: [2021-05-08 Sat 15:37]--[2021-05-08 Sat 15:58] =>  0:21
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package lsp-mode
   :straight t
   :init
@@ -2994,7 +2994,7 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 (use-package ox-gfm
   :straight t)
 #+end_src
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
