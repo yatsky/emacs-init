@@ -2913,7 +2913,7 @@ CLOCK: [2022-03-27 Sun 16:13]--[2022-03-27 Sun 16:26] =>  0:13
 CLOCK: [2022-03-27 Sun 15:37]--[2022-03-27 Sun 16:06] =>  0:29
 :END:
 Doesn't really work.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (defun yaoni/start-eaf ()
   "Wrapper to start EAF."
   (add-to-list 'load-path ~/.emacs.d/site-lisp/emacs-application-framework/)
