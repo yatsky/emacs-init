@@ -3350,6 +3350,18 @@ Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
 (use-package atomic-chrome
   :straight t)
 #+end_src
+
+* mide-wave
+:LOGBOOK:
+CLOCK: [2023-03-09 Thu 09:54]--[2023-03-09 Thu 10:07] =>  0:13
+:END:
+
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'load-path "~/.emacs.d/site-lisp/mind-wave")
+
+(require 'mind-wave)
+#+end_src
+
 * org-ai
 #+begin_src emacs-lisp :tangle yes
 (use-package org-ai
