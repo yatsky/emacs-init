@@ -954,8 +954,6 @@ Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
 #+begin_src emacs-lisp :tangle yes
 (use-package org-download
   :straight t
-  :after org
-  :defer t
   :init
   ;; https://github.com/abo-abo/org-download/issues/178#issuecomment-974772904
   (defun yaoni/yank-image-from-win-clipboard-through-powershell()
@@ -989,10 +987,8 @@ Need to install [[https://github.com/jcsalterego/pngpaste][pngpaste]] too.
   (org-image-actual-width 1000)
   (org-download-screenshot-method "pngpaste %s")
   :bind
-  ("C-M-y" . yaoni/org-download-yank)
-  :config
-  (require 'org-download)
-  (org-download-enable))
+  ("C-M-y" . yaoni/org-download-yank))
+(org-download-enable)
 #+end_src
 ** custom functions
 :LOGBOOK:
