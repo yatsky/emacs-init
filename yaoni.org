@@ -3374,6 +3374,6 @@ CLOCK: [2023-03-09 Thu 09:54]--[2023-03-09 Thu 10:07] =>  0:13
 (use-package org-ai
   :straight (:host github :repo "rksm/org-ai" :files ("*")))
 (setq org-ai-default-chat-model "gpt-3.5-turbo")
-(setq org-ai-default-max-tokens 2000)
+(setq org-ai-default-max-tokens 8000)
 (add-hook 'org-mode-hook 'org-ai-mode)
 #+end_src
