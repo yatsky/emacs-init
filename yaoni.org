@@ -3200,7 +3200,7 @@ Summertime
 
 * other lisp code
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'load-path "~/.emacs.d/other-packages/random-elisp-code")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/random-elisp-code")
 (require 'yaoni-evil-object)
 (require 'yaoni-set-theme-by-mode)
 (require 'yaoni-get-buffer-name)
@@ -3247,7 +3247,7 @@ Add sticky headeer at the top of the window.
 
 
 #+begin_src emacs-lisp :tangle no
-(add-to-list 'load-path "~/.emacs.d/other-packages/org-bars")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-bars")
 (require 'org-bars)
 (add-hook 'org-mode-hook #'org-bars-mode)
 #+end_src
