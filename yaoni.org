@@ -1598,11 +1598,11 @@ CLOCK: [2022-01-05 Wed 21:15]--[2022-01-05 Wed 21:15] =>  0:00
 :LOGBOOK:
 CLOCK: [2022-06-25 Sat 20:47]--[2022-06-25 Sat 21:15] =>  0:28
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package company
   :straight t
   :config
-  (add-hook 'org-mode-hook (lambda () (company-mode 1))))
+  (add-hook 'org-mode-hook (lambda () (company-mode -1))))
 
 (use-package company-quickhelp
   :defer t
@@ -2501,7 +2501,7 @@ All the icons to display and show icons.
 #+end_src
 
 * emacs-jupyter
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package jupyter
   :straight (:host github :repo "nnicandro/emacs-jupyter"))
 #+end_src
@@ -2510,7 +2510,7 @@ All the icons to display and show icons.
 CLOCK: [2022-06-25 Sat 21:52]--[2022-06-25 Sat 22:05] =>  0:13
 CLOCK: [2022-03-27 Sun 21:53]--[2022-03-27 Sun 22:05] =>  0:12
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package hydra
   :straight t)
 
@@ -3039,7 +3039,7 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 
 * company wordfreq
 Reference config here: https://github.com/KaratasFurkan/.emacs.d/issues/1
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package company-wordfreq
   :straight  (:host github :repo "johannes-mueller/company-wordfreq.el")
   :custom
