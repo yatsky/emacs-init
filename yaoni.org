@@ -1187,7 +1187,7 @@ CLOCK: [2021-08-19 Thu 20:10]--[2021-08-19 Thu 20:22] =>  0:12
 :LOGBOOK:
 CLOCK: [2022-01-26 Wed 20:42]--[2022-01-26 Wed 20:54] =>  0:12
 :END:
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package org-latex-impatient
   :straight t
   :defer t
@@ -1996,7 +1996,7 @@ CLOCK: [2022-01-20 Thu 15:34]--[2022-01-20 Thu 15:34] =>  0:00
 CLOCK: [2022-01-20 Thu 13:43]--[2022-01-20 Thu 14:00] =>  0:17
 :END:
 First install Aspell with Homebrew.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (defun add-word-to-aspell-list ()
   "Add word at point to .aspell.en.pws"
   (interactive)
@@ -2872,7 +2872,7 @@ Somehow in Emacs 28 I need to explicitly set this variable because right command
   (setq mac-right-command-modifier 'meta))
 #+end_src
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package vterm
     :straight t)
 
