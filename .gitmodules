@@ -4,3 +4,6 @@
 [submodule "yas-snippets"]
 	path = yas-snippets
 	url = git@github.com:yatsky/yas-snippets.git
+[submodule "site-lisp/lsp-bridge"]
+	path = site-lisp/lsp-bridge
+	url = git@github.com:manateelazycat/lsp-bridge.git

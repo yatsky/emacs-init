@@ -3000,6 +3000,8 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 
 (use-package ox-gfm
   :straight t)
+(use-package posframe
+  :straight t)
 #+end_src
 #+begin_src emacs-lisp :tangle no
 (use-package lsp-pyright
@@ -3008,33 +3010,27 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
 #+end_src
-#+begin_src emacs-lisp :tangle yes
-(use-package lsp-bridge
-  :straight (:host github :repo "manateelazycat/lsp-bridge"
-                   :files ("*"
-                           ("acm" "acm/*")
-                           ("core" "core/*")
-                           ("langserver" "langserver/*")
-                           ("multiserver" "multiserver/*")
-                           ("resources" "resources/*")))
-  :init
-  (bind-key "M-N" 'lsp-bridge-popup-documentation-scroll-up) ;向下滚动文档
-  (bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
-  :config
-  (push '(terraform-mode . "terraform-ls") lsp-bridge-multi-lang-server-mode-list)
-  (push 'terraform-mode-hook lsp-bridge-default-mode-hooks)
-  (push '(terraform-mode . 2) lsp-bridge-formatting-indent-alist)
-  (dolist (hook '(org-mode-hook terraform-mode-hook))
-    (setq lsp-bridge-default-mode-hooks
-          (remove hook lsp-bridge-default-mode-hooks)))
-  ;; very important, otherwise org-babel block completion will not work properly
-  (setq org-src-lang-modes (append org-src-lang-modes  '(("python" . python) ("emacs-lisp" . emacs-lisp))))
-  (setq lsp-bridge-python-lsp-server "pyright")
-  (setq lsp-bridge-python-ruff-lsp-server "pyright-background-analysis_ruff")
-  (setq lsp-bridge-enable-org-babel t)
-  (setq lsp-bridge-org-babel-lang-list nil)
-  (global-lsp-bridge-mode))
 
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
+(require 'lsp-bridge)
+(setq org-src-lang-modes (append org-src-lang-modes  '(("python" . python) ("emacs-lisp" . emacs-lisp))))
+;; (setq lsp-bridge-python-lsp-server "pyright")
+;; (setq lsp-bridge-python-ruff-lsp-server "pyright_ruff")
+
+;; (push '(terraform-mode . "terraform-ls") lsp-bridge-multi-lang-server-mode-list)
+;; (push 'terraform-mode-hook lsp-bridge-default-mode-hooks)
+;; (push '(terraform-mode . 2) lsp-bridge-formatting-indent-alist)
+;; (dolist (hook '(org-mode-hook terraform-mode-hook))
+;; (setq lsp-bridge-default-mode-hooks
+;;         (remove hook lsp-bridge-default-mode-hooks)))
+
+(setq org-src-lang-modes (append org-src-lang-modes  '(("python" . python) ("emacs-lisp" . emacs-lisp))))
+(setq lsp-bridge-enable-org-babel t)
+(bind-key "M-N" 'lsp-bridge-popup-documentation-scroll-up) ;向下滚动文档
+(bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
+(setq acm-enable-codeium t)
+(global-lsp-bridge-mode)
 #+end_src
 
 * company wordfreq
