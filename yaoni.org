@@ -2850,6 +2850,13 @@ Show colors under color text codes.
 (use-package rainbow-mode
     :straight  t)
 #+end_src
+** breadcrumb
+
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'load-path "~/.emacs.d/site-lisp/breadcrumb")
+(require 'breadcrumb)
+(breadcrumb-mode)
+#+end_src
 * os intergration
 :LOGBOOK:
 CLOCK: [2022-03-06 Sun 22:01]--[2022-03-06 Sun 22:38] =>  0:37
@@ -3213,11 +3220,13 @@ Summertime
 
 * topsy and org-sticky-header
 Add sticky headeer at the top of the window.
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (use-package topsy
   :straight (:host github :repo "alphapapa/topsy.el")
   :hook (prog-mode . topsy-mode))
+#+end_src
 
+#+begin_src emacs-lisp :tangle yes
 (use-package org-sticky-header
   :straight (:host github :repo "alphapapa/org-sticky-header")
   :hook (org-mode . org-sticky-header-mode))
