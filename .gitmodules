@@ -7,3 +7,6 @@
 [submodule "site-lisp/lsp-bridge"]
 	path = site-lisp/lsp-bridge
 	url = git@github.com:manateelazycat/lsp-bridge.git
+[submodule "breadcrumb"]
+	path = site-lisp/breadcrumb
+	url = git@github.com:joaotavora/breadcrumb.git

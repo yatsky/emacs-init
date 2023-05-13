@@ -3025,7 +3025,6 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 ;; (setq lsp-bridge-default-mode-hooks
 ;;         (remove hook lsp-bridge-default-mode-hooks)))
 
-(setq org-src-lang-modes (append org-src-lang-modes  '(("python" . python) ("emacs-lisp" . emacs-lisp))))
 (setq lsp-bridge-enable-org-babel t)
 (bind-key "M-N" 'lsp-bridge-popup-documentation-scroll-up) ;向下滚动文档
 (bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
