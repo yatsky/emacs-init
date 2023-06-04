@@ -313,6 +313,8 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
   "a" 'evil-append-line
   "s" 'swiper-thing-at-point
   "m" 'yaoni/mark-node
+  "u" 'yaoni/upcase-thing-at-point
+  "d" 'yaoni/downcase-thing-at-point
   )
 
 (my-global-leader
