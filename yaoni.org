@@ -3040,9 +3040,12 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 ;;         (remove hook lsp-bridge-default-mode-hooks)))
 
 (setq lsp-bridge-enable-org-babel t)
+(setq lsp-bridge-enable-completion-in-string t) 
 (bind-key "M-N" 'lsp-bridge-popup-documentation-scroll-up) ;向下滚动文档
 (bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
 (setq acm-enable-codeium t)
+(setq acm-enable-tabnine nil)
+(setq lsp-bridge-enable-log nil)
 (global-lsp-bridge-mode)
 #+end_src
 
