@@ -247,7 +247,7 @@ CLOCK: [2022-03-27 Sun 12:24]--[2022-03-27 Sun 14:33] =>  2:09
  :states '(motion visual normal)
  :keymaps 'override
  ;;  -> redo
- "r" 'undo-tree-redo
+ "r" 'yaoni/evil-replace-with-kill-ring
  "0" 'delete-window
  "1" 'my-previous-window
  "2" 'other-window
@@ -823,12 +823,12 @@ CLOCK: [2020-05-05 Tue 10:49]--[2020-05-05 Tue 10:52] =>  0:03
     "r a i" 'org-id-get-create
     "r a t" 'org-roam-tag-add
     ;; forward one line so that the cursor is not on the begin_src line
-    "n" '(lambda () (interactive) (org-babel-next-src-block) (forward-line))
-    "p" '(lambda () (interactive) (org-babel-previous-src-block) (forward-line))
+    "n" '(lambda () (interactive) (org-next-block 1) (forward-line))
+    "p" '(lambda () (interactive) (org-previous-block 2) (forward-line))
     ;; org copy src
     "c s" 'org-copy-src-block
     "c c" 'yaoni/org-cycle
-    "s i" 'org-display-inline-images
+    "s t" 'org-toggle-inline-images
     "s n" 'org-narrow-to-subtree
     "s w" 'widen
     "g h" 'yaoni/org-get-heading)
