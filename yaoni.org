@@ -102,6 +102,9 @@ Use straight to manage ein.
         '("program" "org-mode" "read-book")))
 ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
 ;; (cnfonts-set-spacemacs-fallback-fonts)
+
+(define-key evil-normal-state-map (kbd "C-+") 'cnfonts-increase-fontsize)
+(define-key evil-normal-state-map (kbd "C-_") 'cnfonts-decrease-fontsize)
 #+end_src
 
 #+caption: Testing table of cnfonts
