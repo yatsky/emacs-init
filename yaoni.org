@@ -3224,6 +3224,7 @@ Summertime
 (require 'yaoni-org)
 (require 'yaoni-edit)
 (require 'yaoni-search)
+(require 'yaoni-magit)
 #+end_src
 
 * topsy and org-sticky-header
