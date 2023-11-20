@@ -3442,3 +3442,10 @@ CLOCK: [2023-03-09 Thu 09:54]--[2023-03-09 Thu 10:07] =>  0:13
 (setq org-ai-default-max-tokens 8000)
 (add-hook 'org-mode-hook 'org-ai-mode)
 #+end_src
+
+* isort
+#+begin_src emacs-lisp :tangle yes
+(use-package py-isort
+  :straight t)
+(setq py-isort-options '("--profile=black"))
+#+end_src
