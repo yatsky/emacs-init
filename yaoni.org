@@ -2402,7 +2402,6 @@ CLOCK: [2022-06-25 Sat 21:50]--[2022-06-25 Sat 21:51] =>  0:01
 ;; note that setting `venv-location` is not necessary if you
 ;; use the default location (`~/.virtualenvs`), or if the
 ;; the environment variable `WORKON_HOME` points to the right place
-;; (venv-workon "otree-3")
 
 (defun yaoni/venv-workon-advice ()
   "Run this advice after `venv-workon'."
