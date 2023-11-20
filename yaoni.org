@@ -3443,6 +3443,14 @@ CLOCK: [2023-03-09 Thu 09:54]--[2023-03-09 Thu 10:07] =>  0:13
 (add-hook 'org-mode-hook 'org-ai-mode)
 #+end_src
 
+* graphql
+
+#+begin_src emacs-lisp :tangle yes
+(use-package graphql-mode
+  :straight t)
+#+end_src
+
+
 * isort
 #+begin_src emacs-lisp :tangle yes
 (use-package py-isort
