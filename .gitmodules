@@ -10,3 +10,6 @@
 [submodule "breadcrumb"]
 	path = site-lisp/breadcrumb
 	url = git@github.com:joaotavora/breadcrumb.git
+[submodule "site-lisp/random-elisp-code"]
+	path = site-lisp/random-elisp-code
+	url = git@github.com:yatsky/random-elisp-code.git
