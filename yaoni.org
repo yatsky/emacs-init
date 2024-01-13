@@ -3015,8 +3015,18 @@ pip install easyocr
 #+end_src
 * lsp-bridge
 :LOGBOOK:
+CLOCK: [2024-01-12 Fri 23:26]--[2024-01-12 Fri 23:31] =>  0:05
 CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 :END:
+
+need to run
+#+begin_src bash :results output
+#!/bin/bash
+ssh-add id_rsa
+#+end_src
+then restart lsp-bridge
+cannot restart lsp-bridge once the ssh connection is established
+
 #+begin_src emacs-lisp :tangle yes
 (use-package f
   :straight t)
@@ -3056,9 +3066,32 @@ CLOCK: [2022-07-16 Sat 19:50]--[2022-07-16 Sat 20:05] =>  0:15
 (setq lsp-bridge-enable-completion-in-string t) 
 (bind-key "M-N" 'lsp-bridge-popup-documentation-scroll-up) ;向下滚动文档
 (bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
-(setq acm-enable-codeium t)
+(setq acm-enable-codeium nil)
 (setq acm-enable-tabnine nil)
-(setq lsp-bridge-enable-log nil)
+(setq acm-enable-copilot t)
+;; (setq lsp-bridge-enable-log t)
+(setq lsp-bridge-python-command "python")
+(setq lsp-bridge-enable-with-tramp t)
+(setq lsp-bridge-user-ssh-private-key "/Users/laura/.ssh/id_rsa")
+(setq
+ lsp-bridge-multi-lang-server-extension-list
+ '((("vue")
+    . "volar_emmet")
+   (("ts" "tsx")
+    . "typescript_eslint")
+   )
+ )
+(setq lsp-bridge-single-lang-server-extension-list '((("wxml")
+                                                      . "wxml-language-server")
+                                                     (("html")
+                                                      . "vscode-html-language-server")
+                                                     (("astro")
+                                                      . "astro-ls")
+                                                     (("typ")
+                                                      . "typst-lsp")
+                                                     (("js" "jsx")
+                                                      . "typescriptreact")))
+
 (global-lsp-bridge-mode)
 #+end_src
 
