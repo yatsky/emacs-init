@@ -3395,7 +3395,7 @@ Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
   :init
   ;; I use Edge as the browser
   (require 'yaoni-blink-search)
-  (setq sblink-search-browser-function 'browse-url-macosx-edge-browser)
+  (setq blink-search-browser-function 'browse-url-macosx-edge-browser)
   (setq blink-search-enable-posframe nil)
   (my-global-leader
     "SPC" 'blink-search))
