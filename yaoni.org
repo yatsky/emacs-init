@@ -3073,7 +3073,7 @@ cannot restart lsp-bridge once the ssh connection is established
 ;; (setq lsp-bridge-enable-log t)
 (setq lsp-bridge-python-command "python")
 (setq lsp-bridge-enable-with-tramp t)
-(setq lsp-bridge-user-ssh-private-key "/Users/laura/.ssh/id_rsa")
+(setq lsp-bridge-user-ssh-private-key "~/.ssh/id_rsa_home_office")
 (setq
  lsp-bridge-multi-lang-server-extension-list
  '((("vue")
