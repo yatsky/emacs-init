@@ -2917,7 +2917,7 @@ https://xenodium.com/showhide-emacs-dired-details-in-style/
   ;; current directory.
   (setq dired-dwim-target t)
   ;; h -> human readable
-  (setq dired-listing-switches "-alh")
+  (setq dired-listing-switches "-laGh1v --group-directories-first")
   ;; Dired
   :config
   (use-package dired-x
