@@ -1041,9 +1041,6 @@ org-roam also wants ~gcc~ to be installed.
 So run this ~sudo apt-get install gdb~.
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'load-path "~/.emacs.d/straight/repos/emacsql")
-(require 'emacsql)
-(require 'emacsql-sqlite-common)
-(require 'emacsql-sqlite-builtin)
 
 (use-package org-roam
   :straight t
