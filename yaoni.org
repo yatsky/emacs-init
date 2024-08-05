@@ -2913,6 +2913,8 @@ https://xenodium.com/showhide-emacs-dired-details-in-style/
   ;; current directory.
   (setq dired-dwim-target t)
   ;; h -> human readable
+  ;; https://github.com/d12frosted/homebrew-emacs-plus/issues/383
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
   (setq dired-listing-switches "-laGh1v --group-directories-first")
   ;; Dired
   :config
