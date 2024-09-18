@@ -3064,7 +3064,7 @@ cannot restart lsp-bridge once the ssh connection is established
 (bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
 (setq acm-enable-codeium nil)
 (setq acm-enable-tabnine nil)
-(setq acm-enable-copilot t)
+(setq acm-enable-copilot nil)
 ;; (setq lsp-bridge-enable-log t)
 (setq lsp-bridge-python-command "python")
 (setq lsp-bridge-enable-with-tramp t)
