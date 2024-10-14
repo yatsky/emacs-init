@@ -2462,6 +2462,14 @@ Handle extremely long lines gracefully.
   :ensure nil
   :config (global-so-long-mode 1))
 #+end_src
+https://emacs-china.org/t/topic/25811/7
+#+begin_src emacs-lisp :tangle yes
+(setq-default bidi-display-reordering nil)
+(setq bidi-inhibit-bpa t
+      long-line-threshold 1000
+      large-hscroll-threshold 1000
+      syntax-wholeline-max 1000)
+#+end_src
 ** simple
 #+begin_src emacs-lisp :tangle yes
 (use-package simple
