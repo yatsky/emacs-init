@@ -2677,11 +2677,6 @@ Example: Sat Feb 26 22:03:50 2022 and get 22."
   :straight t)
 ;; (powerline-center-evil-theme)
 
-(use-package emojify
-  :straight t
-  :config
-  (global-emojify-mode t)
-  (global-emojify-mode-line-mode t))
 #+end_src
 ** Mode line
 Mode line customization.
@@ -3067,7 +3062,7 @@ cannot restart lsp-bridge once the ssh connection is established
 (bind-key "M-P" 'lsp-bridge-popup-documentation-scroll-down) ;向上滚动文档
 (setq acm-enable-codeium nil)
 (setq acm-enable-tabnine nil)
-(setq acm-enable-copilot t)
+(setq acm-enable-copilot nil)
 ;; (setq lsp-bridge-enable-log t)
 (setq lsp-bridge-python-command "python")
 (setq lsp-bridge-enable-with-tramp t)
@@ -3090,7 +3085,8 @@ cannot restart lsp-bridge once the ssh connection is established
                                                       . "typst-lsp")
                                                      (("js" "jsx")
                                                       . "typescriptreact")))
-
+(setq acm-completion-backend-merge-order
+      '("template-first-part-candidates" "mode-first-part-candidates" "tabnine-candidates" "copilot-candidates" "codeium-candidates" "template-second-part-candidates" "mode-second-part-candidates"))
 (global-lsp-bridge-mode)
 #+end_src
 
