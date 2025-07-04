@@ -3051,7 +3051,7 @@ cannot restart lsp-bridge once the ssh connection is established
 (add-to-list 'load-path "~/.emacs.d/site-lisp/lsp-bridge")
 (require 'lsp-bridge)
 (setq org-src-lang-modes (append org-src-lang-modes  '(("python" . python) ("emacs-lisp" . emacs-lisp))))
-;; (setq lsp-bridge-python-lsp-server "pyright")
+(setq lsp-bridge-python-lsp-server "basedpyright")
 ;; (setq lsp-bridge-python-ruff-lsp-server "pyright_ruff")
 
 ;; (push '(terraform-mode . "terraform-ls") lsp-bridge-multi-lang-server-mode-list)
