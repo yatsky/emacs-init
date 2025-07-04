@@ -1324,6 +1324,7 @@ CLOCK: [2021-03-11 Thu 11:44]--[2021-03-11 Thu 14:24] =>  2:40
 	:straight  (:host github :repo "purcell/sqlformat" :files ("*.el")))
 
 (setq sqlformat-command 'sqlfmt)
+(setq-default indent-tabs-mode nil)  ; Use spaces instead of tabs globally by default
 ;; (setq sqlformat-command 'sqlfluff)
 ;; (setq sqlformat-args nil)
 ;; (setq sqlformat-args '("--config" "/Users/ethan.wang/Dev/sqlfluff/.sqlfluff" "--FIX-EVEN-UNPARSABLE"))
