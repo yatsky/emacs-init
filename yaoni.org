@@ -3455,3 +3455,17 @@ CLOCK: [2023-03-09 Thu 09:54]--[2023-03-09 Thu 10:07] =>  0:13
   :straight t)
 (setq py-isort-options '("--profile=black"))
 #+end_src
+
+* python
+#+begin_src emacs-lisp :tangle yes
+(setq python-shell-completion-native-enable nil)
+#+end_src
+
+* jinja2
+
+
+
+#+begin_src emacs-lisp :tangle yes
+(use-package jinja2-mode
+  :straight t)
+#+end_src
