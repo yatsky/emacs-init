@@ -3091,7 +3091,7 @@ cannot restart lsp-bridge once the ssh connection is established
                                                      (("js" "jsx")
                                                       . "typescriptreact")))
 (setq acm-completion-backend-merge-order
-      '("template-first-part-candidates" "mode-first-part-candidates" "tabnine-candidates" "copilot-candidates" "codeium-candidates" "template-second-part-candidates" "mode-second-part-candidates"))
+      '("template-first-part-candidates" "mode-first-part-candidates" "copilot-candidates" "codeium-candidates" "template-second-part-candidates" "mode-second-part-candidates"))
 (global-lsp-bridge-mode)
 #+end_src
 
