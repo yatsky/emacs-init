@@ -1249,7 +1249,7 @@ CLOCK: [2022-06-26 Sun 15:07]--[2022-06-26 Sun 15:22] =>  0:15
   ;; 不需要模糊音
   (setq pyim-pinyin-fuzzy-alist nil)
   ;; 使用 Google 云输入
-  (setq pyim-cloudim 'google)
+  (setq pyim-cloudim 'nil)
   :bind
   ("C-\\" . toggle-input-method)
   ("C-]" . pyim-convert-string-at-point)
