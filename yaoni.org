@@ -1041,9 +1041,6 @@ org-roam also wants ~gcc~ to be installed.
 So run this ~sudo apt-get install gdb~.
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'load-path "~/.emacs.d/straight/repos/emacsql")
-(require 'emacsql)
-(require 'emacsql-sqlite-common)
-(require 'emacsql-sqlite-builtin)
 
 (use-package org-roam
   :straight t
@@ -2466,6 +2463,14 @@ Handle extremely long lines gracefully.
   :ensure nil
   :config (global-so-long-mode 1))
 #+end_src
+https://emacs-china.org/t/topic/25811/7
+#+begin_src emacs-lisp :tangle yes
+(setq-default bidi-display-reordering nil)
+(setq bidi-inhibit-bpa t
+      long-line-threshold 1000
+      large-hscroll-threshold 1000
+      syntax-wholeline-max 1000)
+#+end_src
 ** simple
 #+begin_src emacs-lisp :tangle yes
 (use-package simple
@@ -2865,7 +2870,7 @@ Show colors under color text codes.
 #+end_src
 ** breadcrumb
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
 (add-to-list 'load-path "~/.emacs.d/site-lisp/breadcrumb")
 (require 'breadcrumb)
 (breadcrumb-mode)
@@ -2914,6 +2919,7 @@ https://xenodium.com/showhide-emacs-dired-details-in-style/
   ;; current directory.
   (setq dired-dwim-target t)
   ;; h -> human readable
+  ;; https://github.com/d12frosted/homebrew-emacs-plus/issues/383
   (setq insert-directory-program "gls" dired-use-ls-dired t)
   (setq dired-listing-switches "-laGh1v --group-directories-first")
   ;; Dired
