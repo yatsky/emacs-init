@@ -2576,6 +2576,8 @@ CLOCK: [2021-01-27 Wed 21:02]--[2021-01-27 Wed 21:04] =>  0:02
   :config
   ;; yaml support
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode)))
+(use-package yaml-pro
+  :straight t)
 #+end_src
 * Tag navigation
 ** evil-matchit
